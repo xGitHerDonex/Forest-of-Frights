@@ -5,23 +5,27 @@ using UnityEngine;
 public class playerController : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
+    //Players stats
     [SerializeField] int HP;
-    [SerializeField] float playerSpeed;
-    [SerializeField] float jumpHeight;
     [SerializeField] int jumpsMax;
+    [SerializeField] float jumpHeight;
     [SerializeField] float gravityValue;
-
+    [SerializeField] float playerSpeed;
+    
+    //Player basic shooting
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
 
-
+    //Bools and others for functions
     private bool isShooting;
-
-    private Vector3 playerVelocity;
     private bool groundedPlayer;
-    private Vector3 move;
     private int jumpedTimes;
+    private Vector3 playerVelocity;
+    private Vector3 move;
+    
+
+
     private void Start()
     {
 
@@ -29,12 +33,14 @@ public class playerController : MonoBehaviour, IDamage
 
     void Update()
     {
+       //Call to movement
         movement();
+       //Call to shoot
         if (Input.GetButton("Shoot") && !isShooting)
             StartCoroutine(shoot());
     }
 
-
+    //Move Ability:  Currently allows player to move!  Wheee!
     void movement()
     {
         groundedPlayer = controller.isGrounded;
@@ -45,29 +51,21 @@ public class playerController : MonoBehaviour, IDamage
             playerVelocity.y = 0f;
         }
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-
-        //Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        #region oldCode
-        //rotates player to direction
-        //if (move != Vector3.zero)
-        //{
-        //    gameObject.transform.forward = move;
-        //} 
-        #endregion
 
-        // Changes the height position of the player..
+    // Jump Ability:  Currently allows player to jump
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
         {
             jumpedTimes++;
-            playerVelocity.y = jumpHeight;
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
+    //Shoot Ability:  Currently instant projectile speed
     IEnumerator shoot()
     {
         isShooting = true;
@@ -81,16 +79,17 @@ public class playerController : MonoBehaviour, IDamage
                 damageable.takeDamage(shootDamage);
             }
         }
-
-
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
+
+    //Heal Ability:  Currently through the pause menu, until medkits are implemented
     public void giveHP(int amount)
     {
         HP += amount;
     }
 
+    //Damageable Ability:  Currently allows player takes damage
     public void takeDamage(int amount)
     {
         HP -= amount;
