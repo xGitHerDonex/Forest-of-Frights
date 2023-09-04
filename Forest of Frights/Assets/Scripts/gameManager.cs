@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class gameManager : MonoBehaviour
 {
+
     // GameManager Class will run these functions:
     // 1. Pause Menu
     //
@@ -14,7 +15,8 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;            // instance for gameManager
 
     public GameObject player;                      // player
-    public playerController playerController;      // player controller
+
+    public playerController playerScript;           // player controller
 
     bool isPaused;                                 // bool for if game is paused - tracks pause state.
 
@@ -27,7 +29,7 @@ public class gameManager : MonoBehaviour
     {
         instance = this; // set the the instance to this 
         player = GameObject.FindGameObjectWithTag("Player"); // set player to player with tag "player"
-        playerController = player.GetComponent<playerController>(); // set player controller to the player controller of player
+        playerScript = player.GetComponent<playerController>(); // set player controller to the player controller of player
     }
 
     void Update()
