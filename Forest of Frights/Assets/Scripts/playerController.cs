@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class playerController : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
 
     //Players stats
-    [SerializeField] int HP;
+    [SerializeField] float HP;
+    [SerializeField] float maxHP;
     [SerializeField] float maxStamina; 
     [SerializeField] float regenStamina;
     [SerializeField] float playerSpeed;
     [SerializeField] float jumpHeight;
+
+    //Player UI Bar
+    [SerializeField] Image hpBar;
+
 
     //Expanded Player stats
     [Header("Expanded Player Stats")]
@@ -42,6 +47,7 @@ public class playerController : MonoBehaviour, IDamage
     private void Start()
     {
         originalPlayerSpeed = playerSpeed;
+        hpBar.fillAmount = HP / maxHP;
 
     }
 
@@ -50,9 +56,13 @@ public class playerController : MonoBehaviour, IDamage
        //Call to movement
         movement();
         sprint();
+
        //Call to shoot
         if (Input.GetButton("Shoot") && !isShooting)
             StartCoroutine(shoot());
+       
+       //Updates Fill on HP
+       hpBar.fillAmount = HP / maxHP;
     }
 
     //Move Ability:  Currently allows player to move!  Wheee!
