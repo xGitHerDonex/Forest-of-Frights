@@ -1565,11 +1565,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6541914364551022272}
+  - component: {fileID: 4899422589015322427}
   - component: {fileID: 658787560229394401}
   - component: {fileID: 4312130692767753592}
   - component: {fileID: 2102031486215053924}
   - component: {fileID: 8069022081989498039}
-  - component: {fileID: 4899422589015322427}
   m_Layer: 6
   m_Name: spider_black CombatReady
   m_TagString: Untagged
@@ -1594,6 +1594,25 @@ Transform:
   - {fileID: 5451621112535164812}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -75.483, z: 0}
+--- !u!114 &4899422589015322427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411424646334846680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99fd2b224996fac48bc8fd25afdbadc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 6137898851065835685}
+  agent: {fileID: 4312130692767753592}
+  shootPos: {fileID: 2863439077307096138}
+  shootRate: 1
+  bullet: {fileID: 6704994505591150608, guid: 85d33efccae04c14b9967724437b044f, type: 3}
+  hp: 3
+  targetFaceSpeed: 3
 --- !u!95 &658787560229394401
 Animator:
   serializedVersion: 5
@@ -1624,11 +1643,11 @@ NavMeshAgent:
   m_GameObject: {fileID: 7411424646334846680}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 1
-  m_Acceleration: 1
+  m_Radius: 1.67
+  m_Speed: 3.5
+  m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 240
+  m_AngularSpeed: 120
   m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
@@ -1681,25 +1700,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4899422589015322427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7411424646334846680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99fd2b224996fac48bc8fd25afdbadc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 6137898851065835685}
-  agent: {fileID: 4312130692767753592}
-  shootPos: {fileID: 2863439077307096138}
-  shootRate: 1
-  bullet: {fileID: 6704994505591150608, guid: 85d33efccae04c14b9967724437b044f, type: 3}
-  hp: 10
-  targetFaceSpeed: 4
 --- !u!1 &7479677567610319662
 GameObject:
   m_ObjectHideFlags: 0
