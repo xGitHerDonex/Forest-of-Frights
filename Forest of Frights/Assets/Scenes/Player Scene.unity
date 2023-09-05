@@ -472,10 +472,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 699904331}
   HP: 5
+  maxStamina: 4
+  drainStamina: 4
+  regenStamina: 0.75
   jumpsMax: 1
   jumpHeight: 1
   gravityValue: -20
   playerSpeed: 5
+  originalPlayerSpeed: 0
   shootRate: 0.5
   shootDamage: 1
   shootDistance: 50
