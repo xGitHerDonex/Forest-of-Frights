@@ -345,11 +345,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 276332616}
-  - component: {fileID: 276332618}
   - component: {fileID: 276332617}
   - component: {fileID: 276332615}
   - component: {fileID: 276332614}
   - component: {fileID: 276332613}
+  - component: {fileID: 276332618}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -485,14 +485,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 276332617}
-  HP: 6
-  jumpsMax: 2
-  jumpHeight: 15
-  gravityValue: -25
-  playerSpeed: 6
-  shootRate: 5
-  shootDamage: 1
-  shootDistance: 10
+  HP: 5
+  jumpsMax: 0
+  jumpHeight: 0
+  gravityValue: 0
+  playerSpeed: 0
+  shootRate: 0
+  shootDamage: 0
+  shootDistance: 0
 --- !u!1 &470158309
 GameObject:
   m_ObjectHideFlags: 0

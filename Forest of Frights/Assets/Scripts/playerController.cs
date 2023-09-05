@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class playerController : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
+
     //Players stats
     [SerializeField] int HP;
     [SerializeField] int jumpsMax;
@@ -26,9 +28,10 @@ public class playerController : MonoBehaviour, IDamage
     
 
 
+
     private void Start()
     {
-
+        hpBar.fillamount
     }
 
     void Update()
