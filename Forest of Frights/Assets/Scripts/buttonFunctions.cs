@@ -13,7 +13,7 @@ public class buttonFunctions : MonoBehaviour
 
 
     //Quit - Quits the game
-    public void quit()
+    public void Quit()
     {
         Application.Quit();
     }
