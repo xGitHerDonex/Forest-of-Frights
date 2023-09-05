@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class enemyAI : MonoBehaviour, IDamage
 {
@@ -94,9 +95,12 @@ public class enemyAI : MonoBehaviour, IDamage
     //the changes the color back to its original white state.
     IEnumerator flashDamage()
     {
+              
+    
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = Color.white;
+       
     } 
     #endregion
 

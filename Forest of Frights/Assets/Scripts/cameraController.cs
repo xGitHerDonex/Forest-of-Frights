@@ -9,7 +9,7 @@ public class cameraController : MonoBehaviour
     [SerializeField] int lockVertMin;
     [SerializeField] int lockVertMax;
     [SerializeField] bool invertY;
-    
+
     //Float used for camera manipulation
     float xRotation;
 
@@ -21,7 +21,7 @@ public class cameraController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    
+
     void Update()
     {
         //Gets movement inputs
@@ -30,9 +30,12 @@ public class cameraController : MonoBehaviour
 
         //Enables look up and down
         if (invertY)
+        {
             xRotation += mouseY;
-        else
+        } else
+        {
             xRotation -= mouseY;
+        }
 
         //Clamp camera rotation on the X-Axis
         xRotation = Mathf.Clamp(xRotation, lockVertMin, lockVertMax);
