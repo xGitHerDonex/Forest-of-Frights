@@ -1098,7 +1098,7 @@ GameObject:
   - component: {fileID: 8272220473464740548}
   - component: {fileID: 7219613785243107816}
   - component: {fileID: 1734138301607632420}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Wraith_II CombatReady
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1185,9 +1185,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.27
-  m_Height: 1.75
+  m_Height: 2.5
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!135 &7219613785243107816
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1207,7 +1207,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1734138301607632420
 MonoBehaviour:
@@ -1224,10 +1224,10 @@ MonoBehaviour:
   model: {fileID: 8550258249840771030}
   agent: {fileID: 8186315178786838995}
   shootPos: {fileID: 2015361199284060633}
-  shootRate: 3
-  bullet: {fileID: 6704994505591150608, guid: 85d33efccae04c14b9967724437b044f, type: 3}
-  hp: 6
-  targetFaceSpeed: 4
+  shootRate: 0.25
+  bullet: {fileID: 6704994505591150608, guid: 59b29177899772e42a86eac791c7c40c, type: 3}
+  hp: 3
+  targetFaceSpeed: 3
 --- !u!1 &2745490689054622164
 GameObject:
   m_ObjectHideFlags: 0
