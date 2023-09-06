@@ -515,7 +515,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5.5
+  m_Speed: 6
   m_Acceleration: 8.5
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -569,7 +569,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 11.7
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2734557677032440847
 MonoBehaviour:
@@ -587,7 +587,7 @@ MonoBehaviour:
   agent: {fileID: 3062710624558443062}
   shootPos: {fileID: 7139936995016242223}
   shootRate: 2
-  bullet: {fileID: 6704994505591150608, guid: 85d33efccae04c14b9967724437b044f, type: 3}
+  bullet: {fileID: 6704994505591150608, guid: 3d297aa179c87e649b48b00946041433, type: 3}
   hp: 3
   targetFaceSpeed: 5
 --- !u!1 &2128707907488710794
