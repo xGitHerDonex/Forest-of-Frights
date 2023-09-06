@@ -9,7 +9,8 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
 
     //Players stats
-    [SerializeField] float HP;
+    [Header("Player Stats")]
+    [SerializeField] int HP;
     [SerializeField] float maxHP;
     [SerializeField] float maxStamina; 
     [SerializeField] float regenStamina;
@@ -39,14 +40,14 @@ public class playerController : MonoBehaviour, IDamage
     private int jumpedTimes;
     private Vector3 playerVelocity;
     private Vector3 move;
-    float OriginalHp;
+    int OriginalHp;
     
 
 
 
     private void Start()
     {
-        OriginalHp = maxHP;
+        OriginalHp = HP;
         spawnPlayer();
         originalPlayerSpeed = playerSpeed;
         hpBar.fillAmount = HP / maxHP;

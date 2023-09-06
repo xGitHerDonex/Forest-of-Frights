@@ -16,20 +16,18 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;            // instance for gameManager
     public GameObject player;                      // player
     public playerController playerScript;          // player controller
+    public GameObject playerSpawnPos;
     bool isPaused;                                 // bool for if game is paused - tracks pause state.
 
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
     [SerializeField] GameObject pauseMenu;         // Pause Menu
-    [SerializeField] GameObject winMenu;
-    [SerializeField] GameObject loseMenu;
+    [SerializeField] GameObject winMenu;           // Win Menu 
+    [SerializeField] GameObject loseMenu;          // Lose Menu
 
     [SerializeField] int enemiesKilled;
-    [SerializeField] int enemygoal;
+    //[SerializeField] int enemygoal;
 
-    public GameObject playerSpawnPos;
-
-
-
+  
     //Initializes before Application Runs
     void Awake()
     {
@@ -79,7 +77,7 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         enemiesKilled += amount;
-        if (enemiesKilled == enemygoal)
+        if (enemiesKilled >= 10)
         {
             StartCoroutine(youWin());
         }

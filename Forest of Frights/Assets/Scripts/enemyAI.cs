@@ -33,7 +33,8 @@ public class enemyAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        gameManager.instance.updateGameGoal(0);
+        //Disabled updateGameGoal to not count the current enemies on screen
+        //gameManager.instance.updateGameGoal(0);
 
     }
     #region Update
