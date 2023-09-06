@@ -39,16 +39,18 @@ public class playerController : MonoBehaviour, IDamage
     private int jumpedTimes;
     private Vector3 playerVelocity;
     private Vector3 move;
-
+    float OriginalHp;
     
 
 
 
     private void Start()
     {
+        OriginalHp = maxHP;
+        spawnPlayer();
         originalPlayerSpeed = playerSpeed;
         hpBar.fillAmount = HP / maxHP;
-
+          
     }
 
     void Update()
@@ -142,6 +144,7 @@ public class playerController : MonoBehaviour, IDamage
             if (damageable != null)
             {
                 damageable.takeDamage(shootDamage);
+                
             }
         }
         yield return new WaitForSeconds(shootRate);
@@ -158,5 +161,16 @@ public class playerController : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
+        if(HP <= 0)
+        {
+            gameManager.instance.youLose();
+        }
+    }
+    public void spawnPlayer() 
+    {
+        HP = OriginalHp;
+        controller.enabled = false;
+        transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        controller.enabled = true;
     }
 }

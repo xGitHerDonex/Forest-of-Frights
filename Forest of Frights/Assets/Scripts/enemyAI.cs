@@ -33,7 +33,7 @@ public class enemyAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager.instance.updateGameGoal(0);
 
     }
     #region Update
@@ -84,6 +84,7 @@ public class enemyAI : MonoBehaviour, IDamage
         StartCoroutine(flashDamage());
         if (hp <= 0)
         {
+            gameManager.instance.updateGameGoal(+1);
             Destroy(gameObject);
         }
 

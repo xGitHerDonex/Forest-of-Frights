@@ -20,13 +20,20 @@ public class gameManager : MonoBehaviour
 
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
     [SerializeField] GameObject pauseMenu;         // Pause Menu
-
+    [SerializeField] GameObject winMenu;
+    [SerializeField] GameObject loseMenu;
 
     [SerializeField] GameObject enemy1;
     [SerializeField] GameObject enemy2;
 
     [SerializeField] RectTransform spawner;
     [SerializeField] float spawnRate;
+
+
+    [SerializeField] int enemiesKilled;
+    [SerializeField] int enemygoal;
+
+    public GameObject playerSpawnPos;
 
 
 
@@ -36,6 +43,7 @@ public class gameManager : MonoBehaviour
         instance = this; // set the the instance to this 
         player = GameObject.FindGameObjectWithTag("Player"); // set player to player with tag "player"
         playerScript = player.GetComponent<playerController>(); // set player controller to the player controller of player
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
     }
 
     void Update()
@@ -91,5 +99,28 @@ public class gameManager : MonoBehaviour
         currentMenu.SetActive(isPaused); // set Pause Menu as current window;
         currentMenu = null;  // remove window
 
+    }
+    public void updateGameGoal(int amount)
+    {
+        enemiesKilled += amount;
+        if (enemiesKilled == enemygoal)
+        {
+            StartCoroutine(youWin());
+        }
+
+    }
+    IEnumerator youWin()
+    {
+        yield return new WaitForSeconds(1);
+        pause();
+        currentMenu = winMenu;
+        currentMenu.SetActive(isPaused);
+    }
+
+    public void youLose()
+    {
+        pause();
+        currentMenu = loseMenu;
+        currentMenu.SetActive(isPaused);
     }
 }
