@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class gameManager : MonoBehaviour
@@ -20,6 +21,11 @@ public class gameManager : MonoBehaviour
 
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
     [SerializeField] GameObject pauseMenu;         // Pause Menu
+    [SerializeField] GameObject enemy1;
+    [SerializeField] GameObject enemy2;
+
+    [SerializeField] RectTransform spawner;
+    [SerializeField] float spawnRate;
 
 
     //Initializes before Application Runs
@@ -28,6 +34,8 @@ public class gameManager : MonoBehaviour
         instance = this; // set the the instance to this 
         player = GameObject.FindGameObjectWithTag("Player"); // set player to player with tag "player"
         playerScript = player.GetComponent<playerController>(); // set player controller to the player controller of player
+       
+
     }
 
     void Update()
@@ -38,6 +46,28 @@ public class gameManager : MonoBehaviour
             currentMenu = pauseMenu; // set current menu to pause menu
             currentMenu.SetActive(isPaused); // show menu
         }
+        
+
+        //Spawn Enemies
+        if (Time.time  > (spawnRate))
+        {
+            spawnRate = spawnRate + Time.time;
+            StartCoroutine(spawnEnemy(enemy1));
+            StartCoroutine(spawnEnemy(enemy2));
+        }
+
+        //if (Time.time > (spawnRate + 1))
+        //{
+        //    spawnRate = spawnRate + Time.time;
+        //    StartCoroutine(spawnEnemy(enemy2));
+        //}
+    }
+
+    //Spawns an enemy
+    IEnumerator spawnEnemy(GameObject enemy)
+    {
+        Instantiate(enemy, spawner.position, transform.rotation);       
+        yield return new WaitForSeconds(spawnRate); 
 
     }
 
