@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.004080892, g: 0.00022322623, b: 0.000000056989357, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6570,7 +6570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &260246320
 Light:
   m_ObjectHideFlags: 0
@@ -24282,7 +24282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1264087096
 Transform:
   m_ObjectHideFlags: 0
@@ -43598,6 +43598,10 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 693122781}
+    - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
+      propertyPath: jumpHeight
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43708,6 +43712,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 71070142535290673, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 116358304535009283, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1332076536884729599, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336726015210348302, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630461900325177829, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4086349585225404506, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
       propertyPath: m_Name
       value: UI
@@ -43791,6 +43815,34 @@ PrefabInstance:
     - target: {fileID: 4989649792249075166, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091059946387208092, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152106753249058286, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336221074186511694, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363504858069634425, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_fontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6363504858069634425, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8748056215154024012, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8982478741507368500, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
