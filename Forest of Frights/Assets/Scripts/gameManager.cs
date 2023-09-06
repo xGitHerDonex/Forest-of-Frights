@@ -21,6 +21,12 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
     [SerializeField] GameObject pauseMenu;         // Pause Menu
 
+    [SerializeField] GameObject enemy1;
+    [SerializeField] GameObject enemy2;
+
+    [SerializeField] RectTransform spawner;
+    [SerializeField] float spawnRate;
+
 
     //Initializes before Application Runs
     void Awake()
@@ -38,6 +44,24 @@ public class gameManager : MonoBehaviour
             currentMenu = pauseMenu; // set current menu to pause menu
             currentMenu.SetActive(isPaused); // show menu
         }
+
+    
+        //Spawn Enemies
+        if (Time.time > (spawnRate))
+        {
+            spawnRate = spawnRate + Time.time;
+            StartCoroutine(spawnEnemy(enemy1));
+            StartCoroutine(spawnEnemy(enemy2));
+        }
+
+    }
+
+    //Spawns an enemy
+    IEnumerator spawnEnemy(GameObject enemy)
+    {
+        Instantiate(enemy, spawner.position, transform.rotation);
+        yield return new WaitForSeconds(spawnRate);
+
 
     }
 
