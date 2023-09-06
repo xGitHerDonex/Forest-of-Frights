@@ -15,20 +15,13 @@ public class gameManager : MonoBehaviour
 
     public static gameManager instance;            // instance for gameManager
     public GameObject player;                      // player
-    public playerController playerScript;           // player controller
+    public playerController playerScript;          // player controller
     bool isPaused;                                 // bool for if game is paused - tracks pause state.
 
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
     [SerializeField] GameObject pauseMenu;         // Pause Menu
     [SerializeField] GameObject winMenu;
     [SerializeField] GameObject loseMenu;
-
-    [SerializeField] GameObject enemy1;
-    [SerializeField] GameObject enemy2;
-
-    [SerializeField] RectTransform spawner;
-    [SerializeField] float spawnRate;
-
 
     [SerializeField] int enemiesKilled;
     [SerializeField] int enemygoal;
@@ -55,26 +48,9 @@ public class gameManager : MonoBehaviour
             currentMenu.SetActive(isPaused); // show menu
         }
 
- 
-        //Spawn Enemies
-        if (Time.time > (spawnRate))
-        {
-            spawnRate = spawnRate + Time.time;
-            StartCoroutine(spawnEnemy(enemy1));
-            StartCoroutine(spawnEnemy(enemy2));
-        }
 
     }
 
-    //Spawns an enemy
-    IEnumerator spawnEnemy(GameObject enemy)
-    {
-        Instantiate(enemy, spawner.position, transform.rotation);
-        yield return new WaitForSeconds(spawnRate);
-
-
-
-    }
 
     //These methods will contain the logic for pausing and unpausing the game
 
