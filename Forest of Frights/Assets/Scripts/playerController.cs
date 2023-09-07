@@ -12,13 +12,25 @@ public class playerController : MonoBehaviour, IDamage
     [Header("Player Stats")]
     [SerializeField] int HP;
     [SerializeField] float maxHP;
-    [SerializeField] float maxStamina; 
+    [SerializeField] float maxStamina;
     [SerializeField] float regenStamina;
     [SerializeField] float playerSpeed;
     [SerializeField] float jumpHeight;
 
     //Player UI Bar
     [SerializeField] Image hpBar;
+
+    //Player basic shooting
+    [Header("Gun Stats")]
+    [SerializeField] float shootRate;
+    [SerializeField] int shootDamage;
+    [SerializeField] int shootDistance;
+
+    [Header("SFX")]
+    //Player SFX
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip playerInjured;
+    [SerializeField] AudioClip playerShoot;
 
 
     //Expanded Player stats
@@ -27,11 +39,8 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float drainStamina;
     [SerializeField] int jumpsMax; 
     [SerializeField] float gravityValue;
-   
-    //Player basic shooting
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDistance;
+
+    
 
     //Bools and others for functions
     private bool isShooting;
@@ -95,14 +104,14 @@ public class playerController : MonoBehaviour, IDamage
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
-    //Sprint Ability:  Increases run speed by 4 for 4 seconds
+    //Sprint Ability:  Increases run speed by 5 for 4 seconds
     //Future: Powerups to increase maxStamina for increased sprinting
     void sprint()
     {
         if (Input.GetButton("Sprint") && canSprint)
         {
             //isSprinting = true;
-            playerSpeed = originalPlayerSpeed + 4;
+            playerSpeed = originalPlayerSpeed + 5;
             drainStamina -= 1.0f * Time.deltaTime;
             {
                 if (drainStamina <= 0.1)
@@ -137,6 +146,8 @@ public class playerController : MonoBehaviour, IDamage
     IEnumerator shoot()
     {
         isShooting = true;
+        //Shoot Sound!
+        audioSource.PlayOneShot(playerShoot);
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
@@ -166,10 +177,17 @@ public class playerController : MonoBehaviour, IDamage
         {
             gameManager.instance.youLose();
         }
+        else
+        {
+            //Damage sound!
+            audioSource.PlayOneShot(playerInjured);
+        }
     }
     public void spawnPlayer() 
     {
+        //Resets Players HP
         HP = OriginalHp;
+        //Prevents playerController from taking over the script
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
