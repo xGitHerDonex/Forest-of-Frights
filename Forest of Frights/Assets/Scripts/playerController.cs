@@ -46,6 +46,7 @@ public class playerController : MonoBehaviour, IDamage
     private bool isShooting;
     private bool groundedPlayer;
     private bool canSprint = true;
+    private bool isTakingDamage = false;
     private int jumpedTimes;
     private Vector3 playerVelocity;
     private Vector3 move;
@@ -172,16 +173,30 @@ public class playerController : MonoBehaviour, IDamage
     //Damageable Ability:  Currently allows player takes damage
     public void takeDamage(int amount)
     {
-        HP -= amount;
-        if(HP <= 0)
+        if (!isTakingDamage)
         {
-            gameManager.instance.youLose();
+            isTakingDamage = true;
+            HP -= amount;
+
+            if (HP <= 0)
+            {
+                gameManager.instance.youLose();
+            }
+            else
+            {
+                //Damage sound!
+                audioSource.PlayOneShot(playerInjured);
+            }
+            StartCoroutine(ResetTakingDamage());
         }
-        else
-        {
-            //Damage sound!
-            audioSource.PlayOneShot(playerInjured);
-        }
+    }
+
+
+    IEnumerator ResetTakingDamage()
+    {
+        //Small delay to prevent repeat damage
+        yield return new WaitForSeconds(0.1f);
+        isTakingDamage = false;
     }
     public void spawnPlayer() 
     {
