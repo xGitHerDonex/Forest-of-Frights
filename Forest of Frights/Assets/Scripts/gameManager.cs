@@ -24,7 +24,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject winMenu;           // Win Menu 
     [SerializeField] GameObject loseMenu;          // Lose Menu
 
-    [SerializeField] int enemiesKilled;
+    
+    [SerializeField] int enemiesKilled;            // Counts the Enemies that were killed
     //[SerializeField] int enemygoal;
 
   
@@ -74,6 +75,8 @@ public class gameManager : MonoBehaviour
         currentMenu = null;  // remove window
 
     }
+
+    //Our Win Condition.
     public void updateGameGoal(int amount)
     {
         enemiesKilled += amount;
@@ -83,6 +86,8 @@ public class gameManager : MonoBehaviour
         }
 
     }
+
+    //Pulls up the Win table after 1 second of 
     IEnumerator youWin()
     {
         yield return new WaitForSeconds(1);
@@ -90,7 +95,7 @@ public class gameManager : MonoBehaviour
         currentMenu = winMenu;
         currentMenu.SetActive(isPaused);
     }
-
+    //Pulls up the Lose Table after the player dies.
     public void youLose()
     {
         pause();
