@@ -16,7 +16,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float regenStamina;
     [SerializeField] float playerSpeed;
     [SerializeField] float jumpHeight;
-
+    int OriginalHp;
     //Player UI Bar
     [SerializeField] Image hpBar;
 
@@ -50,15 +50,20 @@ public class playerController : MonoBehaviour, IDamage
     private int jumpedTimes;
     private Vector3 playerVelocity;
     private Vector3 move;
-    int OriginalHp;
+
+
+
     
 
 
 
     private void Start()
     {
+        //set up for respawn
         OriginalHp = HP;
+
         spawnPlayer();
+
         originalPlayerSpeed = playerSpeed;
         hpBar.fillAmount = HP / maxHP;
           
@@ -180,6 +185,7 @@ public class playerController : MonoBehaviour, IDamage
 
             if (HP <= 0)
             {
+                //Plays the you lose method after your health hits 0
                 gameManager.instance.youLose();
             }
             else

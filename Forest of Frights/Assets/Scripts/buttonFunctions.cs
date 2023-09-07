@@ -10,6 +10,7 @@ public class buttonFunctions : MonoBehaviour
     // Quit
     // Restart
     // Resume
+    // Respawn
 
 
     //Quit - Quits the game
@@ -31,6 +32,8 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.unPause();
     }
 
+    
+    //Respawn - Respawns the player after they lose
     public void respawnPlayer()
     {
         gameManager.instance.unPause();
