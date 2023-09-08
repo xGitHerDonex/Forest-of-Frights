@@ -4,12 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class playerController : MonoBehaviour, IDamage
+public class playerController : MonoBehaviour, IDamage,IPhysics
 {
     [SerializeField] CharacterController controller;
 
     //Players stats
-    [Header("Player Stats")]
+    [Header("-----Player Stats-----")]
     [SerializeField] int HP;
     [SerializeField] float maxHP;
     [SerializeField] float maxStamina;
@@ -17,16 +17,22 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float playerSpeed;
     [SerializeField] float jumpHeight;
     int OriginalHp;
+
+    [Header("-----PushBack Tweak-----")]
+    
+    [SerializeField] float pushBackResolve;
+
     //Player UI Bar
+    [Header("-----Player UI Image-----")]
     [SerializeField] Image hpBar;
 
     //Player basic shooting
-    [Header("Gun Stats")]
+    [Header("-----Gun Stats------")]
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
 
-    [Header("SFX")]
+    [Header("-----SFX-----")]
     //Player SFX
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip playerInjured;
@@ -34,7 +40,7 @@ public class playerController : MonoBehaviour, IDamage
 
 
     //Expanded Player stats
-    [Header("Expanded Player Stats")]
+    [Header("-----Expanded Player Stats-----")]
     [SerializeField] float originalPlayerSpeed;
     [SerializeField] float drainStamina;
     [SerializeField] int jumpsMax; 
@@ -50,10 +56,10 @@ public class playerController : MonoBehaviour, IDamage
     private int jumpedTimes;
     private Vector3 playerVelocity;
     private Vector3 move;
+    private Vector3 pushback;
 
 
 
-    
 
 
 
@@ -86,6 +92,18 @@ public class playerController : MonoBehaviour, IDamage
     //Move Ability:  Currently allows player to move!  Wheee!
     void movement()
     {
+        //controls pushback amount
+        #region pushback
+if (pushback.magnitude > 0.01f)
+        {
+            pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushBackResolve);
+            pushback.x = Mathf.Lerp(pushback.x, 0, Time.deltaTime * pushBackResolve);
+            pushback.y = Mathf.Lerp(pushback.y, 0, Time.deltaTime * pushBackResolve * 3);
+            pushback.z = Mathf.Lerp(pushback.z, 0, Time.deltaTime * pushBackResolve);
+
+        }
+        #endregion
+        
         groundedPlayer = controller.isGrounded;
 
         if (groundedPlayer && playerVelocity.y < 0)
@@ -212,5 +230,9 @@ public class playerController : MonoBehaviour, IDamage
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
+    }
+    public void physics(Vector3 dir)
+    {
+        pushback += dir;
     }
 }

@@ -8,23 +8,23 @@ using UnityEngine.UIElements;
 public class enemyAI : MonoBehaviour, IDamage
 {
     #region Fields, Members and Variables
-
+    [Header("-----Components-----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-
-    [SerializeField] Transform shootPos;
-    [SerializeField] float shootRate;
     [SerializeField] GameObject bullet;
-    bool isShooting;
+    [SerializeField] Transform shootPos;
 
+    [Header("-----Enemy Stats-----")]
+    [Range(1, 10)][SerializeField] float shootRate;
+    [Range(1, 10)][SerializeField] int hp;
+    [Range(1, 10)][SerializeField] int targetFaceSpeed;
 
-    [SerializeField] int hp;
-    [SerializeField] int targetFaceSpeed;
+    Vector3 playerDir;    
+    Vector3 pushBack;
+    Vector3 playerDirection;
 
     bool playerInRange;
-
-
-    Vector3 playerDirection; 
+    bool isShooting;
     #endregion
 
 
@@ -78,6 +78,7 @@ public class enemyAI : MonoBehaviour, IDamage
      * then subtracts the amount of damage from that whole number
      * the call the sub routine to run at the same time tomake the enemy feedback show (flashing damage indicator)
      * also if the health is less than or equal to 0 destroy this enemy
+     * 
      */
     public void takeDamage(int amount)
     {
@@ -85,7 +86,7 @@ public class enemyAI : MonoBehaviour, IDamage
         StartCoroutine(flashDamage());
         if (hp <= 0)
         {
-            gameManager.instance.updateGameGoal(+1);
+            gameManager.instance.updateGameGoal(+1); //updates win condition set at 10 or greater "You win" also increments enemies killed and starts the win table Ienum
             Destroy(gameObject);
         }
 
@@ -156,8 +157,12 @@ public class enemyAI : MonoBehaviour, IDamage
             playerInRange = false;
 
         }
-    } 
+    }
     #endregion
+    public void physics(Vector3 dir)
+    {
+        agent.velocity += dir;
+    }
 
 
 }
