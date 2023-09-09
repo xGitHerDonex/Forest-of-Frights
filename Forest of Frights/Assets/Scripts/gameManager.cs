@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -11,14 +12,20 @@ public class gameManager : MonoBehaviour
     // 3. Quit
     // 4. Resume
     // 5. Pause States
+    // 6. Player HP
+    // 7. Find Player Spawn
 
 
-    public static gameManager instance;            // instance for gameManager
-    public GameObject player;                      // player
-    public playerController playerScript;          // player controller
-    public GameObject playerSpawnPos;
+    public static gameManager instance;           // instance for gameManager
+    public GameObject player;                     // player
+    public playerController playerScript;         // player controller
+    public GameObject playerSpawnPos;             // player Spawn
+    private Image playerHP;                         // player HP bar
+    private GameObject playerHPbar;
+
     bool isPaused;                                 // bool for if game is paused - tracks pause state.
 
+    
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
     [SerializeField] GameObject pauseMenu;         // Pause Menu
     [SerializeField] GameObject winMenu;           // Win Menu 
@@ -26,16 +33,16 @@ public class gameManager : MonoBehaviour
 
     
     [SerializeField] int enemiesKilled;            // Counts the Enemies that were killed
-    //[SerializeField] int enemygoal;
 
-  
     //Initializes before Application Runs
     void Awake()
     {
         instance = this; // set the the instance to this 
         player = GameObject.FindGameObjectWithTag("Player"); // set player to player with tag "player"
         playerScript = player.GetComponent<playerController>(); // set player controller to the player controller of player
-        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //sets player spawn pos 
+        playerHPbar = GameObject.FindWithTag("playerHP"); //Finds player HP bar
+        playerHP = playerHPbar.GetComponent<Image>(); //Sets player HP to that of Image component of the HP bar
     }
 
     void Update()
@@ -102,4 +109,13 @@ public class gameManager : MonoBehaviour
         currentMenu = loseMenu;
         currentMenu.SetActive(isPaused);
     }
+
+    //When called updates the fill level of the player's hp bar.
+    public void updateHPbar(float amount)
+    {
+        playerHP.fillAmount = amount;
+
+    }
+
+
 }

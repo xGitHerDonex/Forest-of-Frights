@@ -24,7 +24,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
 
     //Player UI Bar
     [Header("-----Player UI Image-----")]
-    [SerializeField] Image hpBar;
+    private Image hpBar;
 
     //Player basic shooting
     [Header("-----Gun Stats------")]
@@ -59,20 +59,15 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     private Vector3 pushback;
 
 
-
-
-
-
     private void Start()
     {
         //set up for respawn
         OriginalHp = HP;
-
         spawnPlayer();
 
+        //Sets player speed
         originalPlayerSpeed = playerSpeed;
-        hpBar.fillAmount = HP / maxHP;
-          
+
     }
 
     void Update()
@@ -84,9 +79,10 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
        //Call to shoot
         if (Input.GetButton("Shoot") && !isShooting)
             StartCoroutine(shoot());
+
        
-       //Updates Fill on HP
-       hpBar.fillAmount = HP / maxHP;
+        gameManager.instance.updateHPbar(HP/maxHP);
+       
     }
 
     //Move Ability:  Currently allows player to move!  Wheee!
