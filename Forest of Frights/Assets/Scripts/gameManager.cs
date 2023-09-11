@@ -23,16 +23,19 @@ public class gameManager : MonoBehaviour
     private Image playerHP;                         // player HP bar
     private GameObject playerHPbar;
 
-    bool isPaused;                                 // bool for if game is paused - tracks pause state.
+    public bool isPaused;                                 // bool for if game is paused - tracks pause state.
 
     
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
     [SerializeField] GameObject pauseMenu;         // Pause Menu
     [SerializeField] GameObject winMenu;           // Win Menu 
     [SerializeField] GameObject loseMenu;          // Lose Menu
-
-    
     [SerializeField] int enemiesKilled;            // Counts the Enemies that were killed
+    [Header("-----SFX-----")]
+    [SerializeField] AudioSource natureSoundSource;
+    [SerializeField] AudioClip natureSounds;
+
+
 
     //Initializes before Application Runs
     void Awake()
@@ -43,6 +46,15 @@ public class gameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //sets player spawn pos 
         playerHPbar = GameObject.FindWithTag("playerHP"); //Finds player HP bar
         playerHP = playerHPbar.GetComponent<Image>(); //Sets player HP to that of Image component of the HP bar
+        
+        //Adds some ambience
+        if (natureSoundSource != null && natureSounds != null)
+        {
+            natureSoundSource.clip = natureSounds;
+            natureSoundSource.loop = true;
+            natureSoundSource.Play();
+        }
+    
     }
 
     void Update()

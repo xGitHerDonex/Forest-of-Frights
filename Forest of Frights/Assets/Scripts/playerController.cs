@@ -37,7 +37,9 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip playerInjured;
     [SerializeField] AudioClip playerShoot;
-
+    [SerializeField] AudioClip playerWalksGrass;
+    [SerializeField] AudioClip playerRunsGrass;
+    [SerializeField] AudioClip playerJumpsGrass;
 
     //Expanded Player stats
     [Header("-----Expanded Player Stats-----")]
@@ -57,7 +59,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     private Vector3 playerVelocity;
     private Vector3 move;
     private Vector3 pushback;
-
+   
 
     private void Start()
     {
@@ -76,11 +78,12 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         movement();
         sprint();
 
-       //Call to shoot
-        if (Input.GetButton("Shoot") && !isShooting)
+        //Call to shoot
+        //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
+        if (Input.GetButton("Shoot") && !isShooting && !gameManager.instance.isPaused)
+
             StartCoroutine(shoot());
 
-       
         gameManager.instance.updateHPbar(HP/maxHP);
        
     }
@@ -108,6 +111,15 @@ if (pushback.magnitude > 0.01f)
             playerVelocity.y = 0f;
         }
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
+        //Adds sound to player footsteps (only while walking)
+        float moveMagnitude = move.magnitude;
+        if (moveMagnitude >0 && !audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(playerWalksGrass);
+        }
+
+
+
         controller.Move(move * Time.deltaTime * playerSpeed);
 
 
@@ -116,8 +128,12 @@ if (pushback.magnitude > 0.01f)
         {
             jumpedTimes++;
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-    //Jumping now drains some stamina
+            
+            //Jumping now makes a sound
+            audioSource.PlayOneShot(playerJumpsGrass);
+            //Jumping now drains some stamina
             drainStamina -= 1.1f;
+
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
@@ -130,19 +146,25 @@ if (pushback.magnitude > 0.01f)
     {
         if (Input.GetButton("Sprint") && canSprint)
         {
-            //isSprinting = true;
+            float moveMagnitude = move.magnitude;
+            //WIP Sprint Sound
+            if (moveMagnitude > 0 && playerSpeed == 10 && !audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(playerRunsGrass);
+            }
+            
+            //Increase player run speed by 5
             playerSpeed = originalPlayerSpeed + 5;
             drainStamina -= 1.0f * Time.deltaTime;
             {
                 if (drainStamina <= 0.1)
-                {
-                    //isSprinting = false;
+                {             
                     canSprint = false;
                     playerSpeed = originalPlayerSpeed;
                 }
             }
-
         }
+
     //Stamina Recover Ability:  Recovers stamina by 0.75(current regenStamina)
     //Future: Powerups to speed up regenStamina
     //Note: drainStamina set to 4.0 to allow sprinting sooner than possible maxStamina
