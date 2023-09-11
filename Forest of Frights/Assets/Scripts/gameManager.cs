@@ -17,20 +17,28 @@ public class gameManager : MonoBehaviour
 
 
     public static gameManager instance;           // instance for gameManager
-    public GameObject player;                     // player
-    public playerController playerScript;         // player controller
-    public GameObject playerSpawnPos;             // player Spawn
-    private Image playerHP;                         // player HP bar
-    private GameObject playerHPbar;
 
-    public bool isPaused;                                 // bool for if game is paused - tracks pause state.
+    [Header("-----Player-----")]
+    public GameObject player;                     
+    public playerController playerScript;        
+    public GameObject playerSpawnPos;            
+    private Image playerHpBar;                        
+    private GameObject playerHp;
+    private Image playerStamBar;
+    private GameObject playerStam;
 
-    
+    public bool isPaused;                                 
+
+
+    [Header("-----Menus-----")]
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
     [SerializeField] GameObject pauseMenu;         // Pause Menu
     [SerializeField] GameObject winMenu;           // Win Menu 
     [SerializeField] GameObject loseMenu;          // Lose Menu
     [SerializeField] int enemiesKilled;            // Counts the Enemies that were killed
+
+
+    
     [Header("-----SFX-----")]
     [SerializeField] AudioSource natureSoundSource;
     [SerializeField] AudioClip natureSounds;
@@ -44,9 +52,14 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player"); // set player to player with tag "player"
         playerScript = player.GetComponent<playerController>(); // set player controller to the player controller of player
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //sets player spawn pos 
-        playerHPbar = GameObject.FindWithTag("playerHP"); //Finds player HP bar
-        playerHP = playerHPbar.GetComponent<Image>(); //Sets player HP to that of Image component of the HP bar
-        
+
+        playerHp = GameObject.FindWithTag("playerHp"); //Finds player HP bar
+        playerHpBar = playerHp.GetComponent<Image>(); //Sets player HP to that of Image component of the HP bar
+
+        playerStam = GameObject.FindWithTag("playerStam"); //Finds player Stam bar
+        playerStamBar = playerStam.GetComponent<Image>(); //Sets player Stam to that of Image component of the Stam bar
+
+
         //Adds some ambience
         if (natureSoundSource != null && natureSounds != null)
         {
@@ -122,12 +135,17 @@ public class gameManager : MonoBehaviour
         currentMenu.SetActive(isPaused);
     }
 
-    //When called updates the fill level of the player's hp bar.
-    public void updateHPbar(float amount)
+    //When called updates the fill level of the Hp Bar
+    public void updateHpBar(float amount)
     {
-        playerHP.fillAmount = amount;
+       playerHpBar.fillAmount = amount;
 
     }
 
+    //When called updates the fill level of the Stam Bar
+    public void updateStamBar(float amount)
+    {
+        playerStamBar.fillAmount = amount;
 
+    }
 }
