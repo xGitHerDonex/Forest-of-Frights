@@ -10,13 +10,16 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
 
     //Players stats
     [Header("-----Player Stats-----")]
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] float maxHP;
     [SerializeField] float maxStamina;
+    [SerializeField] float Stamina;
     [SerializeField] float regenStamina;
     [SerializeField] float playerSpeed;
     [SerializeField] float jumpHeight;
-    int OriginalHp;
+
+
+    //int OriginalHp;
 
     [Header("-----PushBack Tweak-----")]
     
@@ -24,7 +27,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
 
     //Player UI Bar
     [Header("-----Player UI Image-----")]
-    private Image hpBar;
+    //private Image hpBar;
 
     //Player basic shooting
     [Header("-----Gun Stats------")]
@@ -44,7 +47,6 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     //Expanded Player stats
     [Header("-----Expanded Player Stats-----")]
     [SerializeField] float originalPlayerSpeed;
-    [SerializeField] float drainStamina;
     [SerializeField] int jumpsMax; 
     [SerializeField] float gravityValue;
 
@@ -64,7 +66,8 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     private void Start()
     {
         //set up for respawn
-        OriginalHp = HP;
+        HP = maxHP;
+        Stamina = maxStamina;
         spawnPlayer();
 
         //Sets player speed
@@ -81,10 +84,10 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         //Call to shoot
         //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
         if (Input.GetButton("Shoot") && !isShooting && !gameManager.instance.isPaused)
-
             StartCoroutine(shoot());
 
-        gameManager.instance.updateHPbar(HP/maxHP);
+        gameManager.instance.updateHpBar(HP / maxHP);
+        gameManager.instance.updateStamBar(Stamina/ maxStamina);
        
     }
 
@@ -132,7 +135,7 @@ if (pushback.magnitude > 0.01f)
             //Jumping now makes a sound
             audioSource.PlayOneShot(playerJumpsGrass);
             //Jumping now drains some stamina
-            drainStamina -= 1.1f;
+            Stamina -= 1.1f;
 
         }
 
@@ -155,9 +158,9 @@ if (pushback.magnitude > 0.01f)
             
             //Increase player run speed by 5
             playerSpeed = originalPlayerSpeed + 5;
-            drainStamina -= 1.0f * Time.deltaTime;
+            Stamina -= 1.0f * Time.deltaTime;
             {
-                if (drainStamina <= 0.1)
+                if (Stamina <= 0.1)
                 {             
                     canSprint = false;
                     playerSpeed = originalPlayerSpeed;
@@ -170,15 +173,16 @@ if (pushback.magnitude > 0.01f)
     //Note: drainStamina set to 4.0 to allow sprinting sooner than possible maxStamina
         else
         {
-            if (drainStamina >= 4.0)
+            if (Stamina >= 4.0)
             {
                 canSprint = true;
                 playerSpeed = originalPlayerSpeed;
 
             }
-            drainStamina += regenStamina * Time.deltaTime;
+            Stamina += regenStamina * Time.deltaTime;
             //Clamp prevents stamina going negative or over the max
-            drainStamina = Mathf.Clamp(drainStamina, 0, maxStamina);
+
+            Stamina = Mathf.Clamp(Stamina, 0, maxStamina);
         }
 
     }
@@ -243,7 +247,8 @@ if (pushback.magnitude > 0.01f)
     public void spawnPlayer() 
     {
         //Resets Players HP
-        HP = OriginalHp;
+        HP = maxHP;
+
         //Prevents playerController from taking over the script
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
