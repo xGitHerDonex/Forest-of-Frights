@@ -116,7 +116,8 @@ if (pushback.magnitude > 0.01f)
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
         //Adds sound to player footsteps (only while walking)
         float moveMagnitude = move.magnitude;
-        if (moveMagnitude >0 && !audioSource.isPlaying)
+        //Debug.Log(moveMagnitude);
+        if (moveMagnitude >.4f && !audioSource.isPlaying)
         {
             audioSource.PlayOneShot(playerWalksGrass);
         }
@@ -148,17 +149,19 @@ if (pushback.magnitude > 0.01f)
     void sprint()
     {
         if (Input.GetButton("Sprint") && canSprint)
-        {
-            float moveMagnitude = move.magnitude;
-            //WIP Sprint Sound
-            if (moveMagnitude > 0 && playerSpeed == 10 && !audioSource.isPlaying)
-            {
-                audioSource.PlayOneShot(playerRunsGrass);
-            }
-            
+        {         
             //Increase player run speed by 5
             playerSpeed = originalPlayerSpeed + 5;
             Stamina -= 1.0f * Time.deltaTime;
+            
+            //WIP Sprint Sound
+            float moveMagnitude = move.magnitude;
+            //audioSource.Stop();
+            if (moveMagnitude >= 0.1f && playerSpeed == 10 && !audioSource.isPlaying)
+            {
+                
+                audioSource.PlayOneShot(playerRunsGrass);
+            }
             {
                 if (Stamina <= 0.1)
                 {             
