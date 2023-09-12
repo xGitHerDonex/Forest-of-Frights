@@ -22,12 +22,12 @@ public class gameManager : MonoBehaviour
     public GameObject player;                     
     public playerController playerScript;        
     public GameObject playerSpawnPos;            
-    private Image playerHpBar;                        
     private GameObject playerHp;
-    private Image playerStamBar;
+    [SerializeField] Image playerHpBar;                        
     private GameObject playerStam;
+    [SerializeField] Image playerLeftStamBar;
+    [SerializeField] Image playerRightStamBar;
 
-    public bool isPaused;                                 
 
 
     [Header("-----Menus-----")]
@@ -36,6 +36,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject winMenu;           // Win Menu 
     [SerializeField] GameObject loseMenu;          // Lose Menu
     [SerializeField] int enemiesKilled;            // Counts the Enemies that were killed
+    public bool isPaused;                                 
 
 
     
@@ -57,7 +58,8 @@ public class gameManager : MonoBehaviour
         playerHpBar = playerHp.GetComponent<Image>(); //Sets player HP to that of Image component of the HP bar
 
         playerStam = GameObject.FindWithTag("playerStam"); //Finds player Stam bar
-        playerStamBar = playerStam.GetComponent<Image>(); //Sets player Stam to that of Image component of the Stam bar
+        playerLeftStamBar = playerStam.GetComponent<Image>(); //Sets player Stam to that of Image component of the Stam bar
+        playerRightStamBar = playerStam.GetComponent<Image>(); //Sets player Stam to that of Image component of the Stam bar
 
 
         //Adds some ambience
@@ -145,7 +147,8 @@ public class gameManager : MonoBehaviour
     //When called updates the fill level of the Stam Bar
     public void updateStamBar(float amount)
     {
-        playerStamBar.fillAmount = amount;
+        playerLeftStamBar.fillAmount = amount;
+        playerRightStamBar.fillAmount = amount;
 
     }
 }
