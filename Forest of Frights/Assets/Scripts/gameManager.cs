@@ -158,9 +158,8 @@ public class gameManager : MonoBehaviour
     //Flash the screen when player gets damaged
     public IEnumerator playerFlashDamage()
     {
-        currentMenu = playerDamageFlash;
-        currentMenu.SetActive(true);
+        playerDamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        currentMenu.SetActive(false);
+        playerDamageFlash.SetActive(false);
     }
 }

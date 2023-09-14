@@ -247,7 +247,7 @@ if (pushback.magnitude > 0.01f)
     }
     public void spawnPlayer() 
     {
-
+        //GameObject playerDamageFlash = gameManager.GameObject.FindWithTag("")
         //Resets Players HP
         HP = maxHP;
 
