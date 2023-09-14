@@ -2739,7 +2739,7 @@ GameObject:
   - component: {fileID: 5779360525045762499}
   - component: {fileID: 3238992817836029228}
   m_Layer: 0
-  m_Name: playerRightStamina
+  m_Name: playerLeftStamina
   m_TagString: playerStam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2866,8 +2866,8 @@ MonoBehaviour:
   playerScript: {fileID: 0}
   playerSpawnPos: {fileID: 0}
   playerHpBar: {fileID: 0}
-  playerLeftStamBar: {fileID: 602997730100752387}
-  playerRightStamBar: {fileID: 5779360525045762499}
+  playerLeftStamBar: {fileID: 5779360525045762499}
+  playerRightStamBar: {fileID: 602997730100752387}
   currentMenu: {fileID: 0}
   pauseMenu: {fileID: 859718779027106160}
   winMenu: {fileID: 5181780128631637411}
@@ -3023,7 +3023,7 @@ GameObject:
   - component: {fileID: 4410494386408692259}
   - component: {fileID: 602997730100752387}
   m_Layer: 0
-  m_Name: playerLeftStamina
+  m_Name: playerRightStamina
   m_TagString: playerStam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3045,7 +3045,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -8.760044, y: -292.92322}
+  m_AnchoredPosition: {x: -9.286352, y: -292.92322}
   m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &4410494386408692259

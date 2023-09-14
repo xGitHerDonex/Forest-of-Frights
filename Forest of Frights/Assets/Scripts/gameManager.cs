@@ -56,12 +56,12 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>(); // set player controller to the player controller of player
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //sets player spawn pos 
 
-        playerHp = GameObject.FindWithTag("playerHp"); //Finds player HP bar
-        playerHpBar = playerHp.GetComponent<Image>(); //Sets player HP to that of Image component of the HP bar
+       //playerHp = GameObject.FindWithTag("playerHp"); //Finds player HP bar
+       //playerHpBar = playerHp.GetComponent<Image>(); //Sets player HP to that of Image component of the HP bar
 
-        playerStam = GameObject.FindWithTag("playerStam"); //Finds player Stam bar
-        playerLeftStamBar = playerStam.GetComponent<Image>(); //Sets player Stam to that of Image component of the Stam bar
-        playerRightStamBar = playerStam.GetComponent<Image>(); //Sets player Stam to that of Image component of the Stam bar
+       //playerStam = GameObject.FindWithTag("playerStam"); //Finds player Stam bar
+       //playerLeftStamBar = playerStam.GetComponent<Image>(); //Sets player Stam to that of Image component of the Stam bar
+       //playerRightStamBar = playerStam.GetComponent<Image>(); //Sets player Stam to that of Image component of the Stam bar
 
 
         //Adds some ambience

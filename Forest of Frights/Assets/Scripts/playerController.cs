@@ -86,7 +86,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         if (Input.GetButton("Shoot") && !isShooting && !gameManager.instance.isPaused)
             StartCoroutine(shoot());
 
-        gameManager.instance.updateHpBar(HP / maxHP);
+        
         gameManager.instance.updateStamBar(Stamina/ maxStamina);
        
     }
@@ -225,6 +225,7 @@ if (pushback.magnitude > 0.01f)
         {
             isTakingDamage = true;
             HP -= amount;
+            gameManager.instance.updateHpBar(HP / maxHP); // updates HP UI
             StartCoroutine(gameManager.instance.playerFlashDamage());
 
             if (HP <= 0)
