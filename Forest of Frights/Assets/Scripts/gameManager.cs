@@ -35,7 +35,9 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu;         // Pause Menu
     [SerializeField] GameObject winMenu;           // Win Menu 
     [SerializeField] GameObject loseMenu;          // Lose Menu
+    [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
     [SerializeField] int enemiesKilled;            // Counts the Enemies that were killed
+    
     public bool isPaused;                                 
 
 
@@ -150,5 +152,13 @@ public class gameManager : MonoBehaviour
         playerLeftStamBar.fillAmount = amount;
         playerRightStamBar.fillAmount = amount;
 
+    }
+
+    //Flash the screen when player gets damaged
+    public IEnumerator playerFlashDamage()
+    {
+        playerDamageFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        playerDamageFlash.SetActive(false);
     }
 }

@@ -225,6 +225,7 @@ if (pushback.magnitude > 0.01f)
         {
             isTakingDamage = true;
             HP -= amount;
+            StartCoroutine(gameManager.instance.playerFlashDamage());
 
             if (HP <= 0)
             {
