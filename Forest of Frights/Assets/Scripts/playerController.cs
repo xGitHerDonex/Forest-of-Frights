@@ -25,10 +25,6 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     
     [SerializeField] float pushBackResolve;
 
-    //Player UI Bar
-    [Header("-----Player UI Image-----")]
-    //private Image hpBar;
-
     //Player basic shooting
     [Header("-----Gun Stats------")]
     [SerializeField] float shootRate;
@@ -251,6 +247,7 @@ if (pushback.magnitude > 0.01f)
     }
     public void spawnPlayer() 
     {
+
         //Resets Players HP
         HP = maxHP;
 

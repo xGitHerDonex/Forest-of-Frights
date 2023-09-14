@@ -7,16 +7,6 @@ using TMPro;
 public class gameManager : MonoBehaviour
 {
 
-    // GameManager Class will run these functions:
-    // 1. Pause Menu
-    // 2. Restart
-    // 3. Quit
-    // 4. Resume
-    // 5. Pause States
-    // 6. Player HP
-    // 7. Find Player Spawn
-
-
     public static gameManager instance;           // instance for gameManager
 
     [Header("-----Player-----")]
