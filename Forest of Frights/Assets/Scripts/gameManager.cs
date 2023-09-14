@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class gameManager : MonoBehaviour
 {
@@ -21,14 +22,20 @@ public class gameManager : MonoBehaviour
     [Header("-----Player-----")]
     public GameObject player;                     
     public playerController playerScript;        
-    public GameObject playerSpawnPos;            
-    private GameObject playerHp;
+    public GameObject playerSpawnPos;
+
+    [Header("-----Player UI-----")]
+    [SerializeField] GameObject playerHp;
     [SerializeField] Image playerHpBar;                        
-    private GameObject playerStam;
+    [SerializeField] GameObject playerStam;
     [SerializeField] Image playerLeftStamBar;
     [SerializeField] Image playerRightStamBar;
 
-
+    [Header("-----Game Goal-----")]
+    [SerializeField] TMP_Text enemiesRemaingText;  //Text for UI
+    [SerializeField] int enemiesKilledWinCond;     //Sets win condition
+    [SerializeField] int enemiesRemaining;         //Tracks how many enmies are left to win
+    [SerializeField] int enemiesKilled;            //Counts the Enemies that were killed
 
     [Header("-----Menus-----")]
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
@@ -36,9 +43,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject winMenu;           // Win Menu 
     [SerializeField] GameObject loseMenu;          // Lose Menu
     [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
-    [SerializeField] int enemiesKilled;            // Counts the Enemies that were killed
     
-    public bool isPaused;                                 
+    public bool isPaused;
 
 
     
@@ -56,13 +62,7 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>(); // set player controller to the player controller of player
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //sets player spawn pos 
 
-       //playerHp = GameObject.FindWithTag("playerHp"); //Finds player HP bar
-       //playerHpBar = playerHp.GetComponent<Image>(); //Sets player HP to that of Image component of the HP bar
-
-       //playerStam = GameObject.FindWithTag("playerStam"); //Finds player Stam bar
-       //playerLeftStamBar = playerStam.GetComponent<Image>(); //Sets player Stam to that of Image component of the Stam bar
-       //playerRightStamBar = playerStam.GetComponent<Image>(); //Sets player Stam to that of Image component of the Stam bar
-
+        
 
         //Adds some ambience
         if (natureSoundSource != null && natureSounds != null)
@@ -72,6 +72,13 @@ public class gameManager : MonoBehaviour
             natureSoundSource.Play();
         }
     
+    }
+
+    private void Start()
+    {
+        //Set's the enemies remaining to the win condition
+        enemiesRemaining = enemiesKilledWinCond;
+        enemiesRemaingText.text = enemiesRemaining.ToString("0");
     }
 
     void Update()
@@ -86,8 +93,6 @@ public class gameManager : MonoBehaviour
 
     }
 
-
-    //These methods will contain the logic for pausing and unpausing the game
 
     //Pause State
     public void pause()
@@ -116,7 +121,12 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         enemiesKilled += amount;
-        if (enemiesKilled >= 10)
+
+        //Updates the Enemies Remaining in the UI
+        enemiesRemaining -= 1;
+        enemiesRemaingText.text = enemiesRemaining.ToString("0");
+
+        if (enemiesKilled >= enemiesKilledWinCond)
         {
             StartCoroutine(youWin());
         }
@@ -126,6 +136,7 @@ public class gameManager : MonoBehaviour
     //Pulls up the Win table after 1 second of 
     IEnumerator youWin()
     {
+        currentMenu.SetActive(isPaused);
         yield return new WaitForSeconds(1);
         pause();
         currentMenu = winMenu;
@@ -157,8 +168,9 @@ public class gameManager : MonoBehaviour
     //Flash the screen when player gets damaged
     public IEnumerator playerFlashDamage()
     {
-        playerDamageFlash.SetActive(true);
+        currentMenu = playerDamageFlash;
+        currentMenu.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        playerDamageFlash.SetActive(false);
+        currentMenu.SetActive(false);
     }
 }
