@@ -16,7 +16,7 @@ public class gameManager : MonoBehaviour
 
     [Header("-----Player UI-----")]
     [SerializeField] GameObject playerHp;
-    [SerializeField] Image playerHpBar;                        
+    [SerializeField] public Image playerHpBar;                        
     [SerializeField] GameObject playerStam;
     [SerializeField] Image playerLeftStamBar;
     [SerializeField] Image playerRightStamBar;

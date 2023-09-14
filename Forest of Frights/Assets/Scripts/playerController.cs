@@ -250,7 +250,7 @@ if (pushback.magnitude > 0.01f)
         //GameObject playerDamageFlash = gameManager.GameObject.FindWithTag("")
         //Resets Players HP
         HP = maxHP;
-
+        updatePlayerUI();
         //Prevents playerController from taking over the script
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
@@ -259,5 +259,11 @@ if (pushback.magnitude > 0.01f)
     public void physics(Vector3 dir)
     {
         pushback += dir;
+    }
+
+    //Updates players HP bar after a respawn.  Implemented in spawnPlayer()
+    public void updatePlayerUI()
+    {
+        gameManager.instance.playerHpBar.fillAmount = (float)maxHP / HP;
     }
 }
