@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2139661296224873952}
   - component: {fileID: 142118093719885635}
+  - component: {fileID: 764562501855829629}
   m_Layer: 5
   m_Name: Spawner
   m_TagString: Untagged
@@ -51,3 +52,11 @@ MonoBehaviour:
   enemy: {fileID: 7411424646334846680, guid: ba9ebbc06efd7a147bc50fc62281c593, type: 3}
   spawner: {fileID: 2139661296224873952}
   spawnRate: 10
+--- !u!33 &764562501855829629
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3692939764804804970}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
