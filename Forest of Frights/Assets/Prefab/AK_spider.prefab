@@ -601,11 +601,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 328110675197151163}
+  - component: {fileID: 2368290270794767224}
   - component: {fileID: 134382211588297737}
   - component: {fileID: 4055775340662559874}
   - component: {fileID: 9120844634852460121}
   - component: {fileID: 1099084956125356447}
-  - component: {fileID: 2368290270794767224}
   m_Layer: 7
   m_Name: AK_spider
   m_TagString: Untagged
@@ -630,6 +630,32 @@ Transform:
   - {fileID: 6789316133495093872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2368290270794767224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2662462873071270002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99fd2b224996fac48bc8fd25afdbadc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1332318864914122316}
+  agent: {fileID: 4055775340662559874}
+  shootPos: {fileID: 1284873608879623279}
+  headPos: {fileID: 8870798903115325557}
+  anime: {fileID: 134382211588297737}
+  hp: 3
+  targetFaceSpeed: 5
+  viewAngle: 360
+  roamDistance: 50
+  roamPauseTime: 0
+  animeSpeedChange: 0
+  shootAngle: 90
+  shootRate: 2
+  bullet: {fileID: 6704994505591150608, guid: 3d297aa179c87e649b48b00946041433, type: 3}
 --- !u!95 &134382211588297737
 Animator:
   serializedVersion: 5
@@ -717,25 +743,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2368290270794767224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2662462873071270002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99fd2b224996fac48bc8fd25afdbadc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 1332318864914122316}
-  agent: {fileID: 4055775340662559874}
-  bullet: {fileID: 6704994505591150608, guid: 3d297aa179c87e649b48b00946041433, type: 3}
-  shootPos: {fileID: 1284873608879623279}
-  shootRate: 2
-  hp: 3
-  targetFaceSpeed: 5
 --- !u!1 &2749622348909502012
 GameObject:
   m_ObjectHideFlags: 0
