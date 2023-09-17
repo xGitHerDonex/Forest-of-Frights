@@ -44,7 +44,8 @@ public class enemyAI : MonoBehaviour, IDamage
     void Start()
     {
         startingPos = transform.position;
-        stoppingDistOriginal = agent.stoppingDistance;
+        //stoppingDistOriginal = agent.stoppingDistance;
+
         // Disabled updateGameGoal to not count the current enemies on screen
         //gameManager.instance.updateGameGoal(0);
 
@@ -100,8 +101,6 @@ public class enemyAI : MonoBehaviour, IDamage
             destinationPicked = false;
         }
     } 
-
-
 
     /*
      * if the enemy takes damage requires an amount for the damage in a whole number

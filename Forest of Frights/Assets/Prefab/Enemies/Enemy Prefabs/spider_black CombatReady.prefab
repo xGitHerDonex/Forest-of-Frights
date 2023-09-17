@@ -201,7 +201,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5451621112535164812}
   - component: {fileID: 6137898851065835685}
-  - component: {fileID: 2758830445526456110}
   m_Layer: 0
   m_Name: Spider.005
   m_TagString: Untagged
@@ -315,32 +314,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00010721758, y: 0.005488644, z: 0.0024413904}
     m_Extent: {x: 0.019559648, y: 0.016553048, z: 0.009864965}
   m_DirtyAABB: 0
---- !u!114 &2758830445526456110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836157352405475388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99fd2b224996fac48bc8fd25afdbadc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  agent: {fileID: 0}
-  shootPos: {fileID: 0}
-  headPos: {fileID: 0}
-  anime: {fileID: 0}
-  hp: 0
-  targetFaceSpeed: 0
-  viewAngle: 0
-  roamDistance: 0
-  roamPauseTime: 0
-  animeSpeedChange: 0
-  shootAngle: 0
-  shootRate: 0
-  bullet: {fileID: 0}
 --- !u!1 &1863916944015380248
 GameObject:
   m_ObjectHideFlags: 0
