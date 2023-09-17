@@ -212,8 +212,6 @@ public class enemyAI : MonoBehaviour, IDamage
         agent.velocity += dir;
     }
 
-
-
     //if an object enters the collider for the enemy check to see if it is the Player
     //if it is the player set player in range bool to true
     //returns nothing
