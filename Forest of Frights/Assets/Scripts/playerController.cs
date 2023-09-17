@@ -37,7 +37,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     //Player SFX
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip playerInjured;
-    [SerializeField] AudioClip playerShoot;
+    //[SerializeField] AudioClip playerShoot;
     [SerializeField] AudioClip playerWalksGrass;
     [SerializeField] AudioClip playerRunsGrass;
     [SerializeField] AudioClip playerJumpsGrass;
@@ -201,8 +201,9 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     IEnumerator shoot()
     {
         isShooting = true;
+        
         //Shoot Sound!
-        audioSource.PlayOneShot(playerShoot);
+        //audioSource.PlayOneShot(playerShoot);
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
