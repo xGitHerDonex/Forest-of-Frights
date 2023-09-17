@@ -40,8 +40,6 @@ public class enemyAI : MonoBehaviour, IDamage
     #endregion
 
 
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +50,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     }
 
-    #region Update
+
     /* 
      * if the player is in range of the enemy get the player position from the game manager instance running and subtract my enemies position from it for a direction
      * if the nav mesh distance between its current position and the player destination is than or equal to the stopping distance from the enemy
@@ -81,9 +79,9 @@ public class enemyAI : MonoBehaviour, IDamage
         }
 
     }
-    #endregion
 
-    #region Roam
+
+
     IEnumerator roam()
     {
         //will allow the enemy to consulte with the nav mesh to pick a random destination that is walkable
@@ -102,8 +100,8 @@ public class enemyAI : MonoBehaviour, IDamage
             destinationPicked = false;
         }
     } 
-    #endregion
-    #region if the enemy takes damage
+
+
 
     /*
      * if the enemy takes damage requires an amount for the damage in a whole number
@@ -124,9 +122,9 @@ public class enemyAI : MonoBehaviour, IDamage
         }
 
     }
-    #endregion
 
-    #region Enemy Feedback upon taking damage
+
+
     //changes the material color from the original material to a red color for .1 seconds
     //the changes the color back to its original white state.
     IEnumerator flashDamage()
@@ -135,9 +133,9 @@ public class enemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         model.material.color = Color.white;
     }
-    #endregion
 
-    #region Can See The Player
+
+
     //tests to see if the player is within range of the enemy and if the player is within range calculate
     /* the angle of the player to the enemy 
      * there is a debug to show the angle and the player position to the enemy position in the scene screen.
@@ -186,9 +184,7 @@ public class enemyAI : MonoBehaviour, IDamage
         agent.stoppingDistance = 0;
         return false;
     } 
-    #endregion
 
-    #region Shoot
     // Set the shooting bool to true then
     // places and intializes the bullet object from the shooting postion and gives it a direction while triggering the bool that checks whether the enemy is shooting or not.
     //suspends the coroutine for the amount of seconds the shootrate is set to then sets the shooting back to false
@@ -199,9 +195,7 @@ public class enemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
-    #endregion
 
-    #region Face the Target
 
     //sets the rotation of the enemy to face the player based on the player direction to the enemy 
     //and it lerps the rotation over time so it is smooth and not choppy
@@ -211,14 +205,14 @@ public class enemyAI : MonoBehaviour, IDamage
         //lerp over time rotation
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * targetFaceSpeed);
     }
-    #endregion
+
 
     public void physics(Vector3 dir)
     {
         agent.velocity += dir;
     }
 
-    #region On Trigger Enter
+
 
     //if an object enters the collider for the enemy check to see if it is the Player
     //if it is the player set player in range bool to true
@@ -231,9 +225,9 @@ public class enemyAI : MonoBehaviour, IDamage
 
         }
     }
-    #endregion
 
-    #region On Trigger Exit
+
+
     // does the exact opposite as On Trigger enter
     // it checks to see if the object that is in the collider is the player if it isnt then the player isnt in range
     //set the stopping distance to zero 
@@ -246,6 +240,6 @@ public class enemyAI : MonoBehaviour, IDamage
 
         }
     }
-    #endregion
+
 
 }
