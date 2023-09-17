@@ -44,7 +44,7 @@ public class enemyAI : MonoBehaviour, IDamage
     void Start()
     {
         startingPos = transform.position;
-        //stoppingDistOriginal = agent.stoppingDistance;
+        stoppingDistOriginal = agent.stoppingDistance;
 
         // Disabled updateGameGoal to not count the current enemies on screen
         //gameManager.instance.updateGameGoal(0);

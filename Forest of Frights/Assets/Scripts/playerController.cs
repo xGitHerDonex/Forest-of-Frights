@@ -27,6 +27,8 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
 
     //Player basic shooting
     [Header("-----Gun Stats------")]
+    [SerializeField] List<gunStats> gunList = new List<gunStats>();
+    [SerializeField] GameObject gunModel;
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
@@ -57,7 +59,8 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     private Vector3 playerVelocity;
     private Vector3 move;
     private Vector3 pushback;
-   
+    int selectedGun;
+
 
     private void Start()
     {
@@ -77,12 +80,15 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         movement();
         sprint();
 
+       //Use Selected Gun
+        selectGun();
+
         //Call to shoot
         //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
         if (Input.GetButton("Shoot") && !isShooting && !gameManager.instance.isPaused)
             StartCoroutine(shoot());
 
-        
+        //Keeps Stamina Bar updated
         gameManager.instance.updateStamBar(Stamina/ maxStamina);
        
     }
@@ -91,35 +97,39 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     void movement()
     {
         //controls pushback amount
-        #region pushback
-if (pushback.magnitude > 0.01f)
+        if (pushback.magnitude > 0.01f)
         {
-            pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushBackResolve);
-            pushback.x = Mathf.Lerp(pushback.x, 0, Time.deltaTime * pushBackResolve);
-            pushback.y = Mathf.Lerp(pushback.y, 0, Time.deltaTime * pushBackResolve * 3);
-            pushback.z = Mathf.Lerp(pushback.z, 0, Time.deltaTime * pushBackResolve);
+                pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushBackResolve);
+                pushback.x = Mathf.Lerp(pushback.x, 0, Time.deltaTime * pushBackResolve);
+                pushback.y = Mathf.Lerp(pushback.y, 0, Time.deltaTime * pushBackResolve * 3);
+                pushback.z = Mathf.Lerp(pushback.z, 0, Time.deltaTime * pushBackResolve);
 
         }
-        #endregion
-        
+
+        //Sets grounded bool if the player is grounded
         groundedPlayer = controller.isGrounded;
 
+        //Resets jump and updates player vertical vecloity is player is grounded
         if (groundedPlayer && playerVelocity.y < 0)
         {
             jumpedTimes = 0;
             playerVelocity.y = 0f;
         }
+
+        //Calculates movement
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
+
+
         //Adds sound to player footsteps (only while walking)
         float moveMagnitude = move.magnitude;
+
         //Debug.Log(moveMagnitude);
         if (moveMagnitude >.4f && !audioSource.isPlaying)
         {
             audioSource.PlayOneShot(playerWalksGrass);
         }
 
-
-
+        //moves controller based on movement
         controller.Move(move * Time.deltaTime * playerSpeed);
 
 
@@ -267,5 +277,44 @@ if (pushback.magnitude > 0.01f)
     {
         gameManager.instance.updateHpBar((float)HP/maxHP);
         //gameManager.instance.playerHpBar.fillAmount = (float)maxHP / HP;
+    }
+
+    public void gunPickup(gunStats gun)
+    {
+        gunList.Add(gun);
+
+        shootDamage = gun.shootDamage;
+        shootDistance = gun.shootDist;
+        shootRate = gun.shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<Renderer>().sharedMaterial = gun.model.GetComponent<Renderer>().sharedMaterial;
+
+        selectedGun = gunList.Count - 1;
+    }
+
+    void selectGun()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
+        {
+            selectedGun++;
+            changeGun();
+        }
+
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+        {
+            selectedGun--;
+            changeGun();
+        }
+    }
+
+    void changeGun()
+    {
+        shootDamage = gunList[selectedGun].shootDamage;
+        shootDistance = gunList[selectedGun].shootDist;
+        shootRate = gunList[selectedGun].shootRate;
+
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<Renderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<Renderer>().sharedMaterial;
     }
 }
