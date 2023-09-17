@@ -32,12 +32,12 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
+    [SerializeField] AudioClip shotSound;
 
     [Header("-----SFX-----")]
     //Player SFX
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip playerInjured;
-    //[SerializeField] AudioClip playerShoot;
     [SerializeField] AudioClip playerWalksGrass;
     [SerializeField] AudioClip playerRunsGrass;
     [SerializeField] AudioClip playerJumpsGrass;
@@ -203,7 +203,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         isShooting = true;
         
         //Shoot Sound!
-        //audioSource.PlayOneShot(playerShoot);
+        audioSource.PlayOneShot(shotSound);
 
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
@@ -314,6 +314,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         shootDamage = gunList[selectedGun].shootDamage;
         shootDistance = gunList[selectedGun].shootDist;
         shootRate = gunList[selectedGun].shootRate;
+        shotSound = gunList[selectedGun].shotSound;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<Renderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<Renderer>().sharedMaterial;
