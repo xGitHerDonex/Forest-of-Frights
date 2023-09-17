@@ -287,6 +287,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         shootDamage = gun.shootDamage;
         shootDistance = gun.shootDist;
         shootRate = gun.shootRate;
+        shotSound = gun.shotSound;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<Renderer>().sharedMaterial = gun.model.GetComponent<Renderer>().sharedMaterial;
@@ -311,10 +312,10 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
 
     void changeGun()
     {
+        shotSound = gunList[selectedGun].shotSound;
         shootDamage = gunList[selectedGun].shootDamage;
         shootDistance = gunList[selectedGun].shootDist;
         shootRate = gunList[selectedGun].shootRate;
-        shotSound = gunList[selectedGun].shotSound;
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<Renderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<Renderer>().sharedMaterial;

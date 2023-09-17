@@ -401,6 +401,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
+      propertyPath: shotSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: shootDamage
       value: 0
       objectReference: {fileID: 0}
@@ -636,15 +640,80 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4148398316809148752, guid: c5cada3cdffe6ef45be2796a8b41f0e2, type: 3}
+      propertyPath: m_Radius
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 8407152773706500452, guid: c5cada3cdffe6ef45be2796a8b41f0e2, type: 3}
       propertyPath: m_Name
       value: Assault Rifle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3375919958909585282, guid: c5cada3cdffe6ef45be2796a8b41f0e2, type: 3}
+    - {fileID: 6599698428007712728, guid: c5cada3cdffe6ef45be2796a8b41f0e2, type: 3}
+    - {fileID: 7666150443881081028, guid: c5cada3cdffe6ef45be2796a8b41f0e2, type: 3}
+    - {fileID: 4721543920541712876, guid: c5cada3cdffe6ef45be2796a8b41f0e2, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5cada3cdffe6ef45be2796a8b41f0e2, type: 3}
+--- !u!1001 &5391134583268120104
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3652773091348517120, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
+      propertyPath: m_Name
+      value: Machine Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125030741416343747, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.5879998
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125030741416343747, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.6331254
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125030741416343747, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125030741416343747, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125030741416343747, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125030741416343747, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125030741416343747, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125030741416343747, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125030741416343747, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4125030741416343747, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a5ce82b2851dd974182504ef7155f0cd, type: 3}
 --- !u!1001 &6618099437198749851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -718,3 +787,4 @@ SceneRoots:
   - {fileID: 1853578392}
   - {fileID: 218597078}
   - {fileID: 1662890055987014052}
+  - {fileID: 5391134583268120104}
