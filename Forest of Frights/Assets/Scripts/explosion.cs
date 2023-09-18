@@ -5,22 +5,21 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
     [Range(-50, 50)][SerializeField] int explosionAmount;
+    [SerializeField] GameObject explosionEffect;
 
     void Start()
     {
-
+        Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
+        Destroy(gameObject, 0.07f);
 
     }
     //Lecture Code 9-8-23 if Iphysics is attached to the other collider then multiply the explosion amount to the transm=form normalized between 0-1
     private void OnTriggerEnter(Collider other)
     {
-        #region suggestion on trigger vs trigger trip on enter
 
         if (other.isTrigger)
-        {
             return;
-        } 
-        #endregion
+
         IPhysics physicable = other.GetComponent<IPhysics>();
 
         if (physicable != null)
