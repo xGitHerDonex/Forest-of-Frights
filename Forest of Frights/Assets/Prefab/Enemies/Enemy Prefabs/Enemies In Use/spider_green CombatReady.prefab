@@ -507,9 +507,9 @@ MonoBehaviour:
   roamDistance: 72
   roamPauseTime: 0
   animeSpeedChange: 10
+  bullet: {fileID: 6704994505591150608, guid: 3d297aa179c87e649b48b00946041433, type: 3}
   shootAngle: 90
   shootRate: 2
-  bullet: {fileID: 6704994505591150608, guid: 3d297aa179c87e649b48b00946041433, type: 3}
 --- !u!95 &1423536553006922050
 Animator:
   serializedVersion: 5
@@ -545,7 +545,7 @@ NavMeshAgent:
   m_Acceleration: 8.5
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.225
+  m_StoppingDistance: 0.75
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1

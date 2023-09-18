@@ -8,33 +8,49 @@ public class enemyAI : MonoBehaviour, IDamage
 {
     #region Fields, Members and Variables
     [Header("-----Components-----")]
+
     [SerializeField] Renderer model;
+
     [SerializeField] NavMeshAgent agent;
+
     [SerializeField] Transform shootPos;
+
     [SerializeField] Transform headPos;
+
     [SerializeField] Animator anime;
 
     [Header("-----Enemy Stats-----")]
+
     [Tooltip("Enemy health value between 1 and 100.")]
     [Range(1, 100)][SerializeField] int hp;
+
     [Tooltip("Turning speed 1-10.")]
     [Range(1, 10)][SerializeField] int targetFaceSpeed;
+
     [Tooltip("Enemy viewing angle, (-)360-360.")]
     [Range(-360, 360)][SerializeField] int viewAngle;
+
     [Tooltip("This controls how far movement stops from spawn point.")]
     [Range(0, 100)][SerializeField] int roamDistance;
+
     [Tooltip("How long enemy will stop before going to another location. Will eventually become a float and not integer. 1-10.")]
     [Range(1, 10)][SerializeField] int roamPauseTime;
+
     [Tooltip("10 is the default value for all current speeds. Changing this without adjusting Enemy Speed and nav mesh speed will break it!!!!")]
     [Range(-30, 30)][SerializeField] float animeSpeedChange;
 
     [Header("-----Gun Stats and Bullet Component -----")]
-    [Tooltip("Angle which the enemy can attack. (-)360-360")]
-    [Range(-360, 360)][SerializeField] int shootAngle;
-    [Tooltip("Rate enemy can attack between 0 and 10.")]
-    [Range(1, 10)][SerializeField] float shootRate;
+
     [Tooltip("Object to Shoot")]
     [SerializeField] GameObject bullet;
+
+    [Tooltip("Angle which the enemy can attack. (-)360-360")]
+    [Range(-360, 360)][SerializeField] int shootAngle;
+
+    [Tooltip("Rate enemy can attack between 0 and 10.")]
+    [Range(1, 10)][SerializeField] float shootRate;
+
+
 
     Vector3 pushBack;
     Vector3 playerDirection;
@@ -75,7 +91,7 @@ public class enemyAI : MonoBehaviour, IDamage
         //allows the enemy to ease into the transition animation with a tuneable
         //variable for custimization by Lerping it over time prevents choppy transitions
         float agentVel = agent.velocity.normalized.magnitude;
-        
+
         anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
 
         //if the player is in range but cant be "seen" the enemy is allowed to roam
@@ -109,7 +125,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
             destinationPicked = false;
         }
-    } 
+    }
 
     /*
      * if the enemy takes damage requires an amount for the damage in a whole number
@@ -191,7 +207,7 @@ public class enemyAI : MonoBehaviour, IDamage
         //otherwise set the stopping distance to zero and return false
         agent.stoppingDistance = 0;
         return false;
-    } 
+    }
 
     // Set the shooting bool to true then
     // places and intializes the bullet object from the shooting postion and gives it a direction while triggering the bool that checks whether the enemy is shooting or not.
