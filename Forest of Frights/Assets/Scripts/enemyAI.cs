@@ -15,16 +15,25 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] Animator anime;
 
     [Header("-----Enemy Stats-----")]
-    [Range(1, 10)][SerializeField] int hp;
+    [Tooltip("Enemy health value between 1 and 100.")]
+    [Range(1, 100)][SerializeField] int hp;
+    [Tooltip("Turning speed 1-10.")]
     [Range(1, 10)][SerializeField] int targetFaceSpeed;
+    [Tooltip("Enemy viewing angle, (-)360-360.")]
     [Range(-360, 360)][SerializeField] int viewAngle;
+    [Tooltip("This controls how far movement stops from spawn point.")]
     [Range(0, 100)][SerializeField] int roamDistance;
+    [Tooltip("How long enemy will stop before going to another location. Will eventually become a float and not integer. 1-10.")]
     [Range(1, 10)][SerializeField] int roamPauseTime;
-    [Range(1, 10)][SerializeField] float animeSpeedChange;
+    [Tooltip("10 is the default value for all current speeds. Changing this without adjusting Enemy Speed and nav mesh speed will break it!!!!")]
+    [Range(-30, 30)][SerializeField] float animeSpeedChange;
 
     [Header("-----Gun Stats and Bullet Component -----")]
+    [Tooltip("Angle which the enemy can attack. (-)360-360")]
     [Range(-360, 360)][SerializeField] int shootAngle;
+    [Tooltip("Rate enemy can attack between 0 and 10.")]
     [Range(1, 10)][SerializeField] float shootRate;
+    [Tooltip("Object to Shoot")]
     [SerializeField] GameObject bullet;
 
     Vector3 pushBack;
