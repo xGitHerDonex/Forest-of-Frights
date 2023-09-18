@@ -474,7 +474,7 @@ MonoBehaviour:
   viewAngle: 360
   roamDistance: 60
   roamPauseTime: 0
-  animeSpeedChange: 0
+  animeSpeedChange: 10
   shootAngle: 90
   shootRate: 0
   bullet: {fileID: 6704994505591150608, guid: 85d33efccae04c14b9967724437b044f, type: 3}
@@ -488,8 +488,8 @@ Animator:
   m_GameObject: {fileID: 2346690103007051068}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: a96ff394aa19efb4bbcd55446aefd7db, type: 2}
-  m_Controller: {fileID: 9100000, guid: 3f84ca341c1b1844eb99afcd13998555, type: 2}
-  m_CullingMode: 0
+  m_Controller: {fileID: 9100000, guid: cf01c9e513069b546992c31e5c05bacc, type: 2}
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -508,12 +508,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 2346690103007051068}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 2
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 5
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
