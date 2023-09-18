@@ -10,13 +10,13 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;           // instance for gameManager
 
     [Header("-----Player-----")]
-    public GameObject player;                     
-    public playerController playerScript;        
+    public GameObject player;
+    public playerController playerScript;
     public GameObject playerSpawnPos;
 
     [Header("-----Player UI-----")]
     [SerializeField] GameObject playerHp;
-    [SerializeField] Image playerHpBar;                        
+    [SerializeField] Image playerHpBar;
     [SerializeField] GameObject playerStam;
     [SerializeField] Image playerLeftStamBar;
     [SerializeField] Image playerRightStamBar;
@@ -29,14 +29,14 @@ public class gameManager : MonoBehaviour
     [Header("-----Menus-----")]
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
     [SerializeField] GameObject pauseMenu;         // Pause Menu
-    [SerializeField] GameObject winMenu;           // Win Menu 
+    [SerializeField] GameObject winMenu;           // Win Menu
     [SerializeField] GameObject loseMenu;          // Lose Menu
     [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
-    
+
     public bool isPaused;
 
 
-    
+
     [Header("-----SFX-----")]
     [SerializeField] AudioSource natureSoundSource;
     [SerializeField] AudioClip natureSounds;
@@ -46,12 +46,12 @@ public class gameManager : MonoBehaviour
     //Initializes before Application Runs
     void Awake()
     {
-        instance = this; // set the the instance to this 
+        instance = this; // set the the instance to this
         player = GameObject.FindGameObjectWithTag("Player"); // set player to player with tag "player"
         playerScript = player.GetComponent<playerController>(); // set player controller to the player controller of player
-        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //sets player spawn pos 
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //sets player spawn pos
 
-        
+
 
         //Adds some ambience
         if (natureSoundSource != null && natureSounds != null)
@@ -60,7 +60,7 @@ public class gameManager : MonoBehaviour
             natureSoundSource.loop = true;
             natureSoundSource.Play();
         }
-    
+
     }
 
     private void Start()
@@ -106,6 +106,7 @@ public class gameManager : MonoBehaviour
 
     }
 
+
     //Our Win Condition.
     public void updateGameGoal(int amount)
     {
@@ -120,14 +121,17 @@ public class gameManager : MonoBehaviour
 
     }
 
-    //Pulls up the Win table after 1 second of 
+
+
+
+    //Pulls up the Win table after 1 second of
     IEnumerator youWin()
     {
         currentMenu = winMenu;
         currentMenu.SetActive(isPaused);
         yield return new WaitForSeconds(1);
         pause();
-        
+
         currentMenu.SetActive(isPaused);
     }
     //Pulls up the Lose Table after the player dies.
