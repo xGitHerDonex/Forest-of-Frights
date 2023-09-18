@@ -205,12 +205,15 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         //Shoot Sound!
         audioSource.PlayOneShot(shotSound);
 
+        //Casts a Ray and will hit object within range of the gun.
+        //Also instantiates a particle effect if an enemy is hit
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
         {
             IDamage damageable = hit.collider.GetComponent<IDamage>();
             if (damageable != null)
             {
+                Instantiate(gunList[selectedGun].hitEffect, hit.point, gunList[selectedGun].hitEffect.transform.rotation);
                 damageable.takeDamage(shootDamage);
                 
             }
