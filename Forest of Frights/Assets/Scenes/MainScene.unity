@@ -106,15 +106,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 3
     agentTypeID: 0
-    agentRadius: 0.3
+    agentRadius: 0.75
     agentHeight: 2
-    agentSlope: 45
-    agentClimb: 0.4
+    agentSlope: 48.6
+    agentClimb: 0.5
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.1
+    cellSize: 0.25
     manualTileSize: 0
     tileSize: 256
     buildHeightMesh: 0
@@ -1192,7 +1192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3692939764804804970, guid: 9bbe77abec2d7364bb798470829966b8, type: 3}
       propertyPath: m_Name
-      value: Spawner (1)
+      value: BrownspiderSpawner (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2837,7 +2837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3692939764804804970, guid: 9bbe77abec2d7364bb798470829966b8, type: 3}
       propertyPath: m_Name
-      value: Spawner (2)
+      value: GreenSpiderSpawner (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3402,7 +3402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3692939764804804970, guid: 9bbe77abec2d7364bb798470829966b8, type: 3}
       propertyPath: m_Name
-      value: Spawner (3)
+      value: SkeletonWarriorSpawner (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6160,11 +6160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3692939764804804970, guid: 9bbe77abec2d7364bb798470829966b8, type: 3}
       propertyPath: m_Name
-      value: Spawner (4)
+      value: WraithSpawner (4)
       objectReference: {fileID: 0}
     - target: {fileID: 3692939764804804970, guid: 9bbe77abec2d7364bb798470829966b8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13742,7 +13742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3692939764804804970, guid: 9bbe77abec2d7364bb798470829966b8, type: 3}
       propertyPath: m_Name
-      value: Spawner
+      value: BlackSpiderSpawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
