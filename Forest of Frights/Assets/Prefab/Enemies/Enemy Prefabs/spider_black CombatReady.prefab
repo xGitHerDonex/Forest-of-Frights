@@ -1567,7 +1567,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.46, y: 0, z: -0.33}
-  m_LocalScale: {x: 1, y: 1, z: 1.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5122005152324721378}
@@ -1592,13 +1592,13 @@ MonoBehaviour:
   headPos: {fileID: 1987594368443326999}
   anime: {fileID: 658787560229394401}
   hp: 3
-  targetFaceSpeed: 3
+  targetFaceSpeed: 5
   viewAngle: 360
   roamDistance: 30
   roamPauseTime: 0
   animeSpeedChange: 0
   shootAngle: 90
-  shootRate: 1
+  shootRate: 2
   bullet: {fileID: 6704994505591150608, guid: 85d33efccae04c14b9967724437b044f, type: 3}
 --- !u!95 &658787560229394401
 Animator:
@@ -1662,10 +1662,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Radius: 1.2650235
+  m_Height: 3.5436907
+  m_Direction: 0
+  m_Center: {x: 0.033116814, y: 0.73, z: -0.21000004}
 --- !u!135 &8069022081989498039
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2184,7 +2184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6811282737194197876, guid: c0d06784b876a234a828647807a680b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0070020864
+      value: 0.010000006
       objectReference: {fileID: 0}
     - target: {fileID: 6811282737194197876, guid: c0d06784b876a234a828647807a680b0, type: 3}
       propertyPath: m_LocalRotation.w
