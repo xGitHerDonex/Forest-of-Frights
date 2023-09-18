@@ -25,7 +25,6 @@ public class gameManager : MonoBehaviour
     [SerializeField] TMP_Text enemiesRemaingText;  //Text for UI
     [SerializeField] int enemiesKilledWinCond;     //Sets win condition
     [SerializeField] int enemiesRemaining;         //Tracks how many enmies are left to win
-    [SerializeField] int enemiesKilled;            //Counts the Enemies that were killed
 
     [Header("-----Menus-----")]
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
@@ -110,13 +109,11 @@ public class gameManager : MonoBehaviour
     //Our Win Condition.
     public void updateGameGoal(int amount)
     {
-        enemiesKilled += amount;
-
         //Updates the Enemies Remaining in the UI
-        enemiesRemaining -= 1;
+        enemiesRemaining -= amount;
         enemiesRemaingText.text = enemiesRemaining.ToString("0");
 
-        if (enemiesKilled >= enemiesKilledWinCond)
+        if (enemiesRemaining <= 0)
         {
             StartCoroutine(youWin());
         }
@@ -126,10 +123,11 @@ public class gameManager : MonoBehaviour
     //Pulls up the Win table after 1 second of 
     IEnumerator youWin()
     {
+        currentMenu = winMenu;
         currentMenu.SetActive(isPaused);
         yield return new WaitForSeconds(1);
         pause();
-        currentMenu = winMenu;
+        
         currentMenu.SetActive(isPaused);
     }
     //Pulls up the Lose Table after the player dies.
