@@ -10,7 +10,7 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
         Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
-        Destroy(gameObject, 0.07f);
+        Destroy(gameObject, 0.1f);
 
     }
     //Lecture Code 9-8-23 if Iphysics is attached to the other collider then multiply the explosion amount to the transm=form normalized between 0-1
