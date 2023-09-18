@@ -1599,7 +1599,7 @@ MonoBehaviour:
   animeSpeedChange: 10
   bullet: {fileID: 6704994505591150608, guid: 85d33efccae04c14b9967724437b044f, type: 3}
   shootAngle: 90
-  shootRate: 2
+  shootRate: 1
 --- !u!95 &-801906991497656368
 Animator:
   serializedVersion: 5
@@ -1662,10 +1662,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.2650235
-  m_Height: 3.5436907
+  m_Radius: 1.2
+  m_Height: 3.5
   m_Direction: 0
-  m_Center: {x: 0.033116814, y: 0.73, z: -0.21000004}
+  m_Center: {x: 0.033116814, y: 1, z: -0.21000004}
 --- !u!135 &8069022081989498039
 SphereCollider:
   m_ObjectHideFlags: 0

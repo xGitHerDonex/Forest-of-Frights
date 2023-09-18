@@ -141,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4899422589015322427, guid: ba9ebbc06efd7a147bc50fc62281c593, type: 3}
       propertyPath: shootAngle
-      value: 90
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6541914364551022272, guid: ba9ebbc06efd7a147bc50fc62281c593, type: 3}
       propertyPath: m_LocalPosition.x
@@ -186,6 +186,10 @@ PrefabInstance:
     - target: {fileID: 7411424646334846680, guid: ba9ebbc06efd7a147bc50fc62281c593, type: 3}
       propertyPath: m_Name
       value: spider_black CombatReady
+      objectReference: {fileID: 0}
+    - target: {fileID: 8069022081989498039, guid: ba9ebbc06efd7a147bc50fc62281c593, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -586,63 +590,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8eb736b1197f386409b59b8449c07796, type: 3}
---- !u!1001 &1853578392
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 328110675197151163, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.6795635
-      objectReference: {fileID: 0}
-    - target: {fileID: 328110675197151163, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328110675197151163, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -9.564014
-      objectReference: {fileID: 0}
-    - target: {fileID: 328110675197151163, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 328110675197151163, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328110675197151163, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328110675197151163, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328110675197151163, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328110675197151163, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 328110675197151163, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2662462873071270002, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
-      propertyPath: m_Name
-      value: AK_spider
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1ff8f890f86ec674cb4f539f87eddebe, type: 3}
 --- !u!1001 &252681209311803494
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -892,7 +839,6 @@ SceneRoots:
   - {fileID: 1809919500}
   - {fileID: 674276072}
   - {fileID: 1362226850}
-  - {fileID: 1853578392}
   - {fileID: 218597078}
   - {fileID: 1662890055987014052}
   - {fileID: 5391134583268120104}
