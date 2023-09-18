@@ -107,6 +107,7 @@ public class gameManager : MonoBehaviour
 
     }
 
+
     //Our Win Condition.
     public void updateGameGoal(int amount)
     {
@@ -123,14 +124,17 @@ public class gameManager : MonoBehaviour
 
     }
 
+
+
+
     //Pulls up the Win table after 1 second of 
     IEnumerator youWin()
     {
-        currentMenu.SetActive(isPaused);
         yield return new WaitForSeconds(1);
         pause();
         currentMenu = winMenu;
-        currentMenu.SetActive(isPaused);
+        currentMenu.SetActive(isPaused);    
+        //currentMenu.SetActive(isPaused);
     }
     //Pulls up the Lose Table after the player dies.
     public void youLose()
