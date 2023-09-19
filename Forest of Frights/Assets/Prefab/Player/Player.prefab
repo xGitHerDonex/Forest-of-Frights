@@ -67,7 +67,6 @@ MonoBehaviour:
   shotSound: {fileID: 0}
   grenade: {fileID: 8825613890474161169, guid: 802e9ea262efceb48ba432d2a5f9eedc, type: 3}
   throwRate: 1
-  upwardForce: 0
   playerThrowForce: 0
   throwPos: {fileID: 7226456012279697009}
   audioSource: {fileID: 1336561404949693363}
@@ -77,7 +76,7 @@ MonoBehaviour:
   playerJumpsGrass: {fileID: 8300000, guid: a967f92e38352bb4291945423de63499, type: 3}
   originalPlayerSpeed: 0
   jumpsMax: 1
-  gravityValue: -25
+  gravityValue: 25
   pushBack: {x: 0, y: 0, z: 0}
 --- !u!143 &911501259543377830
 CharacterController:

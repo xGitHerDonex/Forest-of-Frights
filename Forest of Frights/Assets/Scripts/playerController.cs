@@ -39,7 +39,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     [Header("-----Grenade Stats------")]
     [SerializeField] GameObject grenade;
     [SerializeField] float throwRate;
-    [Range(1, 20)][SerializeField] float playerThrowForce;
+    [Range(1, 20)][SerializeField] int playerThrowForce;
     [SerializeField] Transform throwPos;
 
 
@@ -97,6 +97,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         if (Input.GetButton("Shoot") && !isShooting && !gameManager.instance.isPaused)
             StartCoroutine(shoot());
 
+        //Throw grenade
         //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
         if (Input.GetButton("throw") && !isShooting && !gameManager.instance.isPaused)
             StartCoroutine(throwGrenade());
@@ -150,7 +151,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
         {
             jumpedTimes++;
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            playerVelocity.y += jumpHeight; //Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             
             //Jumping now makes a sound
             audioSource.PlayOneShot(playerJumpsGrass);
