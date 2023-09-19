@@ -5,7 +5,10 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
     [Range(0, 50)][SerializeField] int explosionAmount;
+    [Range(1, 5)][SerializeField] int explosionDamage;
+
     [SerializeField] GameObject explosionEffect;
+    
 
     void Start()
     {
@@ -23,10 +26,15 @@ public class NewBehaviourScript : MonoBehaviour
         IPhysics physicable = other.GetComponent<IPhysics>();
         IDamage damageable = other.GetComponent<IDamage>();
 
+        if (damageable != null)
+            damageable.takeDamage(explosionDamage);
+
         if (physicable != null)
         {
             physicable.physics((other.transform.position - transform.position).normalized * explosionAmount);
-            damageable.takeDamage(explosionAmount / 5);
+           
         }
+
+
     }
 }

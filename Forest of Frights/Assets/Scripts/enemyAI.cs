@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Device;
 
-public class enemyAI : MonoBehaviour, IDamage
+public class enemyAI : MonoBehaviour, IDamage, IPhysics
 {
     #region Fields, Members and Variables
     [Header("-----Components-----")]
@@ -259,7 +259,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void physics(Vector3 dir)
     {
-        agent.velocity += dir / 2;
+        agent.velocity += dir / 3;
     }
 
     //if an object enters the collider for the enemy check to see if it is the Player
