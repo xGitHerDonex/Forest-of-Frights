@@ -21,10 +21,12 @@ public class NewBehaviourScript : MonoBehaviour
             return;
 
         IPhysics physicable = other.GetComponent<IPhysics>();
+        IDamage damageable = other.GetComponent<IDamage>();
 
         if (physicable != null)
         {
             physicable.physics((other.transform.position - transform.position).normalized * explosionAmount);
+            damageable.takeDamage(explosionAmount / 5);
         }
     }
 }
