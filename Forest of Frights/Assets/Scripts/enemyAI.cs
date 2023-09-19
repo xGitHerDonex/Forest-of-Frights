@@ -19,6 +19,8 @@ public class enemyAI : MonoBehaviour, IDamage
 
     [SerializeField] Animator anime;
 
+    [SerializeField] Collider hitBox;
+
     [Header("-----Enemy Stats-----")]
 
     [Tooltip("Enemy health value between 1 and 100.")]
@@ -57,6 +59,7 @@ public class enemyAI : MonoBehaviour, IDamage
     Vector3 startingPos;
     float stoppingDistOriginal;
     float angleToPlayer;
+    float speedOrig;
 
     bool playerInRange;
     bool isShooting;
@@ -68,6 +71,7 @@ public class enemyAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        speedOrig = agent.speed; // gives the agent speed to the float original speed for later on. 
         startingPos = transform.position;
         stoppingDistOriginal = agent.stoppingDistance;
 
@@ -88,22 +92,25 @@ public class enemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        //allows the enemy to ease into the transition animation with a tuneable
-        //variable for custimization by Lerping it over time prevents choppy transitions
-        float agentVel = agent.velocity.normalized.magnitude;
-
-        anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
-
-        //if the player is in range but cant be "seen" the enemy is allowed to roam
-        //also if the player is not in range at all the enemy is allowed to roam
-        if (playerInRange && !canSeePlayer())
+        if (agent.isActiveAndEnabled)
         {
-            StartCoroutine(roam());
-        } else if (!playerInRange)
-        {
-            StartCoroutine(roam());
+            //allows the enemy to ease into the transition animation with a tuneable
+            //variable for custimization by Lerping it over time prevents choppy transitions
+            float agentVel = agent.velocity.normalized.magnitude;
+
+            anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
+
+            //if the player is in range but cant be "seen" the enemy is allowed to roam
+            //also if the player is not in range at all the enemy is allowed to roam
+            if (playerInRange && !canSeePlayer())
+            {
+                StartCoroutine(roam());
+            }
+            else if (!playerInRange)
+            {
+                StartCoroutine(roam());
+            }
         }
-
     }
 
 
@@ -137,16 +144,34 @@ public class enemyAI : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         hp -= amount;
+        StartCoroutine(stopMoving());
 
-        StartCoroutine(flashDamage());
-        if (hp <= 0)
+
+        if(hp <= 0)
         {
+            hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
+            agent.enabled = false;
+            anime.SetBool("Death", true);
+            StartCoroutine(flashDamage());
             gameManager.instance.updateGameGoal(+1); //updates win condition set at 10 or greater "You win" also increments enemies killed and starts the win table Ienum
-            Destroy(gameObject);
         }
+        else
+        {
+            anime.SetTrigger("Damage");
+            StartCoroutine(flashDamage());
+            agent.SetDestination(gameManager.instance.player.transform.position);
+        }
+
+        
 
     }
 
+    IEnumerator stopMoving()
+    {
+        agent.speed = 0;
+        yield return new WaitForSeconds(1);
+        agent.speed = speedOrig;
+    }
 
 
     //changes the material color from the original material to a red color for .1 seconds
@@ -216,6 +241,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         isShooting = true;
         Instantiate(bullet, shootPos.position, transform.rotation);
+        anime.SetTrigger("Shoot");
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
@@ -233,7 +259,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     public void physics(Vector3 dir)
     {
-        agent.velocity += dir;
+        agent.velocity += dir / 2;
     }
 
     //if an object enters the collider for the enemy check to see if it is the Player

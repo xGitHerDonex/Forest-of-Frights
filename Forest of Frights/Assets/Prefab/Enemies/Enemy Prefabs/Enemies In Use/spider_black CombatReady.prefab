@@ -1547,8 +1547,8 @@ GameObject:
   - component: {fileID: 6541914364551022272}
   - component: {fileID: 4899422589015322427}
   - component: {fileID: -801906991497656368}
-  - component: {fileID: 4312130692767753592}
   - component: {fileID: 2102031486215053924}
+  - component: {fileID: 4312130692767753592}
   - component: {fileID: 8069022081989498039}
   m_Layer: 7
   m_Name: spider_black CombatReady
@@ -1591,6 +1591,7 @@ MonoBehaviour:
   shootPos: {fileID: 2863439077307096138}
   headPos: {fileID: 1987594368443326999}
   anime: {fileID: -801906991497656368}
+  hitBox: {fileID: 2102031486215053924}
   hp: 3
   targetFaceSpeed: 5
   viewAngle: 360
@@ -1621,28 +1622,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!195 &4312130692767753592
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7411424646334846680}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 3
-  m_Speed: 3
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 6
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
-  m_AutoRepath: 1
-  m_Height: 3
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!136 &2102031486215053924
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1666,6 +1645,28 @@ CapsuleCollider:
   m_Height: 3.5
   m_Direction: 0
   m_Center: {x: 0.033116814, y: 1, z: -0.21000004}
+--- !u!195 &4312130692767753592
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411424646334846680}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 3
+  m_Speed: 3
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 6
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 3
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!135 &8069022081989498039
 SphereCollider:
   m_ObjectHideFlags: 0
