@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,6 +39,13 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     [SerializeField] GameObject grenade;
     [SerializeField] int throwDistance;
     [SerializeField] float throwRate;
+
+
+    [SerializeField] float playerThrow;
+    [SerializeField] Transform throwPos;
+    [SerializeField] float upwardForce;
+
+
 
     [Header("-----SFX-----")]
     //Player SFX
@@ -81,7 +89,10 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
 
     void Update()
     {
-       //Call to movement
+#if (UNITY_EDITOR)
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * throwDistance, Color.green);
+#endif
+        //Call to movement
         movement();
         sprint();
 
@@ -234,9 +245,24 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     IEnumerator throwGrenade()
     {
         isShooting = true;
-        Instantiate(grenade);
 
-        yield return new WaitForSeconds(throwRate);
+        RaycastHit hit;
+        
+            //Create Grenade
+            GameObject thrownGrenade = Instantiate(grenade, throwPos.transform.position, grenade.transform.rotation);
+
+            Rigidbody thrownGrenadeRb = thrownGrenade.GetComponent<Rigidbody>();
+
+            //throwing force
+            Vector3 force = (throwPos.transform.forward * playerThrow + transform.up).normalized;
+
+   
+
+            thrownGrenadeRb.AddForce(force);
+
+
+            yield return new WaitForSeconds(throwRate);
+        
         isShooting = false;
 
     }
