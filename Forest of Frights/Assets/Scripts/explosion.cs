@@ -8,6 +8,7 @@ public class explosion : MonoBehaviour
 {
     [Range(0, 50)][SerializeField] int explosionAmount;
     [SerializeField] GameObject explosionEffect;
+    [SerializeField] int explosionDamage;
 
 
     void Start()
@@ -24,10 +25,12 @@ public class explosion : MonoBehaviour
             return;
 
         IPhysics physicable = other.GetComponent<IPhysics>();
+        IDamage damageable = other.GetComponent<IDamage>();
   
         if (physicable != null)
         {
-            physicable.physics((other.transform.position - transform.position).normalized * explosionAmount, true);
+            physicable.physics((other.transform.position - transform.position).normalized * explosionAmount);
+            damageable.delayDamage(explosionDamage, 0.2f);
         }
 
 

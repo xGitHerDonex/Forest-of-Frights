@@ -141,7 +141,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
         StartCoroutine(stopMoving());
 
 
-        if(hp <= 0)
+        if (hp <= 0)
         {
             hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
             agent.enabled = false;
@@ -156,7 +156,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
             agent.SetDestination(gameManager.instance.player.transform.position);
         }
 
-        
+
 
     }
 
@@ -251,23 +251,22 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     }
 
 
-    public void physics(Vector3 dir, bool explosion)
+    public void physics(Vector3 dir)
     {
-        agent.velocity += dir/2;
-
-        if (explosion)
-        {
-            Invoke("explosionDamage", 0.3f);
-        }
- 
+        agent.velocity += dir / 3;
 
     }
 
+    //this method is for starting a co-routine in case a delay is needed
+     public void delayDamage(int damage, float seconds)
+    {
+        StartCoroutine(delayedDamage(damage, seconds));
+    }
 
     //method made for triggering explosion damage through iPhysics
-    void explosionDamage()
+   public IEnumerator delayedDamage(int explosionDamage, float seconds)
     {
-        int explosionDamage = gameManager.instance.getExplosionDamage();
+        yield return new WaitForSeconds(seconds);
         takeDamage(explosionDamage);
     }
 

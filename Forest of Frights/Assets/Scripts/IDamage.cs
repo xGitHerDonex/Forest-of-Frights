@@ -7,6 +7,7 @@ public interface IDamage
 
     void takeDamage(int amount);
 
+    public void delayDamage(int amount, float seconds);
 
 
 }

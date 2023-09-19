@@ -295,7 +295,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     }
 
     //Physics method, player will not use bool here
-    public void physics(Vector3 dir, bool explosion)
+    public void physics(Vector3 dir)
     {
         pushBack += dir;
     }
@@ -346,5 +346,18 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<Renderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<Renderer>().sharedMaterial;
+    }
+
+    //method made for delaying damage for physics
+    public void delayDamage(int damage, float seconds)
+    {
+        StartCoroutine(delayedDamage(damage, seconds));
+    }
+
+    //method made for delaying damage for physics
+    IEnumerator delayedDamage(int damage, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        takeDamage(damage);
     }
 }
