@@ -18,6 +18,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     [SerializeField] float regenStamina;
     [SerializeField] float playerSpeed;
     [SerializeField] float jumpHeight;
+    //[SerializeField] Vector3 Test;
 
 
     //int OriginalHp;
@@ -37,14 +38,9 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
 
     [Header("-----Grenade Stats------")]
     [SerializeField] GameObject grenade;
-    [SerializeField] int throwDistance;
     [SerializeField] float throwRate;
-
-
-    [SerializeField] float playerThrow;
+    [Range(1, 20)][SerializeField] float playerThrowForce;
     [SerializeField] Transform throwPos;
-    [SerializeField] float upwardForce;
-
 
 
     [Header("-----SFX-----")]
@@ -89,9 +85,6 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
 
     void Update()
     {
-#if (UNITY_EDITOR)
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * throwDistance, Color.green);
-#endif
         //Call to movement
         movement();
         sprint();
@@ -246,23 +239,15 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     {
         isShooting = true;
 
-        RaycastHit hit;
-        
-            //Create Grenade
-            GameObject thrownGrenade = Instantiate(grenade, throwPos.transform.position, grenade.transform.rotation);
+        //creates grenades
+        GameObject thrownGrenade = Instantiate(grenade, throwPos.transform.position, grenade.transform.rotation);  
+        Rigidbody thrownGrenadeRb = thrownGrenade.GetComponent<Rigidbody>();
 
-            Rigidbody thrownGrenadeRb = thrownGrenade.GetComponent<Rigidbody>();
+        //throws grenade
+        thrownGrenadeRb.AddForce((throwPos.transform.forward * playerThrowForce * 20) + transform.up, ForceMode.Impulse);
 
-            //throwing force
-            Vector3 force = (throwPos.transform.forward * playerThrow + transform.up).normalized;
-
-   
-
-            thrownGrenadeRb.AddForce(force);
-
-
-            yield return new WaitForSeconds(throwRate);
-        
+         
+        yield return new WaitForSeconds(throwRate);
         isShooting = false;
 
     }

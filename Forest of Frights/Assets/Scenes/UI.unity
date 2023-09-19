@@ -450,6 +450,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 323790995}
     - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
+      propertyPath: Test.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
+      propertyPath: Test.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: grenade
       value: 
       objectReference: {fileID: 8825613890474161169, guid: 802e9ea262efceb48ba432d2a5f9eedc, type: 3}
@@ -463,11 +471,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: throwRate
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: playerThrow
-      value: 300
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: shootDamage
@@ -475,11 +483,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: upwardForce
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: gravityValue
-      value: -25
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: shootDistance
@@ -488,6 +496,10 @@ PrefabInstance:
     - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: throwDistance
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
+      propertyPath: playerThrowForce
+      value: 2.05
       objectReference: {fileID: 0}
     - target: {fileID: 5789141640451461700, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: m_Mesh
