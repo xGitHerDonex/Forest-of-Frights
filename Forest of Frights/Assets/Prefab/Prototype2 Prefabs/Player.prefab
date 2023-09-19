@@ -57,10 +57,10 @@ MonoBehaviour:
   Stamina: 0
   regenStamina: 0.75
   playerSpeed: 5
-  jumpHeight: 0.5
+  jumpHeight: 1
   originalPlayerSpeed: 0
   jumpsMax: 1
-  gravityValue: -3
+  gravityValue: -5
   pushBack: {x: 0, y: 0, z: 0}
   pushBackResolve: 3
   gunList: []
@@ -71,8 +71,8 @@ MonoBehaviour:
   shotSound: {fileID: 0}
   grenade: {fileID: 8825613890474161169, guid: 802e9ea262efceb48ba432d2a5f9eedc, type: 3}
   throwRate: 1
-  playerThrowForce: 20
-  throwLift: 2
+  playerThrowForce: 2
+  throwLift: 1
   throwPos: {fileID: 7226456012279697009}
   audioSource: {fileID: 1336561404949693363}
   playerInjured: {fileID: 8300000, guid: e42dff56582a7604493d4ee759aa6f3f, type: 3}
@@ -433,7 +433,7 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 1
+  m_FOVAxisMode: 0
   m_Iso: 200
   m_ShutterSpeed: 0.005
   m_Aperture: 16
@@ -453,7 +453,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 34.259514
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -505,13 +505,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7832642245457561435}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.061272472, y: -0.027297122, z: 0.06976132, w: 0.99530596}
-  m_LocalPosition: {x: 0.31, y: -0.25, z: 0.61}
+  m_LocalRotation: {x: 0.00044166757, y: -0.03015676, z: 0.051328752, w: 0.9982263}
+  m_LocalPosition: {x: 0.46, y: -0.46, z: 0.75}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7226456012279697009}
-  m_LocalEulerAnglesHint: {x: -6.786, y: -3.631, z: 8.234}
+  m_LocalEulerAnglesHint: {x: 0.228, y: -3.449, z: 5.88}
 --- !u!33 &5789141640451461700
 MeshFilter:
   m_ObjectHideFlags: 0
