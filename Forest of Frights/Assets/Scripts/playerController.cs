@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class playerController : MonoBehaviour, IDamage,IPhysics
+public class playerController : MonoBehaviour, IDamage, IPhysics
 {
     [SerializeField] CharacterController controller;
 
@@ -232,7 +232,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         isShooting = true;
 
         //creates grenades
-        GameObject thrownGrenade = Instantiate(grenade, throwPos.transform.position, grenade.transform.rotation);  
+        GameObject thrownGrenade = Instantiate(grenade, throwPos.transform.position, throwPos.transform.rotation);  
         Rigidbody thrownGrenadeRb = thrownGrenade.GetComponent<Rigidbody>();
 
         //throws grenade
@@ -274,7 +274,6 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         }
     }
 
-
     IEnumerator ResetTakingDamage()
     {
         //Small delay to prevent repeat damage
@@ -293,7 +292,9 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
     }
-    public void physics(Vector3 dir)
+
+    //Physics method, player will not use bool here
+    public void physics(Vector3 dir, bool explosion)
     {
         pushBack += dir;
     }
@@ -302,7 +303,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     public void updatePlayerUI()
     {
         gameManager.instance.updateHpBar((float)HP/maxHP);
-        //gameManager.instance.playerHpBar.fillAmount = (float)maxHP / HP;
+       
     }
 
     public void gunPickup(gunStats gun)

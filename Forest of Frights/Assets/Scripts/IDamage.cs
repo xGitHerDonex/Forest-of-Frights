@@ -4,6 +4,9 @@ using UnityEngine;
 
 public interface IDamage
 {
-    // Start is called before the first frame update
+
     void takeDamage(int amount);
+
+
+
 }

@@ -8,17 +8,11 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
 {
     #region Fields, Members and Variables
     [Header("-----Components-----")]
-
     [SerializeField] Renderer model;
-
     [SerializeField] NavMeshAgent agent;
-
     [SerializeField] Transform shootPos;
-
     [SerializeField] Transform headPos;
-
     [SerializeField] Animator anime;
-
     [SerializeField] Collider hitBox;
 
     [Header("-----Enemy Stats-----")]
@@ -257,10 +251,25 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     }
 
 
-    public void physics(Vector3 dir)
+    public void physics(Vector3 dir, bool explosion)
     {
-        agent.velocity += dir / 3;
+        agent.velocity += dir/2;
+
+        if (explosion)
+        {
+            Invoke("explosionDamage", 0.5f);
+        }
+ 
+
     }
+
+
+    //method made for triggering explosion damage through iPhysics
+    void explosionDamage()
+    {
+        takeDamage(10);
+    }
+
 
     //if an object enters the collider for the enemy check to see if it is the Player
     //if it is the player set player in range bool to true
