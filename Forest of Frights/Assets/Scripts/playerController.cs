@@ -17,14 +17,10 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     [SerializeField] float Stamina;
     [SerializeField] float regenStamina;
     [SerializeField] float playerSpeed;
-    [SerializeField] float jumpHeight;
-    //[SerializeField] Vector3 Test;
+    [Range(0, 2)][SerializeField] float jumpHeight;
 
 
-    //int OriginalHp;
-
-    [Header("-----PushBack Tweak-----")]
-    
+    [Header("-----PushBack Tweak-----")] 
     [SerializeField] float pushBackResolve;
 
     //Player basic shooting

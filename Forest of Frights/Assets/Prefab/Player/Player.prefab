@@ -57,7 +57,7 @@ MonoBehaviour:
   Stamina: 0
   regenStamina: 0.75
   playerSpeed: 5
-  jumpHeight: 1
+  jumpHeight: 0.5
   pushBackResolve: 3
   gunList: []
   gunModel: {fileID: 7832642245457561435}
@@ -76,7 +76,7 @@ MonoBehaviour:
   playerJumpsGrass: {fileID: 8300000, guid: a967f92e38352bb4291945423de63499, type: 3}
   originalPlayerSpeed: 0
   jumpsMax: 1
-  gravityValue: 25
+  gravityValue: -3
   pushBack: {x: 0, y: 0, z: 0}
 --- !u!143 &911501259543377830
 CharacterController:
