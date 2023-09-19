@@ -40,4 +40,10 @@ public class buttonFunctions : MonoBehaviour
         gameManager.instance.playerScript.spawnPlayer();
 
     }
+
+    //Runs startGame in Game manager
+    public void start()
+    {
+        gameManager.instance.startGame();
+    }
 }

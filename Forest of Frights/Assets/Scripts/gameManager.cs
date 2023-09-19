@@ -20,9 +20,12 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject playerStam;
     [SerializeField] Image playerLeftStamBar;
     [SerializeField] Image playerRightStamBar;
+    [SerializeField] GameObject enemiesRemainingUI;
+    [SerializeField] GameObject reticle;
+
 
     [Header("-----Game Goal-----")]
-    [SerializeField] TMP_Text enemiesRemaingText;  //Text for UI
+    [SerializeField] TMP_Text enemiesRemainingText;  //Text for UI
     [SerializeField] int enemiesKilledWinCond;     //Sets win condition
     [SerializeField] int enemiesRemaining;         //Tracks how many enmies are left to win
 
@@ -30,7 +33,9 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
     [SerializeField] GameObject pauseMenu;         // Pause Menu
     [SerializeField] GameObject winMenu;           // Win Menu
+    [SerializeField] GameObject startMenu;         // StartMenu
     [SerializeField] GameObject loseMenu;          // Lose Menu
+
     [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
 
     public bool isPaused;
@@ -67,7 +72,12 @@ public class gameManager : MonoBehaviour
     {
         //Set's the enemies remaining to the win condition
         enemiesRemaining = enemiesKilledWinCond;
-        enemiesRemaingText.text = enemiesRemaining.ToString("0");
+        enemiesRemainingText.text = enemiesRemaining.ToString("0");
+
+        //Pauses game at start
+        isPaused = false;
+        pause();
+ 
     }
 
     void Update()
@@ -112,7 +122,7 @@ public class gameManager : MonoBehaviour
     {
         //Updates the Enemies Remaining in the UI
         enemiesRemaining -= amount;
-        enemiesRemaingText.text = enemiesRemaining.ToString("0");
+        enemiesRemainingText.text = enemiesRemaining.ToString("0");
 
         if (enemiesRemaining <= 0)
         {
@@ -168,5 +178,18 @@ public class gameManager : MonoBehaviour
     public int getExplosionDamage()
     {
         return explosionDamage;
+    }
+
+    public void startGame()
+    {
+        currentMenu = startMenu;
+        reticle.SetActive(true);
+        startMenu.SetActive(false);
+        playerHp.SetActive(true);
+        playerStam.SetActive(true);
+        enemiesRemainingUI.SetActive(true);
+        unPause();
+        
+
     }
 }
