@@ -19,8 +19,11 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     [SerializeField] float playerSpeed;
     [Range(0, 2)][SerializeField] float jumpHeight;
 
-
-    [Header("-----PushBack Tweak-----")] 
+    [Header("-----Expanded Player Stats-----")]
+    [SerializeField] float originalPlayerSpeed;
+    [SerializeField] int jumpsMax;
+    [SerializeField] float gravityValue;
+    [SerializeField] Vector3 pushBack;
     [SerializeField] float pushBackResolve;
 
     //Player basic shooting
@@ -47,15 +50,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     [SerializeField] AudioClip playerRunsGrass;
     [SerializeField] AudioClip playerJumpsGrass;
 
-    //Expanded Player stats
-    [Header("-----Expanded Player Stats-----")]
-    [SerializeField] float originalPlayerSpeed;
-    [SerializeField] int jumpsMax; 
-    [SerializeField] float gravityValue;
-    [SerializeField] Vector3 pushBack;
-
-    
-
+   
     //Bools and others for functions
     private bool isShooting;
     private bool groundedPlayer;
