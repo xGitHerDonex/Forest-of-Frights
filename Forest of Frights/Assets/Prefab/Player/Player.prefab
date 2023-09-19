@@ -65,6 +65,8 @@ MonoBehaviour:
   shootDamage: 0
   shootDistance: 0
   shotSound: {fileID: 0}
+  grenade: {fileID: 8825613890474161169, guid: 802e9ea262efceb48ba432d2a5f9eedc, type: 3}
+  throwDistance: 10
   audioSource: {fileID: 1336561404949693363}
   playerInjured: {fileID: 8300000, guid: e42dff56582a7604493d4ee759aa6f3f, type: 3}
   playerWalksGrass: {fileID: 8300000, guid: 18e761ff5ef14fd4588d9283fcc9b829, type: 3}
@@ -73,6 +75,7 @@ MonoBehaviour:
   originalPlayerSpeed: 0
   jumpsMax: 1
   gravityValue: -25
+  pushBack: {x: 0, y: 0, z: 0}
 --- !u!143 &911501259543377830
 CharacterController:
   m_ObjectHideFlags: 0

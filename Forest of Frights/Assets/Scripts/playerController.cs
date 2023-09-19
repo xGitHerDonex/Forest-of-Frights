@@ -34,6 +34,11 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     [SerializeField] int shootDistance;
     [SerializeField] AudioClip shotSound;
 
+    [Header("-----Grenade Stats------")]
+    [SerializeField] GameObject grenade;
+    [SerializeField] int throwDistance;
+    [SerializeField] float throwRate;
+
     [Header("-----SFX-----")]
     //Player SFX
     [SerializeField] AudioSource audioSource;
@@ -87,6 +92,10 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
         if (Input.GetButton("Shoot") && !isShooting && !gameManager.instance.isPaused)
             StartCoroutine(shoot());
+
+        //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
+        if (Input.GetButton("throw") && !isShooting && !gameManager.instance.isPaused)
+            StartCoroutine(throwGrenade());
 
         //Keeps Stamina Bar updated
         gameManager.instance.updateStamBar(Stamina/ maxStamina);
@@ -220,6 +229,16 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         }
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    IEnumerator throwGrenade()
+    {
+        isShooting = true;
+        Instantiate(grenade);
+
+        yield return new WaitForSeconds(throwRate);
+        isShooting = false;
+
     }
 
     //Heal Ability:  Currently through the pause menu, until medkits are implemented
