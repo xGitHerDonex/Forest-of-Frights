@@ -47,6 +47,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     [SerializeField] float originalPlayerSpeed;
     [SerializeField] int jumpsMax; 
     [SerializeField] float gravityValue;
+    [SerializeField] Vector3 pushBack;
 
     
 
@@ -58,7 +59,6 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     private int jumpedTimes;
     private Vector3 playerVelocity;
     private Vector3 move;
-    private Vector3 pushback;
     int selectedGun;
 
 
@@ -97,12 +97,12 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     void movement()
     {
         //controls pushback amount
-        if (pushback.magnitude > 0.01f)
+        if (pushBack.magnitude > 0.01f)
         {
-                pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushBackResolve);
-                pushback.x = Mathf.Lerp(pushback.x, 0, Time.deltaTime * pushBackResolve);
-                pushback.y = Mathf.Lerp(pushback.y, 0, Time.deltaTime * pushBackResolve * 3);
-                pushback.z = Mathf.Lerp(pushback.z, 0, Time.deltaTime * pushBackResolve);
+                pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackResolve);
+                pushBack.x = Mathf.Lerp(pushBack.x, 0, Time.deltaTime * pushBackResolve);
+                pushBack.y = Mathf.Lerp(pushBack.y, 0, Time.deltaTime * pushBackResolve * 3);
+                pushBack.z = Mathf.Lerp(pushBack.z, 0, Time.deltaTime * pushBackResolve);
 
         }
 
@@ -147,7 +147,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        controller.Move(playerVelocity + pushBack * Time.deltaTime);
     }
 
     //Sprint Ability:  Increases run speed by 5 for 4 seconds
@@ -273,7 +273,7 @@ public class playerController : MonoBehaviour, IDamage,IPhysics
     }
     public void physics(Vector3 dir)
     {
-        pushback += dir;
+        pushBack += dir;
     }
 
     //Updates players HP bar after a respawn.  Implemented in spawnPlayer()

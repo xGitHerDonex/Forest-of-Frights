@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    [Range(-50, 50)][SerializeField] int explosionAmount;
+    [Range(0, 50)][SerializeField] int explosionAmount;
     [SerializeField] GameObject explosionEffect;
 
     void Start()
