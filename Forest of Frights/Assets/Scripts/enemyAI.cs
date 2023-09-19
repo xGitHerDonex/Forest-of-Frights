@@ -257,7 +257,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
 
         if (explosion)
         {
-            Invoke("explosionDamage", 0.5f);
+            Invoke("explosionDamage", 0.3f);
         }
  
 
@@ -267,7 +267,8 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     //method made for triggering explosion damage through iPhysics
     void explosionDamage()
     {
-        takeDamage(10);
+        int explosionDamage = gameManager.instance.getExplosionDamage();
+        takeDamage(explosionDamage);
     }
 
 

@@ -39,6 +39,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] GameObject grenade;
     [SerializeField] float throwRate;
     [Range(1, 20)][SerializeField] int playerThrowForce;
+    [Range(1, 20)][SerializeField] int throwLift;
     [SerializeField] Transform throwPos;
 
 
@@ -236,7 +237,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         Rigidbody thrownGrenadeRb = thrownGrenade.GetComponent<Rigidbody>();
 
         //throws grenade
-        thrownGrenadeRb.AddForce((throwPos.transform.forward * playerThrowForce * 20) + transform.up, ForceMode.Impulse);
+        thrownGrenadeRb.AddForce((throwPos.transform.forward * playerThrowForce * 20) + transform.up * throwLift, ForceMode.Impulse);
 
          
         yield return new WaitForSeconds(throwRate);

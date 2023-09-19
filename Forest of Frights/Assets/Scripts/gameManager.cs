@@ -35,12 +35,12 @@ public class gameManager : MonoBehaviour
 
     public bool isPaused;
 
-
-
     [Header("-----SFX-----")]
     [SerializeField] AudioSource natureSoundSource;
     [SerializeField] AudioClip natureSounds;
 
+    [Header("----Accessible Values-----")]
+    [Range(1, 5)] public int explosionDamage;
 
 
     //Initializes before Application Runs
@@ -163,5 +163,10 @@ public class gameManager : MonoBehaviour
         playerDamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         playerDamageFlash.SetActive(false);
+    }
+
+    public int getExplosionDamage()
+    {
+        return explosionDamage;
     }
 }

@@ -58,6 +58,10 @@ MonoBehaviour:
   regenStamina: 0.75
   playerSpeed: 5
   jumpHeight: 0.5
+  originalPlayerSpeed: 0
+  jumpsMax: 1
+  gravityValue: -3
+  pushBack: {x: 0, y: 0, z: 0}
   pushBackResolve: 3
   gunList: []
   gunModel: {fileID: 7832642245457561435}
@@ -68,16 +72,13 @@ MonoBehaviour:
   grenade: {fileID: 8825613890474161169, guid: 802e9ea262efceb48ba432d2a5f9eedc, type: 3}
   throwRate: 1
   playerThrowForce: 20
+  throwLift: 2
   throwPos: {fileID: 7226456012279697009}
   audioSource: {fileID: 1336561404949693363}
   playerInjured: {fileID: 8300000, guid: e42dff56582a7604493d4ee759aa6f3f, type: 3}
   playerWalksGrass: {fileID: 8300000, guid: 18e761ff5ef14fd4588d9283fcc9b829, type: 3}
   playerRunsGrass: {fileID: 8300000, guid: 1d7e7e6569aab5a45a837f470eaddc8b, type: 3}
   playerJumpsGrass: {fileID: 8300000, guid: a967f92e38352bb4291945423de63499, type: 3}
-  originalPlayerSpeed: 0
-  jumpsMax: 1
-  gravityValue: -3
-  pushBack: {x: 0, y: 0, z: 0}
 --- !u!143 &911501259543377830
 CharacterController:
   m_ObjectHideFlags: 0

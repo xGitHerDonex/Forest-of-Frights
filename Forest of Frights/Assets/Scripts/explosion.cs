@@ -4,10 +4,9 @@ using System.Net.NetworkInformation;
 using System.Threading;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class explosion : MonoBehaviour
 {
     [Range(0, 50)][SerializeField] int explosionAmount;
-    [Range(1, 5)] public int explosionDamage;
     [SerializeField] GameObject explosionEffect;
 
 
@@ -33,6 +32,7 @@ public class NewBehaviourScript : MonoBehaviour
 
 
     }
+
 
 
 
