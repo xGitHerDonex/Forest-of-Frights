@@ -66,18 +66,14 @@ public class gameManager : MonoBehaviour
             natureSoundSource.Play();
         }
 
+        
     }
 
     private void Start()
     {
-        //Set's the enemies remaining to the win condition
-        enemiesRemaining = enemiesKilledWinCond;
-        enemiesRemainingText.text = enemiesRemaining.ToString("0");
-
-        //Pauses game at start
-        isPaused = false;
         pause();
- 
+        currentMenu = startMenu;
+        currentMenu.SetActive(true);   
     }
 
     void Update()
@@ -182,14 +178,20 @@ public class gameManager : MonoBehaviour
 
     public void startGame()
     {
-        currentMenu = startMenu;
-        reticle.SetActive(true);
+
+
         startMenu.SetActive(false);
+        reticle.SetActive(true);
         playerHp.SetActive(true);
         playerStam.SetActive(true);
         enemiesRemainingUI.SetActive(true);
-        unPause();
-        
 
+        //Set's the enemies remaining to the win condition
+        enemiesRemaining = enemiesKilledWinCond;
+        enemiesRemainingText.text = enemiesRemaining.ToString("0");
+
+        unPause();
+
+              
     }
 }
