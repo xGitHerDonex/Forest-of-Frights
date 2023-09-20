@@ -66,9 +66,6 @@ public class gameManager : MonoBehaviour
             natureSoundSource.Play();
         }
 
-        pause();
-        currentMenu = startMenu;
-        currentMenu.SetActive(true);
     }
 
     private void Start()
