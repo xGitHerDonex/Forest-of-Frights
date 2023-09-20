@@ -46,6 +46,13 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     [Tooltip("Rate enemy can attack between 0 and 10.")]
     [Range(1, 10)][SerializeField] float shootRate;
 
+    [Header("SFX")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip walkSound;
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] AudioClip deathSound;
+
+
 
 
     Vector3 pushBack;
@@ -117,21 +124,32 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
         {
             destinationPicked = true;
             yield return new WaitForSeconds(roamPauseTime);
-
             Vector3 randomPos = Random.insideUnitSphere * roamDistance;
             randomPos += startingPos;
             NavMeshHit destination;
             NavMesh.SamplePosition(randomPos, out destination, roamDistance, 1);
             agent.SetDestination(destination.position);
+            
 
             destinationPicked = false;
         }
     }
+    //WIP Walk Sound
+    #region
+    void playWalkSound()
+    {
+        if (audioSource != null && walkSound != null)
+        {
+            audioSource.clip = walkSound;
+            audioSource.Play();
+        }
+    }
+    #endregion
 
     /*
      * if the enemy takes damage requires an amount for the damage in a whole number
      * then subtracts the amount of damage from that whole number
-     * the call the sub routine to run at the same time tomake the enemy feedback show (flashing damage indicator)
+     * the call the sub routine to run at the same time to make the enemy feedback show (flashing damage indicator)
      * also if the health is less than or equal to 0 destroy this enemy
      * 
      */
@@ -146,6 +164,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
             hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
             agent.enabled = false;
             anime.SetBool("Death", true);
+            playDeathSound();
             StartCoroutine(flashDamage());
             gameManager.instance.updateGameGoal(+1); //updates win condition set at 10 or greater "You win" also increments enemies killed and starts the win table Ienum
         }
@@ -159,6 +178,18 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
 
 
     }
+
+    //Allows the attached sound for Death Sound to be played
+    private void playDeathSound()
+    {
+        if (audioSource != null && deathSound != null) 
+        {
+            audioSource.clip = deathSound;
+            audioSource.Play();
+        }
+    }
+
+
 
     IEnumerator stopMoving()
     {
@@ -234,12 +265,22 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     IEnumerator shoot()
     {
         isShooting = true;
+        playAttackSound();
         Instantiate(bullet, shootPos.position, transform.rotation);
         anime.SetTrigger("Shoot");
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
+    //Allows the attached sound for Attack Sound to be played
+    private void playAttackSound()
+    {
+        if (audioSource != null && attackSound != null)
+        {
+            audioSource.clip = attackSound;
+            audioSource.Play();
+        }
+    }
 
     //sets the rotation of the enemy to face the player based on the player direction to the enemy 
     //and it lerps the rotation over time so it is smooth and not choppy
