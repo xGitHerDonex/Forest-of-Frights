@@ -23,7 +23,7 @@ public class buttonFunctions : MonoBehaviour
     public void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //loads active scene
-        gameManager.instance.unPause(); // unPauses the game
+        gameManager.instance.unPause(); // unPausesthe game
     }
 
     //Resume - resume's the game
