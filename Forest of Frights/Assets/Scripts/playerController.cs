@@ -89,8 +89,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         if (Input.GetButton("Shoot") && !isShooting && !gameManager.instance.isPaused)
             StartCoroutine(shoot());
 
-        //Throw grenade
-        //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
+        //Throw grenade - works similar to shoot    
         if (Input.GetButton("throw") && !isShooting && !gameManager.instance.isPaused)
             StartCoroutine(throwGrenade());
 
@@ -227,6 +226,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         isShooting = false;
     }
 
+    //Throw Grenade: will throw a grenade based on the throwforce and lift provided. 
+    //Is infinite but only 1 grenade per second can be thrown
     IEnumerator throwGrenade()
     {
         isShooting = true;
@@ -238,7 +239,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //throws grenade
         thrownGrenadeRb.AddForce((throwPos.transform.forward * playerThrowForce * 20) + (transform.up * throwLift), ForceMode.Impulse);
 
-         
+        //wait for throwrate, then flip bool back
         yield return new WaitForSeconds(throwRate);
         isShooting = false;
 
