@@ -86,11 +86,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //Call to shoot
         //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
-        if (Input.GetButton("Shoot") && !isShooting && !gameManager.instance.isPaused)
-            StartCoroutine(shoot());
+        if (!gameManager.instance.isPaused && gunList.Count > 0 && Input.GetButton("Shoot") && !isShooting)
+                StartCoroutine(shoot());
 
         //Throw grenade - works similar to shoot    
-        if (Input.GetButton("throw") && !isShooting && !gameManager.instance.isPaused)
+        if (!gameManager.instance.isPaused && Input.GetButton("throw") && !isShooting)
             StartCoroutine(throwGrenade());
 
         //Keeps Stamina Bar updated
