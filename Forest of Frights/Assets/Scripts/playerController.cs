@@ -236,7 +236,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         Rigidbody thrownGrenadeRb = thrownGrenade.GetComponent<Rigidbody>();
 
         //throws grenade
-        thrownGrenadeRb.AddForce((throwPos.transform.forward * playerThrowForce * 20) + transform.up * throwLift, ForceMode.Impulse);
+        thrownGrenadeRb.AddForce((throwPos.transform.forward * playerThrowForce * 20) + (transform.up * throwLift), ForceMode.Impulse);
 
          
         yield return new WaitForSeconds(throwRate);
