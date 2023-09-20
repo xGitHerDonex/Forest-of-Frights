@@ -66,14 +66,19 @@ public class gameManager : MonoBehaviour
             natureSoundSource.Play();
         }
 
-        
+        pause();
+        currentMenu = startMenu;
+        currentMenu.SetActive(true);
     }
 
     private void Start()
     {
+        isPaused = false;
         pause();
+
         currentMenu = startMenu;
-        currentMenu.SetActive(true);   
+        currentMenu.SetActive(true);
+
     }
 
     void Update()
@@ -176,11 +181,13 @@ public class gameManager : MonoBehaviour
         return explosionDamage;
     }
 
-    public void startGame()
+    public void beginGame()
     {
+        //hide start menu
+        currentMenu = startMenu;
+        currentMenu.SetActive(false);
 
-
-        startMenu.SetActive(false);
+        //enable ui
         reticle.SetActive(true);
         playerHp.SetActive(true);
         playerStam.SetActive(true);
@@ -190,6 +197,7 @@ public class gameManager : MonoBehaviour
         enemiesRemaining = enemiesKilledWinCond;
         enemiesRemainingText.text = enemiesRemaining.ToString("0");
 
+        //unpause the game
         unPause();
 
               

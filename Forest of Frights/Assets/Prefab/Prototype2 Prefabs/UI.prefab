@@ -33,13 +33,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8235309639929098944}
+  - {fileID: 6402083528561385792}
   - {fileID: 7697661795807370285}
   - {fileID: 5038822598297621890}
   - {fileID: 1862817634985794309}
   - {fileID: 8844849629553230513}
   - {fileID: 507314631965626188}
   - {fileID: 8855878367524736212}
-  - {fileID: 6402083528561385792}
   - {fileID: 1894175132040658086}
   - {fileID: 474993848295229400}
   - {fileID: 7156188563987503934}
@@ -463,7 +463,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 60650474451934004}
         m_TargetAssemblyTypeName: buttonFunctions, Assembly-CSharp
-        m_MethodName: start
+        m_MethodName: begin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2860,7 +2860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8235309639929098944
 RectTransform:
   m_ObjectHideFlags: 0

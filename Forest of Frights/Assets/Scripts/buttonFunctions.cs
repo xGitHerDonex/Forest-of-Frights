@@ -42,8 +42,8 @@ public class buttonFunctions : MonoBehaviour
     }
 
     //Runs startGame in Game manager
-    public void start()
+    public void begin()
     {
-        gameManager.instance.startGame();
+        gameManager.instance.beginGame();
     }
 }
