@@ -1281,6 +1281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5122005152324721378}
+  - component: {fileID: 1679799149682963929}
   m_Layer: 0
   m_Name: Spider
   m_TagString: Untagged
@@ -1313,6 +1314,27 @@ Transform:
   - {fileID: 8129669296997497246}
   m_Father: {fileID: 6541914364551022272}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1679799149682963929
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263568594637827573}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6e831d882f107894eb529a37bf3ffa24, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6356304056336423500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,12 +1616,12 @@ MonoBehaviour:
   hitBox: {fileID: 2102031486215053924}
   hp: 15
   targetFaceSpeed: 5
-  viewAngle: 360
+  viewAngle: 90
   roamDistance: 70
   roamPauseTime: 0
   animeSpeedChange: 10
   bullet: {fileID: 6704994505591150608, guid: 3d297aa179c87e649b48b00946041433, type: 3}
-  shootAngle: 90
+  shootAngle: 10
   shootRate: 1
 --- !u!95 &-801906991497656368
 Animator:

@@ -130,7 +130,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         float moveMagnitude = move.magnitude;
 
         //Debug.Log(moveMagnitude);
-        if (moveMagnitude >.4f && !audioSource.isPlaying)
+        if (moveMagnitude >.3f && !audioSource.isPlaying)
         {
             audioSource.PlayOneShot(playerWalksGrass);
         }
@@ -169,13 +169,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             //WIP Sprint Sound
             float moveMagnitude = move.magnitude;
             //audioSource.Stop();
-            if (moveMagnitude >= 0.1f && playerSpeed == 10 && !audioSource.isPlaying)
-            {
-                
+            if (playerSpeed == 10 && !audioSource.isPlaying && moveMagnitude >= 0.4f)
+            {            
                 audioSource.PlayOneShot(playerRunsGrass);
             }
             {
-                if (Stamina <= 0.1)
+                if (Stamina <= 0.0)
                 {             
                     canSprint = false;
                     playerSpeed = originalPlayerSpeed;
@@ -217,7 +216,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
         {
             IDamage damageable = hit.collider.GetComponent<IDamage>();
-            if (damageable != null)
+            if (damageable != null && hit.transform != transform)
             {
                 Instantiate(gunList[selectedGun].hitEffect, hit.point, gunList[selectedGun].hitEffect.transform.rotation);
                 damageable.takeDamage(shootDamage);

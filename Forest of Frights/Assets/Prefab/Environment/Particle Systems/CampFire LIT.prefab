@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3237890281313057419}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.205734, y: -29.201, z: 4.8415227}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4242083249923438925, guid: 848a09a3cb465d14da35ae72db7a0a7c, type: 3}
       propertyPath: m_DrawHalo
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4242083249923438925, guid: 848a09a3cb465d14da35ae72db7a0a7c, type: 3}
       propertyPath: m_Intensity
@@ -153,7 +153,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4242083249923438925, guid: 848a09a3cb465d14da35ae72db7a0a7c, type: 3}
       propertyPath: m_AreaSize.x
-      value: 15
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5062079540473314948, guid: 848a09a3cb465d14da35ae72db7a0a7c, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 5806714926855919094, guid: 848a09a3cb465d14da35ae72db7a0a7c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -173,11 +177,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7287528377162118147, guid: 848a09a3cb465d14da35ae72db7a0a7c, type: 3}
       propertyPath: maxWait
-      value: 0.2
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 7287528377162118147, guid: 848a09a3cb465d14da35ae72db7a0a7c, type: 3}
       propertyPath: minWait
-      value: 0.05
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7917253738490125794, guid: 848a09a3cb465d14da35ae72db7a0a7c, type: 3}
       propertyPath: m_LocalPosition.z
