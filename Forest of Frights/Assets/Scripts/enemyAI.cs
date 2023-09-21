@@ -223,8 +223,8 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
         angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
         //will not compile in the release build
 #if(UNITY_EDITOR)
-        Debug.Log(angleToPlayer);
-        Debug.DrawRay(headPos.position, playerDirection);
+        //Debug.Log(angleToPlayer);
+        //Debug.DrawRay(headPos.position, playerDirection);
 #endif
 
         RaycastHit hit;

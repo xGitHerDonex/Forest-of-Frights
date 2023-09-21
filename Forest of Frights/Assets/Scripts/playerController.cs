@@ -77,11 +77,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     void Update()
     {
+
         //Call to movement
         movement();
         sprint();
 
-       //Use Selected Gun
+        //Use Selected Gun
         selectGun();
 
         //Call to shoot
@@ -101,6 +102,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Move Ability:  Currently allows player to move!  Wheee!
     void movement()
     {
+        //Prevents inadvertent jumping while the game is paused
+        if (gameManager.instance.isPaused)
+        {
+            return;
+        }
         //controls pushback amount
         if (pushBack.magnitude > 0.01f)
         {

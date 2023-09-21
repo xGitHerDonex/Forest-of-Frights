@@ -30,7 +30,6 @@ public class Spawner : MonoBehaviour
         Instantiate(en, spawner.position, transform.rotation);
         yield return new WaitForSeconds(spawnRate);
 
-
     }
     
 }

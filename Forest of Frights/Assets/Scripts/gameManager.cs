@@ -70,12 +70,14 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
-        isPaused = false;
-        /* pause();
+        enemiesRemaining = enemiesKilledWinCond;
+        enemiesRemainingText.text = enemiesRemaining.ToString("0");
+        //isPaused = false;
+        //pause();
 
-        currentMenu = startMenu;
-        currentMenu.SetActive(true);
-        */
+        //currentMenu = startMenu;
+        //currentMenu.SetActive(true);
+        
     }
 
     void Update()
@@ -111,6 +113,7 @@ public class gameManager : MonoBehaviour
         isPaused = !isPaused; // flip isPaused bool
         currentMenu.SetActive(isPaused); // set Pause Menu as current window;
         currentMenu = null;  // remove window
+        reticle.SetActive(true); // Adds reticle back on screen
 
     }
 
@@ -128,9 +131,6 @@ public class gameManager : MonoBehaviour
         }
 
     }
-
-
-
 
     //Pulls up the Win table after 1 second of
     IEnumerator youWin()
@@ -178,25 +178,27 @@ public class gameManager : MonoBehaviour
         return explosionDamage;
     }
 
-   public void beginGame()
-    {
-        //hide start menu
-        currentMenu = startMenu;
-        currentMenu.SetActive(false);
 
-        //enable ui
-        reticle.SetActive(true);
-        playerHp.SetActive(true);
-        playerStam.SetActive(true);
-        enemiesRemainingUI.SetActive(true);
+   // [[Temporarily disabled for prototype 2]]
+   //public void beginGame()
+   // {
+   //     //hide start menu
+   //     currentMenu = startMenu;
+   //     currentMenu.SetActive(false);
 
-        //Set's the enemies remaining to the win condition
-        enemiesRemaining = enemiesKilledWinCond;
-        enemiesRemainingText.text = enemiesRemaining.ToString("0");
+   //     //enable ui
+   //     reticle.SetActive(true);
+   //     playerHp.SetActive(true);
+   //     playerStam.SetActive(true);
+   //     enemiesRemainingUI.SetActive(true);
 
-        //unpause the game
-        unPause();
+   //     //Set's the enemies remaining to the win condition
+   //     enemiesRemaining = enemiesKilledWinCond;
+   //     enemiesRemainingText.text = enemiesRemaining.ToString("0");
+
+   //     //unpause the game
+   //     unPause();
 
               
-    }
+   // }
 }
