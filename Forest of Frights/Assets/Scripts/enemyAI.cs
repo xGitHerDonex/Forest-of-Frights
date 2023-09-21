@@ -223,8 +223,8 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
         angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
         //will not compile in the release build
 #if(UNITY_EDITOR)
-        //Debug.Log(angleToPlayer);
-        //Debug.DrawRay(headPos.position, playerDirection);
+        Debug.Log(angleToPlayer);
+        Debug.DrawRay(headPos.position, playerDirection);
 #endif
 
         RaycastHit hit;
@@ -266,8 +266,8 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     {
         isShooting = true;
         playAttackSound();
-        Instantiate(bullet, shootPos.position, transform.rotation);
         anime.SetTrigger("Shoot");
+        Instantiate(bullet, shootPos.position, transform.rotation);
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }

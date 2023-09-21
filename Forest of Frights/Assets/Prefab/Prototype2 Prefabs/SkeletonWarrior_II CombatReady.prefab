@@ -2835,13 +2835,17 @@ MonoBehaviour:
   hitBox: {fileID: 8589687051860378562}
   hp: 4
   targetFaceSpeed: 4
-  viewAngle: 180
+  viewAngle: 90
   roamDistance: 20
   roamPauseTime: 0
   animeSpeedChange: 10
   bullet: {fileID: 6704994505591150608, guid: 85d33efccae04c14b9967724437b044f, type: 3}
-  shootAngle: 90
-  shootRate: 0
+  shootAngle: 10
+  shootRate: 2
+  audioSource: {fileID: 0}
+  walkSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: f7ac5c7c6aa82f24db736706881b6342, type: 3}
+  deathSound: {fileID: 8300000, guid: eb0cdcbe5c271244bb8a8577aa6c51d9, type: 3}
 --- !u!95 &8763712495532178541
 Animator:
   serializedVersion: 5
@@ -2907,7 +2911,7 @@ CapsuleCollider:
   m_Radius: 0.3601581
   m_Height: 2.3726044
   m_Direction: 1
-  m_Center: {x: 0.27177775, y: 0.6863022, z: 0.55436623}
+  m_Center: {x: 0, y: 0.8, z: 0.01}
 --- !u!135 &9127431773063331274
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3139,11 +3143,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6811282737194197876, guid: c0d06784b876a234a828647807a680b0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7907681
+      value: -0.049
       objectReference: {fileID: 0}
     - target: {fileID: 6811282737194197876, guid: c0d06784b876a234a828647807a680b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.07324644
+      value: 0.141
       objectReference: {fileID: 0}
     - target: {fileID: 6811282737194197876, guid: c0d06784b876a234a828647807a680b0, type: 3}
       propertyPath: m_LocalRotation.w

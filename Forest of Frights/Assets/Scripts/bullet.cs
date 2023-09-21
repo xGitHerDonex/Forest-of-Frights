@@ -14,13 +14,18 @@ public class bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.forward * speed;
+        rb.velocity = (gameManager.instance.player.transform.position - transform.position).normalized * speed;
         Destroy(gameObject, destroyTime);
 
     }
 
     private void OnTriggerEnter(Collider other)
     {
+
+        if (other.isTrigger)
+            return;
+
+
         IDamage damageable = other.GetComponent<IDamage>();
 
         if (damageable != null)

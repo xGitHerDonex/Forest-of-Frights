@@ -71,11 +71,11 @@ public class gameManager : MonoBehaviour
     private void Start()
     {
         isPaused = false;
-        pause();
+        /* pause();
 
         currentMenu = startMenu;
         currentMenu.SetActive(true);
-
+        */
     }
 
     void Update()
@@ -98,7 +98,7 @@ public class gameManager : MonoBehaviour
         Cursor.visible = true; // show cusor
         Cursor.lockState = CursorLockMode.Confined; //confine cursor
         isPaused = !isPaused; // flip pool for isPaused
-
+        reticle.SetActive(false);
 
     }
 
@@ -178,7 +178,7 @@ public class gameManager : MonoBehaviour
         return explosionDamage;
     }
 
-    public void beginGame()
+   public void beginGame()
     {
         //hide start menu
         currentMenu = startMenu;
