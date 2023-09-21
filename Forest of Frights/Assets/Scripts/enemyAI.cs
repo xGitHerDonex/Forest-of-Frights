@@ -123,8 +123,10 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
         if (agent.remainingDistance < 0.05f && !destinationPicked)
         {
             destinationPicked = true;
+            agent.stoppingDistance = 0;
             yield return new WaitForSeconds(roamPauseTime);
-            Vector3 randomPos = Random.insideUnitSphere * roamDistance;
+            
+            Vector3 randomPos = Random.insideUnitSphere * roamDistance; 
             randomPos += startingPos;
             NavMeshHit destination;
             NavMesh.SamplePosition(randomPos, out destination, roamDistance, 1);
@@ -165,7 +167,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
             agent.enabled = false;
             anime.SetBool("Death", true);
             playDeathSound();
-            StartCoroutine(flashDamage());
+            //StartCoroutine(flashDamage());
             gameManager.instance.updateGameGoal(+1); //updates win condition set at 10 or greater "You win" also increments enemies killed and starts the win table Ienum
         }
         else
