@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2759804137136730787}
   - component: {fileID: 1509882606709709706}
   - component: {fileID: 7614505857687173639}
-  - component: {fileID: 5090008454461370797}
+  - component: {fileID: 8494101419663391498}
   m_Layer: 0
   m_Name: SM_Large_Rock_Layered_020
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6587240314494109608}
   serializedVersion: 2
-  m_LocalRotation: {x: -1, y: -0, z: -0, w: 0.0000029504295}
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: -8.002388, y: 10.622486, z: 1.7956123}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5090008454461370797
-CapsuleCollider:
+--- !u!65 &8494101419663391498
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,8 +102,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 7.85044
-  m_Height: 2.058331
-  m_Direction: 1
+  serializedVersion: 3
+  m_Size: {x: 15.70088, y: 2.058331, z: 7.349703}
   m_Center: {x: 1.747925, y: 1.029165, z: 1.1995794}

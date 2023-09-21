@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7275935468390668813}
   - component: {fileID: 8923952783998138171}
   - component: {fileID: 918766121723099212}
-  - component: {fileID: 5110422411571368210}
+  - component: {fileID: 467168007896474242}
+  - component: {fileID: 2452748277189199127}
   m_Layer: 0
   m_Name: SM_Large_Rock_Round_013
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7433976902960549761}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.965392, z: -0, w: -0.2608034}
+  m_LocalRotation: {x: 0, y: 0.96539307, z: -0, w: -0.26079938}
   m_LocalPosition: {x: -12.672386, y: 2.2953515, z: -9.364386}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -84,8 +85,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5110422411571368210
-CapsuleCollider:
+--- !u!65 &467168007896474242
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7433976902960549761}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 4.491309, y: 7.088526, z: 4.4246063}
+  m_Center: {x: 0.0067058834, y: 3.544263, z: 0.092739865}
+--- !u!64 &2452748277189199127
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,8 +124,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.2456546
-  m_Height: 7.088526
-  m_Direction: 1
-  m_Center: {x: 0.0067058834, y: 3.544263, z: 0.092739865}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5954575756877200523, guid: 8e8a20ee734b7ed439c96aab8b84f213, type: 3}

@@ -27,7 +27,8 @@ public class Spawner : MonoBehaviour
     //Spawns an enemy
     IEnumerator spawnEnemy(GameObject en)
     {
-        Instantiate(en, (spawner.position), transform.rotation);
+        //Vector3 spawnPosition = new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f));
+        Instantiate(en, (spawner.position + new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f))), transform.rotation);
         yield return new WaitForSeconds(spawnRate);
 
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6973224486926259158}
   - component: {fileID: 4882092539219363572}
   - component: {fileID: 486223025433517921}
-  - component: {fileID: 4537631653229293631}
+  - component: {fileID: 726857414202636839}
   m_Layer: 0
   m_Name: SM_Medium_Rock_Square_011
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3686856086637752761}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -13.747368, y: 3.0324862, z: 3.4356117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4537631653229293631
-CapsuleCollider:
+--- !u!65 &726857414202636839
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,8 +102,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.7584425
-  m_Height: 2.8574207
-  m_Direction: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4530137, y: 2.8574207, z: 1.516885}
   m_Center: {x: -0.15251139, y: 1.4359246, z: 0.14205173}
