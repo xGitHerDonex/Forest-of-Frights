@@ -295,9 +295,9 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         updatePlayerUI();
 
         //Prevents playerController from taking over the script
-        //controller.enabled = false;
+        controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
-        //controller.enabled = true;
+        controller.enabled = true;
     }
 
     //Physics method, player will not use bool here
