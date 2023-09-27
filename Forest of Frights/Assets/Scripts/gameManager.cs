@@ -72,6 +72,7 @@ public class gameManager : MonoBehaviour
     {
         enemiesRemaining = enemiesKilledWinCond;
         enemiesRemainingText.text = enemiesRemaining.ToString("0");
+
         //isPaused = false;
         //pause();
 

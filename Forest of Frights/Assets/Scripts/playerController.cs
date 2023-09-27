@@ -42,6 +42,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [Range(1, 20)][SerializeField] int throwLift;
     [SerializeField] Transform throwPos;
 
+    [Header("-----Chronokinesis-----")]
+    [SerializeField] bool isTimeSlowed;
+    [Range(0, 2)][SerializeField] float timeSlowInSeconds;
+    [Range(0, 2)][SerializeField] float timeSlowScale;
+    [Range(1, 5)][SerializeField] float playerSlowSpeed;
+
 
     [Header("-----SFX-----")]
     //Player SFX
@@ -93,6 +99,10 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //Throw grenade - works similar to shoot    
         if (!gameManager.instance.isPaused && Input.GetButton("throw") && !isShooting)
             StartCoroutine(throwGrenade());
+
+        //Throw grenade - works similar to shoot    
+        if (!gameManager.instance.isPaused && Input.GetButton("time") && !isTimeSlowed)
+            StartCoroutine(chronokinesis());
 
         //Keeps Stamina Bar updated
         gameManager.instance.updateStamBar(Stamina/ maxStamina);
@@ -251,6 +261,26 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     }
 
+    IEnumerator chronokinesis()
+    {
+
+        //slow time and increase player speed
+        isTimeSlowed = true;
+        originalPlayerSpeed = playerSpeed;
+        playerSpeed = playerSlowSpeed * 1000;
+        Time.timeScale = timeSlowScale;
+       
+
+        yield return new WaitForSeconds(timeSlowInSeconds);
+
+        //revert scale and update player speed
+        Time.timeScale = 1f;
+        playerSpeed = originalPlayerSpeed;
+
+        isTimeSlowed = false;
+
+    }
+
     //Heal Ability:  Currently through the pause menu, until medkits are implemented
     public void giveHP(int amount)
     {
@@ -313,6 +343,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
        
     }
 
+   //Updates Stats on Player from Gun
     public void gunPickup(gunStats gun)
     {
         gunList.Add(gun);
@@ -328,6 +359,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         selectedGun = gunList.Count - 1;
     }
 
+    //Selecting Gun Method
     void selectGun()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
