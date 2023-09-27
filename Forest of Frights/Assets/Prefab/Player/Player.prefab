@@ -57,10 +57,10 @@ MonoBehaviour:
   Stamina: 0
   regenStamina: 0.75
   playerSpeed: 4
-  jumpHeight: 0.2
+  jumpHeight: 0.15
   originalPlayerSpeed: 0
   jumpsMax: 1
-  gravityValue: -1.2
+  gravityValue: -0.2
   pushBack: {x: 0, y: 0, z: 0}
   pushBackResolve: 3
   gunList: []
@@ -101,7 +101,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 40
-  m_StepOffset: 0.3
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
