@@ -16,11 +16,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float maxStamina;
     [SerializeField] float Stamina;
     [SerializeField] float regenStamina;
-    [SerializeField] float playerSpeed;
+    [SerializeField] int playerSpeed;
     [Range(0, 2)][SerializeField] float jumpHeight;
 
     [Header("-----Expanded Player Stats-----")]
-    [SerializeField] float originalPlayerSpeed;
+    [SerializeField] int originalPlayerSpeed;
     [SerializeField] int jumpsMax;
     [SerializeField] float gravityValue;
     [SerializeField] Vector3 pushBack;
@@ -46,7 +46,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] bool isTimeSlowed;
     [Range(0, 2)][SerializeField] float timeSlowInSeconds;
     [Range(0, 2)][SerializeField] float timeSlowScale;
-    [Range(1, 5)][SerializeField] float playerSlowSpeed;
+    [Range(1, 20)][SerializeField] int playerSlowSpeed;
 
 
     [Header("-----SFX-----")]
@@ -101,8 +101,10 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             StartCoroutine(throwGrenade());
 
         //Throw grenade - works similar to shoot    
-        if (!gameManager.instance.isPaused && Input.GetButton("time") && !isTimeSlowed)
+        if (!gameManager.instance.isPaused && Input.GetButton("time") && !isTimeSlowed && move.magnitude <= 0.4f)             
             StartCoroutine(chronokinesis());
+            
+
 
         //Keeps Stamina Bar updated
         gameManager.instance.updateStamBar(Stamina/ maxStamina);
@@ -192,7 +194,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
                 if (Stamina <= 0.0)
                 {             
                     canSprint = false;
-                    playerSpeed = originalPlayerSpeed;
+                    if (!isTimeSlowed) //test
+                        playerSpeed = originalPlayerSpeed;
                 }
             }
         }
@@ -205,7 +208,9 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             if (Stamina >= 4.0)
             {
                 canSprint = true;
-                playerSpeed = originalPlayerSpeed;
+
+                if (!isTimeSlowed) // test
+                    playerSpeed = originalPlayerSpeed;
 
             }
             Stamina += regenStamina * Time.deltaTime;
@@ -263,24 +268,29 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     IEnumerator chronokinesis()
     {
-
-        //slow time and increase player speed
-        isTimeSlowed = true;
         originalPlayerSpeed = playerSpeed;
-        playerSpeed = playerSlowSpeed * 1000;
+        playerSpeed = playerSpeed * playerSlowSpeed;
+        isTimeSlowed = true;
         Time.timeScale = timeSlowScale;
-       
 
         yield return new WaitForSeconds(timeSlowInSeconds);
 
         //revert scale and update player speed
         Time.timeScale = 1f;
         playerSpeed = originalPlayerSpeed;
-
         isTimeSlowed = false;
+        
 
     }
 
+
+    IEnumerator delaySpeed()
+    {
+        playerSpeed = playerSpeed * 10000;
+        yield return new WaitForSeconds(0.2f);
+        //slow time and increase player speed
+       
+    }
     //Heal Ability:  Currently through the pause menu, until medkits are implemented
     public void giveHP(int amount)
     {
