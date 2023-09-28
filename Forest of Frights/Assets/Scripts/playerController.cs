@@ -177,7 +177,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Future: Powerups to increase maxStamina for increased sprinting
     void sprint()
     {
-        if (Input.GetButton("Sprint") && canSprint)
+        if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed)
         {         
             //Increase player run speed by 5
             playerSpeed = originalPlayerSpeed + 5;
