@@ -4,6 +4,7 @@ using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class playerController : MonoBehaviour, IDamage, IPhysics
 {
@@ -17,7 +18,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float Stamina;
     [SerializeField] float regenStamina;
     [SerializeField] int playerSpeed;
-    [Range(0, 2)][SerializeField] float jumpHeight;
+    [Range(0, 7)][SerializeField] float jumpHeight;
 
     [Header("-----Expanded Player Stats-----")]
     [SerializeField] int originalPlayerSpeed;
@@ -48,6 +49,10 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [Range(0, 2)][SerializeField] float timeSlowScale;
     [Range(1, 20)][SerializeField] int playerSlowSpeed;
 
+    [Header("-----UI Elements-----")]
+    [SerializeField] private TextMeshProUGUI lowHPWarnText;
+    [SerializeField] private GameObject lowHealthWarnBG;
+
 
     [Header("-----SFX-----")]
     //Player SFX
@@ -63,6 +68,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     private bool groundedPlayer;
     private bool canSprint = true;
     private bool isTakingDamage = false;
+    private bool isJumping;
     private int jumpedTimes;
     private Vector3 playerVelocity;
     private Vector3 move;
@@ -90,6 +96,9 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //Use Selected Gun
         selectGun();
+        
+        //Low Health Warning
+        lowHealthWarning(); 
 
         //Call to shoot
         //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
@@ -137,6 +146,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         {
             jumpedTimes = 0;
             playerVelocity.y = 0f;
+            isJumping = false;
         }
 
         //Calculates movement
@@ -147,7 +157,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         float moveMagnitude = move.magnitude;
 
         //Debug.Log(moveMagnitude);
-        if (moveMagnitude >.3f && !audioSource.isPlaying)
+        if (moveMagnitude >.3f && !audioSource.isPlaying &&!isJumping)
         {
             audioSource.PlayOneShot(playerWalksGrass);
         }
@@ -160,24 +170,25 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
         {
             jumpedTimes++;
-            playerVelocity.y += jumpHeight; //Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            playerVelocity.y += jumpHeight;
+            isJumping = true;
+            //Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             
             //Jumping now makes a sound
             audioSource.PlayOneShot(playerJumpsGrass);
             //Jumping now drains some stamina
             Stamina -= 1.1f;
-
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity + pushBack * Time.deltaTime);
+        controller.Move((playerVelocity + pushBack) * Time.deltaTime);
     }
 
     //Sprint Ability:  Increases run speed by 5 for 4 seconds
     //Future: Powerups to increase maxStamina for increased sprinting
     void sprint()
     {
-        if (Input.GetButton("Sprint") && canSprint)
+        if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed)
         {         
             //Increase player run speed by 5
             playerSpeed = originalPlayerSpeed + 5;
@@ -327,6 +338,26 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(0.1f);
         isTakingDamage = false;
     }
+
+    private void lowHealthWarning()
+    {
+        //Once the player hits approximately 33% HP of their Max HP (equipment, etc) it'll trigger the warning
+        float lowHPThresh = maxHP * 0.33f;
+
+        if (HP <= lowHPThresh)
+        {
+            //Turn on Low Health warning
+            lowHPWarnText.gameObject.SetActive(true);
+            lowHealthWarnBG.SetActive(true);
+        }
+        else
+        {
+            //Turn off Low Health warning
+            lowHPWarnText.gameObject.SetActive(false);
+            lowHealthWarnBG.SetActive(false);
+        }
+    }
+
     public void spawnPlayer() 
     {
        
@@ -408,4 +439,5 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(seconds);
         takeDamage(damage);
     }
+
 }
