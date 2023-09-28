@@ -57,10 +57,10 @@ MonoBehaviour:
   Stamina: 0
   regenStamina: 0.75
   playerSpeed: 4
-  jumpHeight: 0.15
+  jumpHeight: 4
   originalPlayerSpeed: 0
   jumpsMax: 1
-  gravityValue: -0.2
+  gravityValue: -3
   pushBack: {x: 0, y: 0, z: 0}
   pushBackResolve: 3
   gunList: []
@@ -78,6 +78,8 @@ MonoBehaviour:
   timeSlowInSeconds: 2
   timeSlowScale: 0.2
   playerSlowSpeed: 10
+  lowHPWarnText: {fileID: 0}
+  lowHealthWarnBG: {fileID: 0}
   audioSource: {fileID: 1336561404949693363}
   playerInjured: {fileID: 8300000, guid: 4c5ffcdd319042140a80e6bd311e2ece, type: 3}
   playerWalksGrass: {fileID: 8300000, guid: 18e761ff5ef14fd4588d9283fcc9b829, type: 3}
@@ -511,7 +513,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.00044166757, y: -0.03015676, z: 0.051328752, w: 0.9982263}
   m_LocalPosition: {x: 0.46, y: -0.46, z: 0.75}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7226456012279697009}
