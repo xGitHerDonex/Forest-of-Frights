@@ -146,6 +146,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         {
             jumpedTimes = 0;
             playerVelocity.y = 0f;
+            isJumping = false;
         }
 
         //Calculates movement
@@ -177,13 +178,6 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             audioSource.PlayOneShot(playerJumpsGrass);
             //Jumping now drains some stamina
             Stamina -= 1.1f;
-        }
-
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            jumpedTimes = 0;
-            playerVelocity.y = 0f;
-            isJumping = false;
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
