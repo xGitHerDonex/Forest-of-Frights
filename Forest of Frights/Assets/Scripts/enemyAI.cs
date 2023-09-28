@@ -39,6 +39,8 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
 
     [Tooltip("Object to Shoot")]
     [SerializeField] GameObject bullet;
+    [Tooltip("Used to delaying the projectile instantiation to match animation")]
+    [SerializeField] float shootDelay;
 
     [Tooltip("Angle which the enemy can attack. (-)360-360")]
     [Range(-360, 360)][SerializeField] int shootAngle;
@@ -284,14 +286,20 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
         {
             isShooting = true;
             playAttackSound();
-            anime.SetTrigger("Shoot");
-            Instantiate(bullet, shootPos.position, transform.rotation);
+            anime.SetTrigger("Shoot");           
+            //Used to add delay to the shoot to match the animation
+            StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
 
-        //Allows the attached sound for Attack Sound to be played
-        private void playAttackSound()
+        IEnumerator shootDelayed()
+        {
+            Instantiate(bullet, shootPos.position, transform.rotation);
+            yield return new WaitForSeconds(shootDelay);
+        }
+    //Allows the attached sound for Attack Sound to be played
+    private void playAttackSound()
         {
             if (audioSource != null && attackSound != null)
             {
