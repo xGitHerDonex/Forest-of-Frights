@@ -161,7 +161,6 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
                 isDead = true; //Will keep update method from running since Enemy is now dead
                 hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
                 agent.enabled = false;
-                anime.SetFloat("Speed", 0);
                 anime.SetBool("Death", true);
                 playDeathSound();
             

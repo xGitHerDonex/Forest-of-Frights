@@ -370,7 +370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4684114712595845917
 Transform:
   m_ObjectHideFlags: 0
@@ -379,13 +379,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2506079833647299735}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.24778682, y: -0.07427195, z: -0.0085557, w: 0.9659256}
-  m_LocalPosition: {x: -0.63271576, y: 0.27764553, z: 0.12116624}
+  m_LocalRotation: {x: -0.1772906, y: 0.24269998, z: -0.17649817, w: 0.9372904}
+  m_LocalPosition: {x: -0.76539487, y: 0.06489445, z: -0.19561765}
   m_LocalScale: {x: 1, y: 0.099999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6288098163237985544}
-  m_LocalEulerAnglesHint: {x: -28.683, y: -9.133, z: 1.325}
+  m_LocalEulerAnglesHint: {x: -14.281, y: 32.279, z: -25.481}
 --- !u!33 &7113659797386557089
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -455,10 +455,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.41840506
-  m_Height: 1.4009085
+  m_Radius: 0.4570479
+  m_Height: 3.552377
   m_Direction: 0
-  m_Center: {x: -0.1575593, y: 0.23095708, z: -0.075049266}
+  m_Center: {x: -1.2332946, y: 0.23096904, z: 0.5096788}
 --- !u!114 &1424961436715452777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -917,7 +917,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 3.5
+  m_StoppingDistance: 7
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -983,7 +983,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1048108305573471109}
   agent: {fileID: 8587041567674221489}
-  shootPos: {fileID: 0}
   headPos: {fileID: 4720580867387196530}
   anime: {fileID: 4851798479365476154}
   hitBox: {fileID: 4187203221033357852}
@@ -995,7 +994,7 @@ MonoBehaviour:
   animeSpeedChange: 10
   leftMeleeCollider: {fileID: 7514048738341509592}
   rightMeleeCollider: {fileID: 2506079833647299735}
-  meleeDelay: 4
+  meleeDelay: 15
   meleeDamage: 2
   audioSource: {fileID: 0}
   walkSound: {fileID: 0}
@@ -1596,7 +1595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &235555008850878017
 Transform:
   m_ObjectHideFlags: 0
@@ -1605,13 +1604,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7514048738341509592}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17116039, y: -0.58641064, z: -0.26815295, w: 0.74493}
-  m_LocalPosition: {x: -0.53034306, y: 0.3019336, z: -0.10604854}
+  m_LocalRotation: {x: 0.24587137, y: -0.69408315, z: -0.27678493, w: 0.6174026}
+  m_LocalPosition: {x: -0.4327937, y: 0.5311736, z: 0.13525827}
   m_LocalScale: {x: 1, y: 0.09999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2506467957334691565}
-  m_LocalEulerAnglesHint: {x: -29.176, y: -2.598, z: -15.703}
+  m_LocalEulerAnglesHint: {x: -4.624, y: -94.858, z: -43.261}
 --- !u!33 &78791919059303094
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1681,10 +1680,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.41840506
-  m_Height: 1.0624583
-  m_Direction: 0
-  m_Center: {x: 0.011667126, y: 0.23095661, z: -0.07504924}
+  m_Radius: 0.56530106
+  m_Height: 3.8472784
+  m_Direction: 2
+  m_Center: {x: -0.01638156, y: -3.9798303, z: 1.5454452}
 --- !u!114 &2911324401571549251
 MonoBehaviour:
   m_ObjectHideFlags: 0
