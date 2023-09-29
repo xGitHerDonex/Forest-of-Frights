@@ -31,6 +31,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [Header("-----Gun Stats------")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     [SerializeField] GameObject gunModel;
+    [SerializeField] Transform gunMuzzle;
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
@@ -237,12 +238,17 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     IEnumerator shoot()
     {
         isShooting = true;
-        
-        //Shoot Sound!
+
+        // Talk to gunStats to grab the current gun's Recoil
+        float recoilAmount = gunList[selectedGun].recoilAmount;
+
+        // Save the original gunModel rotation (to recoil back to)
+        Quaternion originalRotation = gunModel.transform.localRotation;
+
+        // Play the shoot sound
         audioSource.PlayOneShot(shotSound);
 
-        //Casts a Ray and will hit object within range of the gun.
-        //Also instantiates a particle effect if an enemy is hit
+        // Cast a ray and check for hits
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
         {
@@ -251,10 +257,36 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             {
                 Instantiate(gunList[selectedGun].hitEffect, hit.point, gunList[selectedGun].hitEffect.transform.rotation);
                 damageable.takeDamage(shootDamage);
-                
             }
         }
+
+        //// Instantiate the muzzle flash particle effect at the gunMuzzle position
+        //if (gunMuzzle != null)
+        //{
+        //    Debug.Log("Muzzle flash should appear at: " + gunMuzzle.position); // Debug line
+        //    Instantiate(gunList[selectedGun].shootEffect, gunMuzzle.position, gunMuzzle.rotation);
+        //}
+
+        Vector3 recoilForce = new Vector3(-recoilAmount, 0f, 0f);
+        gunModel.transform.localEulerAngles += recoilForce;
+
+        // Smoothly return the gunModel to its original rotation
+        float elapsedTime = 0f;
+        // returnDuration time can be adjusted for smoothness
+        float returnDuration = 0.6f;
+        while (elapsedTime < returnDuration)
+        {
+            gunModel.transform.localRotation = Quaternion.Lerp(gunModel.transform.localRotation, originalRotation, elapsedTime / returnDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // gunModel rotation gets back to the original position
+        gunModel.transform.localRotation = originalRotation;
+
+        // Wait for the shoot rate cooldown
         yield return new WaitForSeconds(shootRate);
+
         isShooting = false;
     }
 
