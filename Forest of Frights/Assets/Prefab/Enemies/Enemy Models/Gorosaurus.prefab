@@ -524,6 +524,8 @@ GameObject:
   - component: {fileID: 5895199675205806088}
   - component: {fileID: 808274185299710189}
   - component: {fileID: 7002856398372168527}
+  - component: {fileID: 6000824492516936850}
+  - component: {fileID: 6582535183765261648}
   m_Layer: 0
   m_Name: Gorosaurus
   m_TagString: Untagged
@@ -585,8 +587,8 @@ MonoBehaviour:
   model: {fileID: 8290756093637584087}
   agent: {fileID: 7002856398372168527}
   shootPos: {fileID: 6737497946880817940}
-  headPos: {fileID: 0}
-  anime: {fileID: 0}
+  headPos: {fileID: 2352409489214901771}
+  anime: {fileID: 5895199675205806088}
   hitBox: {fileID: 0}
   hp: 0
   targetFaceSpeed: 0
@@ -595,6 +597,7 @@ MonoBehaviour:
   roamPauseTime: 0
   animeSpeedChange: 0
   bullet: {fileID: 0}
+  shootDelay: 0
   shootAngle: 0
   shootRate: 0
   audioSource: {fileID: 0}
@@ -623,6 +626,50 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &6000824492516936850
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396455545307726732}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 15
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &6582535183765261648
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396455545307726732}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3499343188867618822
 GameObject:
   m_ObjectHideFlags: 0
