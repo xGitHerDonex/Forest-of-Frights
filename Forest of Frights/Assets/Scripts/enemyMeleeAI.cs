@@ -10,7 +10,6 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
     [Header("-----Components-----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
     [SerializeField] Animator anime;
     [SerializeField] Collider hitBox;
@@ -44,20 +43,6 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
     [Tooltip("meleeDamage")]
     [SerializeField] int meleeDamage;
 
-
-    //[Header("-----Gun Stats and Bullet Component -----")]
-
-    //[Tooltip("Object to Shoot")]
-    //[SerializeField] GameObject bullet;
-    //[Tooltip("Used to delaying the projectile instantiation to match animation")]
-    //[SerializeField] float shootDelay;
-
-    //[Tooltip("Angle which the enemy can attack. (-)360-360")]
-    //[Range(-360, 360)][SerializeField] int shootAngle;
-
-    //[Tooltip("Rate enemy can attack between 0 and 10.")]
-    //[Range(1, 10)][SerializeField] float shootRate;
-
     [Header("SFX")]
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip walkSound;
@@ -73,9 +58,9 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
     float stoppingDistOriginal;
     float angleToPlayer;
     float speedOrig;
-
-    bool playerInRange;
     bool isAttacking;
+    bool isDead;
+    bool playerInRange;
     bool destinationPicked;
 
     #endregion
@@ -87,6 +72,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
         speedOrig = agent.speed; // gives the agent speed to the float original speed for later on. 
         startingPos = transform.position;
         stoppingDistOriginal = agent.stoppingDistance;
+        isDead = false;
 
     }
 
@@ -94,7 +80,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        if (agent.isActiveAndEnabled)
+        if (!isDead)
         {
             //allows the enemy to ease into the transition animation with a tuneable
             //variable for custimization by Lerping it over time prevents choppy transitions
@@ -113,7 +99,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
                 StartCoroutine(roam());
             }
 
-         
+        
         }
     }
 
@@ -172,6 +158,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
 
             if (hp <= 0)
             {
+                isDead = true; //Will keep update method from running since Enemy is now dead
                 hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
                 agent.enabled = false;
                 anime.SetBool("Death", true);
@@ -284,6 +271,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
             leftMeleeCollider.SetActive(true);
             rightMeleeCollider.SetActive(true);
             anime.SetTrigger("Melee");
+
             yield return new WaitForSeconds(meleeDelay);
             isAttacking = false;
             leftMeleeCollider.SetActive(false);
@@ -292,15 +280,15 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
 
 
       
-    //Allows the attached sound for Attack Sound to be played
-    private void playAttackSound()
-        {
-            if (audioSource != null && attackSound != null)
+        //Allows the attached sound for Attack Sound to be played
+        private void playAttackSound()
             {
-                audioSource.clip = attackSound;
-                audioSource.Play();
+                if (audioSource != null && attackSound != null)
+                {
+                    audioSource.clip = attackSound;
+                    audioSource.Play();
+                }
             }
-        }
 
         //sets the rotation of the enemy to face the player based on the player direction to the enemy 
         //and it lerps the rotation over time so it is smooth and not choppy

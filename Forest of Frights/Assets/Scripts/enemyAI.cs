@@ -228,8 +228,6 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
             model.material.color = Color.white;
         }
 
-
-
         //tests to see if the player is within range of the enemy and if the player is within range calculate
         /* the angle of the player to the enemy 
          * there is a debug to show the angle and the player position to the enemy position in the scene screen.
@@ -241,6 +239,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
 
             playerDirection = gameManager.instance.player.transform.position - headPos.position;
             angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
+
             //will not compile in the release build
 #if (UNITY_EDITOR)
             //Debug.Log(angleToPlayer);
@@ -291,7 +290,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
             //Used to add delay to the shoot to match the animation
             StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
 
-        yield return new WaitForSeconds(shootRate);
+            yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
 
