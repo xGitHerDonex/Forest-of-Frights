@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 911501259543377830}
-  HP: 10
+  HP: 200
   maxHP: 10
   maxStamina: 4
   Stamina: 0
@@ -65,6 +65,7 @@ MonoBehaviour:
   pushBackResolve: 3
   gunList: []
   gunModel: {fileID: 7832642245457561435}
+  gunMuzzle: {fileID: 0}
   shootRate: 0
   shootDamage: 0
   shootDistance: 0
@@ -180,10 +181,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.15
-  m_Height: 2
+  m_Radius: 0.5095423
+  m_Height: 2.126511
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.18787599, y: 0.06325558, z: 0.17166269}
 --- !u!82 &1336561404949693363
 AudioSource:
   m_ObjectHideFlags: 0

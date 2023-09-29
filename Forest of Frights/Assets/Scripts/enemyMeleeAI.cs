@@ -75,7 +75,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
     float speedOrig;
 
     bool playerInRange;
-    bool isShooting;
+    bool isAttacking;
     bool destinationPicked;
 
     #endregion
@@ -237,6 +237,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
         bool canSeePlayer()
         {
 
+           
             playerDirection = gameManager.instance.player.transform.position - headPos.position;
             angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
 
@@ -250,7 +251,9 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
                 if (hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle)
                 {
                     agent.stoppingDistance = stoppingDistOriginal;
-                    agent.SetDestination(gameManager.instance.player.transform.position);
+                    
+                    if(!isAttacking)
+                        agent.SetDestination(gameManager.instance.player.transform.position);
                     /*
                      * if the remaining distance is less than or equal to the stopping  distance of the enemy
                      * face the target and prepare to shoot if the angle is within parameter and the enemy is not already shooting
@@ -266,7 +269,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
                 }
             }
             //otherwise set the stopping distance to zero and return false
-            agent.stoppingDistance = 0;
+           agent.stoppingDistance = 0;
             return false;
         }
 
@@ -277,10 +280,12 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
 
         IEnumerator Melee()
         {
+            isAttacking = true;
             leftMeleeCollider.SetActive(true);
             rightMeleeCollider.SetActive(true);
             anime.SetTrigger("Melee");
             yield return new WaitForSeconds(meleeDelay);
+            isAttacking = false;
             leftMeleeCollider.SetActive(false);
             rightMeleeCollider.SetActive(false);
         }
