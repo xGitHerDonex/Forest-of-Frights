@@ -2819,9 +2819,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2587998279081628705, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
+      propertyPath: m_Radius
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3475841303566922838, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
       propertyPath: m_Name
       value: Gorosaurus - Melee
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187203221033357852, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
+      propertyPath: m_Height
+      value: 4.019265
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187203221033357852, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
+      propertyPath: m_Radius
+      value: 1.246845
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187203221033357852, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
+      propertyPath: m_Center.x
+      value: -0.11278163
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187203221033357852, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
+      propertyPath: m_Center.y
+      value: 2.6133022
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187203221033357852, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
+      propertyPath: m_Center.z
+      value: 0.3982253
       objectReference: {fileID: 0}
     - target: {fileID: 6917411876341361058, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2865,7 +2889,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6980453002935945123, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
       propertyPath: meleeDelay
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8587041567674221489, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
+      propertyPath: m_Speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8587041567674221489, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

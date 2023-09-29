@@ -287,10 +287,9 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
             isShooting = true;
             playAttackSound();
             anime.SetTrigger("Shoot");
-            //Instantiate(bullet, shootPos.position, transform.rotation);
 
-        //Used to add delay to the shoot to match the animation
-        StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
+            //Used to add delay to the shoot to match the animation
+            StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
 
         yield return new WaitForSeconds(shootRate);
             isShooting = false;
