@@ -33,6 +33,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
     [SerializeField] AudioClip shotSound;
+    // Railgun Unique
+    [SerializeField] GameObject Railbeam;
 
     [Header("-----Grenade Stats------")]
     [SerializeField] GameObject grenade;

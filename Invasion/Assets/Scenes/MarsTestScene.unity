@@ -1011,6 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca34a6148db2d54493f84f379293f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroupID: 0
 --- !u!4 &409049887
 Transform:
   m_ObjectHideFlags: 0
@@ -1433,7 +1434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2988124821043494311, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 354.04
+      value: 353.82
       objectReference: {fileID: 0}
     - target: {fileID: 2988124821043494311, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1488,6 +1489,10 @@ PrefabInstance:
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
+      propertyPath: Railbeam
+      value: 
+      objectReference: {fileID: 3280786448556084464, guid: 05e7fe8eabf617440b53f7d4e5e51bfe, type: 3}
+    - target: {fileID: 5085036219987582737, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: lowHPWarnText
       value: 
       objectReference: {fileID: 1494991405074004149}
@@ -1540,7 +1545,7 @@ MonoBehaviour:
   targetFaceSpeed: 5
   hp: 10
   animeSpeedChange: 10
-  viewAngle: 3
+  viewAngle: 0
   leftMeleeCollider: {fileID: 1744171177}
   rightMeleeCollider: {fileID: 1764399432}
   meleeDelay: 2
@@ -2937,7 +2942,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2587998279081628705, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
       propertyPath: m_Radius
-      value: 100
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3475841303566922838, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
       propertyPath: m_Name
@@ -2965,7 +2970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6917411876341361058, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 228.1
+      value: 216.03
       objectReference: {fileID: 0}
     - target: {fileID: 6917411876341361058, guid: 41288ff287a66c946808cfd77e4207c8, type: 3}
       propertyPath: m_LocalPosition.y

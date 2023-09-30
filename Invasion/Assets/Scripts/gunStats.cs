@@ -26,4 +26,5 @@ public class gunStats : ScriptableObject
     [SerializeField] public GameObject projectile;
     [SerializeField] public float projectileSpeed;
     
+
 }
