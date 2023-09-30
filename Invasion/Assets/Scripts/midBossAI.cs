@@ -77,14 +77,14 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
         //Selects stage for enemy AI based on Health Remaining
 
-        if (hpRatio >= 70)
-            Stage1();
+        //if (hpRatio >= 70)
+            //Stage1();
 
-        else if (hpRatio >= 30 && hpRatio <= 70)
+        //else if (hpRatio >= 30 && hpRatio <= 70)
             Stage2();
 
-        else if (hpRatio >= 0 && hpRatio <= 30)
-            Stage3();
+        //else if (hpRatio >= 0 && hpRatio <= 30)
+            //Stage3();
     }
 
 
@@ -137,7 +137,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
                     if (!isAttacking)
                     {
-                        StartCoroutine(Melee());
+                        StartCoroutine(Melee(Random.Range(2,5)));
                     }
 
                 }
@@ -204,7 +204,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
                     if (!isAttacking)
                     {
-                        StartCoroutine(Melee());
+                        StartCoroutine(Melee(Random.Range(2,5)));
                     }
 
                 }
@@ -271,7 +271,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
                     if (!isAttacking)
                     {
-                        StartCoroutine(Melee());
+                        StartCoroutine(Melee(Random.Range(2,5)));
                     }
 
                 }
@@ -362,22 +362,33 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         }
 
 
-        IEnumerator Melee()
+        IEnumerator Melee(int combo)
         {
             isAttacking = true;
             leftMeleeCollider.SetActive(true);
             rightMeleeCollider.SetActive(true);
-            anime.SetTrigger("Melee");
 
-            yield return new WaitForSeconds(meleeDelay);
+            if (combo == 2)
+                anime.SetTrigger("Melee2");
+
+            if (combo == 3)
+                anime.SetTrigger("Melee3");
+
+            if (combo == 4)
+                anime.SetTrigger("Melee4");
+
+
+        yield return new WaitForSeconds(meleeDelay);
             isAttacking = false;
             leftMeleeCollider.SetActive(false);
             rightMeleeCollider.SetActive(false);
         }
 
+        
+
    
         //Allows the attached sound for Attack Sound to be played
-        private void playAttackSound()
+        void playAttackSound()
             {
                 if (audioSource != null && attackSound != null)
                 {
