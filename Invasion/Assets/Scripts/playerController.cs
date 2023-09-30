@@ -268,9 +268,17 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         // Railgun shoot effect
         if (gunList[selectedGun].isRailgun)
         {
-            GameObject railBeam = Instantiate(gunList[selectedGun].RailBeam, gunMuzzle.position, gunMuzzle.rotation);
-            Rigidbody railBeamRb = railBeam.GetComponent<Rigidbody>();
-            railBeamRb.velocity = gunMuzzle.transform.forward * gunList[selectedGun].railgunBeamSpeed;
+            // Find the gunMuzzle within the currently selected gun's hierarchy
+            Transform gunMuzzle = gunList[selectedGun].model.transform.Find("gunMuzzle");
+
+            // Check if the gunMuzzle was found
+            if (gunMuzzle != null)
+            {
+                // Instantiate the projectile from the gunMuzzle's position and rotation
+                GameObject railBeam = Instantiate(gunList[selectedGun].projectile, gunMuzzle.position, gunMuzzle.rotation);
+                Rigidbody railBeamRb = railBeam.GetComponent<Rigidbody>();
+                railBeamRb.velocity = gunMuzzle.transform.forward * gunList[selectedGun].projectileSpeed;
+            }
         }
 
         Vector3 recoilForce = new Vector3(-recoilAmount, 0f, 0f);
@@ -434,6 +442,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<Renderer>().sharedMaterial = gun.model.GetComponent<Renderer>().sharedMaterial;
+        gunList[selectedGun].gunMuzzle = gunMuzzle;
 
         selectedGun = gunList.Count - 1;
     }
