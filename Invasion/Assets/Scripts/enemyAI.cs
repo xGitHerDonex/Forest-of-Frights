@@ -6,7 +6,7 @@ using UnityEngine.Device;
 
 public class enemyAI : MonoBehaviour, IDamage, IPhysics
 {
-    #region Fields, Members and Variables
+
     [Header("-----Components-----")]
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
@@ -54,21 +54,16 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip attackSound;
     [SerializeField] AudioClip deathSound;
 
-
-
-
     Vector3 pushBack;
     Vector3 playerDirection;
     Vector3 startingPos;
     float stoppingDistOriginal;
     float angleToPlayer;
     float speedOrig;
-
-    bool playerInRange;
     bool isShooting;
+    bool playerInRange;
     bool destinationPicked;
 
-    #endregion
 
 
     // Start is called before the first frame update

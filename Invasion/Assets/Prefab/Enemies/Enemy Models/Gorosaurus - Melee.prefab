@@ -856,7 +856,6 @@ GameObject:
   - component: {fileID: 8587041567674221489}
   - component: {fileID: 2587998279081628705}
   - component: {fileID: 4187203221033357852}
-  - component: {fileID: 6980453002935945123}
   m_Layer: 0
   m_Name: Gorosaurus - Melee
   m_TagString: Untagged
@@ -969,37 +968,6 @@ CapsuleCollider:
   m_Height: 4.019265
   m_Direction: 1
   m_Center: {x: -0.11278163, y: 2.6133022, z: 0.3982253}
---- !u!114 &6980453002935945123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3475841303566922838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5470948b225d8624aac024843431845b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 1048108305573471109}
-  agent: {fileID: 8587041567674221489}
-  headPos: {fileID: 4720580867387196530}
-  anime: {fileID: 4851798479365476154}
-  hitBox: {fileID: 4187203221033357852}
-  hp: 20
-  targetFaceSpeed: 5
-  viewAngle: 90
-  roamDistance: 1
-  roamPauseTime: 0
-  animeSpeedChange: 10
-  leftMeleeCollider: {fileID: 7514048738341509592}
-  rightMeleeCollider: {fileID: 2506079833647299735}
-  meleeDelay: 15
-  meleeDamage: 2
-  audioSource: {fileID: 0}
-  walkSound: {fileID: 0}
-  attackSound: {fileID: 8300000, guid: 3b65261e91884fa49b788776b1dc2feb, type: 3}
-  deathSound: {fileID: 8300000, guid: 4c7f1d1fe02cb6645a21be4a842bfe3c, type: 3}
 --- !u!1 &3749673918236736755
 GameObject:
   m_ObjectHideFlags: 0
