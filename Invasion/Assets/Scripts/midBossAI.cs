@@ -21,11 +21,13 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
     [Tooltip("Enemy health value between 1 and 100.")]
     [Range(1, 100)][SerializeField] int hp;
+    [Range(1, 100)][SerializeField] int maxHp;
 
 
     [Tooltip("10 is the default value for all current speeds. Changing this without adjusting Enemy Speed and nav mesh speed will break it!!!!")]
     [Range(-30, 30)][SerializeField] float animeSpeedChange;
-    [SerializeField] int viewAngle;
+    //[SerializeField] int viewAngle;
+    [SerializeField] int enemyRunSpeed;
 
 
     [Header("-----Melee Components-----")]
@@ -43,18 +45,18 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip deathSound;
 
 
-
-
     Vector3 pushBack;
     Vector3 playerDirection;
     Vector3 startingPos;
     float stoppingDistOriginal;
-    float angleToPlayer;
+    //float angleToPlayer;
     float speedOrig;
     bool isAttacking;
     bool isDead;
     bool playerInRange;
-    bool destinationPicked;
+    bool isRunning;
+    float agentVel;
+    //bool destinationPicked;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +64,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         speedOrig = agent.speed; // gives the agent speed to the float original speed for later on. 
         startingPos = transform.position;
         stoppingDistOriginal = agent.stoppingDistance;
+        hp = maxHp;
         isDead = false;
 
     }
@@ -70,52 +73,79 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
+        float hpRatio = (hp / maxHp) * 100;
+        if (hpRatio >= 80)
+            Stage1();
+    }
+
+
+    void Stage1()
+    {
+        //If enemy is not dead, we'll continue
         if (!isDead)
-        {
-            //allows the enemy to ease into the transition animation with a tuneable
-            //variable for custimization by Lerping it over time prevents choppy transitions
-            float agentVel = agent.velocity.normalized.magnitude;
+        {     
+            //Updates the animator and speed of the enemy to make the enemy appear running
+            if (!isRunning)
+            {
+                agentVel = agent.velocity.normalized.magnitude;
+                agent.speed = speedOrig;
+            }
 
-            anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
+            else if (isRunning)
+            {
+                agentVel = agent.velocity.normalized.magnitude + 1;
+                agent.speed = enemyRunSpeed;
 
-            //Automatically locks onto player 
+            }
+
+            //casts a ray on the player
             RaycastHit hit;
 
+            //get's player's direction
             playerDirection = gameManager.instance.player.transform.position - headPos.position;
-            angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
-        
+
+            //angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
+
+
+            //Casts a ray on the player
             if (Physics.Raycast(headPos.position, playerDirection, out hit))
             {
 
-                float distToPlayer = Vector3.Distance(headPos.position, gameManager.instance.player.transform.position);
-                Debug.Log(distToPlayer);
+                anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
 
+                //Gets distance to player
+                float distToPlayer = Vector3.Distance(headPos.position, gameManager.instance.player.transform.position);
+
+                //Uncomment to check distance between enemy player
+                //Debug.Log(distToPlayer);
+
+
+                //If player within stopping distance, face target and attack if not already attacking
                 if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
                 {
+                    isRunning = false;
                     faceTarget();
 
-                    if(!isAttacking)
+                    if (!isAttacking)
                     {
                         StartCoroutine(Melee());
                     }
-                     
-                    //agent.stoppingDistance = stoppingDistOriginal;
-
 
                 }
 
+                //if player is not wthin stopping distance, then set distination to the player
                 else if (playerInRange && distToPlayer >= agent.stoppingDistance)
                 {
+                    isRunning = true;
                     faceTarget();
                     agent.SetDestination(gameManager.instance.player.transform.position);
-                    //agent.stoppingDistance = 0;
-
 
                 }
             }
-                
+
         }
     }
+
 
         void playWalkSound()
         {
