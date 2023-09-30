@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public class playerController : MonoBehaviour, IDamage, IPhysics
 {
@@ -63,7 +60,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip playerRunsGrass;
     [SerializeField] AudioClip playerJumpsGrass;
 
-   
+
     //Bools and others for functions
     private bool isShooting;
     private bool groundedPlayer;
@@ -97,28 +94,28 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //Use Selected Gun
         selectGun();
-        
+
         //Low Health Warning
-        lowHealthWarning(); 
+        lowHealthWarning();
 
         //Call to shoot
         //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
         if (!gameManager.instance.isPaused && gunList.Count > 0 && Input.GetButton("Shoot") && !isShooting)
-                StartCoroutine(shoot());
+            StartCoroutine(shoot());
 
         //Throw grenade - works similar to shoot    
         if (!gameManager.instance.isPaused && Input.GetButton("throw") && !isShooting)
             StartCoroutine(throwGrenade());
 
         //Throw grenade - works similar to shoot    
-        if (!gameManager.instance.isPaused && Input.GetButton("time") && !isTimeSlowed && move.magnitude <= 0.4f)             
+        if (!gameManager.instance.isPaused && Input.GetButton("time") && !isTimeSlowed && move.magnitude <= 0.4f)
             StartCoroutine(chronokinesis());
-            
+
 
 
         //Keeps Stamina Bar updated
-        gameManager.instance.updateStamBar(Stamina/ maxStamina);
-       
+        gameManager.instance.updateStamBar(Stamina / maxStamina);
+
     }
 
     //Move Ability:  Currently allows player to move!  Wheee!
@@ -132,10 +129,10 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //controls pushback amount
         if (pushBack.magnitude > 0.01f)
         {
-                pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackResolve);
-                pushBack.x = Mathf.Lerp(pushBack.x, 0, Time.deltaTime * pushBackResolve);
-                pushBack.y = Mathf.Lerp(pushBack.y, 0, Time.deltaTime * pushBackResolve * 3);
-                pushBack.z = Mathf.Lerp(pushBack.z, 0, Time.deltaTime * pushBackResolve);
+            pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackResolve);
+            pushBack.x = Mathf.Lerp(pushBack.x, 0, Time.deltaTime * pushBackResolve);
+            pushBack.y = Mathf.Lerp(pushBack.y, 0, Time.deltaTime * pushBackResolve * 3);
+            pushBack.z = Mathf.Lerp(pushBack.z, 0, Time.deltaTime * pushBackResolve);
 
         }
 
@@ -158,7 +155,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         float moveMagnitude = move.magnitude;
 
         //Debug.Log(moveMagnitude);
-        if (moveMagnitude >.3f && !audioSource.isPlaying &&!isJumping)
+        if (moveMagnitude > .3f && !audioSource.isPlaying && !isJumping)
         {
             audioSource.PlayOneShot(playerWalksGrass);
         }
@@ -167,14 +164,14 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         controller.Move(move * Time.deltaTime * playerSpeed);
 
 
-    //Jump Ability:  Currently allows player to jump
+        //Jump Ability:  Currently allows player to jump
         if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
         {
             jumpedTimes++;
             playerVelocity.y += jumpHeight;
             isJumping = true;
             //Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            
+
             //Jumping now makes a sound
             audioSource.PlayOneShot(playerJumpsGrass);
             //Jumping now drains some stamina
@@ -190,21 +187,21 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     void sprint()
     {
         if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed)
-        {         
+        {
             //Increase player run speed by 5
             playerSpeed = originalPlayerSpeed + 5;
             Stamina -= 1.0f * Time.deltaTime;
-            
+
             //WIP Sprint Sound
             float moveMagnitude = move.magnitude;
             //audioSource.Stop();
             if (playerSpeed == 10 && !audioSource.isPlaying && moveMagnitude >= 0.4f)
-            {            
+            {
                 audioSource.PlayOneShot(playerRunsGrass);
             }
             {
                 if (Stamina <= 0.0)
-                {             
+                {
                     canSprint = false;
                     if (!isTimeSlowed) //test
                         playerSpeed = originalPlayerSpeed;
@@ -212,9 +209,9 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             }
         }
 
-    //Stamina Recover Ability:  Recovers stamina by 0.75(current regenStamina)
-    //Future: Powerups to speed up regenStamina
-    //Note: drainStamina set to 4.0 to allow sprinting sooner than possible maxStamina
+        //Stamina Recover Ability:  Recovers stamina by 0.75(current regenStamina)
+        //Future: Powerups to speed up regenStamina
+        //Note: drainStamina set to 4.0 to allow sprinting sooner than possible maxStamina
         else
         {
             if (Stamina >= 4.0)
@@ -237,6 +234,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Shoot Ability:  Currently instant projectile speed
     IEnumerator shoot()
     {
+        if (isShooting || gunList.Count == 0 || gameManager.instance.isPaused)
+            yield break;
         isShooting = true;
 
         // Talk to gunStats to grab the current gun's Recoil
@@ -247,6 +246,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         // Play the shoot sound
         audioSource.PlayOneShot(shotSound);
+
+        // If statement to simulate a chargetime of 2 seconds
+        if (gunList[selectedGun].isRailgun)
+        {
+            yield return new WaitForSeconds(2.0f);
+        }
 
         // Cast a ray and check for hits
         RaycastHit hit;
@@ -260,12 +265,13 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             }
         }
 
-        //// Instantiate the muzzle flash particle effect at the gunMuzzle position
-        //if (gunMuzzle != null)
-        //{
-        //    Debug.Log("Muzzle flash should appear at: " + gunMuzzle.position); // Debug line
-        //    Instantiate(gunList[selectedGun].shootEffect, gunMuzzle.position, gunMuzzle.rotation);
-        //}
+        // Railgun shoot effect
+        if (gunList[selectedGun].isRailgun)
+        {
+            GameObject railBeam = Instantiate(gunList[selectedGun].RailBeam, gunMuzzle.position, gunMuzzle.rotation);
+            Rigidbody railBeamRb = railBeam.GetComponent<Rigidbody>();
+            railBeamRb.velocity = gunMuzzle.transform.forward * gunList[selectedGun].railgunBeamSpeed;
+        }
 
         Vector3 recoilForce = new Vector3(-recoilAmount, 0f, 0f);
         gunModel.transform.localEulerAngles += recoilForce;
@@ -297,7 +303,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         isShooting = true;
 
         //creates grenades
-        GameObject thrownGrenade = Instantiate(grenade, throwPos.transform.position, throwPos.transform.rotation);  
+        GameObject thrownGrenade = Instantiate(grenade, throwPos.transform.position, throwPos.transform.rotation);
         Rigidbody thrownGrenadeRb = thrownGrenade.GetComponent<Rigidbody>();
 
         //throws grenade
@@ -322,7 +328,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         Time.timeScale = 1f;
         playerSpeed = originalPlayerSpeed;
         isTimeSlowed = false;
-        
+
 
     }
 
@@ -332,7 +338,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         playerSpeed = playerSpeed * 10000;
         yield return new WaitForSeconds(0.2f);
         //slow time and increase player speed
-       
+
     }
     //Heal Ability:  Currently through the pause menu, until medkits are implemented
     public void giveHP(int amount)
@@ -390,11 +396,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         }
     }
 
-    public void spawnPlayer() 
+    public void spawnPlayer()
     {
-       
+
         //Resets Players HP
-        HP = maxHP;       
+        HP = maxHP;
         updatePlayerUI();
 
         //Prevents playerController from taking over the script
@@ -412,11 +418,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Updates players HP bar after a respawn.  Implemented in spawnPlayer()
     public void updatePlayerUI()
     {
-        gameManager.instance.updateHpBar((float)HP/maxHP);
-       
+        gameManager.instance.updateHpBar((float)HP / maxHP);
+
     }
 
-   //Updates Stats on Player from Gun
+    //Updates Stats on Player from Gun
     public void gunPickup(gunStats gun)
     {
         gunList.Add(gun);
@@ -437,13 +443,33 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
         {
+            // Sets current gun to not-Railgun
+            gunList[selectedGun].isRailgun = false;
+
             selectedGun++;
+
+            // Detects if current gun is Railgun
+            if (gunList[selectedGun].isRailgun)
+            {
+                gunList[selectedGun].isRailgun = true;
+            }
+
+
             changeGun();
         }
 
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
         {
+            // Sets current gun to not-Railgun
+            gunList[selectedGun].isRailgun = false;
+            
             selectedGun--;
+
+            // Detects if current gun is Railgun
+            if (gunList[selectedGun].isRailgun)
+            {
+                gunList[selectedGun].isRailgun = true;
+            }
             changeGun();
         }
     }
@@ -471,5 +497,9 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(seconds);
         takeDamage(damage);
     }
+
+
+
+
 
 }

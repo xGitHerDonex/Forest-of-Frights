@@ -20,4 +20,9 @@ public class gunStats : ScriptableObject
     public ParticleSystem hitEffect;
     public ParticleSystem shootEffect;
     public AudioClip shotSound;
+
+    //Railgun Unique
+    [SerializeField] public bool isRailgun;
+    public GameObject RailBeam;
+    public float railgunBeamSpeed;
 }
