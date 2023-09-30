@@ -87,23 +87,23 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             if (Physics.Raycast(headPos.position, playerDirection, out hit))
             {
 
-                float distToPlayer = Vector3.Distance(headPos.postion, gameManager.instance.player.transform.position);
+                float distToPlayer = Vector3.Distance(headPos.position, gameManager.instance.player.transform.position);
                 Debug.Log(distToPlayer);
 
-                if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= 5)
+                if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
                 {
                     faceTarget();
                     StartCoroutine(Melee());
-                    agent.stoppingDistance = stoppingDistOriginal;
+                    //agent.stoppingDistance = stoppingDistOriginal;
 
 
                 }
 
-                else if (playerInRange)
+                else if (playerInRange && distToPlayer >= agent.stoppingDistance)
                 {
                     faceTarget();
                     agent.SetDestination(gameManager.instance.player.transform.position);
-                    agent.stoppingDistance = 0;
+                    //agent.stoppingDistance = 0;
 
 
                 }
