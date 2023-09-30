@@ -220,20 +220,16 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                 //Uncomment to check distance between enemy player
                 Debug.Log(distToPlayer);
 
-                int random = Random.Range(1, 100);
-                //Debug.Log(random);
-
-                if (!isShooting && playerInRange && random < 80  && distToPlayer >= rangedStoppingDistance && canSeePlayer())
+                if (!isAttacking && Random.Range(1, 100) < 100 && !isShooting && playerInRange && distToPlayer >= rangedStoppingDistance)
                 {
-                    //If we aren't shooting and we can see the player, then we'll shoot an energy ball
-                    faceTarget();
+                    canSeePlayer();
                     
-
                 }
 
                 else if (!isShooting && playerInRange)
                 {
                     agent.stoppingDistance = stoppingDistOriginal;
+                    agent.SetDestination(gameManager.instance.player.transform.position);
 
                     //If player within stopping distance, face target and attack if not already attacking
                     if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
@@ -253,9 +249,13 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                     {
                         isRunning = true;
                         faceTarget();
-                        agent.SetDestination(gameManager.instance.player.transform.position);
 
                     }
+                }
+
+                else
+                {
+                    anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), 0, Time.deltaTime * animeSpeedChange));
                 }
 
             }
@@ -270,11 +270,6 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         playerDirection = gameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
 
-        //will not compile in the release build
-//#if (UNITY_EDITOR)
-//        Debug.Log(angleToPlayer);
-//        Debug.DrawRay(headPos.position, playerDirection);
-//#endif
 
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDirection, out hit))
@@ -304,7 +299,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             }
         }
         //otherwise set the stopping distance to zero and return false
-        agent.stoppingDistance = 0;
+        agent.stoppingDistance = stoppingDistOriginal;
         return false;
     }
 
@@ -319,12 +314,18 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+       
     }
 
     IEnumerator shootDelayed()
     {
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        
         yield return new WaitForSeconds(shootDelay);
+        Instantiate(bullet, shootPos.position, transform.rotation);
+        
+
+        //after shooting, head to the player
+        agent.SetDestination(gameManager.instance.player.transform.position);
     }
     void playWalkSound()
         {
