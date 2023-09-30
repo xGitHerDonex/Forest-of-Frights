@@ -83,15 +83,14 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
             playerDirection = gameManager.instance.player.transform.position - headPos.position;
             angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
-
-
-           Debug.Log(angleToPlayer);
-           Debug.DrawRay(headPos.position, playerDirection);
-
-
+        
             if (Physics.Raycast(headPos.position, playerDirection, out hit))
             {
-                if (playerInRange && hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle)
+
+                float distToPlayer = Vector3.Distance(headPos.postion, gameManager.instance.player.transform.position);
+                Debug.Log(distToPlayer);
+
+                if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= 5)
                 {
                     faceTarget();
                     StartCoroutine(Melee());
