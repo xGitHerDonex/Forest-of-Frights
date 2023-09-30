@@ -93,7 +93,12 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                 if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
                 {
                     faceTarget();
-                    StartCoroutine(Melee());
+
+                    if(!isAttacking)
+                    {
+                        StartCoroutine(Melee());
+                    }
+                     
                     //agent.stoppingDistance = stoppingDistOriginal;
 
 

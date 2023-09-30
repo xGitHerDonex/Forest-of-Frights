@@ -379,13 +379,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2506079833647299735}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.1772906, y: 0.24269998, z: -0.17649817, w: 0.9372904}
-  m_LocalPosition: {x: -0.76539487, y: 0.06489445, z: -0.19561765}
+  m_LocalRotation: {x: -0.04063003, y: 0.30274844, z: 0.09634114, w: 0.9473178}
+  m_LocalPosition: {x: -0.7553526, y: 0.67266625, z: -0.6070829}
   m_LocalScale: {x: 1, y: 0.099999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6288098163237985544}
-  m_LocalEulerAnglesHint: {x: -14.281, y: 32.279, z: -25.481}
+  m_LocalEulerAnglesHint: {x: -7.777, y: 34.821, z: 9.172}
 --- !u!33 &7113659797386557089
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -455,10 +455,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.4570479
-  m_Height: 3.552377
+  m_Radius: 0.2661525
+  m_Height: 4.5291495
   m_Direction: 0
-  m_Center: {x: -1.2332946, y: 0.23096904, z: 0.5096788}
+  m_Center: {x: -1.7216765, y: 0.2309716, z: 0.3187841}
 --- !u!114 &1424961436715452777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -856,6 +856,7 @@ GameObject:
   - component: {fileID: 8587041567674221489}
   - component: {fileID: 2587998279081628705}
   - component: {fileID: 4187203221033357852}
+  - component: {fileID: 5501143709924130222}
   m_Layer: 0
   m_Name: Gorosaurus - Melee
   m_TagString: Untagged
@@ -968,6 +969,35 @@ CapsuleCollider:
   m_Height: 4.019265
   m_Direction: 1
   m_Center: {x: -0.11278163, y: 2.6133022, z: 0.3982253}
+--- !u!114 &5501143709924130222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475841303566922838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34aa55156fa98fd4e841c78dc586f798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1048108305573471109}
+  agent: {fileID: 8587041567674221489}
+  headPos: {fileID: 5448859452370394328}
+  anime: {fileID: 4851798479365476154}
+  hitBox: {fileID: 4187203221033357852}
+  targetFaceSpeed: 5
+  hp: 10
+  animeSpeedChange: 10
+  viewAngle: 0
+  leftMeleeCollider: {fileID: 7514048738341509592}
+  rightMeleeCollider: {fileID: 2506079833647299735}
+  meleeDelay: 2
+  meleeDamage: 1
+  audioSource: {fileID: 0}
+  walkSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!1 &3749673918236736755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,13 +1602,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7514048738341509592}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.24587137, y: -0.69408315, z: -0.27678493, w: 0.6174026}
-  m_LocalPosition: {x: -0.4327937, y: 0.5311736, z: 0.13525827}
+  m_LocalRotation: {x: 0.36265936, y: -0.6711347, z: -0.06219247, w: 0.64357483}
+  m_LocalPosition: {x: -0.69007295, y: 1.1686305, z: 0.19595417}
   m_LocalScale: {x: 1, y: 0.09999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2506467957334691565}
-  m_LocalEulerAnglesHint: {x: -4.624, y: -94.858, z: -43.261}
+  m_LocalEulerAnglesHint: {x: 22.539, y: -100.221, z: -37.859}
 --- !u!33 &78791919059303094
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1648,10 +1678,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.56530106
+  m_Radius: 0.17514654
   m_Height: 3.8472784
   m_Direction: 2
-  m_Center: {x: -0.01638156, y: -3.9798303, z: 1.5454452}
+  m_Center: {x: 0.373775, y: -3.979834, z: 1.5454453}
 --- !u!114 &2911324401571549251
 MonoBehaviour:
   m_ObjectHideFlags: 0
