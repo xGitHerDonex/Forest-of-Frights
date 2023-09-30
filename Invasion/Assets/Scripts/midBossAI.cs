@@ -74,8 +74,17 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     void Update()
     {
         float hpRatio = (hp / maxHp) * 100;
-        if (hpRatio >= 80)
+
+        //Selects stage for enemy AI based on Health Remaining
+
+        if (hpRatio >= 70)
             Stage1();
+
+        else if (hpRatio >= 30 && hpRatio <= 70)
+            Stage2();
+
+        else if (hpRatio >= 0 && hpRatio <= 30)
+            Stage3();
     }
 
 
@@ -146,8 +155,141 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         }
     }
 
+    void Stage2()
+    {
+        //If enemy is not dead, we'll continue
+        if (!isDead)
+        {
+            //Updates the animator and speed of the enemy to make the enemy appear running
+            if (!isRunning)
+            {
+                agentVel = agent.velocity.normalized.magnitude;
+                agent.speed = speedOrig;
+            }
 
-        void playWalkSound()
+            else if (isRunning)
+            {
+                agentVel = agent.velocity.normalized.magnitude + 1;
+                agent.speed = enemyRunSpeed;
+
+            }
+
+            //casts a ray on the player
+            RaycastHit hit;
+
+            //get's player's direction
+            playerDirection = gameManager.instance.player.transform.position - headPos.position;
+
+            //angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
+
+
+            //Casts a ray on the player
+            if (Physics.Raycast(headPos.position, playerDirection, out hit))
+            {
+
+                anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
+
+                //Gets distance to player
+                float distToPlayer = Vector3.Distance(headPos.position, gameManager.instance.player.transform.position);
+
+                //Uncomment to check distance between enemy player
+                //Debug.Log(distToPlayer);
+
+
+                //If player within stopping distance, face target and attack if not already attacking
+                if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
+                {
+                    isRunning = false;
+                    faceTarget();
+
+                    if (!isAttacking)
+                    {
+                        StartCoroutine(Melee());
+                    }
+
+                }
+
+                //if player is not wthin stopping distance, then set distination to the player
+                else if (playerInRange && distToPlayer >= agent.stoppingDistance)
+                {
+                    isRunning = true;
+                    faceTarget();
+                    agent.SetDestination(gameManager.instance.player.transform.position);
+
+                }
+            }
+
+        }
+    }
+
+    void Stage3()
+    {
+        //If enemy is not dead, we'll continue
+        if (!isDead)
+        {
+            //Updates the animator and speed of the enemy to make the enemy appear running
+            if (!isRunning)
+            {
+                agentVel = agent.velocity.normalized.magnitude;
+                agent.speed = speedOrig;
+            }
+
+            else if (isRunning)
+            {
+                agentVel = agent.velocity.normalized.magnitude + 1;
+                agent.speed = enemyRunSpeed;
+
+            }
+
+            //casts a ray on the player
+            RaycastHit hit;
+
+            //get's player's direction
+            playerDirection = gameManager.instance.player.transform.position - headPos.position;
+
+            //angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
+
+
+            //Casts a ray on the player
+            if (Physics.Raycast(headPos.position, playerDirection, out hit))
+            {
+
+                anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
+
+                //Gets distance to player
+                float distToPlayer = Vector3.Distance(headPos.position, gameManager.instance.player.transform.position);
+
+                //Uncomment to check distance between enemy player
+                //Debug.Log(distToPlayer);
+
+
+                //If player within stopping distance, face target and attack if not already attacking
+                if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
+                {
+                    isRunning = false;
+                    faceTarget();
+
+                    if (!isAttacking)
+                    {
+                        StartCoroutine(Melee());
+                    }
+
+                }
+
+                //if player is not wthin stopping distance, then set distination to the player
+                else if (playerInRange && distToPlayer >= agent.stoppingDistance)
+                {
+                    isRunning = true;
+                    faceTarget();
+                    agent.SetDestination(gameManager.instance.player.transform.position);
+
+                }
+            }
+
+        }
+    }
+
+    void playWalkSound()
         {
           if (audioSource != null && walkSound != null)
             {
