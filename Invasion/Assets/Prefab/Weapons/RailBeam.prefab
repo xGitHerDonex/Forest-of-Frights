@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5138929287913116691}
-  - component: {fileID: 6625098635581537753}
+  - component: {fileID: -2766807435550456728}
   - component: {fileID: 6484010664044366712}
   - component: {fileID: 952262185228485859}
   - component: {fileID: 342995798186698103}
@@ -36,7 +36,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6625098635581537753
+--- !u!114 &-2766807435550456728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,13 +45,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3280786448556084464}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6b4340b20db6b2479da8e598d03c956, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a1dbc8938989384fb3936318ee9dd7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6484010664044366712}
-  damage: 1
-  speed: 25
-  destroyTime: 3
+  damage: 3
+  speed: 8
+  destroyTime: 5
 --- !u!54 &6484010664044366712
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3280786448556084464}
   serializedVersion: 4
-  m_Mass: 1.5
+  m_Mass: 2.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
