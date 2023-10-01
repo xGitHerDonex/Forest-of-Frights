@@ -45,21 +45,18 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
 
     [Header("-----EnergyBall Components-----")]
-    [SerializeField] int rangeDelay;
-    [SerializeField] int viewAngle;
     [Tooltip("Object to Shoot")]
     [SerializeField] GameObject bullet;
-    [Tooltip("Used to delaying the projectile instantiation to match animation")]
-    [SerializeField] float shootDelay;
+    [Tooltip("Used to delay the projectile instantiation to match animation")]
     [SerializeField] float rangedStoppingDistance;
-
-
-    [Tooltip("Angle which the enemy can attack. (-)360-360")]
+    [SerializeField] int rangeDelay;
+    [Tooltip("Angle which the enemy can attack.")]
+    [SerializeField] int viewAngle;
     [Range(-360, 360)][SerializeField] int shootAngle;
 
-    [Tooltip("Rate enemy can attack between 0 and 10.")]
-    [Range(1, 10)][SerializeField] float shootRate;
-
+    [Tooltip("Rate enemy can attack")]
+    [Range(0, 10)][SerializeField] float shootRate;
+    [SerializeField] float shootDelay;
 
 
     [Header("SFX")]
@@ -67,7 +64,6 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip attackSound;
     [SerializeField] AudioClip deathSound;
-
 
     Vector3 pushBack;
     Vector3 playerDirection;
@@ -108,8 +104,6 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
         else if ( hpRatio <= 40)
             Stage2();
-
-
 
     }
 
@@ -191,8 +185,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             //Increases Melee Damage to double
             meleeDamage = meleeStage2Damage;
 
-            
-
+        
             //Updates the animator and speed of the enemy to make the enemy appear running
             if (!isRunning)
             {
