@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class playerController : MonoBehaviour, IDamage, IPhysics
 {
     [SerializeField] CharacterController controller;
@@ -34,6 +35,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int shootDistance;
     [SerializeField] AudioClip shotSound;
     // Railgun Unique
+    [SerializeField] GameObject Railgun;
     [SerializeField] GameObject Railbeam;
 
     [Header("-----Grenade Stats------")]
@@ -113,7 +115,14 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         if (!gameManager.instance.isPaused && Input.GetButton("time") && !isTimeSlowed && move.magnitude <= 0.4f)
             StartCoroutine(chronokinesis());
 
-
+        if (selectedGun >= 0 && selectedGun < gunList.Count && gunList[selectedGun].gunType == gunStats.GunType.Railgun)
+        {
+            if (!gameManager.instance.isPaused && Input.GetButton("Shoot") && !isShooting)
+            {
+                // Call the method to fire the Railgun.
+                FireRailgun();
+            }
+        }
 
         //Keeps Stamina Bar updated
         gameManager.instance.updateStamBar(Stamina / maxStamina);
@@ -249,12 +258,6 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         // Play the shoot sound
         audioSource.PlayOneShot(shotSound);
 
-        // If statement to simulate a chargetime of 2 seconds
-        if (gunList[selectedGun].isRailgun)
-        {
-            yield return new WaitForSeconds(2.0f);
-        }
-
         // Cast a ray and check for hits
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
@@ -264,22 +267,6 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             {
                 Instantiate(gunList[selectedGun].hitEffect, hit.point, gunList[selectedGun].hitEffect.transform.rotation);
                 damageable.takeDamage(shootDamage);
-            }
-        }
-
-        // Railgun shoot effect
-        if (gunList[selectedGun].isRailgun)
-        {
-            // Find the gunMuzzle within the currently selected gun's hierarchy
-            Transform gunMuzzle = gunList[selectedGun].model.transform.Find("gunMuzzle");
-
-            // Check if the gunMuzzle was found
-            if (gunMuzzle != null)
-            {
-                // Instantiate the projectile from the gunMuzzle's position and rotation
-                GameObject railBeam = Instantiate(gunList[selectedGun].projectile, gunMuzzle.position, gunMuzzle.rotation);
-                Rigidbody railBeamRb = railBeam.GetComponent<Rigidbody>();
-                railBeamRb.velocity = gunMuzzle.transform.forward * gunList[selectedGun].projectileSpeed;
             }
         }
 
@@ -299,6 +286,13 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         // gunModel rotation gets back to the original position
         gunModel.transform.localRotation = originalRotation;
+
+        // If the selected gun is a Railgun, fire the Railgun.
+        if (gunList[selectedGun].gunType == gunStats.GunType.Railgun)
+        {
+            // Implement Railgun-specific logic here.
+            FireRailgun();
+        }
 
         // Wait for the shoot rate cooldown
         yield return new WaitForSeconds(shootRate);
@@ -454,16 +448,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
         {
-            // Sets current gun to not-Railgun
-            gunList[selectedGun].isRailgun = false;
+
 
             selectedGun++;
 
-            // Detects if current gun is Railgun
-            if (gunList[selectedGun].isRailgun)
-            {
-                gunList[selectedGun].isRailgun = true;
-            }
+
 
 
             changeGun();
@@ -471,16 +460,10 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
         {
-            // Sets current gun to not-Railgun
-            gunList[selectedGun].isRailgun = false;
-            
+
+
             selectedGun--;
 
-            // Detects if current gun is Railgun
-            if (gunList[selectedGun].isRailgun)
-            {
-                gunList[selectedGun].isRailgun = true;
-            }
             changeGun();
         }
     }
@@ -509,8 +492,14 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         takeDamage(damage);
     }
 
-
-
-
-
+    void FireRailgun()
+    {
+        if (Railbeam != null)
+        {
+            Transform parentTransform = gunMuzzle.parent;
+            Vector3 spawnPosition = parentTransform.position;
+            Quaternion spawnRotation = parentTransform.rotation;
+            GameObject railbeamInstance = Instantiate(Railbeam, spawnPosition, spawnRotation);
+        }
+    }
 }
