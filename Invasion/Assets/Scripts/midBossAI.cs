@@ -39,6 +39,8 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int meleeDelay;
     [Tooltip("meleeDamage")]
     [SerializeField] int meleeDamage;
+    [SerializeField] int meleeStage2Damage;
+
 
     [Header("-----EnergyBall Components-----")]
     [SerializeField] int rangeDelay;
@@ -183,7 +185,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         if (!isDead)
         {
             //Increases Melee Damage to double
-            meleeDamage = meleeDamage * 2;
+            meleeDamage = meleeStage2Damage;
          
             //Updates the animator and speed of the enemy to make the enemy appear running
             if (!isRunning)
@@ -207,7 +209,6 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
             angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
 
-
             //Casts a ray on the player
             if (Physics.Raycast(headPos.position, playerDirection, out hit))
             {
@@ -222,43 +223,37 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
                 if (!isAttacking && Random.Range(1, 100) < 100 && !isShooting && playerInRange && distToPlayer >= rangedStoppingDistance)
                 {
-                    canSeePlayer();
-                    
+
+                    faceTarget();
+                    StartCoroutine(shoot());
                 }
 
-                else if (!isShooting && playerInRange)
+                //If player within stopping distance, face target and attack if not already attacking
+                else if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
                 {
                     agent.stoppingDistance = stoppingDistOriginal;
-                    agent.SetDestination(gameManager.instance.player.transform.position);
+                    isRunning = false;
+                    faceTarget();
 
-                    //If player within stopping distance, face target and attack if not already attacking
-                    if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
+                    if (!isAttacking)
                     {
-                        isRunning = false;
-                        faceTarget();
-
-                        if (!isAttacking)
-                        {
-                            StartCoroutine(Melee(Random.Range(2, 5)));
-                        }
-
+                        StartCoroutine(Melee(Random.Range(2, 5)));
                     }
 
-                    //if player is not wthin stopping distance, then set distination to the player
-                    else if (playerInRange && distToPlayer >= agent.stoppingDistance)
-                    {
-                        isRunning = true;
-                        faceTarget();
-
-                    }
                 }
 
-                else
+                //if player is not wthin stopping distance, then set distination to the player
+                else if (playerInRange && distToPlayer >= agent.stoppingDistance)
                 {
-                    anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), 0, Time.deltaTime * animeSpeedChange));
+                    agent.stoppingDistance = stoppingDistOriginal;
+                    isRunning = true;
+                    faceTarget();
+                    agent.SetDestination(gameManager.instance.player.transform.position);
                 }
+                }
+            
 
-            }
+      
 
         }
     }
@@ -314,6 +309,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+
        
     }
 
@@ -322,10 +318,10 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         
         yield return new WaitForSeconds(shootDelay);
         Instantiate(bullet, shootPos.position, transform.rotation);
-        
-
-        //after shooting, head to the player
         agent.SetDestination(gameManager.instance.player.transform.position);
+
+
+
     }
     void playWalkSound()
         {
