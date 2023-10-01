@@ -658,7 +658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6465794513971543620, guid: f2ca6668578279c40ae10c99219b5563, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 352.09
+      value: 330.5
       objectReference: {fileID: 0}
     - target: {fileID: 6465794513971543620, guid: f2ca6668578279c40ae10c99219b5563, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1429,7 +1429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2988124821043494311, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 353.82
+      value: 341.2
       objectReference: {fileID: 0}
     - target: {fileID: 2988124821043494311, guid: 364d0194e0ae0eb46b74ce96963cd3bd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3950,7 +3950,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 75
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3882150670834374861
 GameObject:
@@ -4465,10 +4465,11 @@ MonoBehaviour:
   anime: {fileID: 6085000955335388000}
   hitBox: {fileID: 3259662778580940358}
   targetFaceSpeed: 10
+  runningDistance: 10
   hp: 10
   maxHp: 10
   animeSpeedChange: 10
-  enemyRunSpeed: 7
+  enemyRunSpeed: 15
   leftMeleeCollider: {fileID: 9178347757069467010}
   rightMeleeCollider: {fileID: 3882150670834374861}
   meleeDelay: 2
@@ -4480,7 +4481,7 @@ MonoBehaviour:
   shootDelay: 0.35
   rangedStoppingDistance: 12
   shootAngle: 10
-  shootRate: 5
+  shootRate: 8
   audioSource: {fileID: 0}
   walkSound: {fileID: 0}
   attackSound: {fileID: 0}

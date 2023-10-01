@@ -6,7 +6,7 @@ public class grenade : MonoBehaviour
 {
     [SerializeField] Rigidbody rb;
     [SerializeField] int speed;
-    [SerializeField] int destroyTime;
+    [SerializeField] float destroyTime;
     [SerializeField] GameObject explosion;
 
     private void Start()

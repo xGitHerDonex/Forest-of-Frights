@@ -25,8 +25,8 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
 
     [Tooltip("Enemy health value between 1 and 100.")]
-    [Range(1, 100)][SerializeField] int hp;
-    [Range(1, 100)][SerializeField] int maxHp;
+    [Range(1, 300)][SerializeField] int hp;
+    [Range(1, 300)][SerializeField] int maxHp;
 
 
     [Tooltip("10 is the default value for all current speeds. Changing this without adjusting Enemy Speed and nav mesh speed will break it!!!!")]
@@ -101,15 +101,13 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     void Update()
     {
         hpRatio = (hp / maxHp) * 100;
-        //distToPlayer = Vector3.Distance(headPos.position, gameManager.instance.player.transform.position);
 
         //Selects stage for enemy AI based on Health Remaining
+        if (hpRatio >= 40)
+            Stage1();
 
-        //if (hpRatio >= 40)
-        //Stage1();
-
-        //else if ( hpRatio <= 40)
-        Stage2();
+        else if ( hpRatio <= 40)
+            Stage2();
 
 
 
@@ -145,11 +143,17 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             //Casts a ray on the player
             if (Physics.Raycast(headPos.position, playerDirection, out hit))
             {
-
+                agentVel = agent.velocity.normalized.magnitude;
                 anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
 
                 //Gets distance to player
                 distToPlayer = Vector3.Distance(headPos.position, gameManager.instance.player.transform.position);
+
+                if (distToPlayer >= runningDistance)
+                    isRunning = true;
+
+                else if (distToPlayer <= (runningDistance - 1))
+                    isRunning = false;
 
                 //Uncomment to check distance between enemy player
                 //Debug.Log(distToPlayer);
@@ -158,20 +162,18 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                 //If player within stopping distance, face target and attack if not already attacking
                 if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
                 {
-                    isRunning = false;
-                    faceTarget();
-
+                    
                     if (!isAttacking)
                     {
+                        faceTarget();
                         StartCoroutine(Melee(Random.Range(2,5)));
                     }
 
                 }
 
                 //if player is not wthin stopping distance, then set distination to the player
-                else if (playerInRange && distToPlayer >= agent.stoppingDistance)
+                else if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
                 {
-                    isRunning = true;
                     faceTarget();
                     agent.SetDestination(gameManager.instance.player.transform.position);
 
@@ -188,7 +190,9 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         {
             //Increases Melee Damage to double
             meleeDamage = meleeStage2Damage;
-         
+
+            
+
             //Updates the animator and speed of the enemy to make the enemy appear running
             if (!isRunning)
             {
@@ -211,10 +215,10 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
             angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
 
-            //Casts a ray on the player
+            // Runs if we cast a ray on the player
             if (Physics.Raycast(headPos.position, playerDirection, out hit))
             {
-
+                agentVel = agent.velocity.normalized.magnitude;
                 anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
 
                 //Gets distance to player
@@ -223,7 +227,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                 if (distToPlayer >= runningDistance)
                     isRunning = true;
 
-                else if (distToPlayer <= (runningDistance - 3))
+                else if (distToPlayer <= (runningDistance - 1))
                     isRunning = false;
 
                 //Uncomment to check distance between enemy player
@@ -254,12 +258,13 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
                     if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
                     {
-                        faceTarget();
+                        
 
                         if (!isAttacking && !isShooting)
                         {
                             agent.velocity = Vector3.zero;
                             agent.ResetPath();
+                            faceTarget();
                             StartCoroutine(Melee(Random.Range(2, 5)));
                         }
 
@@ -276,6 +281,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
                     else
                     {
+                        faceTarget();
                         agent.SetDestination(gameManager.instance.player.transform.position);
                     }
                 }
@@ -287,6 +293,8 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
       
 
         }
+
+   
     }
 
 
@@ -379,8 +387,8 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
         if (hp <= 0)
         {
-            isDead = true; //Will keep update method from running since Enemy is now dead
-            hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
+            isDead = true;           
+            hitBox.enabled = false;// turns off the hitbox so player isnt collided with the dead body
             agent.enabled = false;
             anime.SetBool("Death", true);
             playDeathSound();
@@ -412,7 +420,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     IEnumerator stopMoving()
     {
         agent.speed = 0;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.5f);
         agent.speed = speedOrig;
     }
 

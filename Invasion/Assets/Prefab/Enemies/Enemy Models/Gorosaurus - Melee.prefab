@@ -379,13 +379,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2506079833647299735}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.04063003, y: 0.30274844, z: 0.09634114, w: 0.9473178}
-  m_LocalPosition: {x: -0.7553526, y: 0.67266625, z: -0.6070829}
+  m_LocalRotation: {x: -0.036436815, y: 0.30182806, z: 0.22203664, w: 0.9264296}
+  m_LocalPosition: {x: -0.89065504, y: 1.0595257, z: -0.5966636}
   m_LocalScale: {x: 1, y: 0.099999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6288098163237985544}
-  m_LocalEulerAnglesHint: {x: -7.777, y: 34.821, z: 9.172}
+  m_LocalEulerAnglesHint: {x: -11.627, y: 33.672, z: 23.426}
 --- !u!33 &7113659797386557089
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -456,9 +456,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.2661525
-  m_Height: 4.5291495
+  m_Height: 4.849972
   m_Direction: 0
-  m_Center: {x: -1.7216765, y: 0.2309716, z: 0.3187841}
+  m_Center: {x: -1.8820877, y: 0.23097211, z: 0.31878456}
 --- !u!114 &1424961436715452777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,6 +576,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7062329422888661823}
+  - component: {fileID: 3835618646588224319}
+  - component: {fileID: 8625003637035484758}
   - component: {fileID: 4902560961021713213}
   m_Layer: 0
   m_Name: ShootPos
@@ -593,12 +595,62 @@ Transform:
   m_GameObject: {fileID: 2727888014333042129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.003, y: 3.643, z: 1.07}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalPosition: {x: -0.341, y: 1.302, z: 0.051}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6917411876341361058}
+  m_Father: {fileID: 5448859452370394328}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3835618646588224319
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2727888014333042129}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &8625003637035484758
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2727888014333042129}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &4902560961021713213
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -857,7 +909,7 @@ GameObject:
   - component: {fileID: 2587998279081628705}
   - component: {fileID: 4187203221033357852}
   - component: {fileID: 5501143709924130222}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gorosaurus - Melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -879,7 +931,7 @@ Transform:
   m_Children:
   - {fileID: 5077251557496205654}
   - {fileID: 3944764096808062196}
-  - {fileID: 7062329422888661823}
+  - {fileID: 1614735029964117273}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 226.464, z: 0}
 --- !u!95 &4851798479365476154
@@ -917,7 +969,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 7
+  m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -944,7 +996,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 30
+  m_Radius: 75
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &4187203221033357852
 CapsuleCollider:
@@ -984,20 +1036,84 @@ MonoBehaviour:
   model: {fileID: 1048108305573471109}
   agent: {fileID: 8587041567674221489}
   headPos: {fileID: 5448859452370394328}
+  shootPos: {fileID: 7062329422888661823}
   anime: {fileID: 4851798479365476154}
   hitBox: {fileID: 4187203221033357852}
-  targetFaceSpeed: 5
-  hp: 10
+  targetFaceSpeed: 6
+  runningDistance: 10
+  hp: 100
+  maxHp: 100
   animeSpeedChange: 10
-  viewAngle: 0
+  enemyRunSpeed: 20
   leftMeleeCollider: {fileID: 7514048738341509592}
   rightMeleeCollider: {fileID: 2506079833647299735}
-  meleeDelay: 2
-  meleeDamage: 1
+  meleeDelay: 1
+  meleeDamage: 20
+  meleeStage2Damage: 40
+  rangeDelay: 10
+  viewAngle: 60
+  bullet: {fileID: 6242495077864083463, guid: 7a37f8cd19b561f438b4bea1ccfc6163, type: 3}
+  shootDelay: 0.35
+  rangedStoppingDistance: 12
+  shootAngle: 10
+  shootRate: 8
   audioSource: {fileID: 0}
   walkSound: {fileID: 0}
   attackSound: {fileID: 0}
   deathSound: {fileID: 0}
+--- !u!1 &3493749412333920047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1614735029964117273}
+  - component: {fileID: 693233336177899504}
+  m_Layer: 0
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1614735029964117273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493749412333920047}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.003, y: 3.643, z: 1.07}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6917411876341361058}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &693233336177899504
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493749412333920047}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3749673918236736755
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,6 +1592,7 @@ Transform:
   - {fileID: 6610324474526574437}
   - {fileID: 4148606339358709284}
   - {fileID: 4784180101018940906}
+  - {fileID: 7062329422888661823}
   m_Father: {fileID: 4720580867387196530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7032093440080367879
@@ -1602,13 +1719,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7514048738341509592}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.36265936, y: -0.6711347, z: -0.06219247, w: 0.64357483}
-  m_LocalPosition: {x: -0.69007295, y: 1.1686305, z: 0.19595417}
+  m_LocalRotation: {x: 0.37898028, y: -0.74706364, z: -0.052518044, w: 0.54360986}
+  m_LocalPosition: {x: -0.7279027, y: 1.1016817, z: 0.60151035}
   m_LocalScale: {x: 1, y: 0.09999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2506467957334691565}
-  m_LocalEulerAnglesHint: {x: 22.539, y: -100.221, z: -37.859}
+  m_LocalEulerAnglesHint: {x: 19.485, y: -115.339, z: -41.393}
 --- !u!33 &78791919059303094
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1678,10 +1795,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.17514654
-  m_Height: 3.8472784
+  m_Radius: 0.25666746
+  m_Height: 4.3688574
   m_Direction: 2
-  m_Center: {x: 0.373775, y: -3.979834, z: 1.5454453}
+  m_Center: {x: -0.25491577, y: -8.008393, z: 1.8062373}
 --- !u!114 &2911324401571549251
 MonoBehaviour:
   m_ObjectHideFlags: 0
