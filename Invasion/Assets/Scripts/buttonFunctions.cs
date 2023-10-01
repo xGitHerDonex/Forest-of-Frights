@@ -41,6 +41,13 @@ public class buttonFunctions : MonoBehaviour
 
     }
 
+    public void inventoryScreen()
+    {
+        gameManager.instance.pause();
+
+
+    }
+
     ////Runs startGame in Game manager  [[Temporarily disabled for Prototype 2]]
     //public void begin()
     //{

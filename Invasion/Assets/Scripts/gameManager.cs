@@ -35,6 +35,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject winMenu;           // Win Menu
     //[SerializeField] GameObject startMenu;         // StartMenu
     [SerializeField] GameObject loseMenu;          // Lose Menu
+    [SerializeField] GameObject inventoryMenu;    // Inventory Menu
 
     [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
 
@@ -90,9 +91,15 @@ public class gameManager : MonoBehaviour
             currentMenu.SetActive(isPaused); // show menu
         }
 
+        if (Input.GetButtonDown("Inventory") && currentMenu == null) //if tab button is hit, and currentMenu is null
+        {
+            pause(); //Pause the game
+            currentMenu = inventoryMenu; // set current menu to pause menu
+            currentMenu.SetActive(isPaused); // show menu
+        }
+
 
     }
-
 
     //Pause State
     public void pause()
