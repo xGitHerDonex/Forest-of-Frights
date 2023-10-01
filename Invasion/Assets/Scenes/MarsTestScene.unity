@@ -648,6 +648,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 804942047876721532, guid: f2ca6668578279c40ae10c99219b5563, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6465794513971543620, guid: f2ca6668578279c40ae10c99219b5563, type: 3}
       propertyPath: m_LocalPosition.x
       value: 208.98
@@ -4465,6 +4469,7 @@ MonoBehaviour:
   anime: {fileID: 6085000955335388000}
   hitBox: {fileID: 3259662778580940358}
   targetFaceSpeed: 10
+  runningDistance: 0
   hp: 10
   maxHp: 10
   animeSpeedChange: 10
