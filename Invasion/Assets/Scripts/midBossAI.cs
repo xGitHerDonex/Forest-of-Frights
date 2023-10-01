@@ -146,7 +146,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                 if (distToPlayer >= runningDistance)
                     isRunning = true;
 
-                else if (distToPlayer <= (runningDistance - 1))
+                else if (distToPlayer <= (runningDistance - 2))
                     isRunning = false;
 
                 //Uncomment to check distance between enemy player
@@ -220,7 +220,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                 if (distToPlayer >= runningDistance)
                     isRunning = true;
 
-                else if (distToPlayer <= (runningDistance - 1))
+                else if (distToPlayer <= (runningDistance - 2))
                     isRunning = false;
 
                 //Uncomment to check distance between enemy player
@@ -228,7 +228,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
                    
                 //If we aren't shooting or attacking, the palyer is Range, and the distance to the player is greater than the ranged Stopping distance
-                if (!isAttacking && !isShooting && playerInRange && hit.collider.CompareTag("Player")  && distToPlayer >= rangedStoppingDistance && Random.Range(1,10) <=3)
+                if (!isAttacking && !isShooting && playerInRange && hit.collider.CompareTag("Player")  && distToPlayer >= rangedStoppingDistance && Random.Range(1,10) <=2)
                 {
                     //set the agent
                     agent.stoppingDistance = rangedStoppingDistance;

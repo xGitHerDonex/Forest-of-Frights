@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 911501259543377830}
   HP: 200
-  maxHP: 10
+  maxHP: 200
   maxStamina: 4
   Stamina: 0
   regenStamina: 0.75
@@ -60,7 +60,7 @@ MonoBehaviour:
   jumpHeight: 4
   originalPlayerSpeed: 0
   jumpsMax: 1
-  gravityValue: -3
+  gravityValue: -6
   pushBack: {x: 0, y: 0, z: 0}
   pushBackResolve: 3
   gunList: []
@@ -70,14 +70,16 @@ MonoBehaviour:
   shootDamage: 0
   shootDistance: 0
   shotSound: {fileID: 0}
+  Railgun: {fileID: 0}
+  Railbeam: {fileID: 0}
   grenade: {fileID: 8825613890474161169, guid: 802e9ea262efceb48ba432d2a5f9eedc, type: 3}
   throwRate: 1
   playerThrowForce: 2
   throwLift: 3
   throwPos: {fileID: 7226456012279697009}
   isTimeSlowed: 0
-  timeSlowInSeconds: 2
-  timeSlowScale: 0.2
+  timeSlowInSeconds: 1.5
+  timeSlowScale: 0.4
   playerSlowSpeed: 10
   lowHPWarnText: {fileID: 0}
   lowHealthWarnBG: {fileID: 0}
