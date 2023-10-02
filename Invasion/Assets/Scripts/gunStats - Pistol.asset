@@ -16,11 +16,12 @@ MonoBehaviour:
   shootDamage: 1
   recoilAmount: 5
   shootDist: 15
-  ammoCur: 15
-  ammoMax: 15
-  model: {fileID: 6543503376382921158, guid: 904cb8ecc489c6940861a81451aa9440, type: 3}
+  ammoCur: 0
+  ammoMax: 500
+  reloadAmount: 15
+  model: {fileID: 6543503376382921158, guid: 37ab374cd3612094fb78b759baf45c7e, type: 3}
   hitEffect: {fileID: 6550913939331660804, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
-  projectile: {fileID: 0}
+  projectile: {fileID: 3280786448556084464, guid: 05e7fe8eabf617440b53f7d4e5e51bfe, type: 3}
   shootEffect: {fileID: 2168293382324622435, guid: 516ed2fb7246a934e84961bdcef12fcf, type: 3}
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
   gunMuzzle: {fileID: 0}

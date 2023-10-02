@@ -54,6 +54,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [Header("-----UI Elements-----")]
     [SerializeField] private TextMeshProUGUI lowHPWarnText;
     [SerializeField] private GameObject lowHealthWarnBG;
+    [SerializeField] private TextMeshProUGUI ammoCurText;
+    [SerializeField] private TextMeshProUGUI ammoMaxText;
 
 
     [Header("-----SFX-----")]
@@ -67,6 +69,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     //Bools and others for functions
     private bool isShooting;
+    public AmmoType ammoType;
     private bool groundedPlayer;
     private bool canSprint = true;
     private bool isTakingDamage = false;
@@ -75,9 +78,17 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     private Vector3 playerVelocity;
     private Vector3 move;
     int selectedGun;
+    public enum AmmoType
+    {
+        PistolAmmo,
+        PulsarAmmo,
+        ShotgunAmmo,
+        RailgunAmmo,
+        RBFGAmmo
+    }
 
     // Ammo Management
-    private Dictionary<string, int> ammoInventory = new Dictionary<string, int>();
+    public Dictionary<string, int> ammoInventory = new Dictionary<string, int>();
 
 
 
@@ -243,32 +254,38 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Shoot Ability:  Currently instant projectile speed
     IEnumerator shoot()
     {
-       
-            if (isShooting || gunList.Count == 0 || gameManager.instance.isPaused)
+
+        if (isShooting || gunList.Count == 0 || gameManager.instance.isPaused)
             yield break;
 
-            if (gunList[selectedGun].ammoCur > 0)
+        if (gunList[selectedGun].ammoCur > 0)
         {
             isShooting = true;
             gunList[selectedGun].ammoCur--;
+
+            // Update HUD Ammo 
+            ammoCurText.text = gunList[selectedGun].ammoCur.ToString();
         }
         else
         {
-            if (Input.GetButton("Reload"))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 // Get the gunName as listed in gunStats
                 string gunType = gunList[selectedGun].gunName;
 
-                if (gunList[selectedGun].ammoMax - gunList[selectedGun].ammoCur > 0)
+                if (gunList[selectedGun].reloadAmount - gunList[selectedGun].ammoCur > 0)
                 {
                     // Calculate how much ammo can be reloaded
-                    int ammoToReload = Mathf.Min(gunList[selectedGun].ammoMax - gunList[selectedGun].ammoCur, ammoInventory[gunType]);
+                    int ammoToReload = Mathf.Min(gunList[selectedGun].reloadAmount - gunList[selectedGun].ammoCur, ammoInventory[gunType]);
 
                     // Deduct the reloaded ammo from the player's inventory
                     ammoInventory[gunType] -= ammoToReload;
 
                     // Update the current ammo count
                     gunList[selectedGun].ammoCur += ammoToReload;
+
+                    // Update HUD ammo after Reloading
+                    ammoUpdate();
                 }
             }
 
@@ -299,7 +316,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         Vector3 recoilForce = new Vector3(-recoilAmount, 0f, 0f);
         gunModel.transform.localEulerAngles += recoilForce;
-        
+
         // Smoothly return the gunModel to its original rotation
         float elapsedTime = 0f;
         // returnDuration time can be adjusted for smoothness
@@ -315,7 +332,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         gunModel.transform.localRotation = originalRotation;
 
         yield return new WaitForSeconds(gunList[selectedGun].shootRate);
-      
+
         isShooting = false;
 
     }
@@ -353,7 +370,6 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         playerSpeed = originalPlayerSpeed;
         isTimeSlowed = false;
 
-
     }
 
 
@@ -364,6 +380,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //slow time and increase player speed
 
     }
+    
     //Heal Ability:  Currently through the pause menu, until medkits are implemented
     public void giveHP(int amount)
     {
@@ -468,23 +485,16 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
         {
-
-
             selectedGun++;
-
-
-
-
             changeGun();
+            ammoUpdate();
         }
 
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
         {
-
-
             selectedGun--;
-
             changeGun();
+            ammoUpdate();
         }
     }
 
@@ -497,6 +507,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<Renderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<Renderer>().sharedMaterial;
+        ammoUpdate();
     }
 
     //method made for delaying damage for physics
@@ -513,17 +524,23 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     }
 
     // Ammo Collection for weapons
-    public void AddAmmo(string ammoType, int amount)
+    public void AddAmmo(AmmoType ammoType, int amount)
     {
-        if (ammoInventory.ContainsKey(ammoType))
+        string ammoTypeName = ammoType.ToString();
+
+        if (ammoInventory.ContainsKey(ammoTypeName))
         {
-            ammoInventory[ammoType] += amount;
+            ammoInventory[ammoTypeName] += amount;
         }
         else
         {
-            
-            ammoInventory[ammoType] = amount;
-            
+            ammoInventory[ammoTypeName] = amount;
         }
+    }
+    // Small convenience to update ammo to HUD
+    public void ammoUpdate()
+    {
+        ammoCurText.text = gunList[selectedGun].ammoCur.ToString();
+        ammoMaxText.text = gunList[selectedGun].ammoMax.ToString();
     }
 }
