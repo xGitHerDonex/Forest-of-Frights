@@ -12,17 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f55067f889c796a41b58d6ce26ea1d08, type: 3}
   m_Name: gunStats - Pistol
   m_EditorClassIdentifier: 
-  shootRate: 0.05
+  shootRate: 0.33
   shootDamage: 1
   recoilAmount: 5
   shootDist: 15
-  ammoCur: 20
-  ammoMax: 20
+  ammoCur: 15
+  ammoMax: 15
   model: {fileID: 6543503376382921158, guid: 904cb8ecc489c6940861a81451aa9440, type: 3}
   hitEffect: {fileID: 6550913939331660804, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
+  projectile: {fileID: 0}
   shootEffect: {fileID: 2168293382324622435, guid: 516ed2fb7246a934e84961bdcef12fcf, type: 3}
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
   gunMuzzle: {fileID: 0}
-  isRailgun: 0
-  projectile: {fileID: 0}
-  projectileSpeed: 0
+  gunName: Pistol

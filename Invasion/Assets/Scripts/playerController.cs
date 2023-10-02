@@ -76,6 +76,10 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     private Vector3 move;
     int selectedGun;
 
+    // Ammo Management
+    private Dictionary<string, int> ammoInventory = new Dictionary<string, int>();
+
+
 
     private void Start()
     {
@@ -83,9 +87,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         HP = maxHP;
         Stamina = maxStamina;
         spawnPlayer();
-
         //Sets player speed
         originalPlayerSpeed = playerSpeed;
+
+        // Creates the total ammo capacity for weapons
+        ammoInventory["Pistol Ammo"] = 100;
+        ammoInventory["Railgun Ammo"] = 30;
 
     }
 
@@ -114,15 +121,6 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //Throw grenade - works similar to shoot    
         if (!gameManager.instance.isPaused && Input.GetButton("time") && !isTimeSlowed && move.magnitude <= 0.4f)
             StartCoroutine(chronokinesis());
-
-        if (selectedGun >= 0 && selectedGun < gunList.Count && gunList[selectedGun].gunType == gunStats.GunType.Railgun)
-        {
-            if (!gameManager.instance.isPaused && Input.GetButton("Shoot") && !isShooting)
-            {
-                // Call the method to fire the Railgun.
-                FireRailgun();
-            }
-        }
 
         //Keeps Stamina Bar updated
         gameManager.instance.updateStamBar(Stamina / maxStamina);
@@ -245,9 +243,38 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Shoot Ability:  Currently instant projectile speed
     IEnumerator shoot()
     {
-        if (isShooting || gunList.Count == 0 || gameManager.instance.isPaused)
+       
+            if (isShooting || gunList.Count == 0 || gameManager.instance.isPaused)
             yield break;
-        isShooting = true;
+
+            if (gunList[selectedGun].ammoCur > 0)
+        {
+            isShooting = true;
+            gunList[selectedGun].ammoCur--;
+        }
+        else
+        {
+            if (Input.GetButton("Reload"))
+            {
+                // Get the gunName as listed in gunStats
+                string gunType = gunList[selectedGun].gunName;
+
+                if (gunList[selectedGun].ammoMax - gunList[selectedGun].ammoCur > 0)
+                {
+                    // Calculate how much ammo can be reloaded
+                    int ammoToReload = Mathf.Min(gunList[selectedGun].ammoMax - gunList[selectedGun].ammoCur, ammoInventory[gunType]);
+
+                    // Deduct the reloaded ammo from the player's inventory
+                    ammoInventory[gunType] -= ammoToReload;
+
+                    // Update the current ammo count
+                    gunList[selectedGun].ammoCur += ammoToReload;
+                }
+            }
+
+            isShooting = false;
+            yield break;
+        }
 
         // Talk to gunStats to grab the current gun's Recoil
         float recoilAmount = gunList[selectedGun].recoilAmount;
@@ -272,11 +299,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         Vector3 recoilForce = new Vector3(-recoilAmount, 0f, 0f);
         gunModel.transform.localEulerAngles += recoilForce;
-
+        
         // Smoothly return the gunModel to its original rotation
         float elapsedTime = 0f;
         // returnDuration time can be adjusted for smoothness
-        float returnDuration = 0.6f;
+        float returnDuration = 0.09f;
         while (elapsedTime < returnDuration)
         {
             gunModel.transform.localRotation = Quaternion.Lerp(gunModel.transform.localRotation, originalRotation, elapsedTime / returnDuration);
@@ -287,17 +314,10 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         // gunModel rotation gets back to the original position
         gunModel.transform.localRotation = originalRotation;
 
-        // If the selected gun is a Railgun, fire the Railgun.
-        if (gunList[selectedGun].gunType == gunStats.GunType.Railgun)
-        {
-            // Implement Railgun-specific logic here.
-            FireRailgun();
-        }
-
-        // Wait for the shoot rate cooldown
-        yield return new WaitForSeconds(shootRate);
-
+        yield return new WaitForSeconds(gunList[selectedGun].shootRate);
+      
         isShooting = false;
+
     }
 
     //Throw Grenade: will throw a grenade based on the throwforce and lift provided. 
@@ -492,14 +512,18 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         takeDamage(damage);
     }
 
-    void FireRailgun()
+    // Ammo Collection for weapons
+    public void AddAmmo(string ammoType, int amount)
     {
-        if (Railbeam != null)
+        if (ammoInventory.ContainsKey(ammoType))
         {
-            Transform parentTransform = gunMuzzle.parent;
-            Vector3 spawnPosition = parentTransform.position;
-            Quaternion spawnRotation = parentTransform.rotation;
-            GameObject railbeamInstance = Instantiate(Railbeam, spawnPosition, spawnRotation);
+            ammoInventory[ammoType] += amount;
+        }
+        else
+        {
+            
+            ammoInventory[ammoType] = amount;
+            
         }
     }
 }
