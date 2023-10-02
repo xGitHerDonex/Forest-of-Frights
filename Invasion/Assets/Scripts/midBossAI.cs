@@ -47,9 +47,16 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     [Header("-----EnergyBall Components-----")]
     [Tooltip("Object to Shoot")]
     [SerializeField] GameObject bullet;
-    [Tooltip("Used to delay the projectile instantiation to match animation")]
+
+    [Tooltip("Sets the ranged stopping distance (updates on range attacks)")]
     [SerializeField] float rangedStoppingDistance;
+
+    [Tooltip("Max Distance enemy cans hoot energy balls")]
+    [SerializeField] int maxShootingRange;
+
+    [Tooltip("Used to delay the projectile instantiation to match animation")]
     [SerializeField] int rangeDelay;
+
     [Tooltip("Angle which the enemy can attack.")]
     [SerializeField] int viewAngle;
     [Range(-360, 360)][SerializeField] int shootAngle;
@@ -85,10 +92,10 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     void Start()
     {
         speedOrig = agent.speed; // gives the agent speed to the float original speed for later on. 
-        startingPos = transform.position;
-        stoppingDistOriginal = agent.stoppingDistance;
-        hp = maxHp;
-        isDead = false;
+        startingPos = transform.position; //saves starting pos
+        stoppingDistOriginal = agent.stoppingDistance; // saves original stopping distance
+        hp = maxHp; // sets hp
+        isDead = false; // set's alive status
 
     }
 
@@ -96,14 +103,18 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        hpRatio = (hp / maxHp) * 100;
+
 
         //Selects stage for enemy AI based on Health Remaining
-        if (hpRatio >= 40)
+        if (hp >= (0.4 * maxHp))
+        {
             Stage1();
+        }
 
-        else if ( hpRatio <= 40)
+        else
+        {
             Stage2();
+        }
 
     }
 
@@ -112,20 +123,9 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     {
         //If enemy is not dead, we'll continue
         if (!isDead)
-        {     
-            //Updates the animator and speed of the enemy to make the enemy appear running
-            if (!isRunning)
-            {
-                agentVel = agent.velocity.normalized.magnitude;
-                agent.speed = speedOrig;
-            }
-
-            else if (isRunning)
-            {
-                agentVel = agent.velocity.normalized.magnitude + 1;
-                agent.speed = enemyRunSpeed;
-
-            }
+        {
+            //Continually determines enemy speed and run / walk animations
+            updateRunningSpeed();
 
             //casts a ray on the player
             RaycastHit hit;
@@ -143,31 +143,24 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                 //Gets distance to player
                 distToPlayer = Vector3.Distance(headPos.position, gameManager.instance.player.transform.position);
 
-                if (distToPlayer >= runningDistance)
-                    isRunning = true;
-
-                else if (distToPlayer <= (runningDistance - 2))
-                    isRunning = false;
-
-                //Uncomment to check distance between enemy player
-                //Debug.Log(distToPlayer);
-
 
                 //If player within stopping distance, face target and attack if not already attacking
-                if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
+                if (!isAttacking && !isShooting && playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
                 {
                     
-                    if (!isAttacking)
-                    {
+                        agent.velocity = Vector3.zero;
+                        agent.ResetPath();
                         faceTarget();
-                        StartCoroutine(Melee(Random.Range(2,5)));
-                    }
 
+                        if (!isRunning)
+                            StartCoroutine(Melee(Random.Range(2,5)));
+                   
                 }
 
                 //if player is not wthin stopping distance, then set distination to the player
                 else if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
                 {
+
                     faceTarget();
                     agent.SetDestination(gameManager.instance.player.transform.position);
 
@@ -185,20 +178,9 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             //Increases Melee Damage to double
             meleeDamage = meleeStage2Damage;
 
-        
-            //Updates the animator and speed of the enemy to make the enemy appear running
-            if (!isRunning)
-            {
-                agentVel = agent.velocity.normalized.magnitude;
-                agent.speed = speedOrig;
-            }
+            //Continually determines enemy speed and run / walk animations
+            updateRunningSpeed();
 
-            else if (isRunning)
-            {
-                agentVel = agent.velocity.normalized.magnitude + 1;
-                agent.speed = enemyRunSpeed;
-
-            }
 
             //casts a ray on the player
             RaycastHit hit;
@@ -217,18 +199,13 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                 //Gets distance to player
                 distToPlayer = Vector3.Distance(headPos.position, gameManager.instance.player.transform.position);
 
-                if (distToPlayer >= runningDistance)
-                    isRunning = true;
-
-                else if (distToPlayer <= (runningDistance - 2))
-                    isRunning = false;
-
+             
                 //Uncomment to check distance between enemy player
                 Debug.Log(distToPlayer);
 
                    
-                //If we aren't shooting or attacking, the palyer is Range, and the distance to the player is greater than the ranged Stopping distance
-                if (!isAttacking && !isShooting && playerInRange && hit.collider.CompareTag("Player")  && distToPlayer >= rangedStoppingDistance && Random.Range(1,10) <=2)
+                //If we aren't shooting or attacking, the player is Range, and the distance to the player is greater than the ranged Stopping distance
+                if (!isAttacking && !isShooting && playerInRange && hit.collider.CompareTag("Player")  && distToPlayer >= rangedStoppingDistance && distToPlayer <= maxShootingRange)
                 {
                     //set the agent
                     agent.stoppingDistance = rangedStoppingDistance;
@@ -244,29 +221,30 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                     }
                 }
 
+
+                //Otherwise we try to reach the player and do a melee combo
                 else
                 {
                     agent.stoppingDistance = stoppingDistOriginal;
 
 
-                    if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
-                    {
-                        
-
-                        if (!isAttacking && !isShooting)
-                        {
+                    if (!isAttacking && !isShooting && playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
+                    {                     
                             agent.velocity = Vector3.zero;
                             agent.ResetPath();
                             faceTarget();
-                            StartCoroutine(Melee(Random.Range(2, 5)));
-                        }
+
+                            if (!isRunning)
+                                StartCoroutine(Melee(Random.Range(2, 5)));
+  
 
                     }
 
                     //if player is not wthin stopping distance, then set distination to the player
                     else if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
                     {
-                                             
+
+                                           
                         faceTarget();
                         if (!isAttacking)
                             agent.SetDestination(gameManager.instance.player.transform.position);
@@ -274,6 +252,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
                     else
                     {
+
                         faceTarget();
                         agent.SetDestination(gameManager.instance.player.transform.position);
                     }
@@ -290,44 +269,24 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
    
     }
 
-
-    bool canSeePlayer()
+    //Update's speed parameter if target is running
+    void updateRunningSpeed()
     {
-
-        playerDirection = gameManager.instance.player.transform.position - headPos.position;
-        angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
-
-
-        RaycastHit hit;
-        if (Physics.Raycast(headPos.position, playerDirection, out hit))
+        //If player is farther than the running distance set, then we update the animator to reflect the run speed and the enemy runs faster.
+        if (distToPlayer >= runningDistance)
         {
-            /*
-             * if the ray cast hits an object and its the player and the angle to the player is less than
-             * or equal to the preset viewing angle then tell the enemy to set the target destination to the player
-             */
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle)
-            {
-                agent.stoppingDistance = rangedStoppingDistance;
-                //agent.SetDestination(transform.position);
-                /*
-                 * if the remaining distance is less than or equal to the stopping  distance of the enemy
-                 * face the target and prepare to shoot if the angle is within parameter and the enemy is not already shooting
-                 * if these are true then start to shoot
-                 */
-                if (agent.remainingDistance <= agent.stoppingDistance)
-                {
-                    faceTarget();
-                    if (!isShooting && angleToPlayer <= shootAngle)
-                    {
-                        StartCoroutine(shoot());
-                    }
-                }
-                return true;
-            }
+            isRunning = true;
+            agentVel = agent.velocity.normalized.magnitude + 1;
+            agent.speed = enemyRunSpeed;
         }
-        //otherwise set the stopping distance to zero and return false
-        agent.stoppingDistance = stoppingDistOriginal;
-        return false;
+
+        // If player is within the running -2 (to give the effect of them running up on the player), then we stop running and speed is set back to it's original
+        else if (distToPlayer <= (runningDistance - 2))
+        {
+            isRunning = false;
+            agentVel = agent.velocity.normalized.magnitude;
+            agent.speed = speedOrig;
+        }
     }
 
     IEnumerator shoot()
@@ -363,7 +322,6 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                 audioSource.Play();
             }
         }
-
 
     /*
         * if the enemy takes damage requires an amount for the damage in a whole number
@@ -409,14 +367,12 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         }
     }
 
-
     IEnumerator stopMoving()
     {
         agent.speed = 0;
         yield return new WaitForSeconds(.5f);
         agent.speed = speedOrig;
     }
-
 
     //changes the material color from the original material to a red color for .1 seconds
     //the changes the color back to its original white state.
@@ -427,7 +383,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         model.material.color = Color.white;
     }
 
-
+    //Melee Routine that will generate a number at random to determine attack sequence.
     IEnumerator Melee(int combo)
     {
         isAttacking = true;
@@ -450,8 +406,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         rightMeleeCollider.SetActive(false);
     }
 
-        
-   
+
     //Allows the attached sound for Attack Sound to be played
     void playAttackSound()
         {
@@ -471,6 +426,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * targetFaceSpeed);
     }
 
+    //Updates physics
     public void physics(Vector3 dir)
     {
         agent.velocity += dir / 3;
