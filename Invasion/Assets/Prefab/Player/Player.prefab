@@ -60,7 +60,7 @@ MonoBehaviour:
   jumpHeight: 4
   originalPlayerSpeed: 0
   jumpsMax: 1
-  gravityValue: -6
+  gravityValue: -8
   pushBack: {x: 0, y: 0, z: 0}
   pushBackResolve: 3
   gunList: []
@@ -71,7 +71,7 @@ MonoBehaviour:
   shootDistance: 0
   shotSound: {fileID: 0}
   Railgun: {fileID: 0}
-  Railbeam: {fileID: 0}
+  Railbeam: {fileID: 3280786448556084464, guid: 05e7fe8eabf617440b53f7d4e5e51bfe, type: 3}
   grenade: {fileID: 8825613890474161169, guid: 802e9ea262efceb48ba432d2a5f9eedc, type: 3}
   throwRate: 1
   playerThrowForce: 2
@@ -83,11 +83,14 @@ MonoBehaviour:
   playerSlowSpeed: 10
   lowHPWarnText: {fileID: 0}
   lowHealthWarnBG: {fileID: 0}
+  ammoCurText: {fileID: 0}
+  ammoMaxText: {fileID: 0}
   audioSource: {fileID: 1336561404949693363}
   playerInjured: {fileID: 8300000, guid: 4c5ffcdd319042140a80e6bd311e2ece, type: 3}
   playerWalksGrass: {fileID: 8300000, guid: 18e761ff5ef14fd4588d9283fcc9b829, type: 3}
   playerRunsGrass: {fileID: 8300000, guid: 1d7e7e6569aab5a45a837f470eaddc8b, type: 3}
   playerJumpsGrass: {fileID: 8300000, guid: a967f92e38352bb4291945423de63499, type: 3}
+  ammoType: 0
 --- !u!143 &911501259543377830
 CharacterController:
   m_ObjectHideFlags: 0
@@ -183,10 +186,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.78960276
-  m_Height: 2.126511
+  m_Radius: 0.5281157
+  m_Height: 2.0171962
   m_Direction: 1
-  m_Center: {x: -0.02931869, y: 0.06325555, z: 0.050159276}
+  m_Center: {x: -0.020243347, y: 0.008598119, z: 0.028735757}
 --- !u!82 &1336561404949693363
 AudioSource:
   m_ObjectHideFlags: 0
@@ -299,7 +302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6298777604644766954
 Transform:
   m_ObjectHideFlags: 0

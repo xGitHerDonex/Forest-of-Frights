@@ -49,6 +49,10 @@ public class gameManager : MonoBehaviour
     [Range(1, 5)] public int explosionDamage;
 
 
+    [SerializeField] GameObject[] waypoints;
+    [SerializeField] float waypointDist;
+    [SerializeField] float closestWaypointDist;
+
     //Initializes before Application Runs
     void Awake()
     {
@@ -74,12 +78,7 @@ public class gameManager : MonoBehaviour
         enemiesRemaining = enemiesKilledWinCond;
         enemiesRemainingText.text = enemiesRemaining.ToString("0");
 
-        //isPaused = false;
-        //pause();
-
-        //currentMenu = startMenu;
-        //currentMenu.SetActive(true);
-        
+   
     }
 
     void Update()
@@ -100,6 +99,8 @@ public class gameManager : MonoBehaviour
 
 
     }
+
+
 
     //Pause State
     public void pause()
@@ -187,26 +188,4 @@ public class gameManager : MonoBehaviour
     }
 
 
-   // [[Temporarily disabled for prototype 2]]
-   //public void beginGame()
-   // {
-   //     //hide start menu
-   //     currentMenu = startMenu;
-   //     currentMenu.SetActive(false);
-
-   //     //enable ui
-   //     reticle.SetActive(true);
-   //     playerHp.SetActive(true);
-   //     playerStam.SetActive(true);
-   //     enemiesRemainingUI.SetActive(true);
-
-   //     //Set's the enemies remaining to the win condition
-   //     enemiesRemaining = enemiesKilledWinCond;
-   //     enemiesRemainingText.text = enemiesRemaining.ToString("0");
-
-   //     //unpause the game
-   //     unPause();
-
-              
-   // }
 }

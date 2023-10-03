@@ -322,13 +322,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             }
         }
 
-    /*
-        * if the enemy takes damage requires an amount for the damage in a whole number
-        * then subtracts the amount of damage from that whole number
-        * the call the sub routine to run at the same time to make the enemy feedback show (flashing damage indicator)
-        * also if the health is less than or equal to 0 destroy this enemy
-        * 
-        */
+    //Runs damage on enemy, includes logic on death.
     public void takeDamage(int amount)
     {
         hp -= amount;

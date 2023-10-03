@@ -67,6 +67,13 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip playerJumpsGrass;
 
 
+    //Waypoints - Used by Enemy Boss Scripts as needed.
+    [SerializeField] GameObject[] waypoints;
+    [SerializeField] float waypointDist;
+    [SerializeField] float closestWaypointDist;
+    [SerializeField] GameObject closestWaypoint;
+
+
     //Bools and others for functions
     private bool isShooting;
     public AmmoType ammoType;
@@ -94,6 +101,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     private void Start()
     {
+      
         //set up for respawn
         HP = maxHP;
         Stamina = maxStamina;
@@ -104,6 +112,10 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         // Creates the total ammo capacity for weapons
         ammoInventory["Pistol Ammo"] = 100;
         ammoInventory["Railgun Ammo"] = 30;
+
+        //Create Ground Waypoint Matrix
+        waypoints = GameObject.FindGameObjectsWithTag("GNDWP");
+
 
     }
 
@@ -543,4 +555,31 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         ammoCurText.text = gunList[selectedGun].ammoCur.ToString();
         ammoMaxText.text = gunList[selectedGun].ammoMax.ToString();
     }
+
+    //public method that will return the ground waypoint closest to the player
+    public GameObject getClosestGroundWaypoint()
+    {
+        GameObject closestWaypoint = null;
+        closestWaypointDist = 3000f;
+
+        //iterates through the list to find the distances
+        foreach( GameObject waypoint in waypoints)
+        {
+            //calculates distance
+            waypointDist = Vector3.Distance(transform.position, waypoint.transform.position);
+
+
+            //updates closest waypoint
+            if (waypointDist < closestWaypointDist)
+            {
+                closestWaypointDist = waypointDist;
+                closestWaypoint = waypoint;
+            }
+
+        }
+
+        //returns the waypoint
+        return closestWaypoint;
+    }
+
 }
