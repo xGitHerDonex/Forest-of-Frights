@@ -338,8 +338,9 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
         if (hp <= 0)
         {
-            isDead = true;           
+            isDead = true;         
             hitBox.enabled = false;// turns off the hitbox so player isnt collided with the dead body
+            agent.velocity = Vector3.zero;
             agent.enabled = false;
             anime.SetBool("Death", true);
             playDeathSound();
