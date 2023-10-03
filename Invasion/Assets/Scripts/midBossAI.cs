@@ -23,7 +23,6 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int runningDistance;
 
 
-
     [Tooltip("Enemy health value between 1 and 100.")]
     [Range(1, 300)][SerializeField] int hp;
     [Range(1, 300)][SerializeField] int maxHp;
