@@ -18,6 +18,9 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Animator anime;
     [SerializeField] Collider hitBox;
     [SerializeField] Rigidbody rb;
+    [SerializeField] GameObject groundCheck;
+    [SerializeField] Transform DemonLord;
+  
 
     [Header("-----Enemy Stats-----")]
 
@@ -81,11 +84,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip attackSound;
     [SerializeField] AudioClip deathSound;
 
-    Vector3 pushBack;
-    Vector3 playerDirection;
-    Vector3 startingPos;
-    float stoppingDistOriginal;
-    float speedOrig;
+    //player or enemy
     float agentVel;
     float hpRatio;
     float distToPlayer;
@@ -93,10 +92,22 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     bool isAttacking;
     bool isDead;
     bool playerInRange;
-    bool isMoving;
-    bool isRunning;
-    bool isShooting;
     playerController playerScript;
+
+    //movement
+    [SerializeField] bool isLanding;
+    [SerializeField] bool isMoving;
+    [SerializeField] bool isRunning;
+    [SerializeField] bool isShooting;
+    [SerializeField] bool isGrounded;
+    [SerializeField] bool isFlying;
+    [SerializeField] bool reachedTarget;
+    [SerializeField] bool FlyTriggered;
+    float stoppingDistOriginal;
+    Vector3 pushBack;
+    Vector3 playerDirection;
+    Vector3 startingPos;
+    float speedOrig;
 
 
 
@@ -108,7 +119,13 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         //Get's Player Script so we can check the closest waypoint
         playerScript = gameManager.instance.player.GetComponent<playerController>();
         origFlightSpeed = flightSpeed;
+        isDead = false;
+        isAttacking = false;
+        isGrounded = true;
+        isFlying = false;
         isMoving = false;
+        FlyTriggered = false;
+
     }
 
     
@@ -119,13 +136,78 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         //Continually checks to see if Enemy is flying, and updates animation
         setFlightAnimation();
 
-        flyToTarget();
-   
+        if (FlyTriggered &&!reachedTarget && isFlying)
+        {
+            flyToTarget();
+        }
+
+        else if (reachedTarget && isLanding)
+        {
+            StartCoroutine(land());
+        }
+
+        Stage1();
         
 
-        
+        //else
+        //{
+        //    Stage1();
+        //}
+
+
+
     }
 
+    void Stage1()
+    {
+        //If enemy is not dead, we'll continue
+        if (!isDead)
+        {
+            //Continually determines enemy speed and run / walk animations
+            //updateRunningSpeed();
+
+            //casts a ray on the player
+            RaycastHit hit;
+
+            //get's player's direction
+            playerDirection = gameManager.instance.player.transform.position - headPos.position;
+
+
+            //Casts a ray on the player
+            if (Physics.Raycast(headPos.position, playerDirection, out hit))
+            {
+                agentVel = agent.velocity.normalized.magnitude;
+                anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
+
+                //Gets distance to player
+                distToPlayer = Vector3.Distance(headPos.position, gameManager.instance.player.transform.position);
+
+
+                //If player within stopping distance, face target and attack if not already attacking
+                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
+                {
+
+                    agent.velocity = Vector3.zero;
+                    agent.ResetPath();
+                    faceTarget();
+
+                    if (!isRunning)
+                        StartCoroutine(Melee(Random.Range(2, 5)));
+
+                }
+
+                //if player is not wthin stopping distance, then set distination to the player
+                else if (hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
+                {
+
+                    faceTarget();
+                    agent.SetDestination(gameManager.instance.player.transform.position);
+
+                }
+            }
+
+        }
+    }
 
     //Heads to specified Target
     IEnumerator headToTarget(GameObject target)
@@ -144,33 +226,71 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     //Flys to Closest Ground Waypoint, when called
     void flyToTarget()
     {
-        waypoint = playerScript.getClosestGroundWaypoint();
-        distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
+            rb.useGravity = false;
+            isGrounded = false;
+            isFlying = true;
 
-        if (distToWaypoint <= groundingHeight)
+            waypoint = playerScript.getClosestGroundWaypoint();
+            distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
+
+            if (distToWaypoint <= groundingHeight)
+            {
+                isFlying = false;
+                reachedTarget = true;
+                isLanding = true;
+             }
+
+            else if (distToWaypoint >= groundingHeight)
+            {
+                isFlying = true;
+                flightSpeed = 30;
+                StartCoroutine(headToTarget(waypoint));
+            }
+        
+    }
+
+    IEnumerator land()
+    {
+        if (isLanding)
         {
-            isMoving = false;
-            flightSpeed = origFlightSpeed;
-            rb.velocity = Vector3.zero;
+            if (!isGrounded && !isFlying && distToWaypoint <= 22)
+            {
+                flightSpeed = origFlightSpeed;
+                isGrounded = true;
+                rb.velocity = Vector3.zero;
+                isLanding = false;
+                rb.useGravity = true;
+                transform.Rotate(new Vector3(0f, transform.rotation.y, transform.rotation.z));
+                yield return new WaitForSeconds(3);
+
+                faceTarget();
+                setFlightAnimation();
+                agent.enabled = true;
+            }
+
         }
 
-        else if (distToWaypoint >= groundingHeight)
-        {
-            flightSpeed = 30;
-            StartCoroutine(headToTarget(waypoint));
-        }
+     
+
+        //if (isGrounded && isLanding && !isFlying)
+        //{
+            
+        //}
+
+        
+           
     }
 
     //Updates Flight animation 
     void setFlightAnimation()
     {
 
-        if (rb.position.y > 0)
+        if (!isGrounded)
         {
             anime.SetBool("Fly", true);
         }
 
-        else
+        else if (isGrounded)
         {
             anime.SetBool("Fly", false);
   
@@ -225,24 +345,24 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     }
 
     //Update's speed parameter if target is running
-    void updateRunningSpeed()
-    {
-        //If player is farther than the running distance set, then we update the animator to reflect the run speed and the enemy runs faster.
-        if (distToPlayer >= runningDistance)
-        {
-            isRunning = true;
-            agentVel = agent.velocity.normalized.magnitude + 1;
-            agent.speed = enemyRunSpeed;
-        }
+    //void updateRunningSpeed()
+    //{
+    //    //If player is farther than the running distance set, then we update the animator to reflect the run speed and the enemy runs faster.
+    //    if (distToPlayer >= runningDistance)
+    //    {
+    //        isRunning = true;
+    //        agentVel = agent.velocity.normalized.magnitude + 1;
+    //        agent.speed = enemyRunSpeed;
+    //    }
 
-        // If player is within the running -2 (to give the effect of them running up on the player), then we stop running and speed is set back to it's original
-        else if (distToPlayer <= (runningDistance - 2))
-        {
-            isRunning = false;
-            agentVel = agent.velocity.normalized.magnitude;
-            agent.speed = speedOrig;
-        }
-    }
+    //    // If player is within the running -2 (to give the effect of them running up on the player), then we stop running and speed is set back to it's original
+    //    else if (distToPlayer <= (runningDistance - 2))
+    //    {
+    //        isRunning = false;
+    //        agentVel = agent.velocity.normalized.magnitude;
+    //        agent.speed = speedOrig;
+    //    }
+    //}
 
     //Allows the attached sound for Attack Sound to be played
     void playAttackSound()
@@ -370,4 +490,42 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     }
 
 
+    //Checks if enemy is grounded
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    isGrounded = true;
+    //    agent.enabled = true;
+    //}
+
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    isGrounded = true;
+    //    agent.enabled = false;
+    //}
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.isTrigger)
+    //    {
+    //        return;
+    //    }
+
+    //    else if(other is TerrainCollider) 
+    //    {
+    //        isGrounded = true;
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.isTrigger)
+    //    {
+    //        return;
+    //    }
+
+    //    else if (other is TerrainCollider)
+    //    {
+    //        isGrounded = false;
+    //    }
+    //}
 }

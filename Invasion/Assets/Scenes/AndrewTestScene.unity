@@ -107,7 +107,7 @@ NavMeshSettings:
     serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
-    agentHeight: 2
+    agentHeight: 10
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 89202258}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 490.43924, y: 72.5, z: 102.83254}
+  m_LocalPosition: {x: 490.43924, y: 72, z: 102.83254}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -256,9 +256,32 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.6901016
-  m_Height: 4.7711377
+  m_Height: 4.313373
   m_Direction: 1
-  m_Center: {x: 0.0069885254, y: 1.8855689, z: 0}
+  m_Center: {x: 0.0069885254, y: 2.1144512, z: 0}
+--- !u!136 &366774018
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366774011}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &646319031 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4407998406768315001, guid: 967eb1c5084c8b0499fa82479ff6653b, type: 3}
@@ -450,6 +473,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demon Lord
       objectReference: {fileID: 0}
+    - target: {fileID: 1452713996136046392, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452713996136046392, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452713996136046392, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452713996136046392, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
       propertyPath: model
       value: 
@@ -464,7 +503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
       propertyPath: groundingHeight
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4166303516654900825, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -480,7 +519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825752165692352313, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.725351
+      value: 27.225351
       objectReference: {fileID: 0}
     - target: {fileID: 4825752165692352313, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -514,6 +553,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7022344279520057728, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: m_AgentTypeID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -521,6 +564,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 884292984102214125, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 366774017}
+    - targetCorrespondingSourceObject: {fileID: 884292984102214125, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 366774018}
   m_SourcePrefab: {fileID: 100100000, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
 --- !u!1 &1858295964
 GameObject:
@@ -628,7 +674,7 @@ GameObject:
   - component: {fileID: 1986557529}
   - component: {fileID: 1986557528}
   m_Layer: 0
-  m_Name: Terrain_0_0_459b0b8d-c58b-490e-b5c3-d5b2a9434cbd
+  m_Name: terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
