@@ -161,7 +161,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     //Faces selected Target
     void faceTarget(GameObject target)
     {
-        //Get Targets direction
+        //Get Targets _direction
         Vector3 targetDirection = target.transform.position - headPos.position;
         Quaternion rotation = Quaternion.LookRotation(targetDirection);
 

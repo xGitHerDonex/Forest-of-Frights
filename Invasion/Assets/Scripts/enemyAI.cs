@@ -39,7 +39,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
 
     [Tooltip("Object to Shoot")]
     [SerializeField] GameObject bullet;
-    [Tooltip("Used to delaying the projectile instantiation to match animation")]
+    [Tooltip("Used to delay the projectile instantiation to match animation")]
     [SerializeField] float shootDelay;
 
     [Tooltip("Angle which the enemy can attack. (-)360-360")]
@@ -80,7 +80,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
 
 
     /* 
-     * if the player is in range of the enemy get the player position from the game manager instance running and subtract my enemies position from it for a direction
+     * if the player is in range of the enemy get the player position from the game manager instance running and subtract my enemies position from it for a _direction
      * if the nav mesh distance between its current position and the player destination is than or equal to the stopping distance from the enemy
      * face the target
      * and if he isnt shooting then start the sub routine to shoot at the object
@@ -103,8 +103,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
             if (playerInRange && !canSeePlayer())
             {
                 StartCoroutine(roam());
-            }
-            else if (!playerInRange)
+            } else if (!playerInRange)
             {
                 StartCoroutine(roam());
             }
@@ -141,225 +140,224 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
 
         }
     }
-        //WIP Walk Sound
-        #region
-        void playWalkSound()
+    //WIP Walk Sound
+    #region
+    void playWalkSound()
+    {
+        if (audioSource != null && walkSound != null)
         {
-            if (audioSource != null && walkSound != null)
-            {
-                audioSource.clip = walkSound;
-                audioSource.Play();
-            }
+            audioSource.clip = walkSound;
+            audioSource.Play();
         }
-        #endregion
+    }
+    #endregion
 
-        /*
-         * if the enemy takes damage requires an amount for the damage in a whole number
-         * then subtracts the amount of damage from that whole number
-         * the call the sub routine to run at the same time to make the enemy feedback show (flashing damage indicator)
-         * also if the health is less than or equal to 0 destroy this enemy
-         * 
-         */
-        public void takeDamage(int amount)
+    /*
+     * if the enemy takes damage requires an amount for the damage in a whole number
+     * then subtracts the amount of damage from that whole number
+     * the call the sub routine to run at the same time to make the enemy feedback show (flashing damage indicator)
+     * also if the health is less than or equal to 0 destroy this enemy
+     * 
+     */
+    public void takeDamage(int amount)
+    {
+        hp -= amount;
+        StartCoroutine(stopMoving());
+
+
+        if (hp <= 0)
         {
-            hp -= amount;
-            StartCoroutine(stopMoving());
+            hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
+            agent.enabled = false;
+            anime.SetBool("Death", true);
+            playDeathSound();
 
-
-            if (hp <= 0)
-            {
-                hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
-                agent.enabled = false;
-                anime.SetBool("Death", true);
-                playDeathSound();
-            
             // Turn out the lights! (When the enemy dies)
             Light enemyLight = GetComponent<Light>();
             if (enemyLight != null)
             {
                 enemyLight.enabled = false;
             }
-            
+
             gameManager.instance.updateGameGoal(+1); //updates win condition set at 10 or greater "You win" also increments enemies killed and starts the win table Ienum
-            
-        }
-            else
-            {
-                anime.SetTrigger("Damage");
-                StartCoroutine(flashDamage());
-                agent.SetDestination(gameManager.instance.player.transform.position);
-            }
 
-
-
-        }
-
-        //Allows the attached sound for Death Sound to be played
-        private void playDeathSound()
+        } else
         {
-            if (audioSource != null && deathSound != null)
-            {
-                audioSource.clip = deathSound;
-                audioSource.Play();
-            }
+            anime.SetTrigger("Damage");
+            StartCoroutine(flashDamage());
+            agent.SetDestination(gameManager.instance.player.transform.position);
         }
 
 
 
-        IEnumerator stopMoving()
+    }
+
+    //Allows the attached sound for Death Sound to be played
+    private void playDeathSound()
+    {
+        if (audioSource != null && deathSound != null)
         {
-            agent.speed = 0;
-            yield return new WaitForSeconds(1);
-            agent.speed = speedOrig;
+            audioSource.clip = deathSound;
+            audioSource.Play();
         }
+    }
 
 
-        //changes the material color from the original material to a red color for .1 seconds
-        //the changes the color back to its original white state.
-        IEnumerator flashDamage()
-        {
-            model.material.color = Color.red;
-            yield return new WaitForSeconds(0.1f);
-            model.material.color = Color.white;
-        }
 
-        //tests to see if the player is within range of the enemy and if the player is within range calculate
-        /* the angle of the player to the enemy 
-         * there is a debug to show the angle and the player position to the enemy position in the scene screen.
-         * sends out a ray cast from the head of the enemy to the player to figure out the direction and if there is 
-         * any obstacles in the way
-         */
-        bool canSeePlayer()
-        {
+    IEnumerator stopMoving()
+    {
+        agent.speed = 0;
+        yield return new WaitForSeconds(1);
+        agent.speed = speedOrig;
+    }
 
-            playerDirection = gameManager.instance.player.transform.position - headPos.position;
-            angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
 
-            //will not compile in the release build
+    //changes the material color from the original material to a red color for .1 seconds
+    //the changes the color back to its original white state.
+    IEnumerator flashDamage()
+    {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = Color.white;
+    }
+
+    //tests to see if the player is within range of the enemy and if the player is within range calculate
+    /* the angle of the player to the enemy 
+     * there is a debug to show the angle and the player position to the enemy position in the scene screen.
+     * sends out a ray cast from the head of the enemy to the player to figure out the _direction and if there is 
+     * any obstacles in the way
+     */
+    bool canSeePlayer()
+    {
+
+        playerDirection = gameManager.instance.player.transform.position - headPos.position;
+        angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
+
+        //will not compile in the release build
 #if (UNITY_EDITOR)
-            //Debug.Log(angleToPlayer);
-            //Debug.DrawRay(headPos.position, playerDirection);
+        //Debug.Log(m_AngleToPlayer);
+        //Debug.DrawRay(headPos.position, playerDirection);
 #endif
 
-            RaycastHit hit;
-            if (Physics.Raycast(headPos.position, playerDirection, out hit))
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.position, playerDirection, out hit))
+        {
+            /*
+             * if the ray cast hits an object and its the player and the angle to the player is less than
+             * or equal to the preset viewing angle then tell the enemy to set the target destination to the player
+             */
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle)
             {
+                agent.stoppingDistance = stoppingDistOriginal;
+                agent.SetDestination(gameManager.instance.player.transform.position);
                 /*
-                 * if the ray cast hits an object and its the player and the angle to the player is less than
-                 * or equal to the preset viewing angle then tell the enemy to set the target destination to the player
+                 * if the remaining distance is less than or equal to the stopping  distance of the enemy
+                 * face the target and prepare to shoot if the angle is within parameter and the enemy is not already shooting
+                 * if these are true then start to shoot
                  */
-                if (hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle)
+                if (agent.remainingDistance <= agent.stoppingDistance)
                 {
-                    agent.stoppingDistance = stoppingDistOriginal;
-                    agent.SetDestination(gameManager.instance.player.transform.position);
-                    /*
-                     * if the remaining distance is less than or equal to the stopping  distance of the enemy
-                     * face the target and prepare to shoot if the angle is within parameter and the enemy is not already shooting
-                     * if these are true then start to shoot
-                     */
-                    if (agent.remainingDistance <= agent.stoppingDistance)
+                    faceTarget();
+                    if (!isShooting && angleToPlayer <= shootAngle)
                     {
-                        faceTarget();
-                        if (!isShooting && angleToPlayer <= shootAngle)
-                        {
-                            StartCoroutine(shoot());
-                        }
+                        StartCoroutine(shoot());
                     }
-                    return true;
                 }
+                return true;
             }
-            //otherwise set the stopping distance to zero and return false
-            agent.stoppingDistance = 0;
-            return false;
         }
+        //otherwise set the stopping distance to zero and return false
+        agent.stoppingDistance = 0;
+        return false;
+    }
 
-        // Set the shooting bool to true then
-        // places and intializes the bullet object from the shooting postion and gives it a direction while triggering the bool that checks whether the enemy is shooting or not.
-        //suspends the coroutine for the amount of seconds the shootrate is set to then sets the shooting back to false
-        IEnumerator shoot()
-        {
-            isShooting = true;
-            playAttackSound();
-            anime.SetTrigger("Shoot");
+    // Set the shooting bool to true then
+    // places and intializes the bullet object from the shooting postion and gives it a _direction while triggering the bool that checks whether the enemy is shooting or not.
+    //suspends the coroutine for the amount of seconds the shootrate is set to then sets the shooting back to false
+    IEnumerator shoot()
+    {
+        isShooting = true;
+        playAttackSound();
+        anime.SetTrigger("Shoot");
 
-            //Used to add delay to the shoot to match the animation
-            StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
+        //Used to add delay to the shoot to match the animation
+        StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
 
-            yield return new WaitForSeconds(shootRate);
-            isShooting = false;
-        }
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+    }
 
-        IEnumerator shootDelayed()
-        {
-            Instantiate(bullet, shootPos.position, transform.rotation);
-            yield return new WaitForSeconds(shootDelay);
-        }
+    IEnumerator shootDelayed()
+    {
+        Instantiate(bullet, shootPos.position, transform.rotation);
+        yield return new WaitForSeconds(shootDelay);
+    }
     //Allows the attached sound for Attack Sound to be played
     private void playAttackSound()
+    {
+        if (audioSource != null && attackSound != null)
         {
-            if (audioSource != null && attackSound != null)
-            {
-                audioSource.clip = attackSound;
-                audioSource.Play();
-            }
+            audioSource.clip = attackSound;
+            audioSource.Play();
         }
+    }
 
-        //sets the rotation of the enemy to face the player based on the player direction to the enemy 
-        //and it lerps the rotation over time so it is smooth and not choppy
-        void faceTarget()
+    //sets the rotation of the enemy to face the player based on the player _direction to the enemy 
+    //and it lerps the rotation over time so it is smooth and not choppy
+    void faceTarget()
+    {
+        Quaternion rotation = Quaternion.LookRotation(playerDirection);
+        //lerp over time rotation
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * targetFaceSpeed);
+    }
+
+
+    public void physics(Vector3 dir)
+    {
+        agent.velocity += dir / 3;
+
+    }
+
+    //this method is for starting a co-routine in case a delay is needed
+    public void delayDamage(int damage, float seconds)
+    {
+        StartCoroutine(delayedDamage(damage, seconds));
+    }
+
+    //method made for triggering explosion damage through iPhysics
+    public IEnumerator delayedDamage(int explosionDamage, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        takeDamage(explosionDamage);
+    }
+
+
+    //if an object enters the collider for the enemy check to see if it is the Player
+    //if it is the player set player in range bool to true
+    //returns nothing
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
-            Quaternion rotation = Quaternion.LookRotation(playerDirection);
-            //lerp over time rotation
-            transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * targetFaceSpeed);
+            playerInRange = true;
+
         }
+    }
 
 
-        public void physics(Vector3 dir)
+
+    // does the exact opposite as On Trigger enter
+    // it checks to see if the object that is in the collider is the player if it isnt then the player isnt in range
+    //set the stopping distance to zero 
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
-            agent.velocity += dir / 3;
+            playerInRange = false;
+            agent.stoppingDistance = 0;
 
         }
-
-        //this method is for starting a co-routine in case a delay is needed
-        public void delayDamage(int damage, float seconds)
-        {
-            StartCoroutine(delayedDamage(damage, seconds));
-        }
-
-        //method made for triggering explosion damage through iPhysics
-        public IEnumerator delayedDamage(int explosionDamage, float seconds)
-        {
-            yield return new WaitForSeconds(seconds);
-            takeDamage(explosionDamage);
-        }
+    }
 
 
-        //if an object enters the collider for the enemy check to see if it is the Player
-        //if it is the player set player in range bool to true
-        //returns nothing
-        public void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                playerInRange = true;
-
-            }
-        }
-
-
-
-        // does the exact opposite as On Trigger enter
-        // it checks to see if the object that is in the collider is the player if it isnt then the player isnt in range
-        //set the stopping distance to zero 
-        public void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("Player"))
-            {
-                playerInRange = false;
-                agent.stoppingDistance = 0;
-
-            }
-        }
-
-    
 }

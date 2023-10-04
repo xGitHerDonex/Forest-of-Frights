@@ -29,18 +29,21 @@ public class WpPatrol : MonoBehaviour, IPhysics//, IDamage
         // player = gameManager.instance.player.transform;
         anime = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        StartPatrol();
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
         direction = player.position - transform.position;
+        StartPatrol();
     }
 
     // Update is called once per frame
     void Update()
     {
+        float agentVel = agent.velocity.normalized.magnitude;
+        anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
         IsAttackable();
 
         if (agent.isActiveAndEnabled)
@@ -93,7 +96,7 @@ public class WpPatrol : MonoBehaviour, IPhysics//, IDamage
     }
 
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter( Collider other )
     {
         if (other.transform == player.transform)
         {
@@ -103,7 +106,7 @@ public class WpPatrol : MonoBehaviour, IPhysics//, IDamage
             anime.SetBool("isLanding", false);
         }
     }
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit( Collider other )
     {
         if (other.transform == player)
         {
@@ -120,10 +123,10 @@ public class WpPatrol : MonoBehaviour, IPhysics//, IDamage
     {
         //just starts the enemy on the way to the initail waypoint.
         agent.SetDestination(waypoints[0].position.normalized);
-
+        FaceTarget();
 
         //test code will integrate a default speed in enemy AI.
-        anime.SetFloat("isMoving", 1);
+        //anime.SetFloat("isMoving", 1);
 
     }
 
@@ -136,7 +139,7 @@ public class WpPatrol : MonoBehaviour, IPhysics//, IDamage
         return m_IsPlayerAttackable;
     }
 
-    public void physics(Vector3 dir)
+    public void physics( Vector3 dir )
     {
         agent.velocity += dir / 3;
 
