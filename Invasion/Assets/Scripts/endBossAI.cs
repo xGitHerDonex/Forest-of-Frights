@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Device;
 using UnityEngine.ProBuilder;
+using UnityEngine.ProBuilder.MeshOperations;
 
 public class endBossAI : MonoBehaviour, IDamage, IPhysics
 {
@@ -71,11 +72,19 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float shootDelay;
 
     [Header("-----Flight-----")]
-    [SerializeField] GameObject waypoint;
     [SerializeField] int flightSpeed;
     [SerializeField] int origFlightSpeed;
     [SerializeField] int groundingHeight;
+    [SerializeField] int flightHeight;
+
+
+    [Header("-----Waypoints-----")]
     [SerializeField] float distToWaypoint;
+    [SerializeField] float closestWaypointDist;
+    [SerializeField] GameObject waypoint;
+    [SerializeField] GameObject[] waypoints;
+    [SerializeField] GameObject closestWaypoint;
+    [SerializeField] float waypointDist;
 
 
     [Header("SFX")]
@@ -110,9 +119,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     float speedOrig;
 
 
-
- 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -126,6 +132,9 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         isMoving = false;
         FlyTriggered = false;
 
+
+        //Creates Flight waypoint Matrix
+        waypoints = GameObject.FindGameObjectsWithTag("FLWP");
     }
 
     
@@ -136,25 +145,21 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         //Continually checks to see if Enemy is flying, and updates animation
         setFlightAnimation();
 
-        if (FlyTriggered &&!reachedTarget && isFlying)
+        if(Input.GetButton("test"))
         {
-            flyToTarget();
+            FlyTriggered = true;
         }
 
-        else if (reachedTarget && isLanding)
+
+        if (FlyTriggered && !reachedTarget)
         {
-            StartCoroutine(land());
+            flyToTarget(FindClosestFlightWaypoint());         
         }
 
-        Stage1();
-        
-
-        //else
-        //{
-        //    Stage1();
-        //}
-
-
+        if (reachedTarget)
+        {
+            FlyTriggered = false;
+        }
 
     }
 
@@ -210,11 +215,23 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     }
 
     //Heads to specified Target
-    IEnumerator headToTarget(GameObject target)
+    IEnumerator headToTarget(GameObject target, bool flight = true)
     {
         isMoving = true;
         faceTarget(target);
-        Vector3 position = Vector3.MoveTowards(rb.position, target.transform.position, flightSpeed * Time.deltaTime);
+        Vector3 position;
+
+        if (flight)
+        {
+           position = Vector3.MoveTowards(rb.position, target.transform.position, flightSpeed * Time.deltaTime);
+        }
+
+        else
+        {
+            position = Vector3.MoveTowards(rb.position, target.transform.position, agent.speed * Time.deltaTime);
+        }
+
+        
         rb.MovePosition(position);
 
         yield return new WaitForSeconds(1);
@@ -224,13 +241,13 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     }
 
     //Flys to Closest Ground Waypoint, when called
-    void flyToTarget()
+    void flyToGround (GameObject waypoint)
     {
             rb.useGravity = false;
             isGrounded = false;
             isFlying = true;
+            agent.enabled = false;
 
-            waypoint = playerScript.getClosestGroundWaypoint();
             distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
 
             if (distToWaypoint <= groundingHeight)
@@ -243,11 +260,35 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             else if (distToWaypoint >= groundingHeight)
             {
                 isFlying = true;
-                flightSpeed = 30;
+                StartCoroutine(headToTarget(waypoint,false));
+            }
+        
+    }
+    void flyToTarget(GameObject waypoint)
+    {
+            rb.useGravity = false;
+            isGrounded = false;
+            isFlying = true;
+            agent.enabled = false;
+
+            distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
+
+            if (distToWaypoint <= flightHeight)
+            {
+                reachedTarget = true;
+
+            }
+
+            else if (distToWaypoint >= flightHeight)
+            {
+                isFlying = true;
+
                 StartCoroutine(headToTarget(waypoint));
             }
         
     }
+
+
 
     IEnumerator land()
     {
@@ -279,6 +320,31 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
         
            
+    }
+
+    GameObject FindClosestFlightWaypoint()
+    {
+
+        closestWaypointDist = 3000f;
+
+        //iterates through the list to find the distances
+        foreach (GameObject waypoint in waypoints)
+        {
+            //calculates distance
+            waypointDist = Vector3.Distance(transform.position, waypoint.transform.position);
+
+
+            //updates closest waypoint
+            if (waypointDist < closestWaypointDist)
+            {
+                closestWaypointDist = waypointDist;
+                closestWaypoint = waypoint;
+            }
+
+        }
+
+        //returns the waypoint
+        return closestWaypoint;
     }
 
     //Updates Flight animation 
@@ -489,43 +555,4 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         takeDamage(explosionDamage);
     }
 
-
-    //Checks if enemy is grounded
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    isGrounded = true;
-    //    agent.enabled = true;
-    //}
-
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    isGrounded = true;
-    //    agent.enabled = false;
-    //}
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if(other.isTrigger)
-    //    {
-    //        return;
-    //    }
-
-    //    else if(other is TerrainCollider) 
-    //    {
-    //        isGrounded = true;
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.isTrigger)
-    //    {
-    //        return;
-    //    }
-
-    //    else if (other is TerrainCollider)
-    //    {
-    //        isGrounded = false;
-    //    }
-    //}
 }
