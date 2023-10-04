@@ -85,6 +85,10 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     private Vector3 playerVelocity;
     private Vector3 move;
     int selectedGun;
+    //Player Buff Checks
+    [SerializeField] float regenStaminaBuffAmount;
+
+
 
     public enum AmmoType
     {
@@ -541,7 +545,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         takeDamage(damage);
     }
 
-    // Ammo Collection for weapons
+    //Ammo Collection for weapons
     public void AddAmmo(AmmoType ammoType, int amount)
     {
         string ammoTypeName = ammoType.ToString();
@@ -555,7 +559,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             ammoInventory[ammoTypeName] = amount;
         }
     }
-    // Small convenience to update ammo to HUD
+    //Small convenience to update ammo to HUD
     public void ammoUpdate()
     {
         ammoCurText.text = gunList[selectedGun].ammoCur.ToString();
@@ -586,6 +590,20 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //returns the waypoint
         return closestWaypoint;
+    }
+
+
+    /// Equipment Buff Section (WIP)
+    
+    public void energeticRingBuff(int staminaBuffAmount)
+    {
+        Stamina = maxStamina;
+        maxStamina += staminaBuffAmount; 
+    }
+
+    public void enhancerBuff(float regenStaminaBuffAmount)
+    {
+        regenStamina += regenStaminaBuffAmount;
     }
 
 }

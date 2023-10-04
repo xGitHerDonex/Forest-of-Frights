@@ -70,6 +70,10 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [Header("-----Flight-----")]
     [SerializeField] GameObject waypoint;
     [SerializeField] int flightSpeed;
+    [SerializeField] int origFlightSpeed;
+    [SerializeField] int groundingHeight;
+    [SerializeField] float distToWaypoint;
+
 
     [Header("SFX")]
     [SerializeField] AudioSource audioSource;
@@ -89,6 +93,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     bool isAttacking;
     bool isDead;
     bool playerInRange;
+    bool isMoving;
     bool isRunning;
     bool isShooting;
     playerController playerScript;
@@ -102,8 +107,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         //Get's Player Script so we can check the closest waypoint
         playerScript = gameManager.instance.player.GetComponent<playerController>();
-
-        isRunning = false;
+        origFlightSpeed = flightSpeed;
+        isMoving = false;
     }
 
     
@@ -111,40 +116,56 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
+        //Continually checks to see if Enemy is flying, and updates animation
         setFlightAnimation();
 
-        waypoint = playerScript.getClosestGroundWaypoint();
-
-        if (!isRunning && rb.position != waypoint.transform.position)
-        {
-            StartCoroutine(headToTarget(waypoint));
-        }
+        flyToTarget();
+   
+        
 
         
     }
 
+
     //Heads to specified Target
-   IEnumerator headToTarget(GameObject target)
+    IEnumerator headToTarget(GameObject target)
     {
-        isRunning = true;
+        isMoving = true;
         faceTarget(target);
         Vector3 position = Vector3.MoveTowards(rb.position, target.transform.position, flightSpeed * Time.deltaTime);
         rb.MovePosition(position);
 
-        if (target.transform.position == rb.position)
-        {
-            yield return new WaitForSeconds(200);
-         } 
+        yield return new WaitForSeconds(1);
 
-       isRunning = false;
-
+        isMoving = false;
+      
     }
 
+    //Flys to Closest Ground Waypoint, when called
+    void flyToTarget()
+    {
+        waypoint = playerScript.getClosestGroundWaypoint();
+        distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
 
+        if (distToWaypoint <= groundingHeight)
+        {
+            isMoving = false;
+            flightSpeed = origFlightSpeed;
+            rb.velocity = Vector3.zero;
+        }
+
+        else if (distToWaypoint >= groundingHeight)
+        {
+            flightSpeed = 30;
+            StartCoroutine(headToTarget(waypoint));
+        }
+    }
+
+    //Updates Flight animation 
     void setFlightAnimation()
     {
 
-        if (rb.position.y > 0 && rb.velocity.x == 0)
+        if (rb.position.y > 0)
         {
             anime.SetBool("Fly", true);
         }
