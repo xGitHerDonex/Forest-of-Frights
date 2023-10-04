@@ -46,7 +46,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int meleeStage2Damage;
 
 
-    [Header("-----EnergyBall Components-----")]
+    [Header("-----FireBall Components-----")]
     [Tooltip("Object to Shoot")]
     [SerializeField] GameObject bullet;
 
@@ -67,6 +67,9 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [Range(0, 10)][SerializeField] float shootRate;
     [SerializeField] float shootDelay;
 
+    [Header("-----Flight-----")]
+    [SerializeField] GameObject waypoint;
+    [SerializeField] int flightSpeed;
 
     [Header("SFX")]
     [SerializeField] AudioSource audioSource;
@@ -91,8 +94,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     playerController playerScript;
 
 
-    [SerializeField] GameObject waypoint;
-    [SerializeField] int flightSpeed;
 
  
 

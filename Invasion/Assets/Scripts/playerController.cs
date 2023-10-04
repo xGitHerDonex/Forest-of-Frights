@@ -34,10 +34,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
     [SerializeField] AudioClip shotSound;
+
     // Railgun Unique
     [SerializeField] GameObject Railgun;
     [SerializeField] GameObject Railbeam;
 
+    //Grenades
     [Header("-----Grenade Stats------")]
     [SerializeField] GameObject grenade;
     [SerializeField] float throwRate;
@@ -45,11 +47,19 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [Range(1, 20)][SerializeField] int throwLift;
     [SerializeField] Transform throwPos;
 
+    //Time Slow
     [Header("-----Chronokinesis-----")]
     [SerializeField] bool isTimeSlowed;
     [Range(0, 2)][SerializeField] float timeSlowInSeconds;
     [Range(0, 2)][SerializeField] float timeSlowScale;
     [Range(1, 20)][SerializeField] int playerSlowSpeed;
+
+    //Waypoints are used to track the player and what is close to them.
+    [Header("-----Waypoints-----")]
+    [SerializeField] GameObject[] waypoints;
+    [SerializeField] float waypointDist;
+    [SerializeField] float closestWaypointDist;
+    [SerializeField] GameObject closestWaypoint;
 
     [Header("-----UI Elements-----")]
     [SerializeField] private TextMeshProUGUI lowHPWarnText;
@@ -57,22 +67,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] private TextMeshProUGUI ammoCurText;
     [SerializeField] private TextMeshProUGUI ammoMaxText;
 
-
     [Header("-----SFX-----")]
-    //Player SFX
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip playerInjured;
     [SerializeField] AudioClip playerWalksGrass;
     [SerializeField] AudioClip playerRunsGrass;
     [SerializeField] AudioClip playerJumpsGrass;
-
-
-    //Waypoints - Used by Enemy Boss Scripts as needed.
-    [SerializeField] GameObject[] waypoints;
-    [SerializeField] float waypointDist;
-    [SerializeField] float closestWaypointDist;
-    [SerializeField] GameObject closestWaypoint;
-
 
     //Bools and others for functions
     private bool isShooting;
@@ -85,6 +85,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     private Vector3 playerVelocity;
     private Vector3 move;
     int selectedGun;
+
     public enum AmmoType
     {
         PistolAmmo,
@@ -97,8 +98,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     // Ammo Management
     public Dictionary<string, int> ammoInventory = new Dictionary<string, int>();
 
-
-
+    //Start
     private void Start()
     {
       
@@ -119,6 +119,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     }
 
+    //Update
     void Update()
     {
 
@@ -368,6 +369,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     }
 
+    //Time Slow: slows the world but not the player
     IEnumerator chronokinesis()
     {
         originalPlayerSpeed = playerSpeed;
@@ -384,7 +386,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     }
 
-
+    //
     IEnumerator delaySpeed()
     {
         playerSpeed = playerSpeed * 10000;
@@ -423,6 +425,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         }
     }
 
+    //Prevents repeat Damage
     IEnumerator ResetTakingDamage()
     {
         //Small delay to prevent repeat damage
@@ -430,6 +433,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         isTakingDamage = false;
     }
 
+    //low hp warning
     private void lowHealthWarning()
     {
         //Once the player hits approximately 33% HP of their Max HP (equipment, etc) it'll trigger the warning
@@ -449,6 +453,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         }
     }
 
+    //Spawns player
     public void spawnPlayer()
     {
 
@@ -510,6 +515,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         }
     }
 
+    //Change gun
     void changeGun()
     {
         shotSound = gunList[selectedGun].shotSound;
