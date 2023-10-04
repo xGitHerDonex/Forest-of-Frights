@@ -463,6 +463,7 @@ GameObject:
   - component: {fileID: 1576755904453881166}
   - component: {fileID: 7022344279520057728}
   - component: {fileID: 1452713996136046392}
+  - component: {fileID: 5210883362826208591}
   m_Layer: 0
   m_Name: Demon Lord
   m_TagString: Untagged
@@ -522,13 +523,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185b15534e218f446969186f5afc21ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
+  model: {fileID: 5923908018359595519}
   agent: {fileID: 7022344279520057728}
   headPos: {fileID: 4599581073810700605}
   shootPos: {fileID: 0}
   anime: {fileID: 8885747574330338785}
-  hitBox: {fileID: 0}
+  hitBox: {fileID: 5210883362826208591}
   rb: {fileID: 1452713996136046392}
+  groundCheck: {fileID: 0}
+  DemonLord: {fileID: 0}
   targetFaceSpeed: 8
   runningDistance: 0
   hp: 0
@@ -548,12 +551,28 @@ MonoBehaviour:
   shootAngle: 0
   shootRate: 0
   shootDelay: 0
+  flightSpeed: 25
+  origFlightSpeed: 0
+  groundingHeight: 15
+  flightHeight: 10
+  distToWaypoint: 0
+  closestWaypointDist: 0
+  waypoint: {fileID: 0}
+  waypoints: []
+  closestWaypoint: {fileID: 0}
+  waypointDist: 0
   audioSource: {fileID: 0}
   walkSound: {fileID: 0}
   attackSound: {fileID: 0}
   deathSound: {fileID: 0}
-  waypoint: {fileID: 0}
-  flightSpeed: 5
+  isLanding: 0
+  isMoving: 0
+  isRunning: 0
+  isShooting: 0
+  isGrounded: 0
+  isFlying: 0
+  reachedTarget: 0
+  FlyTriggered: 0
 --- !u!195 &7022344279520057728
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -562,7 +581,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884292984102214125}
   m_Enabled: 1
-  m_AgentTypeID: 1479372276
+  m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
@@ -584,7 +603,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884292984102214125}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -592,17 +611,40 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
+--- !u!136 &5210883362826208591
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884292984102214125}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6901016
+  m_Height: 4.313373
+  m_Direction: 1
+  m_Center: {x: 0.0069885254, y: 2.1144512, z: 0}
 --- !u!1 &1201515015468293222
 GameObject:
   m_ObjectHideFlags: 0
@@ -2887,7 +2929,7 @@ Transform:
   m_GameObject: {fileID: 7978566993253956486}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 19, y: 8.793376, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

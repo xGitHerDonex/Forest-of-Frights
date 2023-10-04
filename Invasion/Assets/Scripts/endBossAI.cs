@@ -101,6 +101,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     bool isAttacking;
     bool isDead;
     bool playerInRange;
+    bool runNextJob;
     playerController playerScript;
 
     //movement
@@ -131,8 +132,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         isFlying = false;
         isMoving = false;
         FlyTriggered = false;
-
-
+        runNextJob = false;
         //Creates Flight waypoint Matrix
         waypoints = GameObject.FindGameObjectsWithTag("FLWP");
     }
@@ -150,17 +150,34 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             FlyTriggered = true;
         }
 
-
         if (FlyTriggered && !reachedTarget)
         {
             flyToTarget(FindClosestFlightWaypoint());         
         }
 
-        if (reachedTarget)
+        else if (reachedTarget && agent.enabled == false)
         {
             FlyTriggered = false;
+            runNextJob = true;
+            reachedTarget = false;
         }
 
+        else
+        {
+            if (runNextJob)
+            {
+                flyToGround(playerScript.getClosestGroundWaypoint());
+                StartCoroutine(land());
+            }
+
+            else if (agent.isActiveAndEnabled)
+            {
+                runNextJob = false;
+                Stage1();
+            }
+        }
+
+        
     }
 
     void Stage1()
@@ -260,7 +277,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             else if (distToWaypoint >= groundingHeight)
             {
                 isFlying = true;
-                StartCoroutine(headToTarget(waypoint,false));
+                StartCoroutine(headToTarget(waypoint,true));
             }
         
     }
@@ -307,6 +324,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                 faceTarget();
                 setFlightAnimation();
                 agent.enabled = true;
+                runNextJob = false; // remove
             }
 
         }
@@ -344,6 +362,26 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         }
 
         //returns the waypoint
+        return closestWaypoint;
+    }
+
+    GameObject PickFlightWaypoint(float distMin, float distMax)
+    {
+
+        //iterates through the list to find the distances
+        foreach (GameObject waypoint in waypoints)
+        {
+            //calculates distance
+            waypointDist = Vector3.Distance(transform.position, waypoint.transform.position);
+
+            if (waypointDist <= distMax && waypointDist >= distMin)
+            {
+                closestWaypoint = waypoint;
+                break;
+            }
+
+        }
+
         return closestWaypoint;
     }
 
