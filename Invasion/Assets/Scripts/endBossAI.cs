@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -15,18 +16,17 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform headPos;
+    [SerializeField] Transform bodyPos;
     [SerializeField] Transform shootPos;
     [SerializeField] Animator anime;
     [SerializeField] Collider hitBox;
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject groundCheck;
-    [SerializeField] Transform DemonLord;
   
-
     [Header("-----Enemy Stats-----")]
 
     [Tooltip("Turning speed 1-10.")]
-    [Range(1, 10)][SerializeField] int targetFaceSpeed;
+    [Range(1, 20)][SerializeField] int targetFaceSpeed;
     [SerializeField] int runningDistance;
 
 
@@ -43,11 +43,15 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [Header("-----Melee Components-----")]
     [SerializeField] GameObject leftMeleeCollider;
     [SerializeField] GameObject rightMeleeCollider;
+
+    [Tooltip("Calculates within stopping range where enemy will whip")]
+    [SerializeField] float whipDelay;
     [Tooltip("Delay Value between melee attacks in seconds")]
-    [SerializeField] int meleeDelay;
+    [SerializeField] float meleeDelay;
     [Tooltip("meleeDamage")]
     [SerializeField] int meleeDamage;
     [SerializeField] int meleeStage2Damage;
+    [SerializeField] float meleeRange;
 
 
     [Header("-----FireBall Components-----")]
@@ -76,6 +80,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int origFlightSpeed;
     [SerializeField] int groundingHeight;
     [SerializeField] int flightHeight;
+    [SerializeField] int flightStoppingDist;
+
 
 
     [Header("-----Waypoints-----")]
@@ -85,7 +91,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] GameObject[] waypoints;
     [SerializeField] GameObject closestWaypoint;
     [SerializeField] float waypointDist;
-    [SerializeField] float rotationSpeed;
 
 
     [Header("SFX")]
@@ -99,14 +104,21 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     float hpRatio;
     float distToPlayer;
     float angleToPlayer;
-    bool isAttacking;
     bool isDead;
     bool playerInRange;
-    bool runNextJob;
     playerController playerScript;
+    float stoppingDistOriginal;
+    Vector3 pushBack;
+    Vector3 playerDirection;
+    Vector3 startingPos;
+    float speedOrig;
+    bool runNextJob;
+    int wavesToSpawn;
+    int wavesSpawned;
 
-    //movement
-    [SerializeField] bool isLanding;
+    //bools
+    [SerializeField] bool isLanding; 
+    [SerializeField] bool isAttacking;
     [SerializeField] bool isMoving;
     [SerializeField] bool isRunning;
     [SerializeField] bool isShooting;
@@ -114,11 +126,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] bool isFlying;
     [SerializeField] bool reachedTarget;
     [SerializeField] bool FlyTriggered;
-    float stoppingDistOriginal;
-    Vector3 pushBack;
-    Vector3 playerDirection;
-    Vector3 startingPos;
-    float speedOrig;
+    [SerializeField] bool isSummoning;
+
 
 
     // Start is called before the first frame update
@@ -127,6 +136,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         //Get's Player Script so we can check the closest waypoint
         playerScript = gameManager.instance.player.GetComponent<playerController>();
         origFlightSpeed = flightSpeed;
+        stoppingDistOriginal = agent.stoppingDistance;
         isDead = false;
         isAttacking = false;
         isGrounded = true;
@@ -134,6 +144,10 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         isMoving = false;
         FlyTriggered = false;
         runNextJob = false;
+
+        //Gets waves to Spawn
+        //wavesToSpawn = bossSpawnerManager.instance.getWavesToSpawn();
+
         //Creates Flight waypoint Matrix
         waypoints = GameObject.FindGameObjectsWithTag("FLWP");
     }
@@ -144,41 +158,10 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     void Update()
     {
         //Continually checks to see if Enemy is flying, and updates animation
-        setFlightAnimation();
+        //setFlightAnimation();
+        //Stage1();
 
-        if(Input.GetButton("test"))
-        {
-            FlyTriggered = true;
-        }
-
-        if (FlyTriggered && !reachedTarget)
-        {
-            flyToTarget(FindClosestFlightWaypoint());         
-        }
-
-        //else if (reachedTarget && )
-        //{
-        //    FlyTriggered = false;
-        //    runNextJob = true;
-        //    reachedTarget = false;
-        //}
-
-        //else
-        //{
-        //    if (runNextJob)
-        //    {
-        //        flyToGround(playerScript.getClosestGroundWaypoint());
-        //        StartCoroutine(land());
-        //    }
-
-        //    else if (agent.isActiveAndEnabled)
-        //    {
-        //        runNextJob = false;
-        //        Stage1();
-        //    }
-        //}
-
-        
+        StartCoroutine(summon());
     }
 
     void Stage1()
@@ -186,9 +169,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         //If enemy is not dead, we'll continue
         if (!isDead)
         {
-            //Continually determines enemy speed and run / walk animations
-            //updateRunningSpeed();
-
+            facePlayer();
             //casts a ray on the player
             RaycastHit hit;
 
@@ -199,6 +180,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             //Casts a ray on the player
             if (Physics.Raycast(headPos.position, playerDirection, out hit))
             {
+
                 agentVel = agent.velocity.normalized.magnitude;
                 anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
 
@@ -207,23 +189,33 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
 
                 //If player within stopping distance, face target and attack if not already attacking
-                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
+                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance && distToPlayer >= meleeRange)
                 {
 
                     agent.velocity = Vector3.zero;
                     agent.ResetPath();
-                    faceTarget();
-
-                    if (!isRunning)
-                        StartCoroutine(Melee(Random.Range(2, 5)));
+                    facePlayer();
+                    StartCoroutine(whip());
 
                 }
+
+                //If player within stopping distance, face target and attack if not already attacking
+                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= meleeRange)
+                {
+
+                    agent.velocity = Vector3.zero;
+                    agent.ResetPath();
+                    facePlayer();
+                    StartCoroutine(Melee(Random.Range(1, 5)));
+
+                }
+
 
                 //if player is not wthin stopping distance, then set distination to the player
                 else if (hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
                 {
 
-                    faceTarget();
+                    facePlayer();
                     agent.SetDestination(gameManager.instance.player.transform.position);
 
                 }
@@ -253,7 +245,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         rb.MovePosition(position);
 
         yield return new WaitForSeconds(1);
-
         isMoving = false;
       
     }
@@ -265,6 +256,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             isGrounded = false;
             isFlying = true;
             agent.enabled = false;
+
 
             distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
 
@@ -282,74 +274,65 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             }
         
     }
+
+    //Same as above, but enemy flys to any target
     void flyToTarget(GameObject waypoint)
     {
+            isFlying = true;
+            faceTarget(waypoint);
             rb.useGravity = false;
             isGrounded = false;
             isFlying = true;
-            //agent.enabled = false;
-
+            agent.enabled = false;
+           
             distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
-           // rb.constraints = RigidbodyConstraints.FreezeRotationX;
 
 
             if (distToWaypoint <= flightHeight)
-            {
-            //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(playerDirection),2);
-
-            //Quaternion rotation = Quaternion.LookRotation(waypoint.transform.position - transform.position);
-
-            //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
-            reachedTarget = true;
+            {                
+                reachedTarget = true;
 
             }
 
             else if (distToWaypoint >= flightHeight)
             {
-                isFlying = true;
-                
-
+                isFlying = true;               
                 StartCoroutine(headToTarget(waypoint));
             }
         
     }
 
-
-
+    //Land Routine that will land the enemy and reenable nav mesh
     IEnumerator land()
     {
+        
         if (isLanding)
         {
-            if (!isGrounded && !isFlying && distToWaypoint <= 22)
+
+            if (!isGrounded && !isFlying && distToWaypoint <= 25)
             {
+
                 flightSpeed = origFlightSpeed;
                 isGrounded = true;
                 isLanding = false;
                 rb.useGravity = true;
-                //transform.Rotate(new Vector3(90f, transform.rotation.y, transform.rotation.z));
-
-                yield return new WaitForSeconds(0.5f);
-
-                faceTarget();
                 setFlightAnimation();
-                //agent.enabled = true;
-                runNextJob = false; // remove
+
+                yield return new WaitForSeconds(.2f);
+
+                facePlayer();
+                agent.enabled = true;
+                runNextJob = false;
+              
             }
 
         }
 
-     
-
-        //if (isGrounded && isLanding && !isFlying)
-        //{
-            
-        //}
-
-        
+ 
            
     }
 
-    GameObject FindClosestFlightWaypoint()
+    GameObject findClosestFlightWaypoint()
     {
 
         closestWaypointDist = 3000f;
@@ -376,6 +359,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
     GameObject PickFlightWaypoint(float distMin, float distMax)
     {
+        closestWaypointDist = 3000f;
 
         //iterates through the list to find the distances
         foreach (GameObject waypoint in waypoints)
@@ -386,12 +370,13 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             if (waypointDist <= distMax && waypointDist >= distMin)
             {
                 closestWaypoint = waypoint;
-                break;
+               
             }
 
         }
 
         return closestWaypoint;
+
     }
 
     //Updates Flight animation 
@@ -401,12 +386,13 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         if (!isGrounded)
         {
             anime.SetBool("Fly", true);
+            agent.stoppingDistance = flightStoppingDist;
         }
 
         else if (isGrounded)
         {
             anime.SetBool("Fly", false);
-  
+            agent.stoppingDistance = stoppingDistOriginal;
         }
 
                
@@ -425,19 +411,27 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
 
     //Faces Player
-    void faceTarget()
+    void facePlayer()
     {
         Quaternion rotation = Quaternion.LookRotation(playerDirection);
         //lerp over time rotation
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * targetFaceSpeed);
     }
 
-
-    //Find Closest flight way point
-
-    //Summon enemies
-
-    //
+    //Summon enemies using the spawn manager
+    IEnumerator summon()
+    {
+      
+       if(!isSummoning)
+        { 
+            isSummoning = true;
+            bossSpawnerManager.instance.setTimeToSpawn(true);
+            yield return new WaitForSeconds(0.1f);
+            bossSpawnerManager.instance.setTimeToSpawn(false);
+            isSummoning = false;
+        }
+     
+    }
 
 
     IEnumerator shoot()
@@ -457,26 +451,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
     }
 
-    //Update's speed parameter if target is running
-    //void updateRunningSpeed()
-    //{
-    //    //If player is farther than the running distance set, then we update the animator to reflect the run speed and the enemy runs faster.
-    //    if (distToPlayer >= runningDistance)
-    //    {
-    //        isRunning = true;
-    //        agentVel = agent.velocity.normalized.magnitude + 1;
-    //        agent.speed = enemyRunSpeed;
-    //    }
-
-    //    // If player is within the running -2 (to give the effect of them running up on the player), then we stop running and speed is set back to it's original
-    //    else if (distToPlayer <= (runningDistance - 2))
-    //    {
-    //        isRunning = false;
-    //        agentVel = agent.velocity.normalized.magnitude;
-    //        agent.speed = speedOrig;
-    //    }
-    //}
-
     //Allows the attached sound for Attack Sound to be played
     void playAttackSound()
     {
@@ -490,22 +464,43 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     IEnumerator Melee(int combo)
     {
         isAttacking = true;
+        
         leftMeleeCollider.SetActive(true);
-        rightMeleeCollider.SetActive(true);
 
-        if (combo == 2)
-            anime.SetTrigger("Melee2");
+            switch (combo)
+            {
+                case 1:
+                    anime.SetTrigger("Melee1");
+                    break;
+                case 2:
+                    anime.SetTrigger("Melee2");
+                    break;
+                case 3:
+                    anime.SetTrigger("Melee3");
+                    break;
+                case 4:
+                    anime.SetTrigger("Melee4");
+                    break;
 
-        if (combo == 3)
-            anime.SetTrigger("Melee3");
-
-        if (combo == 4)
-            anime.SetTrigger("Melee4");
-
-
+            }
+   
+     
         yield return new WaitForSeconds(meleeDelay);
         isAttacking = false;
+
         leftMeleeCollider.SetActive(false);
+        rightMeleeCollider.SetActive(false);
+    }
+
+    IEnumerator whip()
+    {
+        isAttacking = true;
+        rightMeleeCollider.SetActive(true);
+        anime.SetTrigger("Whip");
+        
+        yield return new WaitForSeconds(whipDelay);
+        isAttacking = false;
+
         rightMeleeCollider.SetActive(false);
     }
 
