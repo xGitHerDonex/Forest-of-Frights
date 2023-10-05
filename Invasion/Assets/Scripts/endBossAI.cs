@@ -79,8 +79,13 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int flightSpeed;
     [SerializeField] int origFlightSpeed;
     [SerializeField] int groundingHeight;
-    [SerializeField] int flightHeight;
+    //[SerializeField] int flightHeight;
     [SerializeField] int flightStoppingDist;
+    [SerializeField] int landingSequenceDist;
+    [SerializeField] int landingSpeed;
+    [SerializeField] int switchFacing;
+    [SerializeField] int landingDelay;
+
 
 
 
@@ -158,10 +163,43 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     void Update()
     {
         //Continually checks to see if Enemy is flying, and updates animation
-        //setFlightAnimation();
+        setFlightAnimation();
         //Stage1();
 
-        StartCoroutine(summon());
+        //StartCoroutine(summon());
+
+        if (Input.GetButton("test"))
+        {
+            FlyTriggered = true;
+        }
+
+        if (FlyTriggered && !reachedTarget)
+        {
+            flyToTarget(findClosestFlightWaypoint());
+        }
+
+        else if (reachedTarget)
+        {
+            FlyTriggered = false;
+            runNextJob = true;
+            reachedTarget = false;
+        }
+
+        else
+        {
+            if (runNextJob)
+            {
+
+                flyToGround(playerScript.getClosestGroundWaypoint());
+                StartCoroutine(land());
+            }
+
+            else if (agent.isActiveAndEnabled)
+            {
+                runNextJob = false;
+                Stage1();
+            }
+        }
     }
 
     void Stage1()
@@ -225,10 +263,23 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     }
 
     //Heads to specified Target
-    IEnumerator headToTarget(GameObject target, bool flight = true)
+    IEnumerator headToTarget(GameObject target, bool flyToGround, bool flight = true)
     {
+        float distToTarget = Vector3.Distance(rb.position, target.transform.position);
+
+        float switchViewTarget = landingSequenceDist + switchFacing;
+
+        if (flyToGround && distToTarget >= switchViewTarget)
+        {
+            faceTarget(target);
+        }
+
+        else if (flyToGround && distToTarget <= switchViewTarget )
+        {
+            facePlayer();
+        }
+    
         isMoving = true;
-        faceTarget(target);
         Vector3 position;
 
         if (flight)
@@ -241,22 +292,24 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             position = Vector3.MoveTowards(rb.position, target.transform.position, agent.speed * Time.deltaTime);
         }
 
-        
-        rb.MovePosition(position);
+       
+
+        rb.Move(position,transform.rotation);
 
         yield return new WaitForSeconds(1);
+
         isMoving = false;
-      
+
+
     }
 
     //Flys to Closest Ground Waypoint, when called
     void flyToGround (GameObject waypoint)
     {
-            rb.useGravity = false;
+
             isGrounded = false;
             isFlying = true;
             agent.enabled = false;
-
 
             distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
 
@@ -279,25 +332,24 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     void flyToTarget(GameObject waypoint)
     {
             isFlying = true;
-            faceTarget(waypoint);
-            rb.useGravity = false;
+            //rb.useGravity = false;
             isGrounded = false;
-            isFlying = true;
             agent.enabled = false;
            
             distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
 
 
-            if (distToWaypoint <= flightHeight)
+            if (distToWaypoint <= flightStoppingDist)
             {                
                 reachedTarget = true;
 
             }
 
-            else if (distToWaypoint >= flightHeight)
+            else if (distToWaypoint >= flightStoppingDist)
             {
-                isFlying = true;               
-                StartCoroutine(headToTarget(waypoint));
+                isFlying = true;
+                faceTarget(waypoint);
+                StartCoroutine(headToTarget(waypoint, false, true));
             }
         
     }
@@ -309,18 +361,17 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         if (isLanding)
         {
 
-            if (!isGrounded && !isFlying && distToWaypoint <= 25)
+            if (!isGrounded && !isFlying)// && distToWaypoint) //<= landingSequenceDist)
             {
-
+                facePlayer();
                 flightSpeed = origFlightSpeed;
                 isGrounded = true;
                 isLanding = false;
-                rb.useGravity = true;
+                rb.velocity = new Vector3(0, landingSpeed, 0);
                 setFlightAnimation();
 
-                yield return new WaitForSeconds(.2f);
+                yield return new WaitForSeconds(landingDelay);
                 anime.SetTrigger("equip");
-                facePlayer();
                 agent.enabled = true;
                 runNextJob = false;
               
@@ -331,6 +382,11 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
  
            
     }
+
+    //IEnumerator landingDelay
+    //{
+
+    //}
 
     GameObject findClosestFlightWaypoint()
     {
@@ -386,13 +442,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         if (!isGrounded)
         {
             anime.SetBool("Fly", true);
-            agent.stoppingDistance = flightStoppingDist;
+
         }
 
         else if (isGrounded)
         {
             anime.SetBool("Fly", false);
-            agent.stoppingDistance = stoppingDistOriginal;
         }
 
                
