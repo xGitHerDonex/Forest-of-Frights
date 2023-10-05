@@ -129,7 +129,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             //casts a ray on the player
             RaycastHit hit;
 
-            //get's player's direction
+            //get's player's _direction
             playerDirection = gameManager.instance.player.transform.position - headPos.position;
 
 
@@ -184,7 +184,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             //casts a ray on the player
             RaycastHit hit;
 
-            //get's player's direction
+            //get's player's _direction
             playerDirection = gameManager.instance.player.transform.position - headPos.position;
 
             angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
@@ -411,7 +411,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             }
         }
 
-    //sets the rotation of the enemy to face the player based on the player direction to the enemy 
+    //sets the rotation of the enemy to face the player based on the player _direction to the enemy 
     //and it lerps the rotation over time so it is smooth and not choppy
     void faceTarget()
     {

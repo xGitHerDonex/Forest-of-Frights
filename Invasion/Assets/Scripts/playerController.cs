@@ -231,7 +231,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
             //WIP Sprint Sound
             float moveMagnitude = move.magnitude;
-            //audioSource.Stop();
+            //m_AudioSource.Stop();
             if (playerSpeed == 10 && !audioSource.isPlaying && moveMagnitude >= 0.4f)
             {
                 audioSource.PlayOneShot(playerRunsGrass);

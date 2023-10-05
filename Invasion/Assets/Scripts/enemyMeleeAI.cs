@@ -218,7 +218,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
         //tests to see if the player is within range of the enemy and if the player is within range calculate
         /* the angle of the player to the enemy 
          * there is a debug to show the angle and the player position to the enemy position in the scene screen.
-         * sends out a ray cast from the head of the enemy to the player to figure out the direction and if there is 
+         * sends out a ray cast from the head of the enemy to the player to figure out the _direction and if there is 
          * any obstacles in the way
          */
         bool canSeePlayer()
@@ -261,7 +261,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
         }
 
         // Set the shooting bool to true then
-        // places and intializes the bullet object from the shooting postion and gives it a direction while triggering the bool that checks whether the enemy is shooting or not.
+        // places and intializes the bullet object from the shooting postion and gives it a _direction while triggering the bool that checks whether the enemy is shooting or not.
         //suspends the coroutine for the amount of seconds the shootrate is set to then sets the shooting back to false
 
 
@@ -290,7 +290,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
                 }
             }
 
-        //sets the rotation of the enemy to face the player based on the player direction to the enemy 
+        //sets the rotation of the enemy to face the player based on the player _direction to the enemy 
         //and it lerps the rotation over time so it is smooth and not choppy
         void faceTarget()
         {
