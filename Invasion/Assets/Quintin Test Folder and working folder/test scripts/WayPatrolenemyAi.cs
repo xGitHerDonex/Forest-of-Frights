@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Device;
 
-public class testenemyAI : MonoBehaviour, IDamage, IPhysics
+public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 {
 
     [Header("-----Components-----")]
     [SerializeField] Renderer model;
-    [SerializeField] NavMeshAgent agent;
+    private NavMeshAgent agent;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
-    [SerializeField] Animator anime;
+    private Animator anime;
     [SerializeField] Collider hitBox;
     [Tooltip("waypoints must be set")]
     [SerializeField] Transform[] waypoints;
@@ -41,8 +41,8 @@ public class testenemyAI : MonoBehaviour, IDamage, IPhysics
 
     [Tooltip("Object to Shoot")]
     [SerializeField] GameObject bullet;
-    [Tooltip("Used to delay the projectile instantiation to match animation")]
-    [SerializeField] float shootDelay;
+    //[Tooltip("Used to delay the projectile instantiation to match animation")]
+    //[SerializeField] float shootDelay;
 
     [Tooltip("Angle which the enemy can attack. (-)360-360")]
     [Range(-360, 360)][SerializeField] int shootAngle;
@@ -68,7 +68,11 @@ public class testenemyAI : MonoBehaviour, IDamage, IPhysics
     private int m_PathIndex;
 
 
-
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        anime = GetComponent<Animator>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -260,7 +264,7 @@ public class testenemyAI : MonoBehaviour, IDamage, IPhysics
                  * face the target and prepare to shoot if the angle is within parameter and the enemy is not already shooting
                  * if these are true then start to shoot
                  */
-                if (agent.remainingDistance <= agent.stoppingDistance)
+                if (agent.remainingDistance >= agent.stoppingDistance)
                 {
                     faceTarget();
                     if (!isShooting && angleToPlayer <= shootAngle)
@@ -284,19 +288,18 @@ public class testenemyAI : MonoBehaviour, IDamage, IPhysics
         isShooting = true;
         playAttackSound();
         anime.SetTrigger("Shoot");
-
         //Used to add delay to the shoot to match the animation
-        StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
-
+        //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
         yield return new WaitForSeconds(shootRate);
+        Instantiate(bullet, shootPos.position, transform.rotation);
         isShooting = false;
     }
 
-    IEnumerator shootDelayed()
-    {
-        Instantiate(bullet, shootPos.position, transform.rotation);
-        yield return new WaitForSeconds(shootDelay);
-    }
+    //IEnumerator shootDelayed()
+    //{
+    //    Instantiate(bullet, shootPos.position, transform.rotation);
+    //    yield return new WaitForSeconds(shootDelay);
+    //}
     //Allows the attached sound for Attack Sound to be played
     private void playAttackSound()
     {

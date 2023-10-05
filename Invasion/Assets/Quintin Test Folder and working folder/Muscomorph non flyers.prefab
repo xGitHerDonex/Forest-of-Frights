@@ -822,13 +822,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4045760243799244027}
-  - component: {fileID: 6978872451355735321}
+  - component: {fileID: 7123113487784394483}
   - component: {fileID: 7133280225709019248}
   - component: {fileID: 3287290332716487741}
   - component: {fileID: 262383418574687730}
   - component: {fileID: 9066978301247056401}
   m_Layer: 7
-  m_Name: Muscomorph Testing Watching and identify Works
+  m_Name: Muscomorph non flyers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -857,7 +857,7 @@ Transform:
   - {fileID: 8801934272025888666}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6978872451355735321
+--- !u!114 &7123113487784394483
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -866,27 +866,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 3471716434128170009}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f42ca813dc81da84aab74373bf99346a, type: 3}
+  m_Script: {fileID: 11500000, guid: f04db652adcaff64fb10720001b7d0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  hitBox: {fileID: 0}
-  shootPos: {fileID: 0}
   model: {fileID: 0}
-  bullet: {fileID: 0}
-  m_RangedAttackParticle: {fileID: 0}
+  agent: {fileID: 0}
+  shootPos: {fileID: 0}
+  headPos: {fileID: 0}
+  anime: {fileID: 0}
+  hitBox: {fileID: 0}
   waypoints: []
-  shootDelay: 0
-  targetFaceSpeed: 3
   hp: 0
+  targetFaceSpeed: 0
+  viewAngle: 0
+  roamDistance: 0
+  roamPauseTime: 0
+  animeSpeedChange: 0
+  bullet: {fileID: 0}
+  shootDelay: 0
   shootAngle: 0
-  m_ViewAngle: 0
   shootRate: 0
-  animeSpeedChange: 1
-  m_AudioSource: {fileID: 0}
-  m_WalkSound: {fileID: 0}
-  m_AttackSound: {fileID: 0}
-  m_DeathSound: {fileID: 0}
+  audioSource: {fileID: 0}
+  walkSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!95 &7133280225709019248
 Animator:
   serializedVersion: 5

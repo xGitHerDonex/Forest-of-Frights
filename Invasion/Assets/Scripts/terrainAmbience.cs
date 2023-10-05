@@ -33,7 +33,7 @@ public class terrainAmbience : MonoBehaviour
     }
     IEnumerator playAudioInSequence()
     {
-
+        audioSource.volume = .1f;
         int rand = Random.Range(0, audioClips.Length);
         rand = (rand + 1) % audioClips.Length;
         audioSource.clip = audioClips[rand];
