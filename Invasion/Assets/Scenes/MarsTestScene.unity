@@ -1498,7 +1498,8 @@ Transform:
   m_LocalPosition: {x: 210.01001, y: 0.40999985, z: 400.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 932877691}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &187838077
@@ -4386,11 +4387,11 @@ Transform:
   m_GameObject: {fileID: 932877690}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 225.68, y: 0.40999985, z: 376.3}
+  m_LocalPosition: {x: -22.670013, y: 0, z: -24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 187838076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &932877692
 BoxCollider:
@@ -6141,6 +6142,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2744346416422435851, guid: 79df2e6a75b865a4db8ac2e32403522a, type: 3}
+      propertyPath: waypoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744346416422435851, guid: 79df2e6a75b865a4db8ac2e32403522a, type: 3}
+      propertyPath: waypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 187838076}
+    - target: {fileID: 2744346416422435851, guid: 79df2e6a75b865a4db8ac2e32403522a, type: 3}
+      propertyPath: waypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 2028148595}
     - target: {fileID: 4187950898864324539, guid: 79df2e6a75b865a4db8ac2e32403522a, type: 3}
       propertyPath: waypoints.Array.size
       value: 4
@@ -7966,7 +7979,6 @@ SceneRoots:
   - {fileID: 454153256}
   - {fileID: 2028148595}
   - {fileID: 187838076}
-  - {fileID: 932877691}
   - {fileID: 927371250}
   - {fileID: 1673665537}
   - {fileID: 1852786378}
