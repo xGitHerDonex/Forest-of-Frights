@@ -231,113 +231,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2ca6668578279c40ae10c99219b5563, type: 3}
---- !u!1 &489096544
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 489096545}
-  - component: {fileID: 489096548}
-  - component: {fileID: 489096547}
-  - component: {fileID: 489096546}
-  m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &489096545
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 489096544}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.7881597, y: -0.019208724, z: 0.22078764, w: 0.5741847}
-  m_LocalPosition: {x: 2.966019, y: 1.6707608, z: -1.8928021}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5299886357014580448}
-  m_LocalEulerAnglesHint: {x: 113.994995, y: -53.281982, z: -33.299988}
---- !u!136 &489096546
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 489096544}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.14943384
-  m_Height: 5.2574267
-  m_Direction: 2
-  m_Center: {x: 0.35057214, y: -0.0000045543184, z: 2.378058}
---- !u!23 &489096547
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 489096544}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &489096548
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 489096544}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &646319031 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4407998406768315001, guid: 967eb1c5084c8b0499fa82479ff6653b, type: 3}
@@ -915,6 +808,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7926022950704675586}
+  - component: {fileID: 7926022950704675588}
+  - component: {fileID: 7926022950704675587}
   m_Layer: 0
   m_Name: DEMON_LORD_WHIP_02
   m_TagString: Untagged
@@ -1217,6 +1112,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3721725475574393323}
+  - component: {fileID: 3721725475574393325}
+  - component: {fileID: 3721725475574393324}
   m_Layer: 0
   m_Name: DEMON_LORD_WHIP_06
   m_TagString: Untagged
@@ -2661,6 +2558,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5627329581942565674}
+  - component: {fileID: 5627329581942565676}
+  - component: {fileID: 5627329581942565675}
   m_Layer: 0
   m_Name: DEMON_LORD_WHIP_04
   m_TagString: Untagged
@@ -2907,12 +2806,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7528799137351318532}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.8022064, y: 0.021064078, z: 0.2747738, w: 0.5296419}
-  m_LocalPosition: {x: 2.032216, y: 0.026847169, z: -1.8543885}
+  m_LocalRotation: {x: -0.2664185, y: -0.06509376, z: -0.41419953, w: 0.8678841}
+  m_LocalPosition: {x: -1.9182281, y: 2.3261738, z: 0.4341507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5299886357014580448}
+  m_Father: {fileID: 4825752165207375192}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1007577176375509086
 BoxCollider:
@@ -4100,18 +3999,19 @@ MonoBehaviour:
   hitBox: {fileID: 0}
   rb: {fileID: 1452713995609212249}
   groundCheck: {fileID: 0}
-  DemonLord: {fileID: 0}
   targetFaceSpeed: 10
   runningDistance: 0
   hp: 0
   maxHp: 1
   animeSpeedChange: 10
   enemyRunSpeed: 0
-  leftMeleeCollider: {fileID: 7528799137351318532}
-  rightMeleeCollider: {fileID: 3306632922964405834}
+  leftMeleeCollider: {fileID: 1728914785656875299}
+  rightMeleeCollider: {fileID: 5944698568429622414}
+  whipDelay: 1.8
   meleeDelay: 1
   meleeDamage: 5
   meleeStage2Damage: 10
+  meleeRange: 25
   bullet: {fileID: 0}
   rangedStoppingDistance: 0
   maxShootingRange: 0
@@ -4137,6 +4037,7 @@ MonoBehaviour:
   attackSound: {fileID: 0}
   deathSound: {fileID: 0}
   isLanding: 0
+  isAttacking: 0
   isMoving: 0
   isRunning: 0
   isShooting: 0
@@ -4412,13 +4313,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4543773281234973303}
+  - component: {fileID: 4543773281234973304}
+  - component: {fileID: 4543773281234973305}
   m_Layer: 0
   m_Name: DEMON_LORD_SWORD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1749967535816860686
 Transform:
   m_ObjectHideFlags: 0
@@ -4823,7 +4726,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.707018, y: 0.23260294, z: -0.6506805, w: 0.15045363}
   m_LocalPosition: {x: -0.3369795, y: 0.15479279, z: -0.32505926}
-  m_LocalScale: {x: 0.99999994, y: 0.9999998, z: 1.0000002}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5008799483711324286}
@@ -5673,6 +5576,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6468316582938458129}
+  - component: {fileID: 6468316582938458131}
+  - component: {fileID: 6468316582938458130}
   m_Layer: 0
   m_Name: DEMON_LORD_WHIP_011
   m_TagString: Untagged
@@ -6614,6 +6519,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7930857343272657019}
+  - component: {fileID: 7930857343272657021}
+  - component: {fileID: 7930857343272657020}
   m_Layer: 0
   m_Name: DEMON_LORD_WHIP_08
   m_TagString: Untagged
@@ -7987,6 +7894,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5008799483711324286}
+  - component: {fileID: 5008799483711324288}
+  - component: {fileID: 5008799483711324287}
   m_Layer: 0
   m_Name: DEMON_LORD_WHIP_01
   m_TagString: Untagged
@@ -8426,6 +8335,42 @@ Transform:
   - {fileID: 8002342765614836209}
   m_Father: {fileID: 5387147385988718106}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &3721725475574393324
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223597855164742358}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3721725475574393325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223597855164742358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
 --- !u!1 &3725525159586996517
 GameObject:
   m_ObjectHideFlags: 0
@@ -9831,6 +9776,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1078484688902585094}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4543773281234973304
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728914785656875299}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6805426
+  m_Height: 5.3284416
+  m_Direction: 0
+  m_Center: {x: -2.5634477, y: 0.10453201, z: -0.12663986}
+--- !u!114 &4543773281234973305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728914785656875299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!65 &4562674573018357457
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10348,6 +10329,7 @@ Transform:
   m_Children:
   - {fileID: 210920553785792187}
   - {fileID: 4166303515163413560}
+  - {fileID: 982797149894421615}
   - {fileID: 6335337151314415216}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10626,6 +10608,42 @@ Transform:
   - {fileID: 7926022950704675586}
   m_Father: {fileID: 1949844792159189227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5008799483711324287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3462687413475269794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+--- !u!136 &5008799483711324288
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3462687413475269794}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: -0.12208986, y: -0.000000004879844, z: -0.000000027618015}
 --- !u!4 &5022198614779625244
 Transform:
   m_ObjectHideFlags: 0
@@ -11194,11 +11212,9 @@ Transform:
   m_LocalScale: {x: 0.99999994, y: 0.9999998, z: 0.99999994}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 489096545}
   - {fileID: 7057253172890663518}
   - {fileID: 2020146096600930528}
   - {fileID: 5898097381590563600}
-  - {fileID: 982797149894421615}
   m_Father: {fileID: 1486954659036839458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5319843642233033306
@@ -11550,6 +11566,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8002342765614836209}
+  - component: {fileID: 8002342765614836211}
+  - component: {fileID: 8002342765614836210}
   m_Layer: 0
   m_Name: DEMON_LORD_WHIP_07
   m_TagString: Untagged
@@ -11732,6 +11750,42 @@ Transform:
   - {fileID: 5387147385988718106}
   m_Father: {fileID: 2986794760538186903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5627329581942565675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883277919829362424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+--- !u!136 &5627329581942565676
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883277919829362424}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &5629891907082287966
 Transform:
   m_ObjectHideFlags: 0
@@ -11907,6 +11961,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2986794760538186903}
+  - component: {fileID: 5771001553941163034}
+  - component: {fileID: 5771001553941163033}
   m_Layer: 0
   m_Name: DEMON_LORD_WHIP_03
   m_TagString: Untagged
@@ -11914,6 +11970,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5771001553941163033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5771001553941163032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+--- !u!136 &5771001553941163034
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5771001553941163032}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &5781346431669760804
 Transform:
   m_ObjectHideFlags: 0
@@ -12438,7 +12530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5957052028006732181
 Transform:
   m_ObjectHideFlags: 0
@@ -13457,6 +13549,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5030693235564645863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &6468316582938458130
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364973612829024346}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4125087
+  m_Height: 3.3819642
+  m_Direction: 0
+  m_Center: {x: -1.432217, y: 0.15893556, z: -0.4285531}
+--- !u!114 &6468316582938458131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2364973612829024346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
 --- !u!1 &6471621560468309404
 GameObject:
   m_ObjectHideFlags: 0
@@ -14519,11 +14647,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 15
+  m_Speed: 20
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 150
-  m_StoppingDistance: 30
+  m_StoppingDistance: 35
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -15457,6 +15585,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5387147385988718106}
+  - component: {fileID: 7370862343110966556}
+  - component: {fileID: 7370862343110966555}
   m_Layer: 0
   m_Name: DEMON_LORD_WHIP_05
   m_TagString: Untagged
@@ -15464,6 +15594,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!136 &7370862343110966555
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370862343110966554}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7370862343110966556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7370862343110966554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
 --- !u!65 &7371186934806244049
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16514,6 +16680,42 @@ Transform:
   - {fileID: 2986794760538186903}
   m_Father: {fileID: 5008799483711324286}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7926022950704675587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108514267944215722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+--- !u!136 &7926022950704675588
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108514267944215722}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &7926983644308309890
 Transform:
   m_ObjectHideFlags: 0
@@ -16545,6 +16747,42 @@ Transform:
   - {fileID: 9043872278869740938}
   m_Father: {fileID: 8002342765614836209}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7930857343272657020
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2884823155344949346}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7930857343272657021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2884823155344949346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
 --- !u!4 &7939114172066053000
 Transform:
   m_ObjectHideFlags: 0
@@ -16758,6 +16996,42 @@ Transform:
   - {fileID: 7930857343272657019}
   m_Father: {fileID: 3721725475574393323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8002342765614836210
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5515524101072835821}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8002342765614836211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5515524101072835821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
 --- !u!65 &8007608071083810105
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17215,6 +17489,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5030693235564645863}
+  - component: {fileID: 8171565578505002783}
+  - component: {fileID: 8171565578505002782}
   m_Layer: 0
   m_Name: DEMON_LORD_WHIP_010
   m_TagString: Untagged
@@ -17222,6 +17498,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!136 &8171565578505002782
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8171565578505002781}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8171565578505002783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8171565578505002781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
 --- !u!1 &8174601773766293121
 GameObject:
   m_ObjectHideFlags: 0
@@ -19207,6 +19519,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9043872278869740938}
+  - component: {fileID: 9081236684629265544}
+  - component: {fileID: 9081236684629265543}
   m_Layer: 0
   m_Name: DEMON_LORD_WHIP_09
   m_TagString: Untagged
@@ -19214,6 +19528,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!136 &9081236684629265543
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9081236684629265542}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9081236684629265544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9081236684629265542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
 --- !u!4 &9093704351311056580
 Transform:
   m_ObjectHideFlags: 0

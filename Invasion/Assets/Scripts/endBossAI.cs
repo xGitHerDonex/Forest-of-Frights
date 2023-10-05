@@ -22,9 +22,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Collider hitBox;
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject groundCheck;
-    [SerializeField] Transform DemonLord;
   
-
     [Header("-----Enemy Stats-----")]
 
     [Tooltip("Turning speed 1-10.")]
@@ -45,11 +43,15 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [Header("-----Melee Components-----")]
     [SerializeField] GameObject leftMeleeCollider;
     [SerializeField] GameObject rightMeleeCollider;
+
+    [Tooltip("Calculates within stopping range where enemy will whip")]
+    [SerializeField] float whipDelay;
     [Tooltip("Delay Value between melee attacks in seconds")]
-    [SerializeField] int meleeDelay;
+    [SerializeField] float meleeDelay;
     [Tooltip("meleeDamage")]
     [SerializeField] int meleeDamage;
     [SerializeField] int meleeStage2Damage;
+    [SerializeField] float meleeRange;
 
 
     [Header("-----FireBall Components-----")]
@@ -89,7 +91,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] GameObject[] waypoints;
     [SerializeField] GameObject closestWaypoint;
     [SerializeField] float waypointDist;
-    [SerializeField] float rotationSpeed;
 
 
     [Header("SFX")]
@@ -161,7 +162,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         //If enemy is not dead, we'll continue
         if (!isDead)
         {
-
+            facePlayer();
             //casts a ray on the player
             RaycastHit hit;
 
@@ -172,6 +173,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             //Casts a ray on the player
             if (Physics.Raycast(headPos.position, playerDirection, out hit))
             {
+
                 agentVel = agent.velocity.normalized.magnitude;
                 anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
 
@@ -180,23 +182,33 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
 
                 //If player within stopping distance, face target and attack if not already attacking
-                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
+                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance && distToPlayer >= meleeRange)
                 {
 
                     agent.velocity = Vector3.zero;
                     agent.ResetPath();
-                    faceTarget();
-
-                    if (!isRunning)
-                        StartCoroutine(Melee(1));
+                    facePlayer();
+                    StartCoroutine(whip());
 
                 }
+
+                //If player within stopping distance, face target and attack if not already attacking
+                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= meleeRange)
+                {
+
+                    agent.velocity = Vector3.zero;
+                    agent.ResetPath();
+                    facePlayer();
+                    StartCoroutine(Melee(Random.Range(1, 5)));
+
+                }
+
 
                 //if player is not wthin stopping distance, then set distination to the player
                 else if (hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
                 {
 
-                    faceTarget();
+                    facePlayer();
                     agent.SetDestination(gameManager.instance.player.transform.position);
 
                 }
@@ -301,7 +313,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
                 yield return new WaitForSeconds(.2f);
 
-                faceTarget();
+                facePlayer();
                 agent.enabled = true;
                 runNextJob = false;
               
@@ -392,7 +404,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
 
     //Faces Player
-    void faceTarget()
+    void facePlayer()
     {
         Quaternion rotation = Quaternion.LookRotation(playerDirection);
         //lerp over time rotation
@@ -436,26 +448,44 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     IEnumerator Melee(int combo)
     {
         isAttacking = true;
-        //leftMeleeCollider.SetActive(true);
-        //rightMeleeCollider.SetActive(true);
+        
+        leftMeleeCollider.SetActive(true);
 
-        if (combo == 1)
-            anime.SetTrigger("Melee1");
+            switch (combo)
+            {
+                case 1:
+                    anime.SetTrigger("Melee1");
+                    break;
+                case 2:
+                    anime.SetTrigger("Melee2");
+                    break;
+                case 3:
+                    anime.SetTrigger("Melee3");
+                    break;
+                case 4:
+                    anime.SetTrigger("Melee4");
+                    break;
 
-        if (combo == 2)
-            anime.SetTrigger("Melee2");
-
-        if (combo == 3)
-            anime.SetTrigger("Melee3");
-
-        if (combo == 4)
-            anime.SetTrigger("Melee4");
-
-
+            }
+   
+     
         yield return new WaitForSeconds(meleeDelay);
         isAttacking = false;
-        //leftMeleeCollider.SetActive(false);
-        //rightMeleeCollider.SetActive(false);
+
+        leftMeleeCollider.SetActive(false);
+        rightMeleeCollider.SetActive(false);
+    }
+
+    IEnumerator whip()
+    {
+        isAttacking = true;
+        rightMeleeCollider.SetActive(true);
+        anime.SetTrigger("Whip");
+        
+        yield return new WaitForSeconds(whipDelay);
+        isAttacking = false;
+
+        rightMeleeCollider.SetActive(false);
     }
 
     //Delay between Ranged attacks
