@@ -319,7 +319,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                 setFlightAnimation();
 
                 yield return new WaitForSeconds(.2f);
-
+                anime.SetTrigger("equip");
                 facePlayer();
                 agent.enabled = true;
                 runNextJob = false;
@@ -423,7 +423,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
       
        if(!isSummoning)
-        { 
+        {
+            anime.SetTrigger("summon");
             isSummoning = true;
             bossSpawnerManager.instance.setTimeToSpawn(true);
             yield return new WaitForSeconds(0.1f);
