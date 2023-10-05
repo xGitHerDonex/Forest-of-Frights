@@ -5,38 +5,53 @@ using static playerController;
 
 public class ammoPickup : MonoBehaviour
 {
-    public playerController.AmmoType ammoType;  // Enum type
 
-    // Available Ammo types
-    public Dictionary<AmmoType, int> ammoAmounts = new Dictionary<AmmoType, int>()
-{
-    { AmmoType.PistolAmmo, 15 },
-    { AmmoType.PulsarAmmo, 30 },
-    { AmmoType.ShotgunAmmo, 5 },
-    { AmmoType.RailgunAmmo, 3 },
-    { AmmoType.RBFGAmmo, 1 }
-};
-
-    private void OnTriggerEnter(Collider other)
+    public enum AmmoItem
     {
-        if (other.CompareTag("Player"))
+        None,
+        PistolAmmo,
+        ShotgunAmmo,
+        RailgunAmmo,
+        Metabolizer,
+        FlightX,
+        Enhancer,
+        NanoInfusor,
+        PhaseShifter,
+        ReflexGauntlet,
+        AntiGravStone,
+        Synthesizer,
+        Vitalizer,
+        ChronoGreaves,
+        PowerInfusor,
+        FarSight
+    }
+    [SerializeField] private AmmoItem ammoType;
+    [SerializeField] private playerController player;
+    [SerializeField] private GameObject energeticRingUI;
+    [SerializeField] private GameObject crimsonStoneUI;
+    [SerializeField] private GameObject temportalRelicUI;
+    [SerializeField] private GameObject metabolizerUI;
+    [SerializeField] private GameObject flightxUI;
+    [SerializeField] private GameObject enhancerUI;
+    [SerializeField] private GameObject nanoInfusorUI;
+    [SerializeField] private GameObject phaseShifterUI;
+    [SerializeField] private GameObject reflexGauntletUI;
+    [SerializeField] private GameObject antiGravStoneUI;
+    [SerializeField] private GameObject synthesizerUI;
+    [SerializeField] private GameObject vitalizerUI;
+    [SerializeField] private GameObject chronoGreavesUI;
+    [SerializeField] private GameObject powerInfusorUI;
+    [SerializeField] private GameObject farSightUI;
+
+    public class AmmoItemData
+    {
+        public int pickupValue;
+
+        public AmmoItemData(int pickupValue)
         {
-            playerController player = other.GetComponent<playerController>();
-
-            if (player != null)
-            {
-                // Check if the ammo type is in the dictionary
-                if (ammoAmounts.ContainsKey(player.ammoType))
-                {
-                    int amount = ammoAmounts[player.ammoType];
-
-                    // Add ammo to the player's inventory
-                    player.AddAmmo(player.ammoType, amount);
-                    player.ammoUpdate();
-                }
-
-                Destroy(gameObject);
-            }
+            this.pickupValue = pickupValue;
         }
     }
+
+
 }
