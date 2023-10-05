@@ -415,7 +415,10 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
 
     //Summon enemies
-
+    void Summon()
+    {
+        bossSpawnerManager.instance.setTimeToSpawn(true));
+    }
 
 
     IEnumerator shoot()
