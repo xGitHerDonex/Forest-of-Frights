@@ -21,8 +21,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Animator anime;
     [SerializeField] Collider hitBox;
     [SerializeField] Rigidbody rb;
-    [SerializeField] GameObject groundCheck;
-  
+
     [Header("-----Enemy Stats-----")]
 
     [Tooltip("Turning speed 1-10.")]
@@ -79,14 +78,30 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int flightSpeed;
     [SerializeField] int origFlightSpeed;
     [SerializeField] int groundingHeight;
-    //[SerializeField] int flightHeight;
     [SerializeField] int flightStoppingDist;
-    [SerializeField] int landingSequenceDist;
     [SerializeField] int landingSpeed;
     [SerializeField] int switchFacing;
-    [SerializeField] int landingDelay;
+    [SerializeField] float landingDelay;
 
 
+    //bools
+    [SerializeField] bool isLanding; 
+    [SerializeField] bool isAttacking;
+    [SerializeField] bool isMoving;
+    [SerializeField] bool isRunning;
+    [SerializeField] bool isShooting;
+    [SerializeField] bool isGrounded;
+    [SerializeField] bool isFlying;
+    [SerializeField] bool reachedTarget;
+    [SerializeField] bool FlyTriggered;
+    [SerializeField] bool isSummoning;
+
+
+    [Header("SFX")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip walkSound;
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] AudioClip deathSound;
 
 
     [Header("-----Waypoints-----")]
@@ -96,14 +111,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] GameObject[] waypoints;
     [SerializeField] GameObject closestWaypoint;
     [SerializeField] float waypointDist;
-
-
-    [Header("SFX")]
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip walkSound;
-    [SerializeField] AudioClip attackSound;
-    [SerializeField] AudioClip deathSound;
-
     //player or enemy
     float agentVel;
     float hpRatio;
@@ -121,17 +128,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     int wavesToSpawn;
     int wavesSpawned;
 
-    //bools
-    [SerializeField] bool isLanding; 
-    [SerializeField] bool isAttacking;
-    [SerializeField] bool isMoving;
-    [SerializeField] bool isRunning;
-    [SerializeField] bool isShooting;
-    [SerializeField] bool isGrounded;
-    [SerializeField] bool isFlying;
-    [SerializeField] bool reachedTarget;
-    [SerializeField] bool FlyTriggered;
-    [SerializeField] bool isSummoning;
+
 
 
 
@@ -267,7 +264,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         float distToTarget = Vector3.Distance(rb.position, target.transform.position);
 
-        float switchViewTarget = landingSequenceDist + switchFacing;
+        float switchViewTarget = groundingHeight + switchFacing;
 
         if (flyToGround && distToTarget >= switchViewTarget)
         {
@@ -361,7 +358,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         if (isLanding)
         {
 
-            if (!isGrounded && !isFlying)// && distToWaypoint) //<= landingSequenceDist)
+            if (!isGrounded && !isFlying)
             {
                 facePlayer();
                 flightSpeed = origFlightSpeed;
