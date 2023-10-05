@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -15,6 +16,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform headPos;
+    [SerializeField] Transform bodyPos;
     [SerializeField] Transform shootPos;
     [SerializeField] Animator anime;
     [SerializeField] Collider hitBox;
@@ -26,7 +28,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [Header("-----Enemy Stats-----")]
 
     [Tooltip("Turning speed 1-10.")]
-    [Range(1, 10)][SerializeField] int targetFaceSpeed;
+    [Range(1, 20)][SerializeField] int targetFaceSpeed;
     [SerializeField] int runningDistance;
 
 
@@ -76,6 +78,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int origFlightSpeed;
     [SerializeField] int groundingHeight;
     [SerializeField] int flightHeight;
+    [SerializeField] int flightStoppingDist;
+
 
 
     [Header("-----Waypoints-----")]
@@ -99,14 +103,13 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     float hpRatio;
     float distToPlayer;
     float angleToPlayer;
-    bool isAttacking;
     bool isDead;
     bool playerInRange;
-    bool runNextJob;
     playerController playerScript;
 
-    //movement
-    [SerializeField] bool isLanding;
+    //bools
+    [SerializeField] bool isLanding; 
+    [SerializeField] bool isAttacking;
     [SerializeField] bool isMoving;
     [SerializeField] bool isRunning;
     [SerializeField] bool isShooting;
@@ -119,6 +122,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     Vector3 playerDirection;
     Vector3 startingPos;
     float speedOrig;
+    bool runNextJob;
 
 
     // Start is called before the first frame update
@@ -127,6 +131,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         //Get's Player Script so we can check the closest waypoint
         playerScript = gameManager.instance.player.GetComponent<playerController>();
         origFlightSpeed = flightSpeed;
+        stoppingDistOriginal = agent.stoppingDistance;
         isDead = false;
         isAttacking = false;
         isGrounded = true;
@@ -147,39 +152,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         //Continually checks to see if Enemy is flying, and updates animation
         setFlightAnimation();
 
-        if(Input.GetButton("test"))
-        {
-            FlyTriggered = true;
-        }
-
-        if (FlyTriggered && !reachedTarget)
-        {
-            flyToTarget(findClosestFlightWaypoint());         
-        }
-
-        else if (reachedTarget)
-        {
-            FlyTriggered = false;
-            runNextJob = true;
-            reachedTarget = false;
-        }
-
-        else
-        {
-            if (runNextJob)
-            {
-
-                flyToGround(playerScript.getClosestGroundWaypoint());
-                StartCoroutine(land());
-            }
-
-            else if (agent.isActiveAndEnabled)
-            {
-                runNextJob = false;
-                Stage1();
-            }
-        }
-
+        Stage1();
 
     }
 
@@ -188,8 +161,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         //If enemy is not dead, we'll continue
         if (!isDead)
         {
-            //Continually determines enemy speed and run / walk animations
-            //updateRunningSpeed();
 
             //casts a ray on the player
             RaycastHit hit;
@@ -217,7 +188,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                     faceTarget();
 
                     if (!isRunning)
-                        StartCoroutine(Melee(Random.Range(2, 5)));
+                        StartCoroutine(Melee(1));
 
                 }
 
@@ -255,7 +226,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         rb.MovePosition(position);
 
         yield return new WaitForSeconds(1);
-
         isMoving = false;
       
     }
@@ -268,14 +238,10 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             isFlying = true;
             agent.enabled = false;
 
+
             distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
 
-        //Quaternion rotation = Quaternion.LookRotation(waypoint.transform.position - transform.position);
-        //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * rotationSpeed);
-
-        //transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, rotationSpeed);
-
-        if (distToWaypoint <= groundingHeight)
+            if (distToWaypoint <= groundingHeight)
             {
                 isFlying = false;
                 reachedTarget = true;
@@ -284,19 +250,24 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
             else if (distToWaypoint >= groundingHeight)
             {
-            isFlying = true;
+                isFlying = true;
                 StartCoroutine(headToTarget(waypoint,true));
             }
         
     }
+
+    //Same as above, but enemy flys to any target
     void flyToTarget(GameObject waypoint)
     {
+            isFlying = true;
+            faceTarget(waypoint);
             rb.useGravity = false;
             isGrounded = false;
             isFlying = true;
             agent.enabled = false;
            
             distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
+
 
             if (distToWaypoint <= flightHeight)
             {                
@@ -306,13 +277,13 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
             else if (distToWaypoint >= flightHeight)
             {
-                rb.constraints = RigidbodyConstraints.FreezeRotationX;
                 isFlying = true;               
                 StartCoroutine(headToTarget(waypoint));
             }
         
     }
 
+    //Land Routine that will land the enemy and reenable nav mesh
     IEnumerator land()
     {
         
@@ -327,24 +298,18 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                 isLanding = false;
                 rb.useGravity = true;
                 setFlightAnimation();
-                faceTarget();
 
                 yield return new WaitForSeconds(.2f);
 
+                faceTarget();
                 agent.enabled = true;
-                runNextJob = false; // remove
+                runNextJob = false;
+              
             }
 
         }
 
-     
-
-        //if (isGrounded && isLanding && !isFlying)
-        //{
-            
-        //}
-
-        
+ 
            
     }
 
@@ -402,12 +367,13 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         if (!isGrounded)
         {
             anime.SetBool("Fly", true);
+            agent.stoppingDistance = flightStoppingDist;
         }
 
         else if (isGrounded)
         {
             anime.SetBool("Fly", false);
-  
+            agent.stoppingDistance = stoppingDistOriginal;
         }
 
                
@@ -434,11 +400,10 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     }
 
 
-    //Find Closest flight way point
+
 
     //Summon enemies
 
-    //
 
 
     IEnumerator shoot()
@@ -458,26 +423,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
     }
 
-    //Update's speed parameter if target is running
-    //void updateRunningSpeed()
-    //{
-    //    //If player is farther than the running distance set, then we update the animator to reflect the run speed and the enemy runs faster.
-    //    if (distToPlayer >= runningDistance)
-    //    {
-    //        isRunning = true;
-    //        agentVel = agent.velocity.normalized.magnitude + 1;
-    //        agent.speed = enemyRunSpeed;
-    //    }
-
-    //    // If player is within the running -2 (to give the effect of them running up on the player), then we stop running and speed is set back to it's original
-    //    else if (distToPlayer <= (runningDistance - 2))
-    //    {
-    //        isRunning = false;
-    //        agentVel = agent.velocity.normalized.magnitude;
-    //        agent.speed = speedOrig;
-    //    }
-    //}
-
     //Allows the attached sound for Attack Sound to be played
     void playAttackSound()
     {
@@ -491,8 +436,11 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     IEnumerator Melee(int combo)
     {
         isAttacking = true;
-        leftMeleeCollider.SetActive(true);
-        rightMeleeCollider.SetActive(true);
+        //leftMeleeCollider.SetActive(true);
+        //rightMeleeCollider.SetActive(true);
+
+        if (combo == 1)
+            anime.SetTrigger("Melee1");
 
         if (combo == 2)
             anime.SetTrigger("Melee2");
@@ -506,8 +454,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
         yield return new WaitForSeconds(meleeDelay);
         isAttacking = false;
-        leftMeleeCollider.SetActive(false);
-        rightMeleeCollider.SetActive(false);
+        //leftMeleeCollider.SetActive(false);
+        //rightMeleeCollider.SetActive(false);
     }
 
     //Delay between Ranged attacks
