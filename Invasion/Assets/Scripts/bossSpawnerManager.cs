@@ -18,6 +18,10 @@ public class bossSpawnerManager : MonoBehaviour
         spawners = GameObject.FindGameObjectsWithTag("spawner");
     }
 
+    public void spawnWave()
+    {
+    }
+
     public bool getTimeToSpawn()
     {
         return timeToSpawn;

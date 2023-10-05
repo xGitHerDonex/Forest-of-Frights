@@ -107,6 +107,14 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     bool isDead;
     bool playerInRange;
     playerController playerScript;
+    float stoppingDistOriginal;
+    Vector3 pushBack;
+    Vector3 playerDirection;
+    Vector3 startingPos;
+    float speedOrig;
+    bool runNextJob;
+    int wavesToSpawn;
+    int wavesSpawned;
 
     //bools
     [SerializeField] bool isLanding; 
@@ -118,12 +126,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] bool isFlying;
     [SerializeField] bool reachedTarget;
     [SerializeField] bool FlyTriggered;
-    float stoppingDistOriginal;
-    Vector3 pushBack;
-    Vector3 playerDirection;
-    Vector3 startingPos;
-    float speedOrig;
-    bool runNextJob;
+    [SerializeField] bool isSummoning;
+
 
 
     // Start is called before the first frame update
@@ -140,6 +144,10 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         isMoving = false;
         FlyTriggered = false;
         runNextJob = false;
+
+        //Gets waves to Spawn
+        //wavesToSpawn = bossSpawnerManager.instance.getWavesToSpawn();
+
         //Creates Flight waypoint Matrix
         waypoints = GameObject.FindGameObjectsWithTag("FLWP");
     }
@@ -149,12 +157,11 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-
         //Continually checks to see if Enemy is flying, and updates animation
-        setFlightAnimation();
+        //setFlightAnimation();
+        //Stage1();
 
-        Stage1();
-
+        StartCoroutine(summon());
     }
 
     void Stage1()
@@ -411,13 +418,19 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * targetFaceSpeed);
     }
 
-
-
-
-    //Summon enemies
-    void Summon()
+    //Summon enemies using the spawn manager
+    IEnumerator summon()
     {
-        bossSpawnerManager.instance.setTimeToSpawn(true));
+      
+       if(!isSummoning)
+        { 
+            isSummoning = true;
+            bossSpawnerManager.instance.setTimeToSpawn(true);
+            yield return new WaitForSeconds(0.1f);
+            bossSpawnerManager.instance.setTimeToSpawn(false);
+            isSummoning = false;
+        }
+     
     }
 
 
