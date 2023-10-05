@@ -28,7 +28,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Player basic shooting
     [Header("-----Gun Stats------")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
-    [SerializeField] GameObject gunModel;
+    //[SerializeField] GameObject gunModel;
     [SerializeField] Transform gunMuzzle;
     [SerializeField] float shootRate;
     [SerializeField] int shootDamage;
@@ -36,8 +36,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip shotSound;
 
     // Railgun Unique
-    [SerializeField] GameObject Railgun;
-    [SerializeField] GameObject Railbeam;
+    //[SerializeField] GameObject Railgun;
+    //[SerializeField] GameObject Railbeam;
 
     //Grenades
     [Header("-----Grenade Stats------")]
@@ -114,8 +114,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         originalPlayerSpeed = playerSpeed;
 
         // Creates the total ammo capacity for weapons
-        ammoInventory["Pistol Ammo"] = 100;
-        ammoInventory["Railgun Ammo"] = 30;
+        //ammoInventory["Pistol Ammo"] = 100;
+        //ammoInventory["Railgun Ammo"] = 30;
 
         //Create Ground Waypoint Matrix
         waypoints = GameObject.FindGameObjectsWithTag("GNDWP");
@@ -139,8 +139,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //Call to shoot
         //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
-        if (!gameManager.instance.isPaused && gunList.Count > 0 && Input.GetButton("Shoot") && !isShooting)
-            StartCoroutine(shoot());
+        //if (!gameManager.instance.isPaused && gunList.Count > 0 && Input.GetButton("Shoot") && !isShooting)
+        //    StartCoroutine(shoot());
 
         //Throw grenade - works similar to shoot    
         if (!gameManager.instance.isPaused && Input.GetButton("throw") && !isShooting)
@@ -269,90 +269,90 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
 
     //Shoot Ability:  Currently instant projectile speed
-    IEnumerator shoot()
-    {
+    //IEnumerator shoot()
+    //{
 
-        if (isShooting || gunList.Count == 0 || gameManager.instance.isPaused)
-            yield break;
+    //    if (isShooting || gunList.Count == 0 || gameManager.instance.isPaused)
+    //        yield break;
 
-        if (gunList[selectedGun].ammoCur > 0)
-        {
-            isShooting = true;
-            gunList[selectedGun].ammoCur--;
+    //    if (gunList[selectedGun].ammoCur > 0)
+    //    {
+    //        isShooting = true;
+    //        gunList[selectedGun].ammoCur--;
 
-            // Update HUD Ammo 
-            ammoCurText.text = gunList[selectedGun].ammoCur.ToString();
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                // Get the gunName as listed in gunStats
-                string gunType = gunList[selectedGun].gunName;
+    //        // Update HUD Ammo 
+    //        ammoCurText.text = gunList[selectedGun].ammoCur.ToString();
+    //    }
+    //    else
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.R))
+    //        {
+    //            // Get the gunName as listed in gunStats
+    //            string gunType = gunList[selectedGun].gunName;
 
-                if (gunList[selectedGun].reloadAmount - gunList[selectedGun].ammoCur > 0)
-                {
-                    // Calculate how much ammo can be reloaded
-                    int ammoToReload = Mathf.Min(gunList[selectedGun].reloadAmount - gunList[selectedGun].ammoCur, ammoInventory[gunType]);
+    //            if (gunList[selectedGun].reloadAmount - gunList[selectedGun].ammoCur > 0)
+    //            {
+    //                // Calculate how much ammo can be reloaded
+    //                int ammoToReload = Mathf.Min(gunList[selectedGun].reloadAmount - gunList[selectedGun].ammoCur, ammoInventory[gunType]);
 
-                    // Deduct the reloaded ammo from the player's inventory
-                    ammoInventory[gunType] -= ammoToReload;
+    //                // Deduct the reloaded ammo from the player's inventory
+    //                ammoInventory[gunType] -= ammoToReload;
 
-                    // Update the current ammo count
-                    gunList[selectedGun].ammoCur += ammoToReload;
+    //                // Update the current ammo count
+    //                gunList[selectedGun].ammoCur += ammoToReload;
 
-                    // Update HUD ammo after Reloading
-                    ammoUpdate();
-                }
-            }
+    //                // Update HUD ammo after Reloading
+    //                ammoUpdate();
+    //            }
+    //        }
 
-            isShooting = false;
-            yield break;
-        }
+    //        isShooting = false;
+    //        yield break;
+    //    }
 
-        // Talk to gunStats to grab the current gun's Recoil
-        float recoilAmount = gunList[selectedGun].recoilAmount;
+    //    // Talk to gunStats to grab the current gun's Recoil
+    //    float recoilAmount = gunList[selectedGun].recoilAmount;
 
-        // Save the original gunModel rotation (to recoil back to)
-        Quaternion originalRotation = gunModel.transform.localRotation;
+    //    // Save the original gunModel rotation (to recoil back to)
+    //    Quaternion originalRotation = gunModel.transform.localRotation;
 
-        // Play the shoot sound
-        audioSource.PlayOneShot(shotSound);
+    //    // Play the shoot sound
+    //    audioSource.PlayOneShot(shotSound);
 
-        // Cast a ray and check for hits
-        RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
-        {
-            IDamage damageable = hit.collider.GetComponent<IDamage>();
-            if (damageable != null && hit.transform != transform)
-            {
-                Instantiate(gunList[selectedGun].hitEffect, hit.point, gunList[selectedGun].hitEffect.transform.rotation);
-                damageable.takeDamage(shootDamage);
-            }
-        }
+    //    // Cast a ray and check for hits
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
+    //    {
+    //        IDamage damageable = hit.collider.GetComponent<IDamage>();
+    //        if (damageable != null && hit.transform != transform)
+    //        {
+    //            Instantiate(gunList[selectedGun].hitEffect, hit.point, gunList[selectedGun].hitEffect.transform.rotation);
+    //            damageable.takeDamage(shootDamage);
+    //        }
+    //    }
 
-        Vector3 recoilForce = new Vector3(-recoilAmount, 0f, 0f);
-        gunModel.transform.localEulerAngles += recoilForce;
+    //    Vector3 recoilForce = new Vector3(-recoilAmount, 0f, 0f);
+    //    gunModel.transform.localEulerAngles += recoilForce;
 
-        // Smoothly return the gunModel to its original rotation
-        float elapsedTime = 0f;
-        // returnDuration time can be adjusted for smoothness
-        float returnDuration = 0.09f;
-        while (elapsedTime < returnDuration)
-        {
-            gunModel.transform.localRotation = Quaternion.Lerp(gunModel.transform.localRotation, originalRotation, elapsedTime / returnDuration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+    //    // Smoothly return the gunModel to its original rotation
+    //    float elapsedTime = 0f;
+    //    // returnDuration time can be adjusted for smoothness
+    //    float returnDuration = 0.09f;
+    //    while (elapsedTime < returnDuration)
+    //    {
+    //        gunModel.transform.localRotation = Quaternion.Lerp(gunModel.transform.localRotation, originalRotation, elapsedTime / returnDuration);
+    //        elapsedTime += Time.deltaTime;
+    //        yield return null;
+    //    }
 
-        // gunModel rotation gets back to the original position
-        gunModel.transform.localRotation = originalRotation;
+    //    // gunModel rotation gets back to the original position
+    //    gunModel.transform.localRotation = originalRotation;
 
-        yield return new WaitForSeconds(gunList[selectedGun].shootRate);
+    //    yield return new WaitForSeconds(gunList[selectedGun].shootRate);
 
-        isShooting = false;
+    //    isShooting = false;
 
-    }
+    //}
 
     //Throw Grenade: will throw a grenade based on the throwforce and lift provided. 
     //Is infinite but only 1 grenade per second can be thrown
@@ -494,8 +494,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         shootRate = gun.shootRate;
         shotSound = gun.shotSound;
 
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
-        gunModel.GetComponent<Renderer>().sharedMaterial = gun.model.GetComponent<Renderer>().sharedMaterial;
+        //gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
+       // gunModel.GetComponent<Renderer>().sharedMaterial = gun.model.GetComponent<Renderer>().sharedMaterial;
         gunList[selectedGun].gunMuzzle = gunMuzzle;
 
         selectedGun = gunList.Count - 1;
@@ -527,8 +527,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         shootDistance = gunList[selectedGun].shootDist;
         shootRate = gunList[selectedGun].shootRate;
 
-        gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
-        gunModel.GetComponent<Renderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<Renderer>().sharedMaterial;
+        //gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
+       // gunModel.GetComponent<Renderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<Renderer>().sharedMaterial;
         ammoUpdate();
     }
 
