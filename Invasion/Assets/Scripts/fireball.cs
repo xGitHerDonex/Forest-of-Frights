@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class grenade : MonoBehaviour
+public class fireball : explosion
 {
+
     [SerializeField] Rigidbody rb;
     [SerializeField] int speed;
     [SerializeField] float destroyTime;
     [SerializeField] GameObject explosive;
 
-    private void Start()
+    protected override void Start()
     {
         rb.velocity = (gameManager.instance.player.transform.position - transform.position).normalized * speed;
         StartCoroutine(explode());
@@ -18,7 +20,24 @@ public class grenade : MonoBehaviour
     public virtual IEnumerator explode()
     {
         yield return new WaitForSeconds(destroyTime);
-        Instantiate(explosive, transform.position, explosive.transform.rotation);
+        BombsAway();
         Destroy(gameObject);
     }
+
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.isTrigger)
+        {
+            return;
+        }
+        BombsAway();
+    }
 }
+
+
+
+
+
+

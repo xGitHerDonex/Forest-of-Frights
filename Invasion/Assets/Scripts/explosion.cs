@@ -10,9 +10,9 @@ public class explosion : MonoBehaviour
     [Range(0, 50)][SerializeField] int explosionAmount;
     [SerializeField] GameObject explosionEffect;
     [SerializeField] int explosionDamage;
-    public float destroyTime = .01f;
+    [SerializeField] float destroyTime = .01f;
 
-    void Start()
+    protected virtual void Start()
     {
         BombsAway();
 

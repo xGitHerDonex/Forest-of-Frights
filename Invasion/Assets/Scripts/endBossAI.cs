@@ -85,7 +85,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float landingDelay;
     [SerializeField] int flightTargetFaceSpeed;
 
-
     [Header("-----Bools-----")]
     [SerializeField] bool isLanding; 
     [SerializeField] bool isAttacking;
@@ -99,13 +98,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] bool isSummoning;
 
 
-    [Header("SFX")]
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip walkSound;
-    [SerializeField] AudioClip attackSound;
-    [SerializeField] AudioClip deathSound;
-
-
     [Header("-----Waypoints-----")]
     [SerializeField] float distToWaypoint;
     [SerializeField] float closestWaypointDist;
@@ -113,7 +105,15 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] GameObject[] waypoints;
     [SerializeField] GameObject closestWaypoint;
     [SerializeField] float waypointDist;
-    
+
+
+    [Header("SFX")]
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip walkSound;
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] AudioClip deathSound;
+
+
     //player or enemy
     float agentVel;
     float hpRatio;
@@ -165,8 +165,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         //Continually checks to see if Enemy is flying, and updates animation
         setFlightAnimation();
-        Stage1();
-
+        if(!isShooting)
+        {
+            facePlayer();
+            StartCoroutine(shoot());
+        }
+        
         //StartCoroutine(summon());
 
         //if (Input.GetButton("test"))

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 7556672370897440497}
   - component: {fileID: 8399575887377994764}
   - component: {fileID: 1543882293016339473}
-  - component: {fileID: -4620691592038665141}
-  - component: {fileID: -3574622973217172995}
-  m_Layer: 0
-  m_Name: EnergyBall
+  - component: {fileID: 6580476616662141725}
+  - component: {fileID: 1470901191441593847}
+  m_Layer: 8
+  m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,7 +104,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -130,12 +130,12 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-4620691592038665141
+--- !u!114 &6580476616662141725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,14 +144,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6242495077864083463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b56f6f284e2a1e47a10a3fdf0c6f936, type: 3}
+  m_Script: {fileID: 11500000, guid: 218b2a146c027314ba878feed944ee1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionAmount: 5
+  explosionEffect: {fileID: 9013456325837797778, guid: 246ec6f8a942dda49a01ec9aa92fec5f, type: 3}
+  explosionDamage: 5
+  destroyTime: 3
   rb: {fileID: 1543882293016339473}
-  speed: 22
-  destroyTime: 1
-  explosion: {fileID: 9013456325837797778, guid: 246ec6f8a942dda49a01ec9aa92fec5f, type: 3}
---- !u!135 &-3574622973217172995
+  speed: 25
+  destroyTime: 3
+  explosive: {fileID: 9013456325837797778, guid: 246ec6f8a942dda49a01ec9aa92fec5f, type: 3}
+--- !u!135 &1470901191441593847
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,7 +170,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
