@@ -21,8 +21,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Animator anime;
     [SerializeField] Collider hitBox;
     [SerializeField] Rigidbody rb;
+    [SerializeField] GameObject DemonLord;
 
-    [Header("-----Enemy Stats-----")]
+    Rigidbody originalRb;
+
+
+[Header("-----Enemy Stats-----")]
 
     [Tooltip("Turning speed 1-10.")]
     [Range(1, 20)][SerializeField] int targetFaceSpeed;
@@ -97,10 +101,11 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] bool flyTriggered;
     [SerializeField] bool isSummoning;
     [SerializeField] bool summonCompleted;
+    [SerializeField] bool isRbDestroyed;
 
 
 
-    [Header("-----Waypoints-----")]
+   [Header("-----Waypoints-----")]
     [SerializeField] float distToWaypoint;
     [SerializeField] float closestWaypointDist;
     [SerializeField] GameObject waypoint;
@@ -425,11 +430,28 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         
     }
 
+    void createRb()
+    {
+        if (isRbDestroyed)
+        {
+            isRbDestroyed = false;
+            rb = DemonLord.AddComponent<Rigidbody>();
+            rb.freezeRotation = true;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+            rb.isKinematic = false;
+            rb.useGravity = false;
+            rb.mass = 30;
+        }
+    }
+
     //Same as above, but enemy flys to any target
     void flyToTarget(GameObject waypoint)
     {
+
+            createRb();
+
             isFlying = true;
-            rb.useGravity = false;
+            //rb.useGravity = false;
             isGrounded = false;
             agent.enabled = false;
             targetFaceSpeed = flightTargetFaceSpeed;
@@ -471,8 +493,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                 anime.SetTrigger("equip");
                 agent.enabled = true;              
                 isGrounded = true;
-                runNextJob = true;
-              
+                reachedTarget = false;
+                Destroy(rb);
+                isRbDestroyed = true;
+
+
+
             }
 
         }
@@ -574,6 +600,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(summonTime);
         bossSpawnerManager.instance.setTimeToSpawn(false);
         summonCompleted = true;
+
 
 
     }
