@@ -84,7 +84,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float landingDelay;
 
 
-    //bools
+    [Header("-----Bools-----")]
     [SerializeField] bool isLanding; 
     [SerializeField] bool isAttacking;
     [SerializeField] bool isMoving;
@@ -161,42 +161,42 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         //Continually checks to see if Enemy is flying, and updates animation
         setFlightAnimation();
-        //Stage1();
+        Stage1();
 
         //StartCoroutine(summon());
 
-        if (Input.GetButton("test"))
-        {
-            FlyTriggered = true;
-        }
+        //if (Input.GetButton("test"))
+        //{
+        //    FlyTriggered = true;
+        //}
 
-        if (FlyTriggered && !reachedTarget)
-        {
-            flyToTarget(findClosestFlightWaypoint());
-        }
+        //if (FlyTriggered && !reachedTarget)
+        //{
+        //    flyToTarget(findClosestFlightWaypoint());
+        //}
 
-        else if (reachedTarget)
-        {
-            FlyTriggered = false;
-            runNextJob = true;
-            reachedTarget = false;
-        }
+        //else if (reachedTarget)
+        //{
+        //    FlyTriggered = false;
+        //    runNextJob = true;
+        //    reachedTarget = false;
+        //}
 
-        else
-        {
-            if (runNextJob)
-            {
+        //else
+        //{
+        //    if (runNextJob)
+        //    {
 
-                flyToGround(playerScript.getClosestGroundWaypoint());
-                StartCoroutine(land());
-            }
+        //        flyToGround(playerScript.getClosestGroundWaypoint());
+        //        StartCoroutine(land());
+        //    }
 
-            else if (agent.isActiveAndEnabled)
-            {
-                runNextJob = false;
-                Stage1();
-            }
-        }
+        //    else if (agent.isActiveAndEnabled)
+        //    {
+        //        runNextJob = false;
+        //        Stage1();
+        //    }
+        //}
     }
 
     void Stage1()
@@ -224,7 +224,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
 
                 //If player within stopping distance, face target and attack if not already attacking
-                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance && distToPlayer >= meleeRange)
+                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance + 5 && distToPlayer >= meleeRange)
                 {
 
                     agent.velocity = Vector3.zero;
@@ -542,7 +542,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         isAttacking = false;
 
         leftMeleeCollider.SetActive(false);
-        rightMeleeCollider.SetActive(false);
+
     }
 
     IEnumerator whip()

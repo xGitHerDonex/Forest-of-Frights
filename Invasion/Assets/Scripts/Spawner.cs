@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pawner : MonoBehaviour
+public class spawner : MonoBehaviour
 {
 
     //Spawner will handle spawn points for enemies
@@ -21,10 +21,7 @@ public class pawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (bossSpawnerManager.instance.getTimeToSpawn())
-        {
-            StartCoroutine(spawnEnemy(enemy));
-        }
+     
 
     }
 
@@ -34,7 +31,6 @@ public class pawner : MonoBehaviour
         if(!isSpawning)
         {
             isSpawning = true;
-            //Vector3 spawnPosition = new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f));
             Instantiate(en, (transform.position + new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f))), transform.rotation);
             wavesToSpawn--;
             yield return new WaitForSeconds(spawnRate);

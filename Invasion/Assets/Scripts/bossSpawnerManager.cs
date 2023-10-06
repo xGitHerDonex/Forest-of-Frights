@@ -12,10 +12,11 @@ public class bossSpawnerManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+   private void Start()
     {
         instance = this;
         spawners = GameObject.FindGameObjectsWithTag("spawner");
+
     }
 
     public void spawnWave()
