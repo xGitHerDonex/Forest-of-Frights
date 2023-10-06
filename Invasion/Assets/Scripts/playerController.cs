@@ -85,6 +85,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     private Vector3 playerVelocity;
     private Vector3 move;
     int selectedGun;
+
     //Player Buff Checks
     [SerializeField] float regenStaminaBuffAmount;
 

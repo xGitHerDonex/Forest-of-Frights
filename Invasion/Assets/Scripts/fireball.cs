@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class fireball : explosion
+public class fireball : MonoBehaviour 
 {
 
     [SerializeField] Rigidbody rb;
     [SerializeField] int speed;
     [SerializeField] float destroyTime;
-    [SerializeField] GameObject explosive;
+    [SerializeField] GameObject explosionEffect;
+    [SerializeField] int explosionDamage;
+    [Range(0, 50)][SerializeField] int explosionAmount;
 
-    protected override void Start()
+    void Start()
     {
         rb.velocity = (gameManager.instance.player.transform.position - transform.position).normalized * speed;
         StartCoroutine(explode());
     }
 
-    public virtual IEnumerator explode()
+    IEnumerator explode()
     {
         yield return new WaitForSeconds(destroyTime);
         BombsAway();
-        Destroy(gameObject);
     }
 
 
 
-    private void OnTriggerEnter(Collider other)
+   void OnTriggerEnter(Collider other)
     {
         if(other.isTrigger)
         {
@@ -34,6 +35,12 @@ public class fireball : explosion
         }
 
         BombsAway();
+    }
+
+    public void BombsAway()
+    {
+        Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
+        Destroy(gameObject);
     }
 }
 

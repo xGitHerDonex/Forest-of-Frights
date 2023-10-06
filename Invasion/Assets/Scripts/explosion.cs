@@ -10,7 +10,7 @@ public class explosion : MonoBehaviour
     [Range(0, 50)][SerializeField] int explosionAmount;
     [SerializeField] GameObject explosionEffect;
     [SerializeField] int explosionDamage;
-    [SerializeField] float destroyTime = .01f;
+    [SerializeField] float destroyTime; // do not initialize variables in the class -do so in unity
 
     protected virtual void Start()
     {
@@ -18,7 +18,7 @@ public class explosion : MonoBehaviour
 
     }
     //Lecture Code 9-8-23 if Iphysics is attached to the other collider then multiply the explosion amount to the transm=form normalized between 0-1
-    private void OnTriggerEnter(Collider other)
+   void OnTriggerEnter(Collider other)
     {
 
         ProcessDamage(other);
