@@ -102,10 +102,10 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-
+        float hpRatio = (float)(hp / maxHp);
 
         //Selects stage for enemy AI based on Health Remaining
-        if (hp >= (0.4 * maxHp))
+        if (hpRatio >= 0.4)
         {
             Stage1();
         }
@@ -200,7 +200,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
              
                 //Uncomment to check distance between enemy player
-                Debug.Log(distToPlayer);
+                //Debug.Log(distToPlayer);
 
                    
                 //If we aren't shooting or attacking, the player is Range, and the distance to the player is greater than the ranged Stopping distance

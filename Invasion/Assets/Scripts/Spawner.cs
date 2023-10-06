@@ -10,18 +10,22 @@ public class spawner : MonoBehaviour
     [SerializeField] GameObject enemy;
     [SerializeField] float spawnRate;       //spawn rate
     [SerializeField] int wavesToSpawn;      //how many waves
-    bool isSpawning;                        // currently spawning
+    bool isSpawning;                        //currently spawning
 
     private void Start()
     {
-        wavesToSpawn = bossSpawnerManager.instance.getWavesToSpawn();
-        spawnRate = bossSpawnerManager.instance.getSpawnRate();
+        //wavesToSpawn = bossSpawnerManager.instance.getWavesToSpawn();
+        //spawnRate = bossSpawnerManager.instance.getSpawnRate();
     }
 
     // Update is called once per frame
     void Update()
     {
-     
+
+        if (bossSpawnerManager.instance.getTimeToSpawn())
+        {
+            StartCoroutine(spawnEnemy(enemy));
+        }
 
     }
 

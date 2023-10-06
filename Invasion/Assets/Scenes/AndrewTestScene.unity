@@ -1010,9 +1010,29 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.0044269413
       objectReference: {fileID: 0}
+    - target: {fileID: 2516729400851120323, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
+      propertyPath: spawnRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516729400851120323, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
+      propertyPath: spawnWaves
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2781206818915049672, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.0044269413
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131813365575540507, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131813365575540507, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3131813365575540507, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3131813365575540507, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1020,7 +1040,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3131813365575540507, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.7213471
+      value: 0.49999928
       objectReference: {fileID: 0}
     - target: {fileID: 3131813365575540507, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1057,6 +1077,10 @@ PrefabInstance:
     - target: {fileID: 3383273551299381169, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
       propertyPath: m_Name
       value: BossSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 3383273551299381169, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3747016312927072046, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1463,6 +1487,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1223275021 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3383273551299381169, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
+  m_PrefabInstance: {fileID: 745814017}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1273601780
 GameObject:
   m_ObjectHideFlags: 0
@@ -2827,13 +2856,69 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demon Lord
       objectReference: {fileID: 0}
+    - target: {fileID: 1452713996136046392, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: m_Mass
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452713996136046392, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452713996136046392, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452713996136046392, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: m_ImplicitTensor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: hp
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: maxHp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: shootRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: meleeRange
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: summonTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: bossSpawner
+      value: 
+      objectReference: {fileID: 1223275021}
+    - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: isSummoning
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: landingDelay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: maxShootingRange
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: flightStoppingDist
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4825752165692352313, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 277.99927
       objectReference: {fileID: 0}
     - target: {fileID: 4825752165692352313, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.0998058
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 4825752165692352313, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5193,5 +5278,5 @@ SceneRoots:
   - {fileID: 3165157288859556280}
   - {fileID: 89202259}
   - {fileID: 743049504}
-  - {fileID: 745814017}
   - {fileID: 874740911}
+  - {fileID: 745814017}
