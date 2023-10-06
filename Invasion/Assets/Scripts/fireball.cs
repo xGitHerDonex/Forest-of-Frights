@@ -32,6 +32,7 @@ public class fireball : explosion
         {
             return;
         }
+
         BombsAway();
     }
 }
