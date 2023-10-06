@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 7926022951289463139}
   - component: {fileID: 3654155488623046524}
   - component: {fileID: 9048540785262233207}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 3721725473983165322}
   - component: {fileID: 129036484115740279}
   - component: {fileID: 3466634521036511170}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 5627329583504175435}
   - component: {fileID: 2268607899462022994}
   - component: {fileID: 4640983462226793704}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 7022344279520057728}
   - component: {fileID: 1452713996136046392}
   - component: {fileID: 5210883362826208591}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Demon Lord
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,11 +641,12 @@ MonoBehaviour:
   agent: {fileID: 7022344279520057728}
   headPos: {fileID: 4599581073810700605}
   bodyPos: {fileID: 4501166024047667232}
-  shootPos: {fileID: 0}
+  shootPos: {fileID: 4668320917491491950}
   anime: {fileID: 8885747574330338785}
   hitBox: {fileID: 5210883362826208591}
   rb: {fileID: 1452713996136046392}
-  targetFaceSpeed: 1
+  targetFaceSpeed: 10
+  originalTargetFaceSpeed: 0
   runningDistance: 0
   hp: 0
   maxHp: 1
@@ -658,14 +659,14 @@ MonoBehaviour:
   meleeDamage: 5
   meleeStage2Damage: 10
   meleeRange: 15
-  bullet: {fileID: 0}
-  rangedStoppingDistance: 0
-  maxShootingRange: 0
-  rangeDelay: 0
-  viewAngle: 0
-  shootAngle: 0
-  shootRate: 0
-  shootDelay: 0
+  bullet: {fileID: 6242495077864083463, guid: 23078b76108640b44884b187b85ffd4a, type: 3}
+  rangedStoppingDistance: 12
+  maxShootingRange: 30
+  rangeDelay: 10
+  viewAngle: 60
+  shootAngle: 10
+  shootRate: 3
+  shootDelay: 0.35
   flightSpeed: 15
   origFlightSpeed: 0
   groundingHeight: 7
@@ -673,6 +674,7 @@ MonoBehaviour:
   landingSpeed: -8
   switchFacing: 28
   landingDelay: 0.8
+  flightTargetFaceSpeed: 1
   isLanding: 0
   isAttacking: 0
   isMoving: 0
@@ -683,16 +685,16 @@ MonoBehaviour:
   reachedTarget: 0
   FlyTriggered: 0
   isSummoning: 0
-  audioSource: {fileID: 0}
-  walkSound: {fileID: 0}
-  attackSound: {fileID: 0}
-  deathSound: {fileID: 0}
   distToWaypoint: 0
   closestWaypointDist: 0
   waypoint: {fileID: 0}
   waypoints: []
   closestWaypoint: {fileID: 0}
   waypointDist: 0
+  audioSource: {fileID: 0}
+  walkSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!195 &7022344279520057728
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -707,7 +709,7 @@ NavMeshAgent:
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 200
-  m_StoppingDistance: 40
+  m_StoppingDistance: 30
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -757,7 +759,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1011,9 +1013,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.6805426
-  m_Height: 5.820626
+  m_Height: 4.7213473
   m_Direction: 0
-  m_Center: {x: -2.8095365, y: 0.10452976, z: -0.1266405}
+  m_Center: {x: -2.2598796, y: 0.10451995, z: -0.12664214}
 --- !u!114 &3788874976732869000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1120,6 +1122,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6988424276040438441}
+  - {fileID: 4668320917491491950}
   m_Father: {fileID: 8143372568288280461}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2364973611098536507
@@ -1133,7 +1136,7 @@ GameObject:
   - component: {fileID: 6468316582383411824}
   - component: {fileID: 8196109229029106590}
   - component: {fileID: 437575170093407848}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1362,7 +1365,7 @@ GameObject:
   - component: {fileID: 7930857341585160730}
   - component: {fileID: 7858128839408325701}
   - component: {fileID: 5657201610600982825}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1681,7 +1684,7 @@ GameObject:
   - component: {fileID: 5008799484330498591}
   - component: {fileID: 8039915543434047668}
   - component: {fileID: 8416247638213701762}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2195,7 +2198,7 @@ GameObject:
   - component: {fileID: 8002342765088764816}
   - component: {fileID: 759978758094690447}
   - component: {fileID: 453181527421228030}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2328,7 +2331,7 @@ GameObject:
   - component: {fileID: 2986794762059366134}
   - component: {fileID: 3088684310706613356}
   - component: {fileID: 8177381557184874069}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2494,7 +2497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1949844790562579082}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_HANDLE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2932,6 +2935,59 @@ Transform:
   - {fileID: 927551047583300603}
   m_Father: {fileID: 5861388114355627941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7258308188398444954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4668320917491491950}
+  - component: {fileID: 3537032847563061163}
+  m_Layer: 0
+  m_Name: shootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4668320917491491950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7258308188398444954}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5572193, y: -0.43532282, z: -0.5572191, w: -0.43532464}
+  m_LocalPosition: {x: -0.12975687, y: 1.1462944, z: -0.00036671516}
+  m_LocalScale: {x: 0.5000002, y: 0.49999988, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4599581073810700605}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &3537032847563061163
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7258308188398444954}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7370862343724820347
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,7 +2999,7 @@ GameObject:
   - component: {fileID: 5387147385373967483}
   - component: {fileID: 8138586323995002575}
   - component: {fileID: 4563591208216112080}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3517,7 +3573,7 @@ GameObject:
   - component: {fileID: 5030693237055117190}
   - component: {fileID: 3725352421078537113}
   - component: {fileID: 3061752579752225701}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3847,7 +3903,7 @@ GameObject:
   - component: {fileID: 9043872278456260587}
   - component: {fileID: 5105444257598216098}
   - component: {fileID: 9168093379564308597}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DEMON_LORD_WHIP_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}

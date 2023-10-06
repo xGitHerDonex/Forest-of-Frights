@@ -165,11 +165,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         //Continually checks to see if Enemy is flying, and updates animation
         setFlightAnimation();
-        if(!isShooting)
-        {
-            facePlayer();
-            StartCoroutine(shoot());
-        }
+        Stage1();
         
         //StartCoroutine(summon());
 
