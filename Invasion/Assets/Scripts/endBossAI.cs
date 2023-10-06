@@ -26,6 +26,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
     [Tooltip("Turning speed 1-10.")]
     [Range(1, 20)][SerializeField] int targetFaceSpeed;
+    [Range(1, 20)][SerializeField] int originalTargetFaceSpeed;
     [SerializeField] int runningDistance;
 
 
@@ -82,6 +83,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int landingSpeed;
     [SerializeField] int switchFacing;
     [SerializeField] float landingDelay;
+    [SerializeField] int flightTargetFaceSpeed;
 
 
     [Header("-----Bools-----")]
@@ -111,6 +113,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] GameObject[] waypoints;
     [SerializeField] GameObject closestWaypoint;
     [SerializeField] float waypointDist;
+    
     //player or enemy
     float agentVel;
     float hpRatio;
@@ -146,6 +149,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         isMoving = false;
         FlyTriggered = false;
         runNextJob = false;
+        originalTargetFaceSpeed = targetFaceSpeed;
 
         //Gets waves to Spawn
         //wavesToSpawn = bossSpawnerManager.instance.getWavesToSpawn();
@@ -207,6 +211,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             facePlayer();
             //casts a ray on the player
             RaycastHit hit;
+
+            targetFaceSpeed = originalTargetFaceSpeed;
 
             //get's player's direction
             playerDirection = gameManager.instance.player.transform.position - headPos.position;
@@ -332,6 +338,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             //rb.useGravity = false;
             isGrounded = false;
             agent.enabled = false;
+            targetFaceSpeed = flightTargetFaceSpeed;
            
             distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
 
