@@ -778,6 +778,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5453068894355461666}
     m_Modifications:
+    - target: {fileID: 304034127445556055, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: lengthInSec
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 304034127445556055, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: LightsModule.ratio
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 304034127445556055, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 304034127445556055, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 304034127445556055, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 304034127445556055, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: LightsModule.intensityCurve.scalar
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3308722831358327602, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.13
@@ -822,10 +846,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Handgun
       objectReference: {fileID: 0}
+    - target: {fileID: 6053213405024161754, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: m_Range
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053213405024161754, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053213405024161754, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9743073
+      objectReference: {fileID: 0}
+    - target: {fileID: 6053213405024161754, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: m_Intensity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7005870020570997616, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: maxAmmo
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7005870020570997616, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 4936007565715983630}
+    - target: {fileID: 7005870020570997616, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
+      propertyPath: firerate
+      value: 2.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7005870020570997616, guid: 6ae8d887c0180ed4e9bc62f3e62e9b31, type: 3}
       propertyPath: shootCam
       value: 
