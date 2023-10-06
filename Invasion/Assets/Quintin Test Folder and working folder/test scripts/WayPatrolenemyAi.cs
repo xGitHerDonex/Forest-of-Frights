@@ -6,6 +6,7 @@ using UnityEngine.Device;
 
 public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 {
+    #region Variables
 
     [Header("-----Components-----")]
     [SerializeField] Renderer model;
@@ -65,7 +66,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     bool isShooting;
     bool playerInRange;
     bool destinationPicked;
-    private int m_PathIndex;
+    private int m_PathIndex; 
+    #endregion
 
 
     private void Awake()
@@ -73,7 +75,9 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         agent = GetComponent<NavMeshAgent>();
         anime = GetComponent<Animator>();
     }
-    // Start is called before the first frame update
+
+
+
     void Start()
     {
         speedOrig = agent.speed; // gives the agent speed to the float original speed for later on. 
@@ -93,8 +97,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
      * and if he isnt shooting then start the sub routine to shoot at the object
      * then the Nav mesh calcutates a new path to the destination if it has moved must return true 
      *  set destination otherwise returns false and no new path is calculated
+     *  
      */
-    // Update is called once per frame
     void Update()
     {
         if (agent.isActiveAndEnabled)
@@ -118,7 +122,11 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     }
 
 
-
+    #region Movement
+    /// <summary>
+    /// roams enemy to waypoint
+    /// </summary>
+    /// <returns></returns>
     IEnumerator roam()
     {
         //Added this if statement to prevent spawning throwing an error when spawning enemies
@@ -130,6 +138,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             {
                 m_PathIndex = (m_PathIndex + 1) % waypoints.Length;
                 destinationPicked = true;
+                
                 //agent.stoppingDistance = 0;
                 yield return new WaitForSeconds(roamPauseTime);
                 agent.SetDestination(waypoints[m_PathIndex].position);
@@ -149,25 +158,41 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
         }
     }
-    //WIP Walk Sound
-    #region
-    void playWalkSound()
+
+    /// <summary>
+    /// stops navmesh from moving
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator stopMoving()
     {
-        if (audioSource != null && walkSound != null)
-        {
-            audioSource.clip = walkSound;
-            audioSource.Play();
-        }
+        agent.speed = 0;
+        yield return new WaitForSeconds(1);
+        agent.speed = speedOrig;
     }
+
+   /// <summary>
+   /// turns and faces target with a lerp
+   /// </summary>
+    void faceTarget()
+    {
+        //sets the rotation of the enemy to face the player based on the player _direction to the enemy 
+    //and it lerps the rotation over time so it is smooth and not choppy
+        Quaternion rotation = Quaternion.LookRotation(playerDirection);
+        //lerp over time rotation
+        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * targetFaceSpeed);
+    }
+
     #endregion
 
-    /*
-     * if the enemy takes damage requires an amount for the damage in a whole number
-     * then subtracts the amount of damage from that whole number
-     * the call the sub routine to run at the same time to make the enemy feedback show (flashing damage indicator)
-     * also if the health is less than or equal to 0 destroy this enemy
-     * 
-     */
+    #region Damage Related
+
+    /// <summary>
+ /// if the enemy takes damage requires an amount for the damage in a whole number
+ /// then subtracts the amount of damage from that whole number
+ ///the call the sub routine to run at the same time to make the enemy feedback show( flashing damage indicator)
+ ///also if the health is less than or equal to 0 destroy this enemy
+ /// </summary>
+ /// <param name="amount"></param>
     public void takeDamage( int amount )
     {
         hp -= amount;
@@ -201,28 +226,11 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
     }
 
-    //Allows the attached sound for Death Sound to be played
-    private void playDeathSound()
-    {
-        if (audioSource != null && deathSound != null)
-        {
-            audioSource.clip = deathSound;
-            audioSource.Play();
-        }
-    }
-
-
-
-    IEnumerator stopMoving()
-    {
-        agent.speed = 0;
-        yield return new WaitForSeconds(1);
-        agent.speed = speedOrig;
-    }
-
-
-    //changes the material color from the original material to a red color for .1 seconds
-    //the changes the color back to its original white state.
+    /// <summary>
+    /// changes the material color from the original material to a red color for .1 seconds 
+    /// the changes the color back to its original white state.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator flashDamage()
     {
         model.material.color = Color.red;
@@ -230,15 +238,66 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         model.material.color = Color.white;
     }
 
-    //tests to see if the player is within range of the enemy and if the player is within range calculate
+    /// <summary>
+    ///Set the shooting bool to true then
+    ///places and intializes the bullet object from the shooting postion and gives it a _direction while triggering the bool that checks whether the enemy is shooting or not.
+    ///suspends the coroutine for the amount of seconds the shootrate is set to then sets the shooting back to false
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator shoot()
+    {
+        isShooting = true;
+        playAttackSound();
+        anime.SetTrigger("Shoot");
+        //Used to add delay to the shoot to match the animation
+        //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
+        yield return new WaitForSeconds(shootRate);
+        Instantiate(bullet, shootPos.position, transform.rotation);
+        isShooting = false;
+    }
+
+    //IEnumerator shootDelayed()
+    //{
+    //    Instantiate(bullet, shootPos.position, transform.rotation);
+    //    yield return new WaitForSeconds(shootDelay);
+    //}
+
+    //this method is for starting a co-routine in case a delay is needed
+
+    public void delayDamage( int damage, float seconds )
+    {
+        StartCoroutine(delayedDamage(damage, seconds));
+    }
+
+    /// <summary>
+    /// method made for triggering explosion damage through iPhysics
+    /// </summary>
+    /// <param name="explosionDamage"></param>
+    /// <param name="seconds"></param>
+    /// <returns></returns>
+    private IEnumerator delayedDamage( int explosionDamage, float seconds )
+    {
+        yield return new WaitForSeconds(seconds);
+        takeDamage(explosionDamage);
+    }
+
+    #endregion
+
+    #region Can See Player  
+    /// <summary>
+    /// returns a bool if the player is in range of the enemy or the enemy is in range 
+    /// of the player compared to angle, position, and raycast hit
+    /// </summary>
+    /// <returns></returns>
+    /// 
+    bool canSeePlayer()
+    {
+//tests to see if the player is within range of the enemy and if the player is within range calculate
     /* the angle of the player to the enemy 
      * there is a debug to show the angle and the player position to the enemy position in the scene screen.
      * sends out a ray cast from the head of the enemy to the player to figure out the _direction and if there is 
      * any obstacles in the way
      */
-    bool canSeePlayer()
-    {
-
         playerDirection = gameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
 
@@ -280,64 +339,18 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         return false;
     }
 
-    // Set the shooting bool to true then
-    // places and intializes the bullet object from the shooting postion and gives it a _direction while triggering the bool that checks whether the enemy is shooting or not.
-    //suspends the coroutine for the amount of seconds the shootrate is set to then sets the shooting back to false
-    IEnumerator shoot()
-    {
-        isShooting = true;
-        playAttackSound();
-        anime.SetTrigger("Shoot");
-        //Used to add delay to the shoot to match the animation
-        //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
-        yield return new WaitForSeconds(shootRate);
-        Instantiate(bullet, shootPos.position, transform.rotation);
-        isShooting = false;
-    }
+    #endregion
 
-    //IEnumerator shootDelayed()
-    //{
-    //    Instantiate(bullet, shootPos.position, transform.rotation);
-    //    yield return new WaitForSeconds(shootDelay);
-    //}
-    //Allows the attached sound for Attack Sound to be played
-    private void playAttackSound()
-    {
-        if (audioSource != null && attackSound != null)
-        {
-            audioSource.clip = attackSound;
-            audioSource.Play();
-        }
-    }
-
-    //sets the rotation of the enemy to face the player based on the player _direction to the enemy 
-    //and it lerps the rotation over time so it is smooth and not choppy
-    void faceTarget()
-    {
-        Quaternion rotation = Quaternion.LookRotation(playerDirection);
-        //lerp over time rotation
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * targetFaceSpeed);
-    }
-
+    #region IPhysics 
 
     public void physics( Vector3 dir )
     {
         agent.velocity += dir / 3;
 
-    }
+    } 
+    #endregion
 
-    //this method is for starting a co-routine in case a delay is needed
-    public void delayDamage( int damage, float seconds )
-    {
-        StartCoroutine(delayedDamage(damage, seconds));
-    }
-
-    //method made for triggering explosion damage through iPhysics
-    public IEnumerator delayedDamage( int explosionDamage, float seconds )
-    {
-        yield return new WaitForSeconds(seconds);
-        takeDamage(explosionDamage);
-    }
+    #region On Trigger Enter and Exit   
 
 
     //if an object enters the collider for the enemy check to see if it is the Player
@@ -352,8 +365,6 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         }
     }
 
-
-
     // does the exact opposite as On Trigger enter
     // it checks to see if the object that is in the collider is the player if it isnt then the player isnt in range
     //set the stopping distance to zero 
@@ -367,5 +378,45 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         }
     }
 
+    #endregion
 
+    #region SFX
+    
+    /// <summary>
+    /// Allows the attached sound for Attack Sound to be played
+    /// </summary>
+    private void playAttackSound()
+    {
+        if (audioSource != null && attackSound != null)
+        {
+            audioSource.clip = attackSound;
+            audioSource.Play();
+        }
+    }
+
+    /// <summary>
+    /// Allows the attached sound for Death Sound to be played
+    /// </summary>
+    private void playDeathSound()
+    {
+        if (audioSource != null && deathSound != null)
+        {
+            audioSource.clip = deathSound;
+            audioSource.Play();
+        }
+    }
+ 
+    /// <summary>
+    /// WIP Walk Sound
+    /// </summary>
+    void playWalkSound()
+    {
+        if (audioSource != null && walkSound != null)
+        {
+            audioSource.clip = walkSound;
+            audioSource.Play();
+        }
+    }
+   
+    #endregion
 }
