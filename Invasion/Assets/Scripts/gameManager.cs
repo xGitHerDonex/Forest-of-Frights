@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject playerStam;
     [SerializeField] Image playerLeftStamBar;
     [SerializeField] Image playerRightStamBar;
+    [SerializeField] GameObject enemiesRemainingUI;
     [SerializeField] GameObject reticle;
 
 
