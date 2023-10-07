@@ -88,7 +88,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
     [Header("-----Bools-----")]
     [SerializeField] bool startFight;
-    [SerializeField] bool isLanding; 
+    [SerializeField] bool isLanding;
     [SerializeField] bool isAttacking;
     [SerializeField] bool isRunning;
     [SerializeField] bool isShooting;
@@ -101,7 +101,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
 
 
-   [Header("-----Waypoints-----")]
+    [Header("-----Waypoints-----")]
     [SerializeField] float distToWaypoint;
     [SerializeField] float closestWaypointDist;
     [SerializeField] GameObject waypoint;
@@ -146,7 +146,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     void Start()
     {
         //Get's Player Script so we can check the closest waypoint
-        
+
         playerScript = gameManager.instance.player.GetComponent<playerController>();
         origFlightSpeed = flightSpeed;
         stoppingDistOriginal = agent.stoppingDistance;
@@ -162,12 +162,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         waypoints = GameObject.FindGameObjectsWithTag("FLWP");
     }
 
-    
+
 
     // Update is called once per frame
     void Update()
     {
-  
+
         if (startFight)//gameManager.instance.getIsMidBossDead())
         {
 
@@ -197,7 +197,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
                 }
 
-                else if (isGrounded && !isLanding && agent.isActiveAndEnabled)
+                else if (!isTimeToSummon() && isGrounded && !isLanding && agent.isActiveAndEnabled)
                 {
 
                     Stage2();
@@ -343,6 +343,19 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
         }
     }
+
+    bool isTimeToSummon()
+    {
+        if (Random.Range(0, 6000) <= 3)
+        {
+            isSummoning = true;
+            return true;
+        }
+
+        else
+            return false;
+    }
+
 
     void summonRoutine(GameObject waypoint)
     {
@@ -581,7 +594,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         //lerp over time rotation
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * targetFaceSpeed);
     }
-
+    
 
     //Faces Player
     void facePlayer()

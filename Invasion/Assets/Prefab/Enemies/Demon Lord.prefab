@@ -584,7 +584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4825752165692352313
 Transform:
   m_ObjectHideFlags: 0
@@ -645,11 +645,12 @@ MonoBehaviour:
   anime: {fileID: 8885747574330338785}
   hitBox: {fileID: 5210883362826208591}
   rb: {fileID: 1452713996136046392}
+  DemonLord: {fileID: 884292984102214125}
   targetFaceSpeed: 10
   originalTargetFaceSpeed: 0
   runningDistance: 0
-  hp: 0
-  maxHp: 1
+  hp: 80
+  maxHp: 100
   animeSpeedChange: 10
   enemyRunSpeed: 0
   leftMeleeCollider: {fileID: 1728914785062646594}
@@ -658,39 +659,42 @@ MonoBehaviour:
   meleeDelay: 1
   meleeDamage: 5
   meleeStage2Damage: 10
-  meleeRange: 15
+  meleeRange: 12
   bullet: {fileID: 6242495077864083463, guid: 23078b76108640b44884b187b85ffd4a, type: 3}
   rangedStoppingDistance: 12
-  maxShootingRange: 30
+  maxShootingRange: 60
   rangeDelay: 10
   viewAngle: 60
   shootAngle: 10
-  shootRate: 3
-  shootDelay: 0.35
+  shootRate: 1
+  shootDelay: 0.5
   flightSpeed: 15
   origFlightSpeed: 0
   groundingHeight: 7
-  flightStoppingDist: 10
+  flightStoppingDist: 2
   landingSpeed: -8
   switchFacing: 28
-  landingDelay: 0.8
+  landingDelay: 2
   flightTargetFaceSpeed: 1
+  startFight: 1
   isLanding: 0
   isAttacking: 0
-  isMoving: 0
   isRunning: 0
   isShooting: 0
   isGrounded: 0
   isFlying: 0
   reachedTarget: 0
-  FlyTriggered: 0
   isSummoning: 0
+  summonCompleted: 0
+  isRbDestroyed: 0
   distToWaypoint: 0
   closestWaypointDist: 0
   waypoint: {fileID: 0}
   waypoints: []
   closestWaypoint: {fileID: 0}
   waypointDist: 0
+  bossSpawner: {fileID: 0}
+  summonTime: 2
   audioSource: {fileID: 0}
   walkSound: {fileID: 0}
   attackSound: {fileID: 0}
@@ -705,11 +709,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 20
+  m_Speed: 35
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 200
-  m_StoppingDistance: 30
+  m_StoppingDistance: 20
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -725,7 +729,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884292984102214125}
   serializedVersion: 4
-  m_Mass: 10
+  m_Mass: 30
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -737,12 +741,12 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
+  m_ImplicitCom: 0
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &5210883362826208591
 CapsuleCollider:

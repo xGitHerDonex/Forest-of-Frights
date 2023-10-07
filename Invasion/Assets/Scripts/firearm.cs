@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class firearm : MonoBehaviour
 {
-    public float damage = 1f;
+    public int damage = 1;
     public float range = 10f;
     public float force = 30f;
     public float firerate = 15f;
@@ -63,11 +63,19 @@ public class firearm : MonoBehaviour
         if( Physics.Raycast(shootCam.transform.position, shootCam.transform.forward, out hit, range))
         {
             Debug.Log(hit.transform.name);
-            targetDamage target = hit.transform.GetComponent<targetDamage>();
-        if (target != null)
-            {
-                target.hurtBaddies(damage);
+            //targetDamage target = hit.transform.GetComponent<targetDamage>();
+
+            IDamage damageable = hit.collider.GetComponent<IDamage>();
+
+            if (damageable != null && hit.transform != transform)
+            {                
+                damageable.hurtBaddies(damage);
             }
+
+            //if (target != null)
+            //{
+            //    target.hurtBaddies(damage);
+            //}
         }
 
         if (hit.rigidbody != null)

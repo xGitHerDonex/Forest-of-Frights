@@ -75,7 +75,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip playerJumpsGrass;
 
     //Bools and others for functions
-    private bool isShooting;
+    private bool isShooting = false;
     public AmmoType ammoType;
     private bool groundedPlayer;
     private bool canSprint = true;
@@ -144,7 +144,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //    StartCoroutine(shoot());
 
         //Throw grenade - works similar to shoot    
-        if (!gameManager.instance.isPaused && Input.GetButton("throw") && !isShooting)
+        if (Input.GetKeyDown("f")) //(!gameManager.instance.isPaused && Input.GetButton("throw"))// && !isShooting)
             StartCoroutine(throwGrenade());
 
         //Throw grenade - works similar to shoot    
