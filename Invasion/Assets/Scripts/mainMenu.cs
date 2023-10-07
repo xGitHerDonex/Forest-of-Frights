@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class menuScript : MonoBehaviour
+public class mainMenu : MonoBehaviour
 {
-    public void onPlayButton()
+
+    public void OnPlayButton()
     {
         SceneManager.LoadScene(1);
     }
 
-    public void onQuitButton()
+
+    public void OnQuitButton()
     {
         Application.Quit();
     }
-
 
 }
