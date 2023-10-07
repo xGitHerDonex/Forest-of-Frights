@@ -83,7 +83,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     bool isAttacking;
     bool isDead;
     bool playerInRange;
-    bool isRunning;
+    //bool isRunning;
     bool isShooting;
   
 
@@ -151,7 +151,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                         agent.ResetPath();
                         faceTarget();
 
-                        if (!isRunning)
+                       // if (!isRunning)
                             StartCoroutine(Melee(Random.Range(2,5)));
                    
                 }
@@ -233,7 +233,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                             agent.ResetPath();
                             faceTarget();
 
-                            if (!isRunning)
+                            //if (!isRunning)
                                 StartCoroutine(Melee(Random.Range(2, 5)));
   
 
@@ -278,7 +278,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         //If player is farther than the running distance set, then we update the animator to reflect the run speed and the enemy runs faster.
         if (distToPlayer >= runningDistance)
         {
-            isRunning = true;
+            //isRunning = true;
             agentVel = agent.velocity.normalized.magnitude + 1;
             agent.speed = enemyRunSpeed;
         }
@@ -286,7 +286,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         // If player is within the running -2 (to give the effect of them running up on the player), then we stop running and speed is set back to it's original
         else if (distToPlayer <= (runningDistance - 2))
         {
-            isRunning = false;
+            //isRunning = false;
             agentVel = agent.velocity.normalized.magnitude;
             agent.speed = speedOrig;
         }

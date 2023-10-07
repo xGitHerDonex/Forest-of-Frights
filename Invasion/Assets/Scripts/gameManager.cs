@@ -24,6 +24,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject playerStam;
     [SerializeField] Image playerLeftStamBar;
     [SerializeField] Image playerRightStamBar;
+    [SerializeField] Image playerChronoBar;
     [SerializeField] GameObject reticle;
 
 
@@ -188,6 +189,10 @@ public class gameManager : MonoBehaviour
         checkPointMenu.SetActive(false);
     }
 
+    public void updateChronoBar(float amount)
+    {
+        playerChronoBar.fillAmount = amount;
+    }
 }
 
 

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8422546584195697242
 RectTransform:
   m_ObjectHideFlags: 0
@@ -146,6 +146,10 @@ PrefabInstance:
     - target: {fileID: 3900151593290231813, guid: af9c8fb806b70e544826c408ac18b229, type: 3}
       propertyPath: m_Name
       value: Blood
+      objectReference: {fileID: 0}
+    - target: {fileID: 3900151593290231813, guid: af9c8fb806b70e544826c408ac18b229, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4231776415227968159, guid: af9c8fb806b70e544826c408ac18b229, type: 3}
       propertyPath: m_Pivot.x

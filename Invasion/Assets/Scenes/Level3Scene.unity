@@ -226,83 +226,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2ca6668578279c40ae10c99219b5563, type: 3}
---- !u!1001 &360377809
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 332004023617824042, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1596141818590855422, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_Radius
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 472.6856
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.000015258789
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 147.88058
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.71155155
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.702634
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 270.723
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: hp
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: maxShootingRange
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: rangedStoppingDistance
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918646389003623894, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_Name
-      value: Gorosaurus
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
 --- !u!1001 &611365557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -478,6 +401,67 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e349a063068af34ead98865299a606b, type: 3}
+--- !u!1001 &1784345247
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 332004023617824042, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 421
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000038146973
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 170
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.6644666
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.747318
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 263.283
+      objectReference: {fileID: 0}
+    - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7918646389003623894, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_Name
+      value: Gorosaurus
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
 --- !u!1001 &1786525153
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1012,5 +996,5 @@ SceneRoots:
   - {fileID: 1786525153}
   - {fileID: 2072247834}
   - {fileID: 1641386174}
-  - {fileID: 360377809}
   - {fileID: 918614058}
+  - {fileID: 1784345247}
