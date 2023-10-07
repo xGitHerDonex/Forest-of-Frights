@@ -66,7 +66,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     bool isShooting;
     bool playerInRange;
     bool destinationPicked;
-    private int m_PathIndex; 
+    private int m_PathIndex;
     #endregion
 
 
@@ -80,7 +80,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
     void Start()
     {
-        speedOrig = agent.speed; // gives the agent speed to the float original speed for later on. 
+        speedOrig = agent.speed; // gives the agent speed to the float original speed for later on.
         startingPos = transform.position;
         stoppingDistOriginal = agent.stoppingDistance;
 
@@ -90,14 +90,14 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     }
 
 
-    /* 
+    /*
      * if the player is in range of the enemy get the player position from the game manager instance running and subtract my enemies position from it for a _direction
      * if the nav mesh distance between its current position and the player destination is than or equal to the stopping distance from the enemy
      * face the target
      * and if he isnt shooting then start the sub routine to shoot at the object
-     * then the Nav mesh calcutates a new path to the destination if it has moved must return true 
+     * then the Nav mesh calcutates a new path to the destination if it has moved must return true
      *  set destination otherwise returns false and no new path is calculated
-     *  
+     *
      */
     void Update()
     {
@@ -138,7 +138,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             {
                 m_PathIndex = (m_PathIndex + 1) % waypoints.Length;
                 destinationPicked = true;
-                
+
                 //agent.stoppingDistance = 0;
                 yield return new WaitForSeconds(roamPauseTime);
                 agent.SetDestination(waypoints[m_PathIndex].position);
@@ -175,7 +175,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
    /// </summary>
     void faceTarget()
     {
-        //sets the rotation of the enemy to face the player based on the player _direction to the enemy 
+        //sets the rotation of the enemy to face the player based on the player _direction to the enemy
     //and it lerps the rotation over time so it is smooth and not choppy
         Quaternion rotation = Quaternion.LookRotation(playerDirection);
         //lerp over time rotation
@@ -193,7 +193,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
  ///also if the health is less than or equal to 0 destroy this enemy
  /// </summary>
  /// <param name="amount"></param>
-    public void takeDamage( int amount )
+    public void hurtBaddies( int amount )
     {
         hp -= amount;
         StartCoroutine(stopMoving());
@@ -227,7 +227,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     }
 
     /// <summary>
-    /// changes the material color from the original material to a red color for .1 seconds 
+    /// changes the material color from the original material to a red color for .1 seconds
     /// the changes the color back to its original white state.
     /// </summary>
     /// <returns></returns>
@@ -278,24 +278,24 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     private IEnumerator delayedDamage( int explosionDamage, float seconds )
     {
         yield return new WaitForSeconds(seconds);
-        takeDamage(explosionDamage);
+        hurtBaddies(explosionDamage);
     }
 
     #endregion
 
-    #region Can See Player  
+    #region Can See Player
     /// <summary>
-    /// returns a bool if the player is in range of the enemy or the enemy is in range 
+    /// returns a bool if the player is in range of the enemy or the enemy is in range
     /// of the player compared to angle, position, and raycast hit
     /// </summary>
     /// <returns></returns>
-    /// 
+    ///
     bool canSeePlayer()
     {
 //tests to see if the player is within range of the enemy and if the player is within range calculate
-    /* the angle of the player to the enemy 
+    /* the angle of the player to the enemy
      * there is a debug to show the angle and the player position to the enemy position in the scene screen.
-     * sends out a ray cast from the head of the enemy to the player to figure out the _direction and if there is 
+     * sends out a ray cast from the head of the enemy to the player to figure out the _direction and if there is
      * any obstacles in the way
      */
         playerDirection = gameManager.instance.player.transform.position - headPos.position;
@@ -341,16 +341,16 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
     #endregion
 
-    #region IPhysics 
+    #region IPhysics
 
     public void physics( Vector3 dir )
     {
         agent.velocity += dir / 3;
 
-    } 
+    }
     #endregion
 
-    #region On Trigger Enter and Exit   
+    #region On Trigger Enter and Exit
 
 
     //if an object enters the collider for the enemy check to see if it is the Player
@@ -367,7 +367,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
     // does the exact opposite as On Trigger enter
     // it checks to see if the object that is in the collider is the player if it isnt then the player isnt in range
-    //set the stopping distance to zero 
+    //set the stopping distance to zero
     public void OnTriggerExit( Collider other )
     {
         if (other.CompareTag("Player"))
@@ -381,7 +381,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     #endregion
 
     #region SFX
-    
+
     /// <summary>
     /// Allows the attached sound for Attack Sound to be played
     /// </summary>
@@ -405,7 +405,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             audioSource.Play();
         }
     }
- 
+
     /// <summary>
     /// WIP Walk Sound
     /// </summary>
@@ -417,6 +417,6 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             audioSource.Play();
         }
     }
-   
+
     #endregion
 }

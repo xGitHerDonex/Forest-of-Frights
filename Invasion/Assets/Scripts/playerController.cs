@@ -407,7 +407,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     }
 
     //Damageable Ability:  Currently allows player takes damage
-    public void takeDamage(int amount)
+    public void hurtBaddies(int amount)
     {
         if (!isTakingDamage)
         {
@@ -543,7 +543,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     IEnumerator delayedDamage(int damage, float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        takeDamage(damage);
+        hurtBaddies(damage);
     }
 
     //Ammo Collection for weapons

@@ -69,7 +69,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     // Start is called before the first frame update
     void Start()
     {
-        speedOrig = agent.speed; // gives the agent speed to the float original speed for later on. 
+        speedOrig = agent.speed; // gives the agent speed to the float original speed for later on.
         startingPos = transform.position;
         stoppingDistOriginal = agent.stoppingDistance;
 
@@ -79,12 +79,12 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     }
 
 
-    /* 
+    /*
      * if the player is in range of the enemy get the player position from the game manager instance running and subtract my enemies position from it for a _direction
      * if the nav mesh distance between its current position and the player destination is than or equal to the stopping distance from the enemy
      * face the target
      * and if he isnt shooting then start the sub routine to shoot at the object
-     * then the Nav mesh calcutates a new path to the destination if it has moved must return true 
+     * then the Nav mesh calcutates a new path to the destination if it has moved must return true
      *  set destination otherwise returns false and no new path is calculated
      */
     // Update is called once per frame
@@ -157,9 +157,9 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
      * then subtracts the amount of damage from that whole number
      * the call the sub routine to run at the same time to make the enemy feedback show (flashing damage indicator)
      * also if the health is less than or equal to 0 destroy this enemy
-     * 
+     *
      */
-    public void takeDamage(int amount)
+    public void hurtBaddies(int amount)
     {
         hp -= amount;
         StartCoroutine(stopMoving());
@@ -179,8 +179,8 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
                 enemyLight.enabled = false;
             }
 
-        } 
-        
+        }
+
         else
         {
             anime.SetTrigger("Damage");
@@ -222,9 +222,9 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     }
 
     //tests to see if the player is within range of the enemy and if the player is within range calculate
-    /* the angle of the player to the enemy 
+    /* the angle of the player to the enemy
      * there is a debug to show the angle and the player position to the enemy position in the scene screen.
-     * sends out a ray cast from the head of the enemy to the player to figure out the _direction and if there is 
+     * sends out a ray cast from the head of the enemy to the player to figure out the _direction and if there is
      * any obstacles in the way
      */
     bool canSeePlayer()
@@ -302,7 +302,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
         }
     }
 
-    //sets the rotation of the enemy to face the player based on the player _direction to the enemy 
+    //sets the rotation of the enemy to face the player based on the player _direction to the enemy
     //and it lerps the rotation over time so it is smooth and not choppy
     void faceTarget()
     {
@@ -328,7 +328,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     public IEnumerator delayedDamage(int explosionDamage, float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        takeDamage(explosionDamage);
+        hurtBaddies(explosionDamage);
     }
 
 
@@ -348,7 +348,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
 
     // does the exact opposite as On Trigger enter
     // it checks to see if the object that is in the collider is the player if it isnt then the player isnt in range
-    //set the stopping distance to zero 
+    //set the stopping distance to zero
     public void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))

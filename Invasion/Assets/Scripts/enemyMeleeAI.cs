@@ -150,7 +150,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
          * also if the health is less than or equal to 0 destroy this enemy
          * 
          */
-        public void takeDamage(int amount)
+        public void hurtBaddies(int amount)
         {
             hp -= amount;
             StartCoroutine(stopMoving());
@@ -315,7 +315,7 @@ public class enemyMeleeAI : MonoBehaviour, IDamage, IPhysics
         public IEnumerator delayedDamage(int explosionDamage, float seconds)
         {
             yield return new WaitForSeconds(seconds);
-            takeDamage(explosionDamage);
+            hurtBaddies(explosionDamage);
         }
 
 
