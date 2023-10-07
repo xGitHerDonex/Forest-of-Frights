@@ -155,7 +155,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //    StartCoroutine(shoot());
 
         //Throw grenade - works similar to shoot    
-        if (Input.GetKeyDown("f") && !isShooting && !gameManager.instance.isPaused)
+        if (Input.GetButtonDown("throw") && !isShooting && !gameManager.instance.isPaused)
         {
             // Check if the "Shoot" button is also pressed, and if so, do not throw the grenade
             if (!Input.GetButton("Shoot"))
@@ -165,15 +165,9 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             }
         }
 
-        //Throw grenade - works similar to shoot    
-        if (!gameManager.instance.isPaused && Input.GetButton("time") && !isTimeSlowed && move.magnitude <= 0.4f)
-        {
-            // Add the code for chronokinesis here.
-            StartCoroutine(chronokinesis());
-        }
-
         //Keeps Stamina Bar updated
         gameManager.instance.updateStamBar(Stamina / maxStamina);
+        gameManager.instance.updateChronoBar(time / maxTime);
     }
 
     //Move Ability:  Currently allows player to move!  Wheee!
@@ -438,42 +432,34 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     }
 
     //Time Slow: slows the world but not the player
-    IEnumerator chronokinesis()
+ void chronokinesis()
     {
-        originalPlayerSpeed = playerSpeed;
-        playerSpeed = playerSpeed * playerSlowSpeed;
-        isTimeSlowed = true;
-        Time.timeScale = timeSlowScale;
 
-        if (!gameManager.instance.isPaused && Input.GetButton("time"))
+
+        if (!gameManager.instance.isPaused && Input.GetButton("time") && time > 0)
         {
-            originalPlayerSpeed = playerSpeed;
-            playerSpeed = playerSpeed * playerSlowSpeed;
+            playerSpeed = originalPlayerSpeed * playerSlowSpeed;
             isTimeSlowed = true;
             Time.timeScale = timeSlowScale;
             time = time - Time.deltaTime;
 
         }
 
-        else //if (Input.GetButtonUp("time"))
+        else if (!gameManager.instance.isPaused)
         {
             isTimeSlowed = false;
             Time.timeScale = 1;
             playerSpeed = originalPlayerSpeed;
 
-            if (time <= maxTime)
+
+            if (time <= maxTime && !isTimeSlowed)
             {
                 time += regenTime * Time.deltaTime;
 
-                yield return new WaitForSeconds(timeSlowInSeconds);
             }
 
-            //revert scale and update player speed
-            Time.timeScale = 1f;
-            playerSpeed = originalPlayerSpeed;
-            isTimeSlowed = false;
-
         }
+
     }
 
         //
