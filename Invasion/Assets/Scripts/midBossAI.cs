@@ -337,7 +337,8 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             agent.enabled = false;
             anime.SetBool("Death", true);
             playDeathSound();
-            
+            gameManager.instance.isMidBossDead();
+
         }
 
         else
@@ -387,10 +388,10 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         if (combo == 2)
             anime.SetTrigger("Melee2");
 
-        if (combo == 3)
+        else if (combo == 3)
             anime.SetTrigger("Melee3");
 
-        if (combo == 4)
+        else if (combo == 4)
             anime.SetTrigger("Melee4");
 
 

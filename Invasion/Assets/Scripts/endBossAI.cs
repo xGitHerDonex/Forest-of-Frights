@@ -26,7 +26,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     Rigidbody originalRb;
 
 
-[Header("-----Enemy Stats-----")]
+    [Header("-----Enemy Stats-----")]
 
     [Tooltip("Turning speed 1-10.")]
     [Range(1, 20)][SerializeField] int targetFaceSpeed;
@@ -174,38 +174,43 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        //Continually checks to see if Enemy is flying, and updates animation
-        setFlightAnimation();
-
-        //Check HP levels
-        float hpRatio = (float)(hp / maxHp);
-
-        if (isSummoning)
-        {
-            summonRoutine(findClosestFlightWaypoint());
-        }
-
-        //Selects stage for enemy AI based on Health Remaining
-        else if (hpRatio >= 0.8 && !isSummoning)
-        {
-            Stage1();
-        }
-
-        else if (hpRatio <= 0.8 && !isSummoning)
+        if (gameManager.instance.getIsMidBossDead())
         {
 
-            if (isFlying && summonCompleted && !isGrounded)
+            //Continually checks to see if Enemy is flying, and updates animation
+            setFlightAnimation();
+
+            //Check HP levels
+            float hpRatio = (float)(hp / maxHp);
+
+            if (isSummoning)
             {
-                flyToGround(playerScript.getClosestGroundWaypoint());
-
+                summonRoutine(findClosestFlightWaypoint());
             }
 
-            else if (isGrounded && !isLanding && agent.isActiveAndEnabled)
+            //Selects stage for enemy AI based on Health Remaining
+            else if (hpRatio >= 0.8 && !isSummoning)
             {
-                agent.ResetPath();
-                Stage2();
-
+                Stage1();
             }
+
+            else if (hpRatio <= 0.8 && !isSummoning)
+            {
+
+                if (isFlying && summonCompleted && !isGrounded)
+                {
+                    flyToGround(playerScript.getClosestGroundWaypoint());
+
+                }
+
+                else if (isGrounded && !isLanding && agent.isActiveAndEnabled)
+                {
+                    agent.ResetPath();
+                    Stage2();
+
+                }
+            }
+
         }
 
     }

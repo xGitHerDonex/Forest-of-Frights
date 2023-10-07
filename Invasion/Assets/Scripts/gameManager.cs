@@ -25,15 +25,14 @@ public class gameManager : MonoBehaviour
 
 
     [Header("-----Game Goal-----")]
-    [SerializeField] TMP_Text enemiesRemainingText;  //Text for UI
-    [SerializeField] int enemiesKilledWinCond;     //Sets win condition
-    [SerializeField] int enemiesRemaining;         //Tracks how many enmies are left to win
+
+    bool _isMidBossDead;
+
 
     [Header("-----Menus-----")]
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
     [SerializeField] GameObject pauseMenu;         // Pause Menu
     [SerializeField] GameObject winMenu;           // Win Menu
-    //[SerializeField] GameObject startMenu;         // StartMenu
     [SerializeField] GameObject loseMenu;          // Lose Menu
     [SerializeField] GameObject inventoryMenu;    // Inventory Menu
 
@@ -49,9 +48,6 @@ public class gameManager : MonoBehaviour
     [Range(1, 5)] public int explosionDamage;
 
 
-    [SerializeField] GameObject[] waypoints;
-    [SerializeField] float waypointDist;
-    [SerializeField] float closestWaypointDist;
 
     //Initializes before Application Runs
     void Awake()
@@ -75,8 +71,7 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
-        enemiesRemaining = enemiesKilledWinCond;
-        enemiesRemainingText.text = enemiesRemaining.ToString("0");
+
     }
 
     void Update()
@@ -183,6 +178,18 @@ public class gameManager : MonoBehaviour
     public int getExplosionDamage()
     {
         return explosionDamage;
+    }
+
+
+    //Determines final boss coming in
+    public void isMidBossDead(bool isDead = true)
+    {
+        _isMidBossDead = isDead;
+    }
+
+    public bool getIsMidBossDead()
+    {
+        return _isMidBossDead;
     }
 
 
