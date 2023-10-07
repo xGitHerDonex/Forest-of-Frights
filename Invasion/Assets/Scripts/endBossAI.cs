@@ -696,7 +696,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     }
 
     //Runs damage on enemy, includes logic on death.
-    public void takeDamage(int amount)
+    public void hurtBaddies(int amount)
     {
         hp -= amount;
         StartCoroutine(stopMoving());
@@ -767,7 +767,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     public IEnumerator delayedDamage(int explosionDamage, float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        takeDamage(explosionDamage);
+        hurtBaddies(explosionDamage);
     }
 
 }

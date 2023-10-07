@@ -66,7 +66,7 @@ public class firearm : MonoBehaviour
             targetDamage target = hit.transform.GetComponent<targetDamage>();
         if (target != null)
             {
-                target.Takedamage(damage);
+                target.hurtBaddies(damage);
             }
         }
 

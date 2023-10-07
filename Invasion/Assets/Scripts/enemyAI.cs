@@ -159,7 +159,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
      * also if the health is less than or equal to 0 destroy this enemy
      * 
      */
-    public void takeDamage(int amount)
+    public void hurtBaddies(int amount)
     {
         hp -= amount;
         StartCoroutine(stopMoving());
@@ -179,7 +179,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
                 enemyLight.enabled = false;
             }
 
-            gameManager.instance.updateGameGoal(+1); //updates win condition set at 10 or greater "You win" also increments enemies killed and starts the win table Ienum
+           // gameManager.instance.updateGameGoal(+1); //updates win condition set at 10 or greater "You win" also increments enemies killed and starts the win table Ienum
 
         } else
         {
@@ -328,7 +328,7 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
     public IEnumerator delayedDamage(int explosionDamage, float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        takeDamage(explosionDamage);
+        hurtBaddies(explosionDamage);
     }
 
 

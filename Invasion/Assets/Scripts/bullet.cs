@@ -31,7 +31,7 @@ public class bullet : MonoBehaviour
 
         if (damageable != null)
         {
-            damageable.takeDamage(damage);
+            damageable.hurtBaddies(damage);
         }
         Destruction();
     }
