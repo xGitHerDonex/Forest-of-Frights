@@ -180,8 +180,6 @@ public class gameManager : MonoBehaviour
         demonLord.SetActive(true);
     }
 
-<<<<<<< Updated upstream
-=======
 
     public IEnumerator checkPointPopup()
     {
@@ -189,7 +187,7 @@ public class gameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         checkPointMenu.SetActive(false);
     }
->>>>>>> Stashed changes
+
 }
 
 
