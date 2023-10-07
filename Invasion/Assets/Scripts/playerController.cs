@@ -17,11 +17,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float Stamina;
     [SerializeField] float maxStamina;
     [SerializeField] float regenStamina;
-    [SerializeField] int playerSpeed;
+    [SerializeField] float playerSpeed;
     [Range(0, 7)][SerializeField] float jumpHeight;
 
     [Header("-----Expanded Player Stats-----")]
-    [SerializeField] int originalPlayerSpeed;
+    [SerializeField] float originalPlayerSpeed;
+    [SerializeField] int addSprintMod;
     [SerializeField] int jumpsMax;
     [SerializeField] float gravityValue;
     [SerializeField] Vector3 pushBack;
@@ -52,9 +53,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Time Slow
     [Header("-----Chronokinesis-----")]
     [SerializeField] bool isTimeSlowed;
+    [SerializeField] float time;
+    [SerializeField] float maxTime;
+    [SerializeField] float regenTime;
     [Range(0, 2)][SerializeField] float timeSlowInSeconds;
     [Range(0, 2)][SerializeField] float timeSlowScale;
-    [Range(1, 20)][SerializeField] int playerSlowSpeed;
+    [Range(0, 3)][SerializeField] float playerSlowSpeed;
 
     //Waypoints are used to track the player and what is close to them.
     [Header("-----Waypoints-----")]
@@ -114,6 +118,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         HP = _maxHP;
         Stamina = maxStamina;
         spawnPlayer();
+        time = maxTime;
         //Sets player speed
         originalPlayerSpeed = playerSpeed;
        
@@ -134,6 +139,9 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //Call to movement
         movement();
         sprint();
+
+        // Time slow
+        chronokinesis();
 
         //Use Selected Gun
         //selectGun();
@@ -292,6 +300,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             {
                 // Increase player run speed by 5
                 playerSpeed = originalPlayerSpeed + 5;
+                playerSpeed = originalPlayerSpeed + addSprintMod;
                 Stamina -= sprintCost * Time.deltaTime;
             }
             else
@@ -436,17 +445,39 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         isTimeSlowed = true;
         Time.timeScale = timeSlowScale;
 
-        yield return new WaitForSeconds(timeSlowInSeconds);
+        if (!gameManager.instance.isPaused && Input.GetButton("time"))
+        {
+            originalPlayerSpeed = playerSpeed;
+            playerSpeed = playerSpeed * playerSlowSpeed;
+            isTimeSlowed = true;
+            Time.timeScale = timeSlowScale;
+            time = time - Time.deltaTime;
 
-        //revert scale and update player speed
-        Time.timeScale = 1f;
-        playerSpeed = originalPlayerSpeed;
-        isTimeSlowed = false;
+        }
 
+        else //if (Input.GetButtonUp("time"))
+        {
+            isTimeSlowed = false;
+            Time.timeScale = 1;
+            playerSpeed = originalPlayerSpeed;
+
+            if (time <= maxTime)
+            {
+                time += regenTime * Time.deltaTime;
+
+                yield return new WaitForSeconds(timeSlowInSeconds);
+            }
+
+            //revert scale and update player speed
+            Time.timeScale = 1f;
+            playerSpeed = originalPlayerSpeed;
+            isTimeSlowed = false;
+
+        }
     }
 
-    //
-    IEnumerator delaySpeed()
+        //
+        IEnumerator delaySpeed()
     {
         playerSpeed = playerSpeed * 10000;
         yield return new WaitForSeconds(0.2f);
