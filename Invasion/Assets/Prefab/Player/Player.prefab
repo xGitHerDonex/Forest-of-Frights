@@ -5637,6 +5637,7 @@ MonoBehaviour:
   playerSpeed: 6
   jumpHeight: 4
   originalPlayerSpeed: 0
+  addSprintMod: 0
   jumpsMax: 1
   gravityValue: -8
   pushBack: {x: 0, y: 0, z: 0}
@@ -5651,9 +5652,11 @@ MonoBehaviour:
   throwLift: 17
   throwPos: {fileID: 1581684895581665375}
   isTimeSlowed: 0
-  timeSlowInSeconds: 1.5
-  timeSlowScale: 0.4
-  playerSlowSpeed: 10
+  time: 0
+  maxTime: 1.5
+  regenTime: 0.13
+  timeSlowScale: 0.6
+  playerSlowSpeed: 1.5
   waypoints: []
   waypointDist: 0
   closestWaypointDist: 0
@@ -5667,7 +5670,7 @@ MonoBehaviour:
   playerWalksGrass: {fileID: 8300000, guid: 18e761ff5ef14fd4588d9283fcc9b829, type: 3}
   playerRunsGrass: {fileID: 8300000, guid: 1d7e7e6569aab5a45a837f470eaddc8b, type: 3}
   playerJumpsGrass: {fileID: 8300000, guid: a967f92e38352bb4291945423de63499, type: 3}
-  isShooting: 0
+  isThrowing: 0
   ammoType: 0
   hasEnergeticRing: 1
   regenStaminaBuffAmount: 0
