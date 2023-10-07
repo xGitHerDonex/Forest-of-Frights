@@ -238,22 +238,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3092696678619848989, guid: 7e62007a878ad6c4daa0a0261494a917, type: 3}
-      propertyPath: time
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3092696678619848989, guid: 7e62007a878ad6c4daa0a0261494a917, type: 3}
-      propertyPath: regenTime
-      value: 0.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 3092696678619848989, guid: 7e62007a878ad6c4daa0a0261494a917, type: 3}
-      propertyPath: timeSlowScale
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3092696678619848989, guid: 7e62007a878ad6c4daa0a0261494a917, type: 3}
-      propertyPath: playerSlowSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7649686444481974697, guid: 7e62007a878ad6c4daa0a0261494a917, type: 3}
       propertyPath: m_LocalPosition.x
       value: 269.92786
@@ -680,17 +664,6 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
---- !u!114 &1880052097 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2667684881963598219, guid: 967eb1c5084c8b0499fa82479ff6653b, type: 3}
-  m_PrefabInstance: {fileID: 727657978441554140}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!850595691 &1946151418
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -922,10 +895,6 @@ PrefabInstance:
       propertyPath: demonLord
       value: 
       objectReference: {fileID: 1786525154}
-    - target: {fileID: 1574269684168981254, guid: 967eb1c5084c8b0499fa82479ff6653b, type: 3}
-      propertyPath: playerChronoBar
-      value: 
-      objectReference: {fileID: 1880052097}
     - target: {fileID: 1574269684168981254, guid: 967eb1c5084c8b0499fa82479ff6653b, type: 3}
       propertyPath: enemiesRemainingUI
       value: 

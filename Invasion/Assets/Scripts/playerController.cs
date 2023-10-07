@@ -80,7 +80,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip playerJumpsGrass;
 
     //Bools and others for functions
-    public bool isThrowing;
+    public bool isShooting = false;
     public AmmoType ammoType;
     private bool groundedPlayer;
     private bool canSprint = true;
@@ -165,11 +165,15 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             }
         }
 
+        //Throw grenade - works similar to shoot    
+        if (!gameManager.instance.isPaused && Input.GetButton("time") && !isTimeSlowed && move.magnitude <= 0.4f)
+        {
+            // Add the code for chronokinesis here.
+            StartCoroutine(chronokinesis());
+        }
 
         //Keeps Stamina Bar updated
         gameManager.instance.updateStamBar(Stamina / maxStamina);
-
-        gameManager.instance.updateChronoBar(time / maxTime);
     }
 
     //Move Ability:  Currently allows player to move!  Wheee!
@@ -435,17 +439,17 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Time Slow: slows the world but not the player
    void  chronokinesis()
     {
-        if (!gameManager.instance.isPaused && Input.GetButton("time") && time >= 0)// && move.magnitude <= 0.4f)
+        if (!gameManager.instance.isPaused && Input.GetButton("time"))// && move.magnitude <= 0.4f)
         {
-
-            playerSpeed = originalPlayerSpeed *playerSlowSpeed;
+            originalPlayerSpeed = playerSpeed;
+            playerSpeed = playerSpeed * playerSlowSpeed;
             isTimeSlowed = true;
             Time.timeScale = timeSlowScale;
             time = time - Time.deltaTime;
 
         }
 
-        else 
+        else //if (Input.GetButtonUp("time"))
         {
             isTimeSlowed = false;
             Time.timeScale = 1;
