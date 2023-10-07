@@ -98,6 +98,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] bool isSummoning;
     [SerializeField] bool summonCompleted;
     [SerializeField] bool isRbDestroyed;
+    [SerializeField] bool isPlayerinRange;
 
 
 
@@ -168,7 +169,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     void Update()
     {
 
-        if (startFight)//gameManager.instance.getIsMidBossDead())
+        if (gameManager.instance.getIsMidBossDead() && playerInRange)
         {
 
             //Continually checks to see if Enemy is flying, and updates animation
@@ -779,6 +780,30 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         yield return new WaitForSeconds(seconds);
         hurtBaddies(explosionDamage);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+
+        }
+    }
+
+
+
+    // does the exact opposite as On Trigger enter
+    // it checks to see if the object that is in the collider is the player if it isnt then the player isnt in range
+    //set the stopping distance to zero 
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+            agent.stoppingDistance = 0;
+
+        }
     }
 
 }
