@@ -9,6 +9,10 @@ public class gameManager : MonoBehaviour
 
     public static gameManager instance;           // instance for gameManager
 
+    [Header("-----Components-----")]
+    [SerializeField] GameObject checkPointMenu;
+
+
     [Header("-----Player-----")]
     public GameObject player;
     public playerController playerScript;
@@ -176,4 +180,16 @@ public class gameManager : MonoBehaviour
         demonLord.SetActive(true);
     }
 
+<<<<<<< Updated upstream
+=======
+
+    public IEnumerator checkPointPopup()
+    {
+        checkPointMenu.SetActive(true);
+        yield return new WaitForSeconds(2);
+        checkPointMenu.SetActive(false);
+    }
+>>>>>>> Stashed changes
 }
+
+
