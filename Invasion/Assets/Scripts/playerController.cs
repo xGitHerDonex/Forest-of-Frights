@@ -17,12 +17,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float Stamina;
     [SerializeField] float maxStamina;
     [SerializeField] float regenStamina;
-    [SerializeField] float playerSpeed;
+    [SerializeField] int playerSpeed;
     [Range(0, 7)][SerializeField] float jumpHeight;
 
     [Header("-----Expanded Player Stats-----")]
-    [SerializeField] float originalPlayerSpeed;
-    [SerializeField] int addSprintMod;
+    [SerializeField] int originalPlayerSpeed;
     [SerializeField] int jumpsMax;
     [SerializeField] float gravityValue;
     [SerializeField] Vector3 pushBack;
@@ -53,11 +52,9 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Time Slow
     [Header("-----Chronokinesis-----")]
     [SerializeField] bool isTimeSlowed;
-    [SerializeField] float time;
-    [SerializeField] float maxTime;
-    [SerializeField] float regenTime;
+    [Range(0, 2)][SerializeField] float timeSlowInSeconds;
     [Range(0, 2)][SerializeField] float timeSlowScale;
-    [Range(0, 3)][SerializeField] float playerSlowSpeed;
+    [Range(1, 20)][SerializeField] int playerSlowSpeed;
 
     //Waypoints are used to track the player and what is close to them.
     [Header("-----Waypoints-----")]
@@ -116,9 +113,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //set up for respawn
         HP = _maxHP;
         Stamina = maxStamina;
-        time = maxTime;
         spawnPlayer();
-
         //Sets player speed
         originalPlayerSpeed = playerSpeed;
        
@@ -140,9 +135,6 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         movement();
         sprint();
 
-        //Time slow
-        chronokinesis();
-
         //Use Selected Gun
         //selectGun();
 
@@ -155,7 +147,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //    StartCoroutine(shoot());
 
         //Throw grenade - works similar to shoot    
-        if (Input.GetButtonDown("throw") && !isThrowing && !gameManager.instance.isPaused)
+        if (Input.GetKeyDown("f") && !isShooting && !gameManager.instance.isPaused)
         {
             // Check if the "Shoot" button is also pressed, and if so, do not throw the grenade
             if (!Input.GetButton("Shoot"))
@@ -299,7 +291,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             if (Stamina >= sprintCost * Time.deltaTime)
             {
                 // Increase player run speed by 5
-                playerSpeed = originalPlayerSpeed + addSprintMod;
+                playerSpeed = originalPlayerSpeed + 5;
                 Stamina -= sprintCost * Time.deltaTime;
             }
             else
@@ -437,36 +429,23 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     }
 
     //Time Slow: slows the world but not the player
-   void  chronokinesis()
+    IEnumerator chronokinesis()
     {
-        if (!gameManager.instance.isPaused && Input.GetButton("time"))// && move.magnitude <= 0.4f)
-        {
-            originalPlayerSpeed = playerSpeed;
-            playerSpeed = playerSpeed * playerSlowSpeed;
-            isTimeSlowed = true;
-            Time.timeScale = timeSlowScale;
-            time = time - Time.deltaTime;
+        originalPlayerSpeed = playerSpeed;
+        playerSpeed = playerSpeed * playerSlowSpeed;
+        isTimeSlowed = true;
+        Time.timeScale = timeSlowScale;
 
-        }
+        yield return new WaitForSeconds(timeSlowInSeconds);
 
-        else //if (Input.GetButtonUp("time"))
-        {
-            isTimeSlowed = false;
-            Time.timeScale = 1;
-            playerSpeed = originalPlayerSpeed;
-
-            if (time <= maxTime)
-            {
-                time += regenTime * Time.deltaTime;
-
-            }
-
-
-        }
+        //revert scale and update player speed
+        Time.timeScale = 1f;
+        playerSpeed = originalPlayerSpeed;
+        isTimeSlowed = false;
 
     }
 
-    
+    //
     IEnumerator delaySpeed()
     {
         playerSpeed = playerSpeed * 10000;

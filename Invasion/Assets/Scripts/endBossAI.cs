@@ -89,7 +89,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] bool startFight;
     [SerializeField] bool isLanding;
     [SerializeField] bool isAttacking;
-    //[SerializeField] bool isRunning;
+    [SerializeField] bool isRunning;
     [SerializeField] bool isShooting;
     [SerializeField] bool isGrounded;
     [SerializeField] bool isFlying;
