@@ -119,23 +119,8 @@ public class gameManager : MonoBehaviour
 
     }
 
-
-    //Our Win Condition.
-    public void updateGameGoal(int amount)
-    {
-        //Updates the Enemies Remaining in the UI
-        enemiesRemaining -= amount;
-        enemiesRemainingText.text = enemiesRemaining.ToString("0");
-
-        if (enemiesRemaining <= 0)
-        {
-            StartCoroutine(youWin());
-        }
-
-    }
-
     //Pulls up the Win table after 1 second of
-    IEnumerator youWin()
+    public IEnumerator youWin()
     {
         currentMenu = winMenu;
         currentMenu.SetActive(isPaused);

@@ -98,7 +98,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] bool isGrounded;
     [SerializeField] bool isFlying;
     [SerializeField] bool reachedTarget;
-    [SerializeField] bool flyTriggered;
     [SerializeField] bool isSummoning;
     [SerializeField] bool summonCompleted;
     [SerializeField] bool isRbDestroyed;
@@ -139,9 +138,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     Vector3 playerDirection;
     Vector3 startingPos;
     float speedOrig;
-    bool runNextJob;
-    int wavesToSpawn;
-    int wavesSpawned;
+
+
 
 
 
@@ -159,8 +157,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         isGrounded = true;
         isFlying = false;
         isMoving = false;
-        flyTriggered = false;
-        runNextJob = false;
         reachedTarget = false;
         summonCompleted = true;
         originalTargetFaceSpeed = targetFaceSpeed;
@@ -714,7 +710,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             agent.enabled = false;
             anime.SetBool("Death", true);
             playDeathSound();
-
+            StartCoroutine(gameManager.instance.youWin());
         }
 
         else
