@@ -1633,7 +1633,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 5
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1704,7 +1704,7 @@ MonoBehaviour:
   anime: {fileID: 1531234606020404625}
   hitBox: {fileID: 2638309090893716847}
   targetFaceSpeed: 6
-  runningDistance: 10
+  runningDistance: 20
   hp: 100
   maxHp: 100
   animeSpeedChange: 10

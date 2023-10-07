@@ -243,18 +243,22 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                     else if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
                     {
 
-                                           
-                        faceTarget();
-                        if (!isAttacking)
-                            agent.SetDestination(gameManager.instance.player.transform.position);
-                    }
-
-                    else
-                    {
-
                         faceTarget();
                         agent.SetDestination(gameManager.instance.player.transform.position);
+
                     }
+
+                    ////if player is not wthin stopping distance, then set distination to the player
+                    //else if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
+                    //{
+
+                                           
+                    //    faceTarget();
+                    //    if (!isAttacking)
+                    //        agent.SetDestination(gameManager.instance.player.transform.position);
+                    //}
+
+                  
                 }
 
                  
@@ -337,7 +341,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             agent.enabled = false;
             anime.SetBool("Death", true);
             playDeathSound();
-            gameManager.instance.isMidBossDead();
+            gameManager.instance.activateBoss();
 
         }
 

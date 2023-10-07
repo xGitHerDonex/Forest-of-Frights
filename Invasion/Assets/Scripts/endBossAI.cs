@@ -7,8 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Device;
-using UnityEngine.ProBuilder;
-using UnityEngine.ProBuilder.MeshOperations;
+
 
 public class endBossAI : MonoBehaviour, IDamage, IPhysics
 {
@@ -168,12 +167,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-
-        if (gameManager.instance.getIsMidBossDead() && playerInRange)
+        if (!isDead && playerInRange)
         {
-
-            //Continually checks to see if Enemy is flying, and updates animation
-            setFlightAnimation();
 
             //Check HP levels
             float hpRatio = (float)(hp / maxHp);
@@ -205,8 +200,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
                 }
             }
-
         }
+        
 
     }
 
@@ -416,7 +411,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     //Flys to Closest Ground Waypoint, when called
     void flyToGround (GameObject waypoint)
     {
-
+            setFlightAnimation();
             isGrounded = false;
             isFlying = true;
             agent.enabled = false;
@@ -460,7 +455,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     //Same as above, but enemy flys to any target
     void flyToTarget(GameObject waypoint)
     {
-
+            setFlightAnimation();
             createRb();
 
             isFlying = true;
@@ -801,7 +796,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            agent.stoppingDistance = 0;
 
         }
     }

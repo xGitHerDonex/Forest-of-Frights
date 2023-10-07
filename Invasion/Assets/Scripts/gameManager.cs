@@ -24,7 +24,7 @@ public class gameManager : MonoBehaviour
 
 
     [Header("-----Game Goal-----")]
-
+    [SerializeField] GameObject demonLord;
     bool _isMidBossDead;
 
 
@@ -171,10 +171,9 @@ public class gameManager : MonoBehaviour
         _isMidBossDead = isDead;
     }
 
-    public bool getIsMidBossDead()
+    public void activateBoss()
     {
-        return _isMidBossDead;
+        demonLord.SetActive(true);
     }
-
 
 }
