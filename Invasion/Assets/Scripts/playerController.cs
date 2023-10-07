@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.UIElements;
 
 public class playerController : MonoBehaviour, IDamage, IPhysics
 {
@@ -11,9 +11,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Players stats
     [Header("-----Player Stats-----")]
     [SerializeField] float HP;
-    [SerializeField] float maxHP;
+    //[SerializeField] float maxHP;
+    private float _maxHP = 200f;
+    private float maxHPBuff =0f;
+    [SerializeField] float Stamina;
     [SerializeField] float maxStamina;
-    [SerializeField] float Stamina = 4;
     [SerializeField] float regenStamina;
     [SerializeField] int playerSpeed;
     [Range(0, 7)][SerializeField] float jumpHeight;
@@ -30,8 +32,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
     //[SerializeField] GameObject gunModel;
     [SerializeField] Transform gunMuzzle;
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDamage;
+    //[SerializeField] float shootRate;
+    //[SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
     [SerializeField] AudioClip shotSound;
 
@@ -75,7 +77,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip playerJumpsGrass;
 
     //Bools and others for functions
-    private bool isShooting = false;
+    public bool isShooting = false;
     public AmmoType ammoType;
     private bool groundedPlayer;
     private bool canSprint = true;
@@ -85,6 +87,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     private Vector3 playerVelocity;
     private Vector3 move;
     int selectedGun;
+    public bool hasEnergeticRing = false;
 
     //Player Buff Checks
     [SerializeField] float regenStaminaBuffAmount;
@@ -108,11 +111,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     {
       
         //set up for respawn
-        HP = maxHP;
+        HP = _maxHP;
         Stamina = maxStamina;
         spawnPlayer();
         //Sets player speed
         originalPlayerSpeed = playerSpeed;
+       
 
         // Creates the total ammo capacity for weapons
         //ammoInventory["Pistol Ammo"] = 100;
@@ -127,13 +131,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Update
     void Update()
     {
-
         //Call to movement
         movement();
         sprint();
 
         //Use Selected Gun
-        selectGun();
+        //selectGun();
 
         //Low Health Warning
         lowHealthWarning();
@@ -144,16 +147,25 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //    StartCoroutine(shoot());
 
         //Throw grenade - works similar to shoot    
-        if (Input.GetKeyDown("f")) //(!gameManager.instance.isPaused && Input.GetButton("throw"))// && !isShooting)
-            StartCoroutine(throwGrenade());
+        if (Input.GetKeyDown("f") && !isShooting && !gameManager.instance.isPaused)
+        {
+            // Check if the "Shoot" button is also pressed, and if so, do not throw the grenade
+            if (!Input.GetButton("Shoot"))
+            {
+                // Start the throwGrenade coroutine
+                StartCoroutine(throwGrenade());
+            }
+        }
 
         //Throw grenade - works similar to shoot    
         if (!gameManager.instance.isPaused && Input.GetButton("time") && !isTimeSlowed && move.magnitude <= 0.4f)
+        {
+            // Add the code for chronokinesis here.
             StartCoroutine(chronokinesis());
+        }
 
         //Keeps Stamina Bar updated
         gameManager.instance.updateStamBar(Stamina / maxStamina);
-
     }
 
     //Move Ability:  Currently allows player to move!  Wheee!
@@ -222,50 +234,92 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     //Sprint Ability:  Increases run speed by 5 for 4 seconds
     //Future: Powerups to increase maxStamina for increased sprinting
+    //void sprint()
+    //{
+    //    float moveMagnitude = move.magnitude;
+    //    if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed && moveMagnitude >=0.1)
+    //    {
+
+    //        //Increase player run speed by 5
+    //        playerSpeed = originalPlayerSpeed + 5;
+    //        Stamina -= 1.0f * Time.deltaTime;
+
+    //        if (playerSpeed == 9 && !audioSource.isPlaying && moveMagnitude >= 0.4f)
+    //        {
+    //            audioSource.PlayOneShot(playerRunsGrass);
+    //        }
+    //        {
+    //            if (Stamina <= 0.0)
+    //            {
+    //                canSprint = false;
+    //                if (!isTimeSlowed) //test
+    //                    playerSpeed = originalPlayerSpeed;
+    //            }
+    //        }
+    //    }
+
+    //    //Stamina Recover Ability:  Recovers stamina by 0.75(current regenStamina)
+    //    //Future: Powerups to speed up regenStamina
+    //    //Note: drainStamina set to 4.0 to allow sprinting sooner than possible maxStamina
+    //    else
+    //    {
+    //        if (Stamina >= 4.0)
+    //        {
+    //            canSprint = true;
+
+    //            if (!isTimeSlowed) // test
+    //            playerSpeed = originalPlayerSpeed;
+
+    //        }
+    //        Stamina += regenStamina * Time.deltaTime;
+    //        //Clamp prevents stamina going negative or over the max
+
+    //        Stamina = Mathf.Clamp(Stamina, 0, _maxStamina);
+    //        playerSpeed = originalPlayerSpeed;
+    //    }
+
+    //}
+
     void sprint()
     {
         float moveMagnitude = move.magnitude;
-        if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed && moveMagnitude >=0.1)
-        {
-           
-            //Increase player run speed by 5
-            playerSpeed = originalPlayerSpeed + 5;
-            Stamina -= 1.0f * Time.deltaTime;
+        float sprintCost = hasEnergeticRing ? 0.5f : 1.0f; // Check if the player has the Energetic Ring
 
-            if (playerSpeed == 9 && !audioSource.isPlaying && moveMagnitude >= 0.4f)
+        if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed && moveMagnitude >= 0.1)
+        {
+            // Check if there's enough stamina to sprint
+            if (Stamina >= sprintCost * Time.deltaTime)
             {
-                audioSource.PlayOneShot(playerRunsGrass);
+                // Increase player run speed by 5
+                playerSpeed = originalPlayerSpeed + 5;
+                Stamina -= sprintCost * Time.deltaTime;
             }
+            else
             {
-                if (Stamina <= 0.0)
-                {
-                    canSprint = false;
-                    if (!isTimeSlowed) //test
-                        playerSpeed = originalPlayerSpeed;
-                }
+                canSprint = false;
+                playerSpeed = originalPlayerSpeed;
             }
         }
-
-        //Stamina Recover Ability:  Recovers stamina by 0.75(current regenStamina)
-        //Future: Powerups to speed up regenStamina
-        //Note: drainStamina set to 4.0 to allow sprinting sooner than possible maxStamina
         else
         {
-            if (Stamina >= 4.0)
+            if (Stamina < maxStamina)
+            {
+                float regenAmount = regenStamina * Time.deltaTime;
+                Stamina = Mathf.Clamp(Stamina + regenAmount, 0, maxStamina);
+            }
+
+            if (Stamina >= 4.0f)
             {
                 canSprint = true;
 
-                if (!isTimeSlowed) // test
-                playerSpeed = originalPlayerSpeed;
-
+                if (!isTimeSlowed)
+                    playerSpeed = originalPlayerSpeed;
             }
-            Stamina += regenStamina * Time.deltaTime;
-            //Clamp prevents stamina going negative or over the max
-
-            Stamina = Mathf.Clamp(Stamina, 0, maxStamina);
-            playerSpeed = originalPlayerSpeed;
+            else
+            {
+                playerSpeed = originalPlayerSpeed;
+            }
         }
-
     }
 
 
@@ -359,9 +413,9 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Is infinite but only 1 grenade per second can be thrown
     IEnumerator throwGrenade()
     {
-        isShooting = true;
-
+        //isShooting = false;
         //creates grenades
+        
         GameObject thrownGrenade = Instantiate(grenade, throwPos.transform.position, throwPos.transform.rotation);
         Rigidbody thrownGrenadeRb = thrownGrenade.GetComponent<Rigidbody>();
 
@@ -370,7 +424,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //wait for throwrate, then flip bool back
         yield return new WaitForSeconds(throwRate);
-        isShooting = false;
+        //isShooting = true;
 
     }
 
@@ -413,7 +467,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         {
             isTakingDamage = true;
             HP -= amount;
-            gameManager.instance.updateHpBar(HP / maxHP); // updates HP UI
+            gameManager.instance.updateHpBar(HP / _maxHP); // updates HP UI
             StartCoroutine(gameManager.instance.playerFlashDamage());
 
             if (HP <= 0)
@@ -442,7 +496,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     private void lowHealthWarning()
     {
         //Once the player hits approximately 33% HP of their Max HP (equipment, etc) it'll trigger the warning
-        float lowHPThresh = maxHP * 0.33f;
+        float lowHPThresh = _maxHP * 0.33f;
 
         if (HP <= lowHPThresh)
         {
@@ -464,7 +518,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     {
 
         //Resets Players HP
-        HP = maxHP;
+        HP = _maxHP;
         updatePlayerUI();
 
         //Prevents playerController from taking over the script
@@ -482,57 +536,57 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Updates players HP bar after a respawn.  Implemented in spawnPlayer()
     public void updatePlayerUI()
     {
-        gameManager.instance.updateHpBar((float)HP / maxHP);
+        gameManager.instance.updateHpBar((float)HP / _maxHP);
 
     }
 
     //Updates Stats on Player from Gun
-    public void gunPickup(gunStats gun)
-    {
-        gunList.Add(gun);
+    //public void gunPickup(gunStats gun)
+    //{
+    //    gunList.Add(gun);
 
-        shootDamage = gun.shootDamage;
-        shootDistance = gun.shootDist;
-        shootRate = gun.shootRate;
-        shotSound = gun.shotSound;
+    //    shootDamage = gun.shootDamage;
+    //    shootDistance = gun.shootDist;
+    //    shootRate = gun.shootRate;
+    //    shotSound = gun.shotSound;
 
-        //gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
-       // gunModel.GetComponent<Renderer>().sharedMaterial = gun.model.GetComponent<Renderer>().sharedMaterial;
-        gunList[selectedGun].gunMuzzle = gunMuzzle;
+    //    //gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
+    //   // gunModel.GetComponent<Renderer>().sharedMaterial = gun.model.GetComponent<Renderer>().sharedMaterial;
+    //    gunList[selectedGun].gunMuzzle = gunMuzzle;
 
-        selectedGun = gunList.Count - 1;
-    }
+    //    selectedGun = gunList.Count - 1;
+    //}
 
-    //Selecting Gun Method
-    void selectGun()
-    {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
-        {
-            selectedGun++;
-            changeGun();
-            ammoUpdate();
-        }
+    ////Selecting Gun Method
+    //void selectGun()
+    //{
+    //    if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
+    //    {
+    //        selectedGun++;
+    //        changeGun();
+    //        ammoUpdate();
+    //    }
 
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
-        {
-            selectedGun--;
-            changeGun();
-            ammoUpdate();
-        }
-    }
+    //    else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+    //    {
+    //        selectedGun--;
+    //        changeGun();
+    //        ammoUpdate();
+    //    }
+    //}
 
     //Change gun
-    void changeGun()
-    {
-        shotSound = gunList[selectedGun].shotSound;
-        shootDamage = gunList[selectedGun].shootDamage;
-        shootDistance = gunList[selectedGun].shootDist;
-        shootRate = gunList[selectedGun].shootRate;
+    //void changeGun()
+    //{
+    //    shotSound = gunList[selectedGun].shotSound;
+    //    shootDamage = gunList[selectedGun].shootDamage;
+    //    shootDistance = gunList[selectedGun].shootDist;
+    //    shootRate = gunList[selectedGun].shootRate;
 
-        //gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
-       // gunModel.GetComponent<Renderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<Renderer>().sharedMaterial;
-        ammoUpdate();
-    }
+    //    //gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
+    //   // gunModel.GetComponent<Renderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<Renderer>().sharedMaterial;
+    //    ammoUpdate();
+    //}
 
     //method made for delaying damage for physics
     public void delayDamage(int damage, float seconds)
@@ -594,21 +648,39 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         return closestWaypoint;
     }
 
-
-    /// Equipment Buff Section (WIP)
-
-    public void energeticRingBuff(float staminaBuffAmount)
+    public float MaxHP
     {
-        // Increase the current Stamina by the buff amount.
-        Stamina += staminaBuffAmount;
-
-        // Ensure that the current Stamina does not exceed the updated maxStamina.
-        Stamina = Mathf.Clamp(Stamina, 0, maxStamina);
+        get
+        {
+            // Calculate maxHP including any buffs
+            return _maxHP + maxHPBuff;
+        }
+        set
+        {
+            // Ensure maxHP is never negative
+            _maxHP = Mathf.Max(value, 0f);
+        }
     }
-
-    public void enhancerBuff(float regenStaminaBuffAmount)
+    //public float MaxStamina
+    //{
+    //    get
+    //    {
+    //        // Calculate maxHP including any buffs
+    //        return maxStamina + maxStaminaBuff;
+    //    }
+    //    set
+    //    {
+    //        // Ensure maxHP is never negative
+    //        maxStamina = Mathf.Max(0f, value);
+    //    }
+    //}
+    /// Equipment Buff Section (WIP)
+    public void ApplyPermanentStatBoost(float hpBoost)
     {
-        regenStamina += regenStaminaBuffAmount;
+        Debug.Log("Before Buff - maxHP: " + _maxHP);
+        _maxHP += hpBoost;
+        Debug.Log("After Buff - maxHP: " + _maxHP);
+        
     }
 
 }

@@ -16,6 +16,7 @@ public class firearm : MonoBehaviour
     public Camera shootCam;
     public ParticleSystem muzzleFlash;
     public AudioClip shotSound;
+    public bool antiGrenade = false;
     
 
     public GameObject hitEffect;
@@ -55,36 +56,40 @@ public class firearm : MonoBehaviour
     }
     public void Shoot()
     {
-        muzzleFlash.Play();
-        audioSource.PlayOneShot(shotSound);
-        currentAmmo--;
-
-        RaycastHit hit;
-        if( Physics.Raycast(shootCam.transform.position, shootCam.transform.forward, out hit, range))
+        
+        if (!gameManager.instance.isPaused)
         {
-            Debug.Log(hit.transform.name);
-            //targetDamage target = hit.transform.GetComponent<targetDamage>();
+            muzzleFlash.Play();
+            audioSource.PlayOneShot(shotSound);
+            currentAmmo--;
+            antiGrenade = true;
+            RaycastHit hit;
+            if (Physics.Raycast(shootCam.transform.position, shootCam.transform.forward, out hit, range))
+            {
+                Debug.Log(hit.transform.name);
+                //targetDamage target = hit.transform.GetComponent<targetDamage>();
 
-            IDamage damageable = hit.collider.GetComponent<IDamage>();
+                IDamage damageable = hit.collider.GetComponent<IDamage>();
 
-            if (damageable != null && hit.transform != transform)
-            {                
-                damageable.hurtBaddies(damage);
+                if (damageable != null && hit.transform != transform)
+                {
+                    damageable.hurtBaddies(damage);
+                }
+
+                //if (target != null)
+                //{
+                //    target.hurtBaddies(damage);
+                //}
             }
 
-            //if (target != null)
-            //{
-            //    target.hurtBaddies(damage);
-            //}
-        }
+            if (hit.rigidbody != null)
+            {
+                hit.rigidbody.AddForce(-hit.normal * force);
+            }
 
-        if (hit.rigidbody != null)
-        {
-            hit.rigidbody.AddForce(-hit.normal * force);
+            GameObject hitEffectGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(hitEffectGO, 1f);
         }
-
-        GameObject hitEffectGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-        Destroy(hitEffectGO, 1f);
     }
 
     IEnumerator Reload()
@@ -102,5 +107,6 @@ public class firearm : MonoBehaviour
         
         isReloading = false;
     }
+
 
 }

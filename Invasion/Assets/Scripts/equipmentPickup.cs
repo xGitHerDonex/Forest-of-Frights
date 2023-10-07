@@ -63,15 +63,16 @@ public class equipmentPickup : MonoBehaviour
             case EquipmentItem.EnergeticRing:
                 if (player != null)
                 {
-                    player.energeticRingBuff(10);
                     energeticRingUI.SetActive(true);
+                    player.hasEnergeticRing = true;
                 }
                 break;
             
             case EquipmentItem.CrimsonStone:
 
-                if (crimsonStoneUI != null)
+                if (player != null)
                 {
+                    player.ApplyPermanentStatBoost(10);
                     crimsonStoneUI.SetActive(true);
                 }
                 break;

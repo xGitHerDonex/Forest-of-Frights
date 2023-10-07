@@ -271,6 +271,7 @@ MonoBehaviour:
   shootCam: {fileID: 4981824521777613818}
   muzzleFlash: {fileID: 0}
   shotSound: {fileID: 0}
+  antiGrenade: 0
   hitEffect: {fileID: 5168290068380350925, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
   audioSource: {fileID: 0}
   weaponHolder: {fileID: 0}
@@ -5592,6 +5593,7 @@ GameObject:
   - component: {fileID: 7168708513451557375}
   - component: {fileID: 878165108786800974}
   - component: {fileID: 211564029119405894}
+  - component: {fileID: 3003112171831569740}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -5629,11 +5631,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7821308652150681510}
   HP: 200
-  maxHP: 200
-  maxStamina: 4
   Stamina: 4
+  maxStamina: 4
   regenStamina: 0.75
-  playerSpeed: 20
+  playerSpeed: 6
   jumpHeight: 4
   originalPlayerSpeed: 0
   jumpsMax: 1
@@ -5642,8 +5643,6 @@ MonoBehaviour:
   pushBackResolve: 3
   gunList: []
   gunMuzzle: {fileID: 0}
-  shootRate: 0
-  shootDamage: 0
   shootDistance: 0
   shotSound: {fileID: 0}
   grenade: {fileID: 8825613890474161169, guid: 802e9ea262efceb48ba432d2a5f9eedc, type: 3}
@@ -5668,7 +5667,9 @@ MonoBehaviour:
   playerWalksGrass: {fileID: 8300000, guid: 18e761ff5ef14fd4588d9283fcc9b829, type: 3}
   playerRunsGrass: {fileID: 8300000, guid: 1d7e7e6569aab5a45a837f470eaddc8b, type: 3}
   playerJumpsGrass: {fileID: 8300000, guid: a967f92e38352bb4291945423de63499, type: 3}
+  isShooting: 0
   ammoType: 0
+  hasEnergeticRing: 1
   regenStaminaBuffAmount: 0
 --- !u!143 &7821308652150681510
 CharacterController:
@@ -5692,7 +5693,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 40
-  m_StepOffset: 1
+  m_StepOffset: 0.7
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -5865,6 +5866,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3003112171831569740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2932831312175181721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49c4949b1b8dd66409d1d18ff575be68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipmentType: 0
+  player: {fileID: 0}
+  energeticRingUI: {fileID: 0}
+  crimsonStoneUI: {fileID: 0}
+  temportalRelicUI: {fileID: 0}
+  metabolizerUI: {fileID: 0}
+  flightxUI: {fileID: 0}
+  enhancerUI: {fileID: 0}
+  nanoInfusorUI: {fileID: 0}
+  phaseShifterUI: {fileID: 0}
+  reflexGauntletUI: {fileID: 0}
+  antiGravStoneUI: {fileID: 0}
+  synthesizerUI: {fileID: 0}
+  vitalizerUI: {fileID: 0}
+  chronoGreavesUI: {fileID: 0}
+  powerInfusorUI: {fileID: 0}
+  farSightUI: {fileID: 0}
 --- !u!1 &3068837648463858587
 GameObject:
   m_ObjectHideFlags: 0
@@ -6186,6 +6216,7 @@ MonoBehaviour:
   shootCam: {fileID: 4981824521777613818}
   muzzleFlash: {fileID: 704486672112966595}
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
+  antiGrenade: 0
   hitEffect: {fileID: 5168290068380350925, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
   audioSource: {fileID: 90018371221168601}
   weaponHolder: {fileID: 7574090309909534750}
@@ -6593,6 +6624,7 @@ MonoBehaviour:
   shootCam: {fileID: 4981824521777613818}
   muzzleFlash: {fileID: 5079691974034952957, guid: a5af073afda13d143a2857372c26ef6e, type: 3}
   shotSound: {fileID: 8300000, guid: a28f97506cbe82d479cd46f40fa6efe0, type: 3}
+  antiGrenade: 0
   hitEffect: {fileID: 5168290068380350925, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
   audioSource: {fileID: 90018371221168601}
   weaponHolder: {fileID: 7574090309909534750}
@@ -12333,6 +12365,7 @@ MonoBehaviour:
   shootCam: {fileID: 4981824521777613818}
   muzzleFlash: {fileID: 8165703571339267615}
   shotSound: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
+  antiGrenade: 0
   hitEffect: {fileID: 5168290068380350925, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
   audioSource: {fileID: 90018371221168601}
   weaponHolder: {fileID: 7574090309909534750}
