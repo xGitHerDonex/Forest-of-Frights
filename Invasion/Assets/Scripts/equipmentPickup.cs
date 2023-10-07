@@ -61,8 +61,9 @@ public class equipmentPickup : MonoBehaviour
         switch (equipmentType)
         {
             case EquipmentItem.EnergeticRing:
-                if (energeticRingUI != null)
+                if (player != null)
                 {
+                    player.energeticRingBuff(10);
                     energeticRingUI.SetActive(true);
                 }
                 break;

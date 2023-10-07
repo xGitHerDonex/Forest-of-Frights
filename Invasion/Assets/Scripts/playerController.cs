@@ -13,7 +13,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float HP;
     [SerializeField] float maxHP;
     [SerializeField] float maxStamina;
-    [SerializeField] float Stamina;
+    [SerializeField] float Stamina = 4;
     [SerializeField] float regenStamina;
     [SerializeField] int playerSpeed;
     [Range(0, 7)][SerializeField] float jumpHeight;
@@ -224,16 +224,15 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Future: Powerups to increase maxStamina for increased sprinting
     void sprint()
     {
-        if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed)
+        float moveMagnitude = move.magnitude;
+        if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed && moveMagnitude >=0.1)
         {
+           
             //Increase player run speed by 5
             playerSpeed = originalPlayerSpeed + 5;
             Stamina -= 1.0f * Time.deltaTime;
 
-            //WIP Sprint Sound
-            float moveMagnitude = move.magnitude;
-            //m_AudioSource.Stop();
-            if (playerSpeed == 10 && !audioSource.isPlaying && moveMagnitude >= 0.4f)
+            if (playerSpeed == 9 && !audioSource.isPlaying && moveMagnitude >= 0.4f)
             {
                 audioSource.PlayOneShot(playerRunsGrass);
             }
@@ -257,13 +256,14 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
                 canSprint = true;
 
                 if (!isTimeSlowed) // test
-                    playerSpeed = originalPlayerSpeed;
+                playerSpeed = originalPlayerSpeed;
 
             }
             Stamina += regenStamina * Time.deltaTime;
             //Clamp prevents stamina going negative or over the max
 
             Stamina = Mathf.Clamp(Stamina, 0, maxStamina);
+            playerSpeed = originalPlayerSpeed;
         }
 
     }
@@ -453,8 +453,9 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         else
         {
             //Turn off Low Health warning
-            lowHPWarnText.gameObject.SetActive(false);
             lowHealthWarnBG.SetActive(false);
+            lowHPWarnText.gameObject.SetActive(false);
+            
         }
     }
 
@@ -595,11 +596,14 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
 
     /// Equipment Buff Section (WIP)
-    
-    public void energeticRingBuff(int staminaBuffAmount)
+
+    public void energeticRingBuff(float staminaBuffAmount)
     {
-        Stamina = maxStamina;
-        maxStamina += staminaBuffAmount; 
+        // Increase the current Stamina by the buff amount.
+        Stamina += staminaBuffAmount;
+
+        // Ensure that the current Stamina does not exceed the updated maxStamina.
+        Stamina = Mathf.Clamp(Stamina, 0, maxStamina);
     }
 
     public void enhancerBuff(float regenStaminaBuffAmount)
