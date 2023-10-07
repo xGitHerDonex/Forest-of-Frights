@@ -179,9 +179,9 @@ public class enemyAI : MonoBehaviour, IDamage, IPhysics
                 enemyLight.enabled = false;
             }
 
-            gameManager.instance.updateGameGoal(+1); //updates win condition set at 10 or greater "You win" also increments enemies killed and starts the win table Ienum
-
-        } else
+        } 
+        
+        else
         {
             anime.SetTrigger("Damage");
             StartCoroutine(flashDamage());

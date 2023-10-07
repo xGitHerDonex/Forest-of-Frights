@@ -23,9 +23,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject DemonLord;
 
-    Rigidbody originalRb;
-
-
     [Header("-----Enemy Stats-----")]
 
     [Tooltip("Turning speed 1-10.")]
@@ -90,9 +87,9 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int flightTargetFaceSpeed;
 
     [Header("-----Bools-----")]
+    [SerializeField] bool startFight;
     [SerializeField] bool isLanding; 
     [SerializeField] bool isAttacking;
-    [SerializeField] bool isMoving;
     [SerializeField] bool isRunning;
     [SerializeField] bool isShooting;
     [SerializeField] bool isGrounded;
@@ -149,6 +146,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     void Start()
     {
         //Get's Player Script so we can check the closest waypoint
+        
         playerScript = gameManager.instance.player.GetComponent<playerController>();
         origFlightSpeed = flightSpeed;
         stoppingDistOriginal = agent.stoppingDistance;
@@ -156,7 +154,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         isAttacking = false;
         isGrounded = true;
         isFlying = false;
-        isMoving = false;
         reachedTarget = false;
         summonCompleted = true;
         originalTargetFaceSpeed = targetFaceSpeed;
@@ -170,7 +167,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.instance.getIsMidBossDead())
+  
+        if (startFight)//gameManager.instance.getIsMidBossDead())
         {
 
             //Continually checks to see if Enemy is flying, and updates animation
@@ -201,7 +199,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
                 else if (isGrounded && !isLanding && agent.isActiveAndEnabled)
                 {
-                    agent.ResetPath();
+
                     Stage2();
 
                 }
