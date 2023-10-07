@@ -419,4 +419,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     }
 
     #endregion
+
+//void Melee(){}
+//void Fly(){}
 }
