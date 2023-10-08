@@ -26,6 +26,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] Image playerRightStamBar;
     [SerializeField] Image playerChronoBar;
 
+
     [SerializeField] GameObject reticle;
 
 
@@ -40,8 +41,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject winMenu;           // Win Menu
     [SerializeField] GameObject loseMenu;          // Lose Menu
     [SerializeField] GameObject inventoryMenu;    // Inventory Menu
-
     [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
+   
 
     public bool isPaused;
 

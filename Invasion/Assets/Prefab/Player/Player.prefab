@@ -443,16 +443,40 @@ PrefabInstance:
       propertyPath: shootCam
       value: 
       objectReference: {fileID: 204235099643368795}
+    - target: {fileID: 2914944531594063970, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
+      propertyPath: _weaponSwap
+      value: 
+      objectReference: {fileID: 2405196994143995230}
     - target: {fileID: 3068570407577131329, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
       propertyPath: shootCam
       value: 
       objectReference: {fileID: 204235099643368795}
+    - target: {fileID: 3068570407577131329, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
+      propertyPath: _weaponSwap
+      value: 
+      objectReference: {fileID: 2405196994143995230}
+    - target: {fileID: 6831696018714963776, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
+      propertyPath: maxAmmo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831696018714963776, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 2259054214927454013}
     - target: {fileID: 6831696018714963776, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
       propertyPath: shootCam
       value: 
       objectReference: {fileID: 204235099643368795}
     - target: {fileID: 6831696018714963776, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831696018714963776, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
+      propertyPath: _weaponSwap
+      value: 
+      objectReference: {fileID: 2405196994143995230}
+    - target: {fileID: 6831696018714963776, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
+      propertyPath: currentAmmo
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7134753191693842225, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
@@ -503,11 +527,55 @@ PrefabInstance:
       propertyPath: shootCam
       value: 
       objectReference: {fileID: 204235099643368795}
+    - target: {fileID: 8073956278226917230, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
+      propertyPath: _weaponSwap
+      value: 
+      objectReference: {fileID: 2405196994143995230}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9158314631260933859, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2259054214927454013}
   m_SourcePrefab: {fileID: 100100000, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
+--- !u!114 &2405196994143995230 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8238827045334292367, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
+  m_PrefabInstance: {fileID: 5996200301445665489}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bfcf76e19204ed4ba7737aae8281fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3183507025322597426 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9158314631260933859, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
+  m_PrefabInstance: {fileID: 5996200301445665489}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2259054214927454013
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3183507025322597426}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1e7381a83ef11e84fb5f80b0a0099f19, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &4172651079773254814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7700861153455023695, guid: c7e2b2e552dd0af44a65f46c454d9154, type: 3}
