@@ -40,7 +40,7 @@ public class firearm : MonoBehaviour
     public Animator animator;
     private void Start()
     {
-
+        player = gameManager.instance.playerScript.GetComponent<IDamage>();
         currentAmmo = maxAmmo;
         UpdateAmmoUI();
   
@@ -94,7 +94,7 @@ public class firearm : MonoBehaviour
 
                 IDamage damageable = hit.collider.GetComponent<IDamage>();
 
-                if (damageable != null && hit.transform != transform && damageable != player)
+                if (damageable != gameManager.instance.playerScript.GetComponent<IDamage>() && damageable != null && hit.transform != transform)
                 {
                     damageable.hurtBaddies(damage);
                 }
@@ -129,9 +129,11 @@ public class firearm : MonoBehaviour
 
             IDamage damageable = hit.collider.GetComponent<IDamage>();
 
-            if (damageable != null && hit.transform != transform && damageable != player)
+            if (damageable != player && damageable != null && hit.transform != transform && damageable != player)
             {
                 damageable.hurtBaddies(damage);
+                GameObject hitEffectGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                Destroy(hitEffectGO, 1f);
             }
 
         }
@@ -141,8 +143,8 @@ public class firearm : MonoBehaviour
             hit.rigidbody.AddForce(-hit.normal * force);
         }
 
-        GameObject hitEffectGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-        Destroy(hitEffectGO, 1f);
+       //GameObject hitEffectGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+        //Destroy(hitEffectGO, 1f);
         specialUsed = true;
 
         if (ammoCurText != null)
