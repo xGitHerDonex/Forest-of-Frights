@@ -147,14 +147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218b2a146c027314ba878feed944ee1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionAmount: 5
-  explosionEffect: {fileID: 9013456325837797778, guid: 246ec6f8a942dda49a01ec9aa92fec5f, type: 3}
-  explosionDamage: 5
-  destroyTime: 3
   rb: {fileID: 1543882293016339473}
   speed: 25
   destroyTime: 3
-  explosive: {fileID: 9013456325837797778, guid: 246ec6f8a942dda49a01ec9aa92fec5f, type: 3}
+  explosionEffect: {fileID: 9013456325837797778, guid: 246ec6f8a942dda49a01ec9aa92fec5f, type: 3}
+  explosionDamage: 5
+  explosionAmount: 5
 --- !u!135 &1470901191441593847
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -174,5 +172,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}

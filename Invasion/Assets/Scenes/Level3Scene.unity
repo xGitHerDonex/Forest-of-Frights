@@ -279,12 +279,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: hp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: runningDistance
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7918646389003623894, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: m_Name
       value: Gorosaurus
+      objectReference: {fileID: 0}
+    - target: {fileID: 7918646389003623894, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -352,7 +360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7649686444481974697, guid: 7e62007a878ad6c4daa0a0261494a917, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 269.92786
+      value: 238.5
       objectReference: {fileID: 0}
     - target: {fileID: 7649686444481974697, guid: 7e62007a878ad6c4daa0a0261494a917, type: 3}
       propertyPath: m_LocalPosition.y
@@ -360,7 +368,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7649686444481974697, guid: 7e62007a878ad6c4daa0a0261494a917, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 89.69302
+      value: 564.5
       objectReference: {fileID: 0}
     - target: {fileID: 7649686444481974697, guid: 7e62007a878ad6c4daa0a0261494a917, type: 3}
       propertyPath: m_LocalRotation.w
@@ -982,6 +990,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 967eb1c5084c8b0499fa82479ff6653b, type: 3}
+--- !u!1001 &2032228380601941086
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4969040929063591081, guid: 8e349a063068af34ead98865299a606b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 983
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969040929063591081, guid: 8e349a063068af34ead98865299a606b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 70.59056
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969040929063591081, guid: 8e349a063068af34ead98865299a606b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 312
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969040929063591081, guid: 8e349a063068af34ead98865299a606b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969040929063591081, guid: 8e349a063068af34ead98865299a606b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969040929063591081, guid: 8e349a063068af34ead98865299a606b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969040929063591081, guid: 8e349a063068af34ead98865299a606b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969040929063591081, guid: 8e349a063068af34ead98865299a606b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969040929063591081, guid: 8e349a063068af34ead98865299a606b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4969040929063591081, guid: 8e349a063068af34ead98865299a606b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478106811036253188, guid: 8e349a063068af34ead98865299a606b, type: 3}
+      propertyPath: m_Name
+      value: 4x4 Waypoints Ground
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8e349a063068af34ead98865299a606b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -993,5 +1058,6 @@ SceneRoots:
   - {fileID: 240632086}
   - {fileID: 1786525153}
   - {fileID: 2072247834}
+  - {fileID: 2032228380601941086}
   - {fileID: 360377809}
   - {fileID: 918614058}
