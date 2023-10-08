@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1543882293016339473}
   - component: {fileID: 6580476616662141725}
   - component: {fileID: 1470901191441593847}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: aad446c3af1a3bd48a9ca9623db46657, type: 2}
+  - {fileID: 2100000, guid: dd73993deb6f6d34aaa82c1343fb7f92, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -150,5 +150,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.8718751
+  m_Radius: 2
   m_Center: {x: 0, y: 0.12187513, z: 0}
