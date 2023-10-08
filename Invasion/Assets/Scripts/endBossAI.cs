@@ -111,7 +111,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
     [Header("-----Summon Details-----")]
     [SerializeField] GameObject bossSpawner;
-    [SerializeField] int summonTime;
+    [SerializeField] float summonTime;
 
 
 
