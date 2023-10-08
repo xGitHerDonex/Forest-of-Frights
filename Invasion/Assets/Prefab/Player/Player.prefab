@@ -5634,9 +5634,10 @@ MonoBehaviour:
   Stamina: 4
   maxStamina: 4
   regenStamina: 0.75
-  playerSpeed: 6
+  playerSpeed: 10
   jumpHeight: 4
   originalPlayerSpeed: 0
+  addSprintMod: 0
   jumpsMax: 1
   gravityValue: -8
   pushBack: {x: 0, y: 0, z: 0}
@@ -5651,9 +5652,12 @@ MonoBehaviour:
   throwLift: 17
   throwPos: {fileID: 1581684895581665375}
   isTimeSlowed: 0
+  time: 0
+  maxTime: 0
+  regenTime: 0
   timeSlowInSeconds: 1.5
   timeSlowScale: 0.4
-  playerSlowSpeed: 10
+  playerSlowSpeed: 3
   waypoints: []
   waypointDist: 0
   closestWaypointDist: 0
