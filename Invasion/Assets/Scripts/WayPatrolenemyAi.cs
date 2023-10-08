@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Device;
@@ -7,6 +9,7 @@ using UnityEngine.Device;
 public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 {
     #region Variables
+    private NavMeshPath path;
 
     [Header("-----Components-----")]
     [SerializeField] Renderer model;
@@ -25,6 +28,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
     [Tooltip("Turning speed 1-10.")]
     [Range(1, 10)][SerializeField] int targetFaceSpeed;
+
+
 
     [Tooltip("Enemy viewing angle, (-)360-360.")]
     [Range(-360, 360)][SerializeField] int viewAngle;
@@ -99,7 +104,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
      *  set destination otherwise returns false and no new path is calculated
      *
      */
-    void Update()
+    void FixedUpdate()
     {
         if (agent.isActiveAndEnabled)
         {
@@ -120,7 +125,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             }
         }
     }
-
+   
 
     #region Movement
     /// <summary>
@@ -179,7 +184,10 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     //and it lerps the rotation over time so it is smooth and not choppy
         Quaternion rotation = Quaternion.LookRotation(playerDirection);
         //lerp over time rotation
+        anime.SetBool("isTurning", true);
         transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * targetFaceSpeed);
+        anime.SetBool("isTurning", false);
+
     }
 
     #endregion
@@ -187,12 +195,12 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     #region Damage Related
 
     /// <summary>
- /// if the enemy takes damage requires an amount for the damage in a whole number
- /// then subtracts the amount of damage from that whole number
- ///the call the sub routine to run at the same time to make the enemy feedback show( flashing damage indicator)
- ///also if the health is less than or equal to 0 destroy this enemy
- /// </summary>
- /// <param name="amount"></param>
+    /// if the enemy takes damage requires an amount for the damage in a whole number
+    /// then subtracts the amount of damage from that whole number
+    ///the call the sub routine to run at the same time to make the enemy feedback show( flashing damage indicator)
+    ///also if the health is less than or equal to 0 destroy this enemy
+    /// </summary>
+    /// <param name="amount"></param>
     public void hurtBaddies( int amount )
     {
         hp -= amount;
@@ -203,7 +211,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         {
             hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
             agent.enabled = false;
-            anime.SetBool("Death", true);
+            anime.SetBool("isDead", true);
             playDeathSound();
 
             // Turn out the lights! (When the enemy dies)
@@ -249,6 +257,16 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         isShooting = true;
         playAttackSound();
         anime.SetTrigger("Shoot");
+        if(agent.stoppingDistance > 7 && playerInRange)
+        {
+            anime.SetBool("isMelee",false);
+            anime.SetBool("isRanged", true);
+        } else
+        {
+            anime.SetBool("isMelee", true);
+            anime.SetBool("isRanged", false);
+        }
+
         //Used to add delay to the shoot to match the animation
         //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
         yield return new WaitForSeconds(shootRate);
@@ -317,6 +335,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle)
             {
                 agent.stoppingDistance = stoppingDistOriginal;
+
                 agent.SetDestination(gameManager.instance.player.transform.position);
                 /*
                  * if the remaining distance is less than or equal to the stopping  distance of the enemy
@@ -324,8 +343,9 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
                  * if these are true then start to shoot
                  */
                 if (agent.remainingDistance >= agent.stoppingDistance)
-                {
+                {                    
                     faceTarget();
+                    
                     if (!isShooting && angleToPlayer <= shootAngle)
                     {
                         StartCoroutine(shoot());
@@ -364,8 +384,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             anime.SetBool("isCaught", playerInRange);
                 //wrap for flight
             anime.SetBool("isLanding",!playerInRange);
-            Fly();
-
+            
         }
     }
 
@@ -377,11 +396,11 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            agent.stoppingDistance = 0;
+
             anime.SetBool("isCaught", playerInRange);
                 //wrap for flight
             anime.SetBool("isLanding",!playerInRange);
-            Land();
+           
         }
     }
 
@@ -430,13 +449,15 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 //void Melee(){}
 void Fly(){
 
+        agent.baseOffset = 3;
 
-transform.position+=Vector3.up;
 
-}
-void Land(){
 
-transform.position += Vector3.down;
+    }
 
-}
+    
+    void Land(){
+
+        agent.baseOffset = 0;
+    }
 }

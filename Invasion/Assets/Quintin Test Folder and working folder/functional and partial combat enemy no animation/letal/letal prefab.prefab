@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3524028776393812240}
   - component: {fileID: 5449048267499554653}
   m_Layer: 8
-  m_Name: Muscous Bullet Prefab
+  m_Name: letal prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   rb: {fileID: 3524028776393812240}
   damage: 4
   speed: 20
-  destroyTime: 3.5
+  destroyTime: 4
 --- !u!114 &-864417641232556038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionAmount: 15
   explosionEffect: {fileID: 100006, guid: 5c4816ab27403454dab71a44408dff24, type: 3}
-  explosionDamage: 5
+  explosionDamage: 0
   destroyTime: 2.5
 --- !u!33 &6140715677174310904
 MeshFilter:
