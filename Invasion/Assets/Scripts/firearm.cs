@@ -41,6 +41,9 @@ public class firearm : MonoBehaviour
     {
         currentAmmo = maxAmmo;
         UpdateAmmoUI();
+
+        ammoCurText = gameManager.instance.getAmmoCurText();
+        ammoMaxText = gameManager.instance.getAmmoMaxText();    
     }
 
     private void OnEnable()

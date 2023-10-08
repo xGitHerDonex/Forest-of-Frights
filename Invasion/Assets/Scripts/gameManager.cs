@@ -52,7 +52,9 @@ public class gameManager : MonoBehaviour
     [Header("----Accessible Values-----")]
     [Range(1, 5)] public int explosionDamage;
 
-
+    [Header("-----TextMeshPro-----")]
+    [SerializeField] TextMeshProUGUI ammoCurText;
+    [SerializeField] TextMeshProUGUI ammoMaxText;
 
     //Initializes before Application Runs
     void Awake()
@@ -195,6 +197,16 @@ public class gameManager : MonoBehaviour
         checkPointMenu.SetActive(true);
         yield return new WaitForSeconds(2);
         checkPointMenu.SetActive(false);
+    }
+
+    public TextMeshProUGUI getAmmoCurText()
+    {
+        return ammoCurText;
+    }
+
+    public TextMeshProUGUI getAmmoMaxText()
+    {
+        return ammoMaxText;
     }
 
 }
