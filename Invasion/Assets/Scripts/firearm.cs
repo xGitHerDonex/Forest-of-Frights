@@ -1,5 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
 
 public class firearm : MonoBehaviour
 {
@@ -10,7 +13,7 @@ public class firearm : MonoBehaviour
     public float specialRate = 1f;
 
     public int maxAmmo = 10;
-    private int currentAmmo;
+    public int currentAmmo;
     public float reloadTime = 1f;
     public float specialReload = 1f;
     private bool isReloading = false;
@@ -27,6 +30,8 @@ public class firearm : MonoBehaviour
     public GameObject hitEffect;
     [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject weaponHolder;
+    [SerializeField] public TextMeshProUGUI ammoCurText;
+    [SerializeField] public TextMeshProUGUI ammoMaxText;
 
     private float nextShot = 0f;
 
@@ -35,6 +40,7 @@ public class firearm : MonoBehaviour
     private void Start()
     {
         currentAmmo = maxAmmo;
+        UpdateAmmoUI();
     }
 
     private void OnEnable()
@@ -96,6 +102,11 @@ public class firearm : MonoBehaviour
 
             GameObject hitEffectGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(hitEffectGO, 1f);
+
+            if (ammoCurText != null)
+            {
+                ammoCurText.text = currentAmmo.ToString();
+            }
         }
     }
 
@@ -134,6 +145,7 @@ public class firearm : MonoBehaviour
     {
         isReloading = true;
         animator.SetBool("Reloading", true);
+        ammoCurText.text = "Reload";
         if (specialUsed)
         {
             yield return new WaitForSeconds(specialReload - .25f);
@@ -147,10 +159,21 @@ public class firearm : MonoBehaviour
         yield return new WaitForSeconds(.25f);
 
         currentAmmo = maxAmmo;
-
+        if (ammoCurText != null)
+        {
+            ammoCurText.text = currentAmmo.ToString();
+        }
         isReloading = false;
         specialUsed = false;
     }
 
+    public void UpdateAmmoUI()
+    {
+        if (ammoCurText != null)
+        {
+            ammoCurText.text = currentAmmo.ToString();
+            ammoMaxText.text = maxAmmo.ToString();
+        }
+    }
 
 }

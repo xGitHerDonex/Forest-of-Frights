@@ -262,12 +262,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d19a2067220c1149ab7595117ee1d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  range: 10
-  force: 5
-  firerate: 15
-  maxAmmo: 10
-  reloadTime: 1
+  damage: 0
+  range: 0
+  force: 0
+  firerate: 0
+  specialRate: 0
+  maxAmmo: 0
+  currentAmmo: 0
+  reloadTime: 0
+  specialReload: 0
   shootCam: {fileID: 4981824521777613818}
   muzzleFlash: {fileID: 0}
   shotSound: {fileID: 0}
@@ -275,6 +278,7 @@ MonoBehaviour:
   hitEffect: {fileID: 5168290068380350925, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
   audioSource: {fileID: 0}
   weaponHolder: {fileID: 0}
+  ammoCurText: {fileID: 0}
   animator: {fileID: 0}
 --- !u!1 &984885635752168130
 GameObject:
@@ -6132,8 +6136,11 @@ MonoBehaviour:
   range: 55
   force: 10
   firerate: 2.4
+  specialRate: 3
   maxAmmo: 15
+  currentAmmo: 0
   reloadTime: 1.2
+  specialReload: 1.9
   shootCam: {fileID: 4981824521777613818}
   muzzleFlash: {fileID: 704486672112966595}
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
@@ -6141,6 +6148,7 @@ MonoBehaviour:
   hitEffect: {fileID: 5168290068380350925, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
   audioSource: {fileID: 90018371221168601}
   weaponHolder: {fileID: 7574090309909534750}
+  ammoCurText: {fileID: 0}
   animator: {fileID: 4936007565715983630}
 --- !u!1 &5232556626643415824
 GameObject:
@@ -6719,6 +6727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedWeapon: 0
+  ammoCurText: {fileID: 0}
 --- !u!95 &4936007565715983630
 Animator:
   serializedVersion: 5
@@ -6986,8 +6995,11 @@ MonoBehaviour:
   range: 70
   force: 10
   firerate: 15
+  specialRate: 15
   maxAmmo: 30
+  currentAmmo: 0
   reloadTime: 3
+  specialReload: 3
   shootCam: {fileID: 4981824521777613818}
   muzzleFlash: {fileID: 8165703571339267615}
   shotSound: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
@@ -6995,6 +7007,7 @@ MonoBehaviour:
   hitEffect: {fileID: 5168290068380350925, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
   audioSource: {fileID: 90018371221168601}
   weaponHolder: {fileID: 7574090309909534750}
+  ammoCurText: {fileID: 0}
   animator: {fileID: 4936007565715983630}
 --- !u!1 &7986360820439223958
 GameObject:
@@ -12121,9 +12134,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 90018371221168601}
     - target: {fileID: 7124752697673893253, guid: 3d439699b3a04f74a8e04f02c64b0e50, type: 3}
+      propertyPath: specialRate
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7124752697673893253, guid: 3d439699b3a04f74a8e04f02c64b0e50, type: 3}
       propertyPath: weaponHolder
       value: 
       objectReference: {fileID: 7574090309909534750}
+    - target: {fileID: 7124752697673893253, guid: 3d439699b3a04f74a8e04f02c64b0e50, type: 3}
+      propertyPath: specialReload
+      value: 3.8
+      objectReference: {fileID: 0}
     - target: {fileID: 9104407235753374527, guid: 3d439699b3a04f74a8e04f02c64b0e50, type: 3}
       propertyPath: m_Name
       value: Shotgun
