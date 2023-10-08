@@ -12,13 +12,15 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [Header("-----Player Stats-----")]
     [SerializeField] float HP;
     //[SerializeField] float maxHP;
-    private float _maxHP = 200f;
-    private float maxHPBuff =0f;
+    [SerializeField] float _maxHP; // = 200f;
+    [SerializeField] float maxHPBuff; //=0f;
     [SerializeField] float Stamina;
     [SerializeField] float maxStamina;
     [SerializeField] float regenStamina;
     [SerializeField] float playerSpeed;
+    [SerializeField] float playerSpeedBuff = 20f;
     [Range(0, 7)][SerializeField] float jumpHeight;
+    float sprintCost;
 
     [Header("-----Expanded Player Stats-----")]
     [SerializeField] float originalPlayerSpeed;
@@ -92,6 +94,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     private Vector3 move;
     int selectedGun;
     public bool hasEnergeticRing = false;
+    public bool hasSynthesizer = false;
 
     //Player Buff Checks
     [SerializeField] float regenStaminaBuffAmount;
@@ -148,6 +151,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //Low Health Warning
         lowHealthWarning();
+      
 
         //Call to shoot
         //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
@@ -285,7 +289,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     void sprint()
     {
         float moveMagnitude = move.magnitude;
-        float sprintCost = hasEnergeticRing ? 0.5f : 1.0f; // Check if the player has the Energetic Ring
+        if (hasEnergeticRing ==true)
+        {
+            sprintCost = 0.5f;
+        }
+         sprintCost = 1.0f;
 
         if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed && moveMagnitude >= 0.1)
         {
@@ -475,6 +483,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     public void giveHP(int amount)
     {
         HP += amount;
+        gameManager.instance.updateHpBar(HP / MaxHP);
     }
 
     //Damageable Ability:  Currently allows player takes damage
@@ -700,4 +709,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         
     }
 
+    //public void ApplyPermanentSpeedBuff(float speedBuff)
+    //{
+    //    playerSpee
+    //}
 }

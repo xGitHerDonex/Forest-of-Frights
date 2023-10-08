@@ -65,7 +65,7 @@ public class equipmentPickup : MonoBehaviour
                 if (player != null)
                 {
                     energeticRingUI.SetActive(true);
-                    player.hasEnergeticRing = true;
+                    gameManager.instance.playerScript.hasEnergeticRing = true;
                 }
                 break;
             
