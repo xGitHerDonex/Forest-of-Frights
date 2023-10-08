@@ -42,8 +42,8 @@ public class firearm : MonoBehaviour
         currentAmmo = maxAmmo;
         UpdateAmmoUI();
 
-        ammoCurText = gameManager.instance.getAmmoCurText();
-        ammoMaxText = gameManager.instance.getAmmoMaxText();    
+        //ammoCurText = gameManager.instance.getAmmoCurText();
+        //ammoMaxText = gameManager.instance.getAmmoMaxText();    
     }
 
     private void OnEnable()
@@ -52,6 +52,12 @@ public class firearm : MonoBehaviour
         animator.SetBool("Reloading", false);
     }
 
+    private void Awake()
+    {
+
+        //ammoCurText = gameManager.instance.getAmmoCurText();
+        //ammoMaxText = gameManager.instance.getAmmoMaxText();
+    }
     void Update()
     {
         if (isReloading)
@@ -142,6 +148,11 @@ public class firearm : MonoBehaviour
         GameObject hitEffectGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(hitEffectGO, 1f);
         specialUsed = true;
+
+        if (ammoCurText != null)
+        {
+            ammoCurText.text = currentAmmo.ToString();
+        }
     }
 
     IEnumerator Reload()
