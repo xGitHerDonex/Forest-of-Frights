@@ -361,6 +361,10 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            anime.SetBool("isCaught", playerInRange);
+                //wrap for flight
+            anime.SetBool("isLanding",!playerInRange);
+            Fly();
 
         }
     }
@@ -374,7 +378,10 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         {
             playerInRange = false;
             agent.stoppingDistance = 0;
-
+            anime.SetBool("isCaught", playerInRange);
+                //wrap for flight
+            anime.SetBool("isLanding",!playerInRange);
+            Land();
         }
     }
 
@@ -421,5 +428,15 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     #endregion
 
 //void Melee(){}
-//void Fly(){}
+void Fly(){
+
+
+transform.position+=Vector3.up;
+
+}
+void Land(){
+
+transform.position += Vector3.down;
+
+}
 }
