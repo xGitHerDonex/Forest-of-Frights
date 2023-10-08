@@ -28,13 +28,15 @@ public class fireball : MonoBehaviour
 
 
    void OnTriggerEnter(Collider other)
-    {
-        if(other.isTrigger)
+   {
+       if(other.isTrigger)
         {
             return;
         }
 
+        ProcessDamage(other);
         BombsAway();
+       
     }
 
     public void BombsAway()
@@ -42,6 +44,22 @@ public class fireball : MonoBehaviour
         Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
         Destroy(gameObject);
     }
+
+    public void ProcessDamage(Collider other)
+    {
+        if (other.isTrigger)
+            return;
+
+        IPhysics physicable = other.GetComponent<IPhysics>();
+        IDamage damageable = other.GetComponent<IDamage>();
+
+        if (physicable != null)
+        {
+            physicable.physics((other.transform.position - transform.position).normalized * explosionAmount);
+            damageable.delayDamage(explosionDamage, 0.2f);
+        }
+    }
+
 }
 
 

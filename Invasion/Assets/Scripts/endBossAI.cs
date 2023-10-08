@@ -341,7 +341,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
     bool isTimeToSummon()
     {
-        if (Random.Range(0, 6000) <= 3)
+        if (Random.Range(0, 8000) <= 1 && !isSummoning)
         {
             isSummoning = true;
             return true;
@@ -602,11 +602,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     //Summon enemies using the spawn manager
     IEnumerator summon()
     {
-        isSummoning = false;
+
         bossSpawnerManager.instance.setTimeToSpawn(true);
         yield return new WaitForSeconds(summonTime);
         bossSpawnerManager.instance.setTimeToSpawn(false);
         summonCompleted = true;
+        isSummoning = false;
 
 
 
@@ -721,7 +722,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
         else
         {
-            anime.SetTrigger("Damage");
+            //anime.SetTrigger("Damage");
             StartCoroutine(flashDamage());
             agent.SetDestination(gameManager.instance.player.transform.position);
         }

@@ -12,7 +12,7 @@ public class explosion : MonoBehaviour
     [SerializeField] int explosionDamage;
     [SerializeField] float destroyTime; // do not initialize variables in the class -do so in unity
 
-    protected virtual void Start()
+    protected void Start()
     {
         BombsAway();
 
