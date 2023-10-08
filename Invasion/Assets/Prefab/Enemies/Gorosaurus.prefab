@@ -1261,7 +1261,8 @@ GameObject:
   - component: {fileID: 1023411943298973569}
   - component: {fileID: 7934982730683227323}
   - component: {fileID: 37342896670136972}
-  - component: {fileID: 3579006733856060259}
+  - component: {fileID: 1568272146833561476}
+  - component: {fileID: 5732938822538041924}
   m_Layer: 0
   m_Name: Right Melee
   m_TagString: Untagged
@@ -1357,7 +1358,7 @@ CapsuleCollider:
   m_Height: 4.5291495
   m_Direction: 0
   m_Center: {x: -1.7216765, y: 0.2309716, z: 0.3187841}
---- !u!114 &3579006733856060259
+--- !u!114 &1568272146833561476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1369,7 +1370,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 0
+  bossMelee: {fileID: 0}
+--- !u!114 &5732938822538041924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7008340677020252507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  bossMelee: {fileID: 7599512346608029463}
 --- !u!1 &7280496271480740017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1712,8 +1728,8 @@ MonoBehaviour:
   leftMeleeCollider: {fileID: 8062806175532408263}
   rightMeleeCollider: {fileID: 7008340677020252507}
   meleeDelay: 1
-  meleeDamage: 5
-  meleeStage2Damage: 15
+  meleeDamage: 100
+  meleeStage2Damage: 200
   bullet: {fileID: 6242495077864083463, guid: 7a37f8cd19b561f438b4bea1ccfc6163, type: 3}
   rangedStoppingDistance: 25
   maxShootingRange: 40
@@ -1802,6 +1818,7 @@ GameObject:
   - component: {fileID: 4573819924212087392}
   - component: {fileID: 4991237250959961539}
   - component: {fileID: 3593963771896672164}
+  - component: {fileID: 3833884368972097310}
   m_Layer: 0
   m_Name: Left Melee
   m_TagString: Untagged
@@ -1909,7 +1926,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 1
+  bossMelee: {fileID: 7599512346608029463}
+--- !u!114 &3833884368972097310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8062806175532408263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  bossMelee: {fileID: 7599512346608029463}
 --- !u!1 &8079403450793708067
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [Tooltip("Delay Value between melee attacks in seconds")]
     [SerializeField] float meleeDelay;
     [Tooltip("meleeDamage")]
-    [SerializeField] int meleeDamage;
+    public int meleeDamage;
     [SerializeField] int meleeStage2Damage;
     [SerializeField] float meleeRange;
 

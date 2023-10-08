@@ -4,11 +4,15 @@ using UnityEngine;
 
 
 
-public class melee : MonoBehaviour
+public class midBossMelee : MonoBehaviour
 {
     [SerializeField] int damage;
+    [SerializeField] midBossAI bossMelee;
 
-
+    private void Start()
+    {
+        damage = bossMelee.meleeDamage;
+    }
     private void OnTriggerEnter(Collider other)
     {
 
@@ -20,6 +24,7 @@ public class melee : MonoBehaviour
 
         if (damageable != null)
         {
+            damage = bossMelee.meleeDamage;
             damageable.hurtBaddies(damage);
         }
 

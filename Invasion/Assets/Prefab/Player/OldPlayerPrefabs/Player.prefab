@@ -279,6 +279,8 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   weaponHolder: {fileID: 0}
   ammoCurText: {fileID: 0}
+  ammoMaxText: {fileID: 0}
+  _weaponSwap: {fileID: 0}
   animator: {fileID: 0}
 --- !u!1 &984885635752168130
 GameObject:
@@ -5635,6 +5637,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7821308652150681510}
   HP: 200
+  _maxHP: 200
+  maxHPBuff: 0
   Stamina: 4
   maxStamina: 4
   regenStamina: 0.75
@@ -5660,7 +5664,7 @@ MonoBehaviour:
   maxTime: 1.5
   regenTime: 0.1
   timeSlowInSeconds: 1.5
-  timeSlowScale: 0.4
+  timeSlowScale: 0.6
   playerSlowSpeed: 2
   waypoints: []
   waypointDist: 0
@@ -5798,7 +5802,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.88773346
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -6096,7 +6100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2311475166172994470
 Transform:
   m_ObjectHideFlags: 0
@@ -6106,7 +6110,7 @@ Transform:
   m_GameObject: {fileID: 3957079840593355016}
   serializedVersion: 2
   m_LocalRotation: {x: 0.01221221, y: -0.065355025, z: -0.00079990004, w: 0.99778706}
-  m_LocalPosition: {x: 0.13, y: 0.19, z: 0.3}
+  m_LocalPosition: {x: 0.18, y: 0.19, z: 0.47}
   m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6149,6 +6153,8 @@ MonoBehaviour:
   audioSource: {fileID: 90018371221168601}
   weaponHolder: {fileID: 7574090309909534750}
   ammoCurText: {fileID: 0}
+  ammoMaxText: {fileID: 0}
+  _weaponSwap: {fileID: 0}
   animator: {fileID: 4936007565715983630}
 --- !u!1 &5232556626643415824
 GameObject:
@@ -7008,6 +7014,8 @@ MonoBehaviour:
   audioSource: {fileID: 90018371221168601}
   weaponHolder: {fileID: 7574090309909534750}
   ammoCurText: {fileID: 0}
+  ammoMaxText: {fileID: 0}
+  _weaponSwap: {fileID: 0}
   animator: {fileID: 4936007565715983630}
 --- !u!1 &7986360820439223958
 GameObject:

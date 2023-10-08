@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  bossMelee: {fileID: 0}
 --- !u!1 &223597856861839543
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  bossMelee: {fileID: 0}
 --- !u!136 &3466634521036511170
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -564,6 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  bossMelee: {fileID: 0}
 --- !u!1 &884292984102214125
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,13 +581,14 @@ GameObject:
   - component: {fileID: 7022344279520057728}
   - component: {fileID: 1452713996136046392}
   - component: {fileID: 5210883362826208591}
+  - component: {fileID: 8996852279460359213}
   m_Layer: 7
   m_Name: Demon Lord
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4825752165692352313
 Transform:
   m_ObjectHideFlags: 0
@@ -595,7 +599,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 277.99927, y: 0.22535133, z: 207.91415}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 210920553233566938}
@@ -657,8 +661,8 @@ MonoBehaviour:
   rightMeleeCollider: {fileID: 5944698570030354159}
   whipDelay: 1.5
   meleeDelay: 1
-  meleeDamage: 5
-  meleeStage2Damage: 10
+  meleeDamage: 20
+  meleeStage2Damage: 30
   meleeRange: 12
   bullet: {fileID: 6242495077864083463, guid: 23078b76108640b44884b187b85ffd4a, type: 3}
   rangedStoppingDistance: 12
@@ -676,7 +680,7 @@ MonoBehaviour:
   switchFacing: 28
   landingDelay: 2
   flightTargetFaceSpeed: 1
-  startFight: 1
+  startFight: 0
   isLanding: 0
   isAttacking: 0
   isRunning: 0
@@ -687,6 +691,7 @@ MonoBehaviour:
   isSummoning: 0
   summonCompleted: 0
   isRbDestroyed: 0
+  isPlayerinRange: 0
   distToWaypoint: 0
   closestWaypointDist: 0
   waypoint: {fileID: 0}
@@ -694,7 +699,7 @@ MonoBehaviour:
   closestWaypoint: {fileID: 0}
   waypointDist: 0
   bossSpawner: {fileID: 0}
-  summonTime: 2
+  summonTime: 1
   audioSource: {fileID: 0}
   walkSound: {fileID: 0}
   attackSound: {fileID: 0}
@@ -771,6 +776,27 @@ CapsuleCollider:
   m_Height: 4.313373
   m_Direction: 1
   m_Center: {x: 0.0069885254, y: 2.1144512, z: 0}
+--- !u!135 &8996852279460359213
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884292984102214125}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 150
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1201515015468293222
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,7 +1000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4543773281647339542}
   - component: {fileID: 1891346229518832740}
-  - component: {fileID: 3788874976732869000}
+  - component: {fileID: 1930445079550185089}
   m_Layer: 0
   m_Name: DEMON_LORD_SWORD
   m_TagString: Untagged
@@ -1020,7 +1046,7 @@ CapsuleCollider:
   m_Height: 4.7213473
   m_Direction: 0
   m_Center: {x: -2.2598796, y: 0.10451995, z: -0.12664214}
---- !u!114 &3788874976732869000
+--- !u!114 &1930445079550185089
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1029,10 +1055,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1728914785062646594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c5ef3c2f7b866f47b062282c5cd437b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 0
+  bossMelee: {fileID: 1576755904453881166}
 --- !u!1 &1805012997663302388
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,6 +1202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  bossMelee: {fileID: 0}
 --- !u!136 &437575170093407848
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1405,6 +1433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  bossMelee: {fileID: 0}
 --- !u!136 &5657201610600982825
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1747,6 +1776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  bossMelee: {fileID: 0}
 --- !u!1 &3500504273631948191
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,6 +2268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  bossMelee: {fileID: 0}
 --- !u!136 &453181527421228030
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2394,6 +2425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  bossMelee: {fileID: 0}
 --- !u!1 &5792403930629793609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,6 +2533,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1949844790562579082}
+  - component: {fileID: 5835589009363560922}
   m_Layer: 12
   m_Name: DEMON_LORD_WHIP_HANDLE
   m_TagString: Untagged
@@ -2524,6 +2557,20 @@ Transform:
   - {fileID: 5008799484330498591}
   m_Father: {fileID: 5861388114355627941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5835589009363560922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5944698570030354159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c5ef3c2f7b866f47b062282c5cd437b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  bossMelee: {fileID: 1576755904453881166}
 --- !u!1 &6011370371081258891
 GameObject:
   m_ObjectHideFlags: 0
@@ -3039,6 +3086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  bossMelee: {fileID: 0}
 --- !u!136 &4563591208216112080
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3613,6 +3661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  bossMelee: {fileID: 0}
 --- !u!136 &3061752579752225701
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3943,6 +3992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  bossMelee: {fileID: 0}
 --- !u!136 &9168093379564308597
 CapsuleCollider:
   m_ObjectHideFlags: 0

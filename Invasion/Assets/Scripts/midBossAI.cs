@@ -39,7 +39,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     [Tooltip("Delay Value between melee attacks in seconds")]
     [SerializeField] int meleeDelay;
     [Tooltip("meleeDamage")]
-    [SerializeField] int meleeDamage;
+    public int meleeDamage;
     [SerializeField] int meleeStage2Damage;
 
 
