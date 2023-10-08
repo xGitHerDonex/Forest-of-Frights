@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5779009549106131628}
   - component: {fileID: 2303574703383286148}
   - component: {fileID: 483614266299798419}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ExplosionSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,6 +52,7 @@ MonoBehaviour:
   explosionAmount: 25
   explosionEffect: {fileID: 4408539241108053208, guid: 4ef85365838d557499de6b10af6b31a4, type: 3}
   explosionDamage: 5
+  destroyTime: 0
 --- !u!33 &5884274645516863061
 MeshFilter:
   m_ObjectHideFlags: 0

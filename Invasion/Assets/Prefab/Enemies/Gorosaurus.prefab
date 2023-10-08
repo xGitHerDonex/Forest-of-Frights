@@ -1633,7 +1633,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 10
+  m_StoppingDistance: 8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1660,7 +1660,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 200
+  m_Radius: 150
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &2638309090893716847
 CapsuleCollider:
@@ -1705,7 +1705,7 @@ MonoBehaviour:
   hitBox: {fileID: 2638309090893716847}
   targetFaceSpeed: 6
   runningDistance: 20
-  hp: 100
+  hp: 1
   maxHp: 100
   animeSpeedChange: 10
   enemyRunSpeed: 22
@@ -1715,8 +1715,8 @@ MonoBehaviour:
   meleeDamage: 5
   meleeStage2Damage: 15
   bullet: {fileID: 6242495077864083463, guid: 7a37f8cd19b561f438b4bea1ccfc6163, type: 3}
-  rangedStoppingDistance: 12
-  maxShootingRange: 30
+  rangedStoppingDistance: 25
+  maxShootingRange: 40
   rangeDelay: 10
   viewAngle: 60
   shootAngle: 10

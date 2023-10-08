@@ -279,7 +279,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         if (distToPlayer >= runningDistance)
         {
             isRunning = true;
-            agentVel = agent.velocity.normalized.magnitude + 1;
+            anime.SetBool("Run", true);
             agent.speed = enemyRunSpeed;
         }
 
@@ -287,6 +287,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         else if (distToPlayer <= (runningDistance - 2))
         {
             isRunning = false;
+            anime.SetBool("Run", false);
             agentVel = agent.velocity.normalized.magnitude;
             agent.speed = speedOrig;
         }
