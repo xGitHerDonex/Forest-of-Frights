@@ -23,7 +23,6 @@ public class firearm : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public AudioClip shotSound;
     public bool antiGrenade = false;
-    private bool specialShot = false;
     private bool specialUsed = false;
     IDamage player;
 
@@ -33,17 +32,18 @@ public class firearm : MonoBehaviour
     [SerializeField] public TextMeshProUGUI ammoCurText;
     [SerializeField] public TextMeshProUGUI ammoMaxText;
 
+    [SerializeField] weaponSwap _weaponSwap;
+
     private float nextShot = 0f;
 
 
     public Animator animator;
     private void Start()
     {
+
         currentAmmo = maxAmmo;
         UpdateAmmoUI();
-
-        //ammoCurText = gameManager.instance.getAmmoCurText();
-        //ammoMaxText = gameManager.instance.getAmmoMaxText();    
+  
     }
 
     private void OnEnable()
@@ -55,8 +55,6 @@ public class firearm : MonoBehaviour
     private void Awake()
     {
 
-        //ammoCurText = gameManager.instance.getAmmoCurText();
-        //ammoMaxText = gameManager.instance.getAmmoMaxText();
     }
     void Update()
     {
@@ -93,7 +91,6 @@ public class firearm : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(shootCam.transform.position, shootCam.transform.forward, out hit, range))
             {
-                Debug.Log(hit.transform.name);
 
                 IDamage damageable = hit.collider.GetComponent<IDamage>();
 
@@ -129,7 +126,6 @@ public class firearm : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(shootCam.transform.position, shootCam.transform.forward, out hit, range))
         {
-            Debug.Log(hit.transform.name);
 
             IDamage damageable = hit.collider.GetComponent<IDamage>();
 
@@ -160,6 +156,8 @@ public class firearm : MonoBehaviour
         isReloading = true;
         animator.SetBool("Reloading", true);
         ammoCurText.text = "Reload";
+
+
         if (specialUsed)
         {
             yield return new WaitForSeconds(specialReload - .25f);
@@ -183,11 +181,20 @@ public class firearm : MonoBehaviour
 
     public void UpdateAmmoUI()
     {
-        if (ammoCurText != null)
+
+        if (ammoCurText != null  && _weaponSwap.selectedWeapon != 0)
         {
             ammoCurText.text = currentAmmo.ToString();
             ammoMaxText.text = maxAmmo.ToString();
         }
+
+        else if (_weaponSwap.selectedWeapon <= 0)
+        {
+            ammoCurText.text = "";
+            ammoMaxText.text = "";
+        }
+
+
     }
 
 }
