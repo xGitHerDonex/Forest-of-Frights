@@ -1262,7 +1262,6 @@ GameObject:
   - component: {fileID: 7934982730683227323}
   - component: {fileID: 37342896670136972}
   - component: {fileID: 1568272146833561476}
-  - component: {fileID: 5732938822538041924}
   m_Layer: 0
   m_Name: Right Melee
   m_TagString: Untagged
@@ -1372,20 +1371,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   bossMelee: {fileID: 0}
---- !u!114 &5732938822538041924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7008340677020252507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  bossMelee: {fileID: 7599512346608029463}
 --- !u!1 &7280496271480740017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,7 +1803,6 @@ GameObject:
   - component: {fileID: 4573819924212087392}
   - component: {fileID: 4991237250959961539}
   - component: {fileID: 3593963771896672164}
-  - component: {fileID: 3833884368972097310}
   m_Layer: 0
   m_Name: Left Melee
   m_TagString: Untagged
@@ -1927,20 +1911,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  bossMelee: {fileID: 7599512346608029463}
---- !u!114 &3833884368972097310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8062806175532408263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c0818fbf60b0664b8899fb2dcef0f3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
   bossMelee: {fileID: 7599512346608029463}
 --- !u!1 &8079403450793708067
 GameObject:

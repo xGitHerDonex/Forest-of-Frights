@@ -110,7 +110,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float waypointDist;
 
     [Header("-----Summon Details-----")]
-    [SerializeField] GameObject bossSpawner;
     [SerializeField] float summonTime;
 
 
