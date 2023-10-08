@@ -1370,7 +1370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  bossMelee: {fileID: 0}
+  bossMelee: {fileID: 7599512346608029463}
 --- !u!1 &7280496271480740017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,7 +1634,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 8
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1705,16 +1705,16 @@ MonoBehaviour:
   anime: {fileID: 1531234606020404625}
   hitBox: {fileID: 2638309090893716847}
   targetFaceSpeed: 6
-  runningDistance: 20
-  hp: 1
+  runningDistance: 12
+  hp: 100
   maxHp: 100
   animeSpeedChange: 10
   enemyRunSpeed: 22
   leftMeleeCollider: {fileID: 8062806175532408263}
   rightMeleeCollider: {fileID: 7008340677020252507}
   meleeDelay: 1
-  meleeDamage: 100
-  meleeStage2Damage: 200
+  meleeDamage: 15
+  meleeStage2Damage: 35
   bullet: {fileID: 6242495077864083463, guid: 7a37f8cd19b561f438b4bea1ccfc6163, type: 3}
   rangedStoppingDistance: 25
   maxShootingRange: 40
