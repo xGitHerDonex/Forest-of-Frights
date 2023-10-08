@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class mainMenu : MonoBehaviour
 {
+    [SerializeField] GameObject controlsPanel;
 
     public void OnPlayButton()
     {
@@ -15,6 +16,17 @@ public class mainMenu : MonoBehaviour
     public void OnQuitButton()
     {
         Application.Quit();
+    }
+
+
+    public void showControls()
+    {
+        controlsPanel.SetActive(true);
+    }
+
+    public void closeControls()
+    {
+        controlsPanel.SetActive(false);  
     }
 
 }

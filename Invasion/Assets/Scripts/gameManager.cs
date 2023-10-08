@@ -160,7 +160,7 @@ public class gameManager : MonoBehaviour
     public void updateChronoBar(float amount)
     {
 
-        playerChronoBar.fillAmount = amount;        
+        playerChronoBar.fillAmount = amount;
 
     }
 

@@ -23,6 +23,7 @@ public class equipmentPickup : MonoBehaviour
         PowerInfusor,
         FarSight
     }
+
     [SerializeField] private EquipmentItem equipmentType;
     [SerializeField] private playerController player;
     [SerializeField] private GameObject energeticRingUI;

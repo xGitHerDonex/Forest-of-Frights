@@ -17,7 +17,8 @@ public class firearm : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public AudioClip shotSound;
     public bool antiGrenade = false;
-    
+
+    IDamage player;
 
     public GameObject hitEffect;
     [SerializeField] AudioSource audioSource;
@@ -71,7 +72,7 @@ public class firearm : MonoBehaviour
 
                 IDamage damageable = hit.collider.GetComponent<IDamage>();
 
-                if (damageable != null && hit.transform != transform)
+                if (damageable != null && hit.transform != transform && damageable != player)
                 {
                     damageable.hurtBaddies(damage);
                 }
