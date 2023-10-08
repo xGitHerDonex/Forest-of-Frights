@@ -53,10 +53,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 924427395465949468}
   HP: 200
+  _maxHP: 0
+  maxHPBuff: 0
   Stamina: 4
   maxStamina: 4
   regenStamina: 0.75
   playerSpeed: 10
+  playerSpeedBuff: 20
   jumpHeight: 4
   originalPlayerSpeed: 0
   addSprintMod: 0
@@ -96,6 +99,7 @@ MonoBehaviour:
   isShooting: 0
   ammoType: 0
   hasEnergeticRing: 1
+  hasSynthesizer: 0
   regenStaminaBuffAmount: 0
 --- !u!143 &924427395465949468
 CharacterController:
@@ -117,7 +121,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_SlopeLimit: 40
   m_StepOffset: 0.7
   m_SkinWidth: 0.08
@@ -192,10 +196,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5281157
+  m_Radius: 0.4013835
   m_Height: 2.0171962
   m_Direction: 1
-  m_Center: {x: -0.020243347, y: 0.008598119, z: 0.028735757}
+  m_Center: {x: 0.013566375, y: 0.008598089, z: 0.028735757}
 --- !u!82 &4782046459694002794
 AudioSource:
   m_ObjectHideFlags: 0
@@ -349,7 +353,7 @@ Transform:
   m_GameObject: {fileID: 8970392581169691521}
   serializedVersion: 2
   m_LocalRotation: {x: -0.012238393, y: -0, z: -0, w: 0.99992514}
-  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalPosition: {x: -0.35995305, y: 0.75, z: 0.4709219}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
