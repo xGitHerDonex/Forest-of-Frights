@@ -127,7 +127,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     float distToPlayer;
     float angleToPlayer;
     bool isDead;
-    bool playerInRange;
+    bool isPlayerInRange;
     playerController playerScript;
     float stoppingDistOriginal;
     Vector3 pushBack;
@@ -166,7 +166,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        if (!isDead)
+        if (!isDead && isPlayerInRange)
         {
 
             //Check HP levels
@@ -787,7 +787,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;
+            isPlayerInRange = true;
 
         }
     }
@@ -801,7 +801,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = false;
+            isPlayerInRange = false;
 
         }
     }
