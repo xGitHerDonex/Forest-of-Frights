@@ -166,7 +166,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        if (!isDead && isPlayerInRange)
+        if (!isDead) // && isPlayerInRange)
         {
 
             //Check HP levels
@@ -261,11 +261,11 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
                 }
 
-                else
-                {
-                    facePlayer();
-                    agent.SetDestination(gameManager.instance.player.transform.position);
-                }
+                //else
+                //{
+                //    facePlayer();
+                //    agent.SetDestination(gameManager.instance.player.transform.position);
+                //}
             }
 
         }
