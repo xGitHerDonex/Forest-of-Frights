@@ -260,6 +260,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                     agent.SetDestination(gameManager.instance.player.transform.position);
 
                 }
+
+                else
+                {
+                    facePlayer();
+                    agent.SetDestination(gameManager.instance.player.transform.position);
+                }
             }
 
         }
