@@ -31,8 +31,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
 
     [Tooltip("Enemy health value between 1 and 100.")]
-    [Range(1, 300)][SerializeField] int hp;
-    [Range(1, 300)][SerializeField] int maxHp;
+    [Range(1, 300)][SerializeField] float hp;
+    [Range(1, 300)][SerializeField] float maxHp;
 
 
     [Tooltip("10 is the default value for all current speeds. Changing this without adjusting Enemy Speed and nav mesh speed will break it!!!!")]
@@ -166,11 +166,11 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        if (!isDead && playerInRange)
+        if (!isDead)
         {
 
             //Check HP levels
-            float hpRatio = (float)(hp / maxHp);
+            //float hpRatio = (hp / maxHp);
 
             if (isSummoning)
             {
@@ -178,12 +178,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             }
 
             //Selects stage for enemy AI based on Health Remaining
-            else if (hpRatio >= 0.8 && !isSummoning)
+            else if (hp >= 120 && !isSummoning)
             {
                 Stage1();
             }
 
-            else if (hpRatio <= 0.8 && !isSummoning)
+            else if ( hp <= 119  && !isSummoning)
             {
 
                 if (isFlying && summonCompleted && !isGrounded)
@@ -271,7 +271,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         }
     }
 
-    void Stage2()
+    void Stage2()    
     {
         //If enemy is not dead, we'll continue
         if (!isDead)
