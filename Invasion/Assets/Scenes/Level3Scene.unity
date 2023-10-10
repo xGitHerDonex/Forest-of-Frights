@@ -570,11 +570,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 332004023617824042, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: m_Speed
-      value: 12
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 332004023617824042, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: m_Acceleration
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 332004023617824042, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: m_StoppingDistance
-      value: 7
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: m_LocalPosition.x
@@ -625,8 +629,28 @@ PrefabInstance:
       value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: shootRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: meleeDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: rangeDelay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: meleeDamage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: enemyRunSpeed
-      value: 30
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: runningDistance
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: targetFaceSpeed
@@ -634,11 +658,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: maxShootingRange
-      value: 35
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: meleeStage2Damage
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: rangedStoppingDistance
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7918646389003623894, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: m_Name
@@ -1374,11 +1402,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1167626509339090603, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: playerSpeed
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1167626509339090603, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: addSprintMod
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1611184030839652678, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2792196722223686619, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1440,9 +1472,13 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0.015075922
       objectReference: {fileID: 0}
+    - target: {fileID: 3195236196473001472, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3545776992576940118, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 119.67
+      value: -396
       objectReference: {fileID: 0}
     - target: {fileID: 3545776992576940118, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1450,11 +1486,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3545776992576940118, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -255.5
+      value: -728
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713369511507642390, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.521
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713369511507642390, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.764
+      objectReference: {fileID: 0}
+    - target: {fileID: 4713369511507642390, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.266
       objectReference: {fileID: 0}
     - target: {fileID: 5238821937834465640, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644953652570421296, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6761779283537249388, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.369
+      objectReference: {fileID: 0}
+    - target: {fileID: 6761779283537249388, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 7330849369679757829, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: demonLord

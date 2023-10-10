@@ -230,7 +230,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                     if (!isAttacking && !isShooting && playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
                     {                     
                             agent.velocity = Vector3.zero;
-                            agent.ResetPath();
+                            //agent.ResetPath();
                             faceTarget();
 
                             if (!isRunning)
@@ -248,17 +248,17 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
                     }
 
-                    ////if player is not wthin stopping distance, then set distination to the player
-                    //else if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
-                    //{
+                    //if player is not wthin stopping distance, then set distination to the player
+                    else if (playerInRange && hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
+                    {
 
-                                           
-                    //    faceTarget();
-                    //    if (!isAttacking)
-                    //        agent.SetDestination(gameManager.instance.player.transform.position);
-                    //}
 
-                  
+                        faceTarget();
+                        if (!isAttacking)
+                            agent.SetDestination(gameManager.instance.player.transform.position);
+                    }
+
+
                 }
 
                  
@@ -284,7 +284,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         }
 
         // If player is within the running -2 (to give the effect of them running up on the player), then we stop running and speed is set back to it's original
-        else if (distToPlayer <= (runningDistance - 2))
+        else if (distToPlayer <= runningDistance)
         {
             isRunning = false;
             anime.SetBool("Run", false);
