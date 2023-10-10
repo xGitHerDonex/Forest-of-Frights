@@ -71,6 +71,14 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip attackSound;
     [SerializeField] AudioClip deathSound;
 
+    [Header("Health Orb")]
+    [SerializeField] GameObject healthOrb;
+    [SerializeField] bool orb1;
+    [SerializeField] bool orb2;
+    [SerializeField] bool orb3;
+
+
+
     Vector3 pushBack;
     Vector3 playerDirection;
     Vector3 startingPos;
@@ -113,6 +121,37 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         else
         {
             Stage2();
+        }
+
+        //Drops orbs based on remaining HP
+        switch (hpRatio * 100)
+        {
+            case 75:
+                if(!orb1)
+                {
+
+                    Instantiate(healthOrb, transform.position + (Vector3.up * 3), transform.rotation);
+s                    orb1 = true;
+                }
+
+                break;
+
+            case 50:
+                if (!orb2)
+                {
+                    Instantiate(healthOrb, transform.position + (Vector3.up * 3), transform.rotation);
+                    orb2 = true;
+                }
+                break;
+
+            case 25:
+                if (!orb3)
+                {
+
+                    Instantiate(healthOrb, transform.position + (Vector3.up * 3), transform.rotation);
+                    orb3 = false;
+                }
+                break;
         }
 
     }
