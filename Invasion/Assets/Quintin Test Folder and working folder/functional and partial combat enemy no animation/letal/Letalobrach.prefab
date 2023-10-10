@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9091500579358526639}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5658957256335239797}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ Pelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   m_Component:
   - component: {fileID: 445836466082655418}
   - component: {fileID: 4043425123949713970}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SK_Letalobrach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5429159094218891094}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ L Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5739126040384593747}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ L UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1745386378598046810}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ L HorseLink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4828525252988267668}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ R Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 1237293416327186468}
   - component: {fileID: 4844162970028595330}
   - component: {fileID: 738249865775300252}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,6 +383,7 @@ MonoBehaviour:
   shootPos: {fileID: 7437769878610004032}
   headPos: {fileID: 2334285695117143708}
   hitBox: {fileID: 1237293416327186468}
+  whereISpawned: {fileID: 0}
   waypoints: []
   hp: 35
   targetFaceSpeed: 1
@@ -397,6 +398,7 @@ MonoBehaviour:
   walkSound: {fileID: 0}
   attackSound: {fileID: 0}
   deathSound: {fileID: 0}
+  stopMovingTime: 0
 --- !u!136 &1237293416327186468
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -472,7 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2892904949962488169}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ Tail5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8592559650106341452}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_Jaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -534,7 +536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2118755764005684085}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ L Clavicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -566,7 +568,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5652851132356437892}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ Tail3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +600,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4661829324852458624}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ L Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -630,7 +632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6605456537046464148}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -662,7 +664,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7416908008392230867}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ R Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -694,7 +696,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8901169288434941093}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ Tail1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -726,7 +728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8500650319674458842}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ R Clavicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,7 +760,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7426192443175288381}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_Tongue2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -790,7 +792,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6136365709429519446}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ R Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -822,7 +824,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7437769878610004032}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_Tongue3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -853,7 +855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 131386958446132733}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -887,7 +889,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 370432646650819744}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ Tail4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -919,7 +921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5799264528695558308}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ L Thigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -951,7 +953,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4396588375241177825}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ L Forearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -983,7 +985,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 806147597159962201}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ R UpperArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1015,7 +1017,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2238553360495259147}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ Spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1049,7 +1051,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1657449312559388798}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ R HorseLink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1081,7 +1083,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3468222065958770399}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ R Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1112,7 +1114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7340383893807332027}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1144,7 +1146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3706250041024409977}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ R Calf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1176,7 +1178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2334285695117143708}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1207,7 +1209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5798821588423307772}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ Tail2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1239,7 +1241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1975990876503095119}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1272,7 +1274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7288733663095070420}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_ L Foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1303,7 +1305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 865786828036034140}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Letalobrach_Tongue1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

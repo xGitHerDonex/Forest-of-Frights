@@ -18,6 +18,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Transform headPos;
     private Animator anime;
     [SerializeField] Collider hitBox;
+    //public spawner whereISpawned;
+
     [Tooltip("waypoints must be set")]
     [SerializeField] Transform[] waypoints;
 
@@ -72,6 +74,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     bool playerInRange;
     bool destinationPicked;
     private int m_PathIndex;
+    public float stopMovingTime;
     #endregion
 
 
@@ -104,7 +107,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
      *  set destination otherwise returns false and no new path is calculated
      *
      */
-    void FixedUpdate()
+    void Update()
     {
         if (agent.isActiveAndEnabled)
         {
@@ -171,7 +174,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     IEnumerator stopMoving()
     {
         agent.speed = 0;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(stopMovingTime);
         agent.speed = speedOrig;
     }
 
@@ -204,6 +207,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     public void hurtBaddies( int amount )
     {
         hp -= amount;
+        
         StartCoroutine(stopMoving());
 
 
@@ -213,6 +217,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             agent.enabled = false;
             anime.SetBool("isDead", true);
             playDeathSound();
+
+            StopAllCoroutines();
 
             // Turn out the lights! (When the enemy dies)
             Light enemyLight = GetComponent<Light>();
@@ -228,6 +234,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             anime.SetTrigger("Damage");
             StartCoroutine(flashDamage());
             agent.SetDestination(gameManager.instance.player.transform.position);
+            
         }
 
 
@@ -446,8 +453,20 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
     #endregion
 
-//void Melee(){}
-void Fly(){
+   //turns on and off the hitbox
+    public void hitboxOff()
+    {
+        hitBox.enabled = false;
+    }
+    //turns on and off the hitbox
+    public void hitboxOn()
+    {
+        hitBox.enabled = true;
+
+    }
+
+    //void Melee(){}
+    void Fly(){
 
         agent.baseOffset = 3;
 

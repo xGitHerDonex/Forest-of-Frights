@@ -99,6 +99,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Player Buff Checks
     [SerializeField] float regenStaminaBuffAmount;
 
+    private float fixedDeltaTime;
 
 
     public enum AmmoType
@@ -112,6 +113,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     // Ammo Management
     public Dictionary<string, int> ammoInventory = new Dictionary<string, int>();
+
+    void Awake()
+    {
+        this.fixedDeltaTime = Time.fixedDeltaTime;
+    }
+
 
     //Start
     private void Start()
@@ -446,32 +453,57 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         if (!gameManager.instance.isPaused && Input.GetButton("time") && time > 0)
         {
-            playerSpeed = originalPlayerSpeed * playerSlowSpeed;
-            isTimeSlowed = true;
-            Time.timeScale = timeSlowScale;
-            time = time - Time.deltaTime;
+            #region old Code 
+            //playerSpeed = originalPlayerSpeed * playerSlowSpeed;
+            //isTimeSlowed = true;
+
+            ////Time.timeScale = timeSlowScale;
+
+
+            ////time = time - Time.deltaTime; 
+            #endregion
+
+            if(Time.timeScale == 1)
+            {
+                TimeSlowed();
+
+            }
+
 
         }
 
         else if (!gameManager.instance.isPaused)
         {
-            isTimeSlowed = false;
-            Time.timeScale = 1;
-            playerSpeed = originalPlayerSpeed;
-
-
-            if (time <= maxTime && !isTimeSlowed)
-            {
-                time += regenTime * Time.deltaTime;
-
-            }
+            TimeUnslowed();
 
         }
 
     }
 
-        //
-        IEnumerator delaySpeed()
+    private void TimeUnslowed()
+    {
+        isTimeSlowed = false;
+        Time.timeScale = 1f;
+        playerSpeed = originalPlayerSpeed;
+
+
+        if (time <= maxTime && !isTimeSlowed)
+        {
+            //time += regenTime * Time.deltaTime;
+            time += regenTime * (this.fixedDeltaTime * Time.timeScale);
+
+        }
+    }
+
+    private void TimeSlowed()
+    {
+        Time.timeScale = .5f;
+        Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
+        playerSpeed = originalPlayerSpeed * Time.fixedDeltaTime * .5f;
+    }
+
+    //
+    IEnumerator delaySpeed()
     {
         playerSpeed = playerSpeed * 10000;
         yield return new WaitForSeconds(0.2f);
