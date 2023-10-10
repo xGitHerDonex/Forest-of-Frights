@@ -23,9 +23,9 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int runningDistance;
 
 
-    [Tooltip("Enemy health value between 1 and 100.")]
-    [Range(1, 300)][SerializeField] int hp;
-    [Range(1, 300)][SerializeField] int maxHp;
+    [Tooltip("Enemy health value between 1 and 1000.")]
+    [Range(1, 1000)][SerializeField] float hp;
+    [Range(1, 1000)][SerializeField] float maxHp;
 
 
     [Tooltip("10 is the default value for all current speeds. Changing this without adjusting Enemy Speed and nav mesh speed will break it!!!!")]
@@ -102,7 +102,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        float hpRatio = (float)(hp / maxHp);
+        float hpRatio = (hp / maxHp);
 
         //Selects stage for enemy AI based on Health Remaining
         if (hpRatio >= 0.4)

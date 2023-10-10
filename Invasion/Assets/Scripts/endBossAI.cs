@@ -166,11 +166,11 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        if (!isDead) // && isPlayerInRange)
+        if (!isDead && isPlayerInRange)
         {
 
             //Check HP levels
-            //float hpRatio = (hp / maxHp);
+            float hpRatio = (hp / maxHp);
 
             if (isSummoning)
             {

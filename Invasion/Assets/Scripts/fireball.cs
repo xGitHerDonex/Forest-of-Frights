@@ -29,7 +29,7 @@ public class fireball : MonoBehaviour
 
    void OnTriggerEnter(Collider other)
    {
-       if(other.isTrigger)
+        if (other.isTrigger)
         {
             return;
         }
