@@ -453,7 +453,13 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
     #endregion
 
-   //turns on and off the hitbox
+    public void CreateBullet()
+    {
+        Instantiate(bullet, shootPos.position, transform.rotation);
+    }
+
+
+    //turns on and off the hitbox
     public void hitboxOff()
     {
         hitBox.enabled = false;
