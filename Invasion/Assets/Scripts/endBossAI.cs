@@ -97,7 +97,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] bool isSummoning;
     [SerializeField] bool summonCompleted;
     [SerializeField] bool isRbDestroyed;
-    [SerializeField] bool isPlayerinRange;
+    [SerializeField] bool attackPlayer;
 
 
 
@@ -166,7 +166,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        if (!isDead && isPlayerInRange)
+        if (!isDead && attackPlayer)
         {
 
             //Check HP levels
@@ -178,12 +178,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             }
 
             //Selects stage for enemy AI based on Health Remaining
-            else if (hp >= 120 && !isSummoning)
+            if (hpRatio >= 0.7 && !isSummoning)
             {
                 Stage1();
             }
 
-            else if ( hp <= 119  && !isSummoning)
+            else if ( hpRatio < 0.7  && !isSummoning)
             {
 
                 if (isFlying && summonCompleted && !isGrounded)
@@ -231,41 +231,41 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
 
                 //If player within stopping distance, face target and attack if not already attacking
-                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance + 5 && distToPlayer >= meleeRange)
+                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance + 5 && distToPlayer > meleeRange)
                 {
-
-                    agent.velocity = Vector3.zero;
+ 
                     agent.ResetPath();
                     facePlayer();
                     StartCoroutine(whip());
+                    agent.SetDestination(gameManager.instance.player.transform.position);
 
                 }
 
                 //If player within stopping distance, face target and attack if not already attacking
                 else if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= meleeRange)
                 {
-
-                    agent.velocity = Vector3.zero;
+ 
                     agent.ResetPath();
                     facePlayer();
                     StartCoroutine(Melee(Random.Range(1, 5)));
-
-                }
-
-                //if player is not wthin stopping distance, then set distination to the player
-                else if (hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
-                {
-
-                    facePlayer();
                     agent.SetDestination(gameManager.instance.player.transform.position);
 
                 }
 
-                //else
+                ////if player is not wthin stopping distance, then set distination to the player
+                //else if (distToPlayer >= agent.stoppingDistance)
                 //{
+
                 //    facePlayer();
                 //    agent.SetDestination(gameManager.instance.player.transform.position);
+
                 //}
+
+                else
+                {
+                    facePlayer();
+                    agent.SetDestination(gameManager.instance.player.transform.position);
+                }
             }
 
         }
@@ -301,29 +301,26 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                 if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance + 5 && distToPlayer >= meleeRange)
                 {
 
-                    agent.velocity = Vector3.zero;
                     agent.ResetPath();
                     facePlayer();
                     StartCoroutine(whip());
-
+                    agent.SetDestination(gameManager.instance.player.transform.position);
                 }
 
                 //If player within stopping distance, face target and attack if not already attacking
                 else if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= meleeRange)
                 {
 
-                    agent.velocity = Vector3.zero;
                     agent.ResetPath();
                     facePlayer();
                     StartCoroutine(Melee(Random.Range(1, 5)));
-
+                    agent.SetDestination(gameManager.instance.player.transform.position);
                 }
 
                 else if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance && distToPlayer <= maxShootingRange)
                 {
 
 
-                    agent.velocity = Vector3.zero;
                     agent.ResetPath();
                     facePlayer();
                     StartCoroutine(shoot());
@@ -332,13 +329,19 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                 }
 
 
-                //if player is not wthin stopping distance, then set distination to the player
-                else if (hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance)
-                {
+                ////if player is not wthin stopping distance, then set distination to the player
+                //else if (distToPlayer >= agent.stoppingDistance)
+                //{
 
+                //    facePlayer();
+                //    agent.SetDestination(gameManager.instance.player.transform.position);
+
+                //}
+
+                else
+                {
                     facePlayer();
                     agent.SetDestination(gameManager.instance.player.transform.position);
-
                 }
             }
 
@@ -787,7 +790,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInRange = true;
+            attackPlayer = true;
 
         }
     }
@@ -801,7 +804,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInRange = false;
+            //attackPlayer = false;
 
         }
     }

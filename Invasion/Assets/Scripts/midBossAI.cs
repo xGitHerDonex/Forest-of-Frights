@@ -130,8 +130,8 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
                 if(!orb1)
                 {
 
-                    Instantiate(healthOrb, transform.position + (Vector3.up * 3), transform.rotation);
-s                    orb1 = true;
+                    Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation);
+                    orb1 = true;
                 }
 
                 break;
@@ -139,7 +139,7 @@ s                    orb1 = true;
             case 50:
                 if (!orb2)
                 {
-                    Instantiate(healthOrb, transform.position + (Vector3.up * 3), transform.rotation);
+                    Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation);
                     orb2 = true;
                 }
                 break;
@@ -163,7 +163,7 @@ s                    orb1 = true;
         if (!isDead)
         {
             //Continually determines enemy speed and run / walk animations
-            updateRunningSpeed();
+            //updateRunningSpeed();
 
             //casts a ray on the player
             RaycastHit hit;
@@ -185,8 +185,7 @@ s                    orb1 = true;
                 //If player within stopping distance, face target and attack if not already attacking
                 if (!isAttacking && !isShooting && playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
                 {
-                    
-                        agent.velocity = Vector3.zero;
+                
                         agent.ResetPath();
                         faceTarget();
 
@@ -217,7 +216,7 @@ s                    orb1 = true;
             meleeDamage = meleeStage2Damage;
 
             //Continually determines enemy speed and run / walk animations
-            updateRunningSpeed();
+            //updateRunningSpeed();
 
 
             //casts a ray on the player
@@ -250,7 +249,7 @@ s                    orb1 = true;
 
                     if (distToPlayer >= agent.stoppingDistance)
                     {
-                        agent.velocity = Vector3.zero;
+
                         agent.ResetPath();
                         faceTarget();                     
                         StartCoroutine(shoot());
@@ -268,8 +267,8 @@ s                    orb1 = true;
 
                     if (!isAttacking && !isShooting && playerInRange && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance)
                     {                     
-                            agent.velocity = Vector3.zero;
-                            //agent.ResetPath();
+                            //agent.velocity = Vector3.zero;
+                            agent.ResetPath();
                             faceTarget();
 
                             if (!isRunning)

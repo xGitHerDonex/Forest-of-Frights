@@ -545,6 +545,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Prevents repeat Damage
     IEnumerator ResetTakingDamage()
     {
+        isTakingDamage = true;
         //Small delay to prevent repeat damage
         yield return new WaitForSeconds(0.35f);
         isTakingDamage = false;
