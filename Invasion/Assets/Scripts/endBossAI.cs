@@ -27,12 +27,10 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [Tooltip("Turning speed 1-10.")]
     [Range(1, 20)][SerializeField] int targetFaceSpeed;
     [Range(1, 20)][SerializeField] int originalTargetFaceSpeed;
-    [SerializeField] int runningDistance;
-
 
     [Tooltip("Enemy health value between 1 and 100.")]
-    [Range(1, 300)][SerializeField] float hp;
-    [Range(1, 300)][SerializeField] float maxHp;
+    [Range(1, 1000)][SerializeField] float hp;
+    [Range(1, 1000)][SerializeField] float maxHp;
 
 
     [Tooltip("10 is the default value for all current speeds. Changing this without adjusting Enemy Speed and nav mesh speed will break it!!!!")]
@@ -136,6 +134,17 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     float speedOrig;
 
 
+    [Header("-----Health Orb-----")]
+    [SerializeField] GameObject healthOrb;
+    [SerializeField] bool orb1;
+    [SerializeField] bool orb2;
+    [SerializeField] bool orb3;
+
+
+    [Header("-----Summons-----")]
+    [SerializeField] bool summon1;
+    [SerializeField] bool summon2;
+    [SerializeField] bool summon3;
 
 
 
@@ -155,6 +164,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         isFlying = false;
         reachedTarget = false;
         summonCompleted = true;
+        isSummoning = false;
         originalTargetFaceSpeed = targetFaceSpeed;
 
         //Creates Flight waypoint Matrix
@@ -178,12 +188,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             }
 
             //Selects stage for enemy AI based on Health Remaining
-            if (hpRatio >= 0.7 && !isSummoning)
+            if (hpRatio >= 0.7f && !isSummoning)
             {
                 Stage1();
             }
 
-            else if ( hpRatio < 0.7  && !isSummoning)
+            else if (hpRatio < 0.7f  && !isSummoning)
             {
 
                 if (isFlying && summonCompleted && !isGrounded)
@@ -192,13 +202,68 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
                 }
 
-                else if (!isTimeToSummon() && isGrounded && !isLanding && agent.isActiveAndEnabled)
+                else if (agent.isActiveAndEnabled)
                 {
 
                     Stage2();
 
                 }
             }
+
+
+            //Drops orbs and calls summons based on remaining HP
+            switch (hpRatio * 100)
+            {
+                case 75:
+                    if (!orb1)
+                    {
+
+                        Instantiate(healthOrb, transform.position + (Vector3.up * 2) + (Vector3.left*2), transform.rotation);
+                        Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation);
+                        orb1 = true;
+
+                    }
+
+                    if (!summon1)
+                    {
+                        isSummoning = true;
+                        summon1 = true;
+                    }
+
+                    break;
+
+                case 50:
+                    if (!orb2)
+                    {
+                        Instantiate(healthOrb, transform.position + (Vector3.up * 2)+ (Vector3.left * 2), transform.rotation);
+                        Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation);
+                        orb2 = true;
+                    }
+
+                    if (!summon2)
+                    {
+                        isSummoning = true;
+                        summon2 = true;
+                    }
+
+                    break;
+
+                case 25:
+                    if (!orb3)
+                    {
+
+                        Instantiate(healthOrb, transform.position + (Vector3.up * 2) + (Vector3.left * 2), transform.rotation);
+                        Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation);
+                        orb3 = false;
+                    }
+
+                    if (!summon3)
+                    {
+                        summon3 = true;
+                    }
+                    break;
+            }
+
         }
         
 
@@ -251,15 +316,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                     agent.SetDestination(gameManager.instance.player.transform.position);
 
                 }
-
-                ////if player is not wthin stopping distance, then set distination to the player
-                //else if (distToPlayer >= agent.stoppingDistance)
-                //{
-
-                //    facePlayer();
-                //    agent.SetDestination(gameManager.instance.player.transform.position);
-
-                //}
+        
 
                 else
                 {
@@ -319,24 +376,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
                 else if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance && distToPlayer <= maxShootingRange)
                 {
-
-
                     agent.ResetPath();
                     facePlayer();
                     StartCoroutine(shoot());
                     agent.SetDestination(gameManager.instance.player.transform.position);
 
                 }
-
-
-                ////if player is not wthin stopping distance, then set distination to the player
-                //else if (distToPlayer >= agent.stoppingDistance)
-                //{
-
-                //    facePlayer();
-                //    agent.SetDestination(gameManager.instance.player.transform.position);
-
-                //}
 
                 else
                 {
@@ -348,17 +393,17 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         }
     }
 
-    bool isTimeToSummon()
-    {
-        if (Random.Range(0, 8000) <= 1 && !isSummoning)
-        {
-            isSummoning = true;
-            return true;
-        }
+    //bool isTimeToSummon()
+    //{
+    //    if (Random.Range(0, 8000) <= 1 && !isSummoning)
+    //    {
+    //        isSummoning = true;
+    //        return true;
+    //    }
 
-        else
-            return false;
-    }
+    //    else
+    //        return false;
+    //}
 
 
     void summonRoutine(GameObject waypoint)
@@ -715,7 +760,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     public void hurtBaddies(int amount)
     {
         hp -= amount;
-        StartCoroutine(stopMoving());
+        //StartCoroutine(stopMoving());
 
 
         if (hp <= 0)
@@ -804,7 +849,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         if (other.CompareTag("Player"))
         {
-            //attackPlayer = false;
+            attackPlayer = false;
 
         }
     }

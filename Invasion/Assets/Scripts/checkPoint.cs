@@ -5,6 +5,8 @@ using UnityEngine;
 public class checkPoint : MonoBehaviour
 {
     bool isTriggered;
+
+    [SerializeField] GameObject barrierWall;
     private void OnTriggerEnter(Collider other)
     {
         if (!isTriggered && other.CompareTag("Player") && gameManager.instance.player.transform.position != transform.position)
@@ -12,6 +14,7 @@ public class checkPoint : MonoBehaviour
             gameManager.instance.playerSpawnPos.transform.position = transform.position;
             StartCoroutine(gameManager.instance.checkPointPopup());
             isTriggered = true;
+            barrierWall.SetActive(true);
         }
 
 
