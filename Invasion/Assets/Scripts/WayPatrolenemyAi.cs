@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Device;
+using Random = UnityEngine.Random;
 
 public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 {
@@ -59,7 +60,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     [Range(0, 10)][SerializeField] float shootRate;
 
     [Header("SFX")]
-    [SerializeField] AudioSource audioSource;
+    private AudioSource audioSource;
     [SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip attackSound;
     [SerializeField] AudioClip deathSound;
@@ -82,6 +83,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     {
         agent = GetComponent<NavMeshAgent>();
         anime = GetComponent<Animator>();
+        gameObject.AddComponent<AudioSource>();
+       // audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -91,6 +94,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         speedOrig = agent.speed; // gives the agent speed to the float original speed for later on.
         startingPos = transform.position;
         stoppingDistOriginal = agent.stoppingDistance;
+        audioSource = GetComponent<AudioSource>();
 
         // Disabled updateGameGoal to not count the current enemies on screen
         //gameManager.instance.updateGameGoal(0);
@@ -144,23 +148,29 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         {
             if (agent.remainingDistance <= agent.stoppingDistance && !destinationPicked)
             {
-                m_PathIndex = (m_PathIndex + 1) % waypoints.Length;
-                destinationPicked = true;
+                if (!waypoints.IsUnityNull())
+                {
+                    m_PathIndex = (m_PathIndex + 1) % waypoints.Length;
+                    destinationPicked = true;
 
-                //agent.stoppingDistance = 0;
-                yield return new WaitForSeconds(roamPauseTime);
-                agent.SetDestination(waypoints[m_PathIndex].position);
+                    //agent.stoppingDistance = 0;
+                    yield return new WaitForSeconds(roamPauseTime);
+                    agent.SetDestination(waypoints[m_PathIndex].position);
+                } else
+                {
 
-                //Vector3 randomPos = Random.insideUnitSphere * roamDistance;
-                //randomPos += startingPos;
-                //NavMeshHit destination;
+                    Vector3 randomPos = Random.insideUnitSphere * roamDistance;
+                    randomPos += startingPos;
+                    NavMeshHit destination;
+                    destinationPicked = true;
 
-                //if (NavMesh.SamplePosition(randomPos, out destination, roamDistance, 1))
-                //{
-                //    agent.SetDestination(destination.position);
-                //}
+                    if (NavMesh.SamplePosition(randomPos, out destination, roamDistance, 1))
+                    {
+                        agent.SetDestination(destination.position);
+                    }
 
-                destinationPicked = false;
+                    destinationPicked = false;
+                }
             }
 
 
@@ -214,11 +224,16 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         if (hp <= 0)
         {
             hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
-            agent.enabled = false;
-            anime.SetBool("isDead", true);
-            playDeathSound();
-
+            if (agent.baseOffset != 0)
+            {
+                agent.baseOffset = 0;
+            } 
             StopAllCoroutines();
+            agent.enabled = false;           
+            playDeathSound();
+            anime.SetBool("isDead", true);
+            hitboxOff();
+           
 
             // Turn out the lights! (When the enemy dies)
             Light enemyLight = GetComponent<Light>();
@@ -262,23 +277,35 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     IEnumerator shoot()
     {
         isShooting = true;
-        playAttackSound();
-        anime.SetTrigger("Shoot");
-        if(agent.stoppingDistance > 7 && playerInRange)
+        playAttackSound();      
+        if(agent.remainingDistance > 7 && playerInRange)
         {
+            //SphereCollider temp = new SphereCollider();
+            //temp.radius = 5f;
+            //temp.enabled = true;
             anime.SetBool("isMelee",false);
             anime.SetBool("isRanged", true);
-        } else
-        {
-            anime.SetBool("isMelee", true);
-            anime.SetBool("isRanged", false);
-        }
-
+             anime.SetTrigger("Shoot");
         //Used to add delay to the shoot to match the animation
         //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
         yield return new WaitForSeconds(shootRate);
         Instantiate(bullet, shootPos.position, transform.rotation);
         isShooting = false;
+        }
+         else if(agent.remainingDistance < 7 && playerInRange)
+        {
+            anime.SetBool("isMelee", true);
+            anime.SetBool("isRanged", false);
+            anime.SetBool("isLanding", true);
+
+            anime.SetTrigger("Shoot");
+            //Used to add delay to the shoot to match the animation
+            //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
+            yield return new WaitForSeconds(shootRate);
+            Instantiate(bullet, shootPos.position, transform.rotation);
+            isShooting = false;
+        }
+  
     }
 
     //IEnumerator shootDelayed()
@@ -434,6 +461,10 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     {
         if (audioSource != null && deathSound != null)
         {
+            if (anime.GetBool("isDead"))
+            {
+                return;
+            }
             audioSource.clip = deathSound;
             audioSource.Play();
         }
@@ -472,17 +503,42 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     }
 
     //void Melee(){}
-    void Fly(){
+    public void Fly( float wait )
+    {
 
-        agent.baseOffset = 3;
-
-
+        float flightHeight = 3;
+        for (float i = agent.baseOffset; i < flightHeight;)
+        {
+            agent.baseOffset += (0.5f * Time.fixedDeltaTime);
+            i = agent.baseOffset;
+            StartCoroutine(Wait(wait));
+            continue;
+        }
 
     }
-
+    IEnumerator Wait(float waitTime )
+    {
+        //wait "waitTime"
+        yield return new WaitForSeconds(waitTime);
+    }
     
-    void Land(){
+   public void Land( float wait )
+    {
 
-        agent.baseOffset = 0;
+        float landHeight = 0;
+        for (float i = agent.baseOffset; i > landHeight;)
+        {
+
+        
+            //StartCoroutine(Wait(wait));
+            ////add 0.5f to current height every loop 
+            //agent.baseOffset -= 0.5f;
+            //StopCoroutine(Wait(wait));
+            agent.baseOffset -= (0.5f * Time.deltaTime);
+            i = agent.baseOffset;
+            
+            continue;
+        }
+
     }
 }

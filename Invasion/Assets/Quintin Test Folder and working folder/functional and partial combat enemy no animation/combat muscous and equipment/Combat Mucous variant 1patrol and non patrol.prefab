@@ -1135,7 +1135,7 @@ GameObject:
   - component: {fileID: 8263050312562621404}
   - component: {fileID: 4402876869370088840}
   m_Layer: 7
-  m_Name: Combat Mucous
+  m_Name: Combat Mucous variant 1patrol and non patrol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1183,7 +1183,7 @@ MonoBehaviour:
   waypoints: []
   hp: 19
   targetFaceSpeed: 3
-  viewAngle: 130
+  viewAngle: 360
   roamDistance: 0
   roamPauseTime: 0
   animeSpeedChange: 5
@@ -1194,6 +1194,7 @@ MonoBehaviour:
   walkSound: {fileID: 0}
   attackSound: {fileID: 0}
   deathSound: {fileID: 0}
+  stopMovingTime: 0
 --- !u!95 &6764801001714684896
 Animator:
   serializedVersion: 5
