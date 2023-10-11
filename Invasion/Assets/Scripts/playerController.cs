@@ -300,12 +300,13 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         {
             sprintCost = 0.5f;
         }
-         sprintCost = 1.0f;
+        else
+            sprintCost = 1.0f;
 
         if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed && moveMagnitude >= 0.1)
         {
             // Check if there's enough stamina to sprint
-            if (Stamina >= sprintCost * Time.deltaTime)
+            if (Stamina >= (sprintCost * Time.deltaTime))
             {
                 // Increase player run speed by 5
                 playerSpeed = originalPlayerSpeed + 5;

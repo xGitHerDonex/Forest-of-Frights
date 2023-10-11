@@ -1661,7 +1661,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 150
+  m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &2638309090893716847
 CapsuleCollider:
@@ -1704,6 +1704,7 @@ MonoBehaviour:
   shootPos: {fileID: 6596966365349649640}
   anime: {fileID: 1531234606020404625}
   hitBox: {fileID: 2638309090893716847}
+  checkpoint: {fileID: 0}
   targetFaceSpeed: 5
   runningDistance: 11
   hp: 800
@@ -1728,6 +1729,9 @@ MonoBehaviour:
   attackSound: {fileID: 0}
   deathSound: {fileID: 0}
   healthOrb: {fileID: 2309197827884873162, guid: f5641ff499fd83c4792bc3142c2b65b6, type: 3}
+  orb1: 0
+  orb2: 0
+  orb3: 0
 --- !u!1 &8032524666230114982
 GameObject:
   m_ObjectHideFlags: 0

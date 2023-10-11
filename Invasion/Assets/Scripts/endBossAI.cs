@@ -228,6 +228,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                     {
                         isSummoning = true;
                         summon1 = true;
+
                     }
 
                     break;
@@ -254,11 +255,12 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
                         Instantiate(healthOrb, transform.position + (Vector3.up * 2) + (Vector3.left * 2), transform.rotation);
                         Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation);
-                        orb3 = false;
+                        orb3 = true;
                     }
 
                     if (!summon3)
                     {
+                        isSummoning = true;
                         summon3 = true;
                     }
                     break;

@@ -14,10 +14,10 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
     [Header("-----Components-----")]
     [SerializeField] Renderer model;
-    private NavMeshAgent agent;
+    protected NavMeshAgent agent;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
-    private Animator anime;
+    protected Animator anime;
     [SerializeField] Collider hitBox;
     //public spawner whereISpawned;
 
@@ -44,7 +44,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     [Range(0, 10)][SerializeField] int roamPauseTime;
 
     [Tooltip("10 is the default value for all current speeds. Changing this without adjusting Enemy Speed and nav mesh speed will break it!!!!")]
-    [Range(-30, 30)][SerializeField] float animeSpeedChange;
+    [Range(-30, 30)][SerializeField] protected float animeSpeedChange;
 
     [Header("-----Gun Stats and Bullet Component -----")]
 
@@ -72,7 +72,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     float angleToPlayer;
     float speedOrig;
     bool isShooting;
-    bool playerInRange;
+    protected bool playerInRange;
     bool destinationPicked;
     private int m_PathIndex;
     public float stopMovingTime;
@@ -111,7 +111,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
      *  set destination otherwise returns false and no new path is calculated
      *
      */
-    void Update()
+    protected virtual void Update()
     {
         if (agent.isActiveAndEnabled)
         {
@@ -342,7 +342,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     /// </summary>
     /// <returns></returns>
     ///
-    bool canSeePlayer()
+    public bool canSeePlayer()
     {
 //tests to see if the player is within range of the enemy and if the player is within range calculate
     /* the angle of the player to the enemy

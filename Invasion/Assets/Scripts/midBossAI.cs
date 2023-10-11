@@ -15,6 +15,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Transform shootPos;
     [SerializeField] Animator anime;
     [SerializeField] Collider hitBox;
+    [SerializeField] GameObject checkpoint;
 
     [Header("-----Enemy Stats-----")]
 
@@ -380,7 +381,10 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             agent.enabled = false;
             anime.SetBool("Death", true);
             playDeathSound();
-            gameManager.instance.activateBoss();
+            gameManager.instance.activateBoss(); // activate the boss 
+            Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation); // drop 2 health orbs
+            Instantiate(healthOrb, transform.position + (Vector3.up * 2) + (Vector3.left * 2), transform.rotation);
+            checkpoint.SetActive(true);
 
         }
 
