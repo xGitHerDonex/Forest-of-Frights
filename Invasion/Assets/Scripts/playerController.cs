@@ -515,8 +515,12 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Heal Ability:  Currently through the pause menu, until medkits are implemented
     public void giveHP(int amount)
     {
-        HP += amount;
-        gameManager.instance.updateHpBar(HP / MaxHP);
+        if (HP < MaxHP)
+        {
+            HP += amount;
+            gameManager.instance.updateHpBar(HP / MaxHP);
+        }
+     
     }
 
     //Damageable Ability:  Currently allows player takes damage

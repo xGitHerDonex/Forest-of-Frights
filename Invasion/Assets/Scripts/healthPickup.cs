@@ -12,6 +12,7 @@ public class healthPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+  
             gameManager.instance.playerScript.giveHP(amount);
             Destroy(gameObject);
             

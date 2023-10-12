@@ -176,7 +176,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        if (!isDead && attackPlayer)
+        if (!isDead)
         {
 
             //Check HP levels
@@ -212,9 +212,9 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
 
             //Drops orbs and calls summons based on remaining HP
-            switch (hpRatio * 100)
+            switch (hpRatio)
             {
-                case 75:
+                case (.8f):
                     if (!orb1)
                     {
 
@@ -233,7 +233,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
                     break;
 
-                case 50:
+                case (.5f):
                     if (!orb2)
                     {
                         Instantiate(healthOrb, transform.position + (Vector3.up * 2)+ (Vector3.left * 2), transform.rotation);
@@ -249,7 +249,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
                     break;
 
-                case 25:
+                case (.3f):
                     if (!orb3)
                     {
 
@@ -304,7 +304,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                     agent.ResetPath();
                     facePlayer();
                     StartCoroutine(whip());
-                    agent.SetDestination(gameManager.instance.player.transform.position);
+
 
                 }
 
@@ -315,7 +315,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                     agent.ResetPath();
                     facePlayer();
                     StartCoroutine(Melee(Random.Range(1, 5)));
-                    agent.SetDestination(gameManager.instance.player.transform.position);
+
 
                 }
         
@@ -363,7 +363,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                     agent.ResetPath();
                     facePlayer();
                     StartCoroutine(whip());
-                    agent.SetDestination(gameManager.instance.player.transform.position);
+
                 }
 
                 //If player within stopping distance, face target and attack if not already attacking
@@ -373,7 +373,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                     agent.ResetPath();
                     facePlayer();
                     StartCoroutine(Melee(Random.Range(1, 5)));
-                    agent.SetDestination(gameManager.instance.player.transform.position);
+
                 }
 
                 else if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer >= agent.stoppingDistance && distToPlayer <= maxShootingRange)
