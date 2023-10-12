@@ -5,8 +5,12 @@ using UnityEngine;
 public class checkPoint : MonoBehaviour
 {
     bool isTriggered;
+    [SerializeField] bool isFinalCheckpoint;
+    [SerializeField] bool isMidBossCheckpoint;
+
 
     [SerializeField] GameObject barrierWall;
+    [SerializeField] endBossAI endBossScript;
     private void OnTriggerEnter(Collider other)
     {
         if (!isTriggered && other.CompareTag("Player") && gameManager.instance.player.transform.position != transform.position)
@@ -14,7 +18,21 @@ public class checkPoint : MonoBehaviour
             gameManager.instance.playerSpawnPos.transform.position = transform.position;
             StartCoroutine(gameManager.instance.checkPointPopup());
             isTriggered = true;
-            barrierWall.SetActive(true);
+
+            if (isFinalCheckpoint)
+            {
+                barrierWall.SetActive(true);
+                endBossScript.finalCheckpointActivated = true;
+
+            }
+
+            else if (isMidBossCheckpoint)
+            {
+                barrierWall.SetActive(true);
+
+
+            }
+
         }
 
 

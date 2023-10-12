@@ -98,8 +98,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] bool isSummoning;
     [SerializeField] bool summonCompleted;
     [SerializeField] bool isRbDestroyed;
-    //[SerializeField] bool attackPlayer;
-
+    public bool finalCheckpointActivated;
 
 
     [Header("-----Waypoints-----")]
@@ -113,7 +112,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     [Header("-----Summon Details-----")]
     [SerializeField] float summonTime;
     [SerializeField] int faceTargetWhileSummonDelay;
-
 
 
     [Header("SFX")]
@@ -180,7 +178,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        if (!isDead)
+        if (!isDead && finalCheckpointActivated)
         {
 
             //Check HP levels
@@ -191,8 +189,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             if (hpRatio <= .7f && !summon1 && !orb1)
             {
 
-                Instantiate(healthOrb, transform.position + (Vector3.up * 2) + (Vector3.left * 2), transform.rotation);
-                Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation);
+                Instantiate(healthOrb, transform.position + (Vector3.up * 1) + (Vector3.left * 2), transform.rotation);
+                Instantiate(healthOrb, transform.position + (Vector3.up * 1), transform.rotation);
                 orb1 = true;
                 isSummoning = true;
                 summon1 = true;
@@ -201,8 +199,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             else if (hpRatio <= .5f && !summon2 && !orb2)
             {
 
-                Instantiate(healthOrb, transform.position + (Vector3.up * 2) + (Vector3.left * 2), transform.rotation);
-                Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation);
+                Instantiate(healthOrb, transform.position + (Vector3.up * 1) + (Vector3.left * 2), transform.rotation);
+                Instantiate(healthOrb, transform.position + (Vector3.up * 1), transform.rotation);
                 orb2 = true;
                 isSummoning = true;
                 summon2 = true;
@@ -211,8 +209,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             else if (hpRatio <= .3f && !summon3 && !orb3)
             {
 
-                Instantiate(healthOrb, transform.position + (Vector3.up * 2) + (Vector3.left * 2), transform.rotation);
-                Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation);
+                Instantiate(healthOrb, transform.position + (Vector3.up * 1) + (Vector3.left * 2), transform.rotation);
+                Instantiate(healthOrb, transform.position + (Vector3.up * 1), transform.rotation);
                 orb3 = true;
                 isSummoning = true;
                 summon3 = true;
@@ -222,6 +220,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
             if (isSummoning)
             {
+
                 summonRoutine(findClosestFlightWaypoint());
             }
 
@@ -385,19 +384,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         }
     }
 
-    //bool isTimeToSummon()
-    //{
-    //    if (Random.Range(0, 8000) <= 1 && !isSummoning)
-    //    {
-    //        isSummoning = true;
-    //        return true;
-    //    }
 
-    //    else
-    //        return false;
-    //}
-
-
+    //once enemy flies up, this routine executes for summoning enemies
     void summonRoutine(GameObject waypoint)
     {
         
@@ -406,17 +394,21 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
         else if (reachedTarget && isFlying)
         {
+            faceTarget(gameManager.instance.playerScript.getClosestGroundWaypoint());
             StartCoroutine(faceTargetWhileSummon());
         }
-         
+
+    
+     
 
     }
 
+    //faces the ground waypoint when called.
     IEnumerator faceTargetWhileSummon()
     {
-        agent.velocity = Vector3.zero;
-        agent.ResetPath();
-        facePlayer();
+        rb.velocity = Vector3.zero;
+        //agent.ResetPath();
+        faceTarget(gameManager.instance.playerScript.getClosestGroundWaypoint());
 
         yield return new WaitForSeconds(faceTargetWhileSummonDelay); // Delay for boss to turn and face player before summon
 
@@ -477,6 +469,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
             if (distToWaypoint <= groundingHeight)
             {
+                facePlayer();
                 isFlying = false;
                 reachedTarget = true;
                 isLanding = true;
@@ -495,6 +488,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         
     }
 
+    //create rigid body and attaches back to the boss.
     void createRb()
     {
         if (isRbDestroyed)
@@ -540,6 +534,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         
     }
 
+
+    //Stay in Air timer
     IEnumerator stayInAir()
     {
         yield return new WaitForSeconds(airTime);
@@ -606,27 +602,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         return closestWaypoint;
     }
 
-    GameObject PickFlightWaypoint(float distMin, float distMax)
-    {
-        closestWaypointDist = 3000f;
-
-        //iterates through the list to find the distances
-        foreach (GameObject waypoint in waypoints)
-        {
-            //calculates distance
-            waypointDist = Vector3.Distance(transform.position, waypoint.transform.position);
-
-            if (waypointDist <= distMax && waypointDist >= distMin)
-            {
-                closestWaypoint = waypoint;
-               
-            }
-
-        }
-
-        return closestWaypoint;
-
-    }
 
     //Updates Flight animation 
     void setFlightAnimation()
@@ -680,7 +655,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
     }
 
-
+    //Shoot ability
     IEnumerator shoot()
     {
         isShooting = true;
@@ -739,6 +714,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
     }
 
+    //whip ability
     IEnumerator whip()
     {
         isAttacking = true;
@@ -760,6 +736,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         Instantiate(bullet, shootPos.position, transform.rotation);
 
     }
+
+    //plays enemy walking sound
     void playWalkSound()
     {
         if (audioSource != null && walkSound != null)
@@ -808,12 +786,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         }
     }
 
-    IEnumerator stopMoving()
-    {
-        agent.speed = 0;
-        yield return new WaitForSeconds(.5f);
-        agent.speed = speedOrig;
-    }
 
     //changes the material color from the original material to a red color for .1 seconds
     //the changes the color back to its original white state.
@@ -844,27 +816,5 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         hurtBaddies(explosionDamage);
     }
 
-    //public void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        attackPlayer = true;
-
-    //    }
-    //}
-
-
-
-    //// does the exact opposite as On Trigger enter
-    //// it checks to see if the object that is in the collider is the player if it isnt then the player isnt in range
-    ////set the stopping distance to zero 
-    //public void OnTriggerExit(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        attackPlayer = false;
-
-    //    }
-    //}
 
 }

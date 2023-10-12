@@ -9,7 +9,7 @@ public class spawner : MonoBehaviour
 
     [SerializeField] GameObject enemy;
     [SerializeField] float spawnRate;       //spawn rate
-    [SerializeField] int wavesToSpawn;      //how many waves
+    //[SerializeField] int wavesToSpawn;      //how many waves
     bool isSpawning;                        //currently spawning
 
     private void Start()
@@ -36,7 +36,6 @@ public class spawner : MonoBehaviour
         {
             isSpawning = true;
             Instantiate(en, (transform.position + new Vector3(Random.Range(-4f, 4f), 0f, Random.Range(-4f, 4f))), transform.rotation);
-            wavesToSpawn--;
             yield return new WaitForSeconds(spawnRate);
             isSpawning=false;
         }
