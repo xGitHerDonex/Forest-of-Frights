@@ -128,7 +128,7 @@ public class gameManager : MonoBehaviour
     {
         currentMenu = winMenu;
         currentMenu.SetActive(isPaused);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5f);
         pause();
 
         currentMenu.SetActive(isPaused);
