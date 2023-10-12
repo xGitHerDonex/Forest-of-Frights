@@ -148,7 +148,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         {
             if (agent.remainingDistance <= agent.stoppingDistance && !destinationPicked)
             {
-                if (!waypoints.IsUnityNull())
+                if (waypoints.Length > 0)
                 {
                     m_PathIndex = (m_PathIndex + 1) % waypoints.Length;
                     destinationPicked = true;
