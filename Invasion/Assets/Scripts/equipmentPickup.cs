@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class equipmentPickup : MonoBehaviour
 {
- public enum EquipmentItem
+    public enum EquipmentItem
     {
         None,
         EnergeticRing,
@@ -25,7 +25,7 @@ public class equipmentPickup : MonoBehaviour
     }
 
     [SerializeField] private EquipmentItem equipmentType;
-    [SerializeField] private playerController player;
+    //[SerializeField] private playerController player;
     [SerializeField] private GameObject energeticRingUI;
     [SerializeField] private GameObject crimsonStoneUI;
     [SerializeField] private GameObject temportalRelicUI;
@@ -42,13 +42,13 @@ public class equipmentPickup : MonoBehaviour
     [SerializeField] private GameObject powerInfusorUI;
     [SerializeField] private GameObject farSightUI;
 
+    private playerController player;
+    private void Awake()
+    {
+        player = gameManager.instance.player.GetComponent<playerController>();
+    }
 
-
-
-
-
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter( Collider other )
     {
         if (other.CompareTag("Player"))
         {
@@ -62,110 +62,127 @@ public class equipmentPickup : MonoBehaviour
         switch (equipmentType)
         {
             case EquipmentItem.EnergeticRing:
-                if (player != null)
+
                 {
                     energeticRingUI.SetActive(true);
                     gameManager.instance.playerScript.hasEnergeticRing = true;
-                }
-                break;
-            
-            case EquipmentItem.CrimsonStone:
+                    break;
 
-                if (player != null)
+                }
+
+            case EquipmentItem.CrimsonStone: 
+
                 {
                     player.ApplyPermanentStatBoost(10);
                     crimsonStoneUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.TemporalRelic:
-                if (temportalRelicUI != null)
+
                 {
                     temportalRelicUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.Metabolizer:
-                if (metabolizerUI != null)
+
                 {
                     metabolizerUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.FlightX:
-                if (flightxUI != null)
+
                 {
                     flightxUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.Enhancer:
-                if (enhancerUI != null)
+
                 {
                     enhancerUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.NanoInfusor:
-                if (nanoInfusorUI != null)
+
                 {
                     nanoInfusorUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.PhaseShifter:
-                if (phaseShifterUI != null)
+
                 {
                     phaseShifterUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.ReflexGauntlet:
-                if (reflexGauntletUI != null)
+
                 {
                     reflexGauntletUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.AntiGravStone:
-                if (antiGravStoneUI != null)
+
                 {
                     antiGravStoneUI.SetActive(true);
+                    break;
+
                 }
-                break;
+
 
             case EquipmentItem.Synthesizer:
                 {
                     synthesizerUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.Vitalizer:
                 {
                     vitalizerUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.ChronoGreaves:
                 {
                     chronoGreavesUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.PowerInfusor:
                 {
                     powerInfusorUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
             case EquipmentItem.FarSight:
                 {
                     farSightUI.SetActive(true);
+                    break;
                 }
-                break;
+
 
 
 
         }
     }
+
+   
 }

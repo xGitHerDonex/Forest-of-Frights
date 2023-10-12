@@ -738,7 +738,10 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //        maxStamina = Mathf.Max(0f, value);
     //    }
     //}
+    /// <summary>
     /// Equipment Buff Section (WIP)
+    /// </summary>
+    /// <param name="hpBoost"></param>
     public void ApplyPermanentStatBoost(float hpBoost)
     {
         Debug.Log("Before Buff - maxHP: " + _maxHP);
