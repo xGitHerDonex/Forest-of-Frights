@@ -22,8 +22,8 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject playerHp;
     [SerializeField] Image playerHpBar;
     [SerializeField] GameObject playerStam;
-    [SerializeField] Image playerLeftStamBar;
-    [SerializeField] Image playerRightStamBar;
+    [SerializeField] Image playerStamBar;
+    //[SerializeField] Image playerRightStamBar;
     [SerializeField] Image playerChronoBar;
 
 
@@ -128,7 +128,7 @@ public class gameManager : MonoBehaviour
     {
         currentMenu = winMenu;
         currentMenu.SetActive(isPaused);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5f);
         pause();
 
         currentMenu.SetActive(isPaused);
@@ -151,8 +151,8 @@ public class gameManager : MonoBehaviour
     //When called updates the fill level of the Stam Bar
     public void updateStamBar(float amount)
     {
-        playerLeftStamBar.fillAmount = amount;
-        playerRightStamBar.fillAmount = amount;
+        playerStamBar.fillAmount = amount;
+        //playerRightStamBar.fillAmount = amount;
 
     }
 
