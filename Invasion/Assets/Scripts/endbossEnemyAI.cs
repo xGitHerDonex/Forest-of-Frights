@@ -22,10 +22,7 @@ public class endbossEnemyAI : WayPatrolenemyAi
             {
                 agent.SetDestination(gameManager.instance.player.transform.position);
             }
-            else if (!playerInRange)
-            {
-      
-            }
+           
         }
     }
 }

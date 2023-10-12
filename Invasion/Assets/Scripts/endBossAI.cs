@@ -479,7 +479,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
              }
 
             else if (distToWaypoint >= groundingHeight)
-            {
+            {   faceTarget(gameManager.instance.playerScript.getClosestGroundWaypoint());
                 isFlying = true;
                 StartCoroutine(headToTarget(waypoint,true));
             }

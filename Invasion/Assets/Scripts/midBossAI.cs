@@ -124,36 +124,33 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             Stage2();
         }
 
-        //Drops orbs based on remaining HP
-        switch (hpRatio * 100)
+
+
+        if (hpRatio <= .7f && !orb1)
         {
-            case 75:
-                if(!orb1)
-                {
 
-                    Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation);
-                    orb1 = true;
-                }
-
-                break;
-
-            case 50:
-                if (!orb2)
-                {
-                    Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation);
-                    orb2 = true;
-                }
-                break;
-
-            case 25:
-                if (!orb3)
-                {
-
-                    Instantiate(healthOrb, transform.position + (Vector3.up * 3), transform.rotation);
-                    orb3 = false;
-                }
-                break;
+            Instantiate(healthOrb, transform.position + (Vector3.up * 1), transform.rotation);
+            orb1 = true;
+      
         }
+
+        else if (hpRatio <= .5f && !orb2)
+        {
+
+            Instantiate(healthOrb, transform.position + (Vector3.up * 1), transform.rotation);
+            orb2 = true;
+
+        }
+
+        else if (hpRatio <= .5f && !orb3)
+        {
+
+            Instantiate(healthOrb, transform.position + (Vector3.up * 1), transform.rotation);
+            orb3 = true;
+
+        }
+
+     
 
     }
 
