@@ -158,7 +158,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //Low Health Warning
         lowHealthWarning();
-      
+
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 70, Color.green);
 
         //Call to shoot
         //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
