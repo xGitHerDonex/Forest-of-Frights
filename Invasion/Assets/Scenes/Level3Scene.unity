@@ -2378,7 +2378,7 @@ PrefabInstance:
       objectReference: {fileID: 6312046575337969148, guid: c57d25f09f6f23e40bd17c3b3b097888, type: 3}
     - target: {fileID: 5723125313800939450, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
       propertyPath: spawnRate
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5787289987384438473, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
       propertyPath: m_LocalScale.x
@@ -5243,8 +5243,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1991870592323477593, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991870592323477593, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.26
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1991870592323477593, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2580079933166528048, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
       propertyPath: demonLord
@@ -5261,6 +5269,18 @@ PrefabInstance:
     - target: {fileID: 4334375471884553702, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
       propertyPath: near clip plane
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921109841228633527, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921109841228633527, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921109841228633527, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5138701578179171117, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
       propertyPath: damage
