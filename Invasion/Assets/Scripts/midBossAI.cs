@@ -379,8 +379,8 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
             anime.SetBool("Death", true);
             playDeathSound();
             gameManager.instance.activateBoss(); // activate the boss 
-            Instantiate(healthOrb, transform.position + (Vector3.up * 1), transform.rotation); // drop 2 health orbs
-            Instantiate(healthOrb, transform.position + (Vector3.up * 1) + (Vector3.left * 2), transform.rotation);
+            Instantiate(healthOrb, transform.position + (Vector3.up * 2), transform.rotation); // drop 2 health orbs
+            Instantiate(healthOrb, transform.position + (Vector3.up * 2) + (Vector3.left * 2), transform.rotation);
             checkpoint.SetActive(true);
 
         }
