@@ -20,6 +20,11 @@ public class buttonFunctions : MonoBehaviour
         Application.Quit();
     }
 
+    public void mainMenu()
+    {
+        SceneManager.LoadScene(0); //loads active scene
+    }
+
     //Restart - reloads the game
     public void restart()
     {
