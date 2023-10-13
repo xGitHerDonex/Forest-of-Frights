@@ -45,9 +45,12 @@ public class equipmentPickup : MonoBehaviour
     private playerController player;
     private void Awake()
     {
+        
+    }
+    private void Start()
+    {
         player = gameManager.instance.player.GetComponent<playerController>();
     }
-
     private void OnTriggerEnter( Collider other )
     {
         if (other.CompareTag("Player"))

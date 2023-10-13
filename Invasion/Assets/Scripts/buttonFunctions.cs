@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
@@ -38,6 +39,32 @@ public class buttonFunctions : MonoBehaviour
     {
         gameManager.instance.unPause();
         gameManager.instance.playerScript.spawnPlayer();
+
+    }
+
+    public void respawnPlayerScene3()
+    {
+        checkPoint midBossCP = gameManager.instance.midBossCP;
+
+        //if mid boss is dead
+        if (gameManager.instance.midBoss)
+        {
+ 
+            SceneManager.LoadScene(5);
+      
+                  
+        }
+
+        else if (midBossCP.isTriggered) 
+        {
+            SceneManager.LoadScene(4);
+        }
+
+
+        else
+        {
+            respawnPlayer();
+        }
 
     }
 

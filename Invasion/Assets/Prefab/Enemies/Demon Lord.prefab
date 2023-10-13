@@ -650,59 +650,68 @@ MonoBehaviour:
   hitBox: {fileID: 5210883362826208591}
   rb: {fileID: 1452713996136046392}
   DemonLord: {fileID: 884292984102214125}
-  targetFaceSpeed: 10
+  targetFaceSpeed: 4
   originalTargetFaceSpeed: 0
-  runningDistance: 0
-  hp: 80
-  maxHp: 100
+  hp: 500
+  maxHp: 500
   animeSpeedChange: 10
-  enemyRunSpeed: 0
+  enemyRunSpeed: 35
   leftMeleeCollider: {fileID: 1728914785062646594}
   rightMeleeCollider: {fileID: 5944698570030354159}
   whipDelay: 1.5
   meleeDelay: 1
-  meleeDamage: 20
-  meleeStage2Damage: 30
-  meleeRange: 12
+  meleeDamage: 25
+  meleeStage2Damage: 40
+  meleeRange: 15
   bullet: {fileID: 6242495077864083463, guid: 23078b76108640b44884b187b85ffd4a, type: 3}
-  rangedStoppingDistance: 12
-  maxShootingRange: 60
+  rangedStoppingDistance: 25
+  maxShootingRange: 100
   rangeDelay: 10
   viewAngle: 60
   shootAngle: 10
   shootRate: 1
-  shootDelay: 0.5
+  shootDelay: 0.1
   flightSpeed: 15
   origFlightSpeed: 0
   groundingHeight: 7
-  flightStoppingDist: 2
+  flightStoppingDist: 8
   landingSpeed: -8
   switchFacing: 28
-  landingDelay: 2
-  flightTargetFaceSpeed: 1
+  landingDelay: 1.8
+  flightTargetFaceSpeed: 2
+  airTime: 10
   startFight: 0
   isLanding: 0
   isAttacking: 0
   isRunning: 0
   isShooting: 0
-  isGrounded: 0
+  isGrounded: 1
+  timeToLand: 0
   isFlying: 0
   reachedTarget: 0
   isSummoning: 0
   summonCompleted: 0
   isRbDestroyed: 0
-  isPlayerinRange: 0
+  finalCheckpointActivated: 0
   distToWaypoint: 0
   closestWaypointDist: 0
   waypoint: {fileID: 0}
   waypoints: []
   closestWaypoint: {fileID: 0}
   waypointDist: 0
-  summonTime: 0.1
+  summonTime: 0.01
+  faceTargetWhileSummonDelay: 3
   audioSource: {fileID: 0}
   walkSound: {fileID: 0}
   attackSound: {fileID: 0}
   deathSound: {fileID: 0}
+  healthOrb: {fileID: 2309197827884873162, guid: f5641ff499fd83c4792bc3142c2b65b6, type: 3}
+  orb1: 0
+  orb2: 0
+  orb3: 0
+  summon1: 0
+  summon2: 0
+  summon3: 0
 --- !u!195 &7022344279520057728
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -712,12 +721,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 884292984102214125}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 35
+  m_Radius: 1
+  m_Speed: 20
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 200
-  m_StoppingDistance: 20
+  m_StoppingDistance: 17
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -794,7 +803,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 150
+  m_Radius: 40
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1201515015468293222
 GameObject:

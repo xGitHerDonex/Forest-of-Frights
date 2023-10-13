@@ -502,11 +502,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 007da77ee19ebc4459a5d9eb2fc1348a, type: 3}
---- !u!1 &14229925 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5471976495509196588, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
-  m_PrefabInstance: {fileID: 809623671}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &15086806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10029,7 +10024,7 @@ PrefabInstance:
     - target: {fileID: 2896247536046845841, guid: 8de723087bd326f4aa5a46e100976d7e, type: 3}
       propertyPath: activateMessage
       value: 
-      objectReference: {fileID: 809623672}
+      objectReference: {fileID: 0}
     - target: {fileID: 2956758544000962999, guid: 8de723087bd326f4aa5a46e100976d7e, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -14736,47 +14731,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3545776992576940118, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -376.30988
-      objectReference: {fileID: 0}
-    - target: {fileID: 3545776992576940118, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3545776992576940118, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -768.18823
-      objectReference: {fileID: 0}
     - target: {fileID: 7590227657355935379, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: m_Name
       value: LevelPrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 7608456433177545650, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
---- !u!114 &809623672 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3827862157823161169, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
-  m_PrefabInstance: {fileID: 809623671}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &811292262 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2845810363364467536, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
-  m_PrefabInstance: {fileID: 809623671}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &811325532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16262,7 +16225,7 @@ PrefabInstance:
     - target: {fileID: 4452595998986751576, guid: bdc6f06520289884da155168e039655e, type: 3}
       propertyPath: antiGravStoneUI
       value: 
-      objectReference: {fileID: 811292262}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -21589,7 +21552,7 @@ PrefabInstance:
     - target: {fileID: 1265429988229379360, guid: 9e65b5860d01234428cd68b993170b95, type: 3}
       propertyPath: nanoInfusorUI
       value: 
-      objectReference: {fileID: 1177468208}
+      objectReference: {fileID: 0}
     - target: {fileID: 5963214567866286231, guid: 9e65b5860d01234428cd68b993170b95, type: 3}
       propertyPath: m_Name
       value: Nano Infusor
@@ -21669,11 +21632,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3477663187008753093, guid: 1e3974e3db8c48c41b2604d2478e7e9e, type: 3}
   m_PrefabInstance: {fileID: 1072551648}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1177468208 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3515629140154892839, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
-  m_PrefabInstance: {fileID: 809623671}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1178516973 stripped
 Transform:
@@ -22875,11 +22833,6 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7623195778715645435, guid: 811bf22db94faad418fb6fdfffe14569, type: 3}
   m_PrefabInstance: {fileID: 1679803918}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1272763603 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5120967906959739867, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
-  m_PrefabInstance: {fileID: 809623671}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1274921171
 PrefabInstance:
@@ -26132,11 +26085,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2553481404179805090, guid: eb2cfde91ad31bf4bad84b2c70e9816e, type: 3}
   m_PrefabInstance: {fileID: 1498848488}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1510554440 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5126494693963946294, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
-  m_PrefabInstance: {fileID: 809623671}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1510675675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27093,7 +27041,7 @@ PrefabInstance:
     - target: {fileID: 3606241027808443301, guid: ba9d60681a5a87746894edf7c67557af, type: 3}
       propertyPath: reflexGauntletUI
       value: 
-      objectReference: {fileID: 1272763603}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -55380,7 +55328,7 @@ PrefabInstance:
     - target: {fileID: 4409389425406117044, guid: 110788bddb34a4f4c9f9863c0b175c45, type: 3}
       propertyPath: enhancerUI
       value: 
-      objectReference: {fileID: 14229925}
+      objectReference: {fileID: 0}
     - target: {fileID: 6449287932418170566, guid: 110788bddb34a4f4c9f9863c0b175c45, type: 3}
       propertyPath: m_Name
       value: Enhancer
@@ -56749,7 +56697,7 @@ PrefabInstance:
     - target: {fileID: 9153714348972728981, guid: 946dcf57a4167894bac1b65b063d8a4d, type: 3}
       propertyPath: phaseShifterUI
       value: 
-      objectReference: {fileID: 1510554440}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -58361,7 +58309,7 @@ PrefabInstance:
     - target: {fileID: 2896247536046845841, guid: 8de723087bd326f4aa5a46e100976d7e, type: 3}
       propertyPath: activateMessage
       value: 
-      objectReference: {fileID: 809623672}
+      objectReference: {fileID: 0}
     - target: {fileID: 2956758544000962999, guid: 8de723087bd326f4aa5a46e100976d7e, type: 3}
       propertyPath: m_Mesh
       value: 

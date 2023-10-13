@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class checkPoint : MonoBehaviour
 {
-    bool isTriggered;
+    public bool isTriggered;
     [SerializeField] bool isFinalCheckpoint;
     [SerializeField] bool isMidBossCheckpoint;
 

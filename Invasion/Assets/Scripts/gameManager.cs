@@ -32,7 +32,10 @@ public class gameManager : MonoBehaviour
 
     [Header("-----Game Goal-----")]
     [SerializeField] GameObject demonLord;
-    bool _isMidBossDead;
+    public bool midBoss;
+    public bool endBoss;
+    public checkPoint midBossCP;
+
 
 
     [Header("-----Menus-----")]
@@ -59,10 +62,10 @@ public class gameManager : MonoBehaviour
         instance = this; // set the the instance to this
         player = GameObject.FindGameObjectWithTag("Player"); // set player to player with tag "player"
         playerScript = player.GetComponent<playerController>(); // set player controller to the player controller of player
-        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos"); //sets player spawn pos
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
 
 
-
+        player.transform.position = playerSpawnPos.transform.position;
         //Adds some ambience
         if (natureSoundSource != null && natureSounds != null)
         {
@@ -76,6 +79,8 @@ public class gameManager : MonoBehaviour
     private void Start()
     {
 
+    
+       
     }
 
     void Update()
@@ -180,11 +185,13 @@ public class gameManager : MonoBehaviour
     //Determines final boss coming in
     public void isMidBossDead(bool isDead = true)
     {
-        _isMidBossDead = isDead;
+        midBoss = isDead;
     }
 
+    //activates finalboss
     public void activateBoss()
     {
+        midBoss = true;
         demonLord.SetActive(true);
     }
 
