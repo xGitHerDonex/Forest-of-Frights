@@ -11,7 +11,7 @@ public class grenade : MonoBehaviour
 
     private void Start()
     {
-        rb.velocity = gameManager.instance.player.transform.position  - transform.position.normalized * speed;
+        rb.velocity = (gameManager.instance.player.transform.position  - transform.position).normalized * speed;
         StartCoroutine(explode());
     }
 

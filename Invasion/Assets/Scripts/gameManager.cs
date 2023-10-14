@@ -25,6 +25,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] Image playerStamBar;
     //[SerializeField] Image playerRightStamBar;
     [SerializeField] Image playerChronoBar;
+    [SerializeField] Image playerGrenadeBar;
 
 
     [SerializeField] GameObject reticle;
@@ -168,6 +169,11 @@ public class gameManager : MonoBehaviour
 
         playerChronoBar.fillAmount = amount;
 
+    }
+
+    public void updateGrenadeBar(float amount)
+    {
+        playerGrenadeBar.fillAmount = amount;
     }
 
     //Flash the screen when player gets damaged

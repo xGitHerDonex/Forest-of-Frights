@@ -41,6 +41,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [Header("-----Grenade Stats------")]
     [SerializeField] GameObject grenade;
     [SerializeField] float throwRate;
+    [SerializeField] float maxThrowRate;
     [Range(1, 20)][SerializeField] int playerThrowForce;
     [Range(1, 20)][SerializeField] int throwLift;
     [SerializeField] Transform throwPos;
@@ -165,6 +166,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //Keeps Stamina Bar updated
         gameManager.instance.updateStamBar(Stamina / maxStamina);
         gameManager.instance.updateChronoBar(time / maxTime);
+        gameManager.instance.updateGrenadeBar(throwRate / maxThrowRate);
     }
 
     //Move Ability:  Currently allows player to move!  Wheee!
@@ -428,10 +430,18 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //wait for throwrate, then flip bool back
         yield return new WaitForSeconds(throwRate);
+        
         grenadeCD = true;
         //isShooting = true;
 
     }
+
+    //public void grenadeCooldown()
+    //{
+    //    grenadeCD = true;
+
+
+    //}
 
     //Time Slow: slows the world but not the player
  void chronokinesis()
