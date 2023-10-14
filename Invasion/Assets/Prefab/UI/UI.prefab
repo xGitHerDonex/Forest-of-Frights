@@ -1038,7 +1038,6 @@ MonoBehaviour:
   playerStam: {fileID: 8295725633111721808}
   playerStamBar: {fileID: 9177057736801863376}
   playerChronoBar: {fileID: 307254033199917483}
-  playerGrenadeBar: {fileID: 0}
   reticle: {fileID: 5287922795987789643}
   demonLord: {fileID: 0}
   midBoss: 0
@@ -1052,6 +1051,8 @@ MonoBehaviour:
   inventoryMenu: {fileID: 3355714730101763731}
   playerDamageFlash: {fileID: 6915875373821733172}
   isPaused: 1
+  natureSoundSource: {fileID: 0}
+  natureSounds: {fileID: 8300000, guid: 21538f6160ff48040a8488deb4ed6d5e, type: 3}
   explosionDamage: 2
 --- !u!1 &903315438395805123
 GameObject:
@@ -6847,6 +6848,7 @@ RectTransform:
   - {fileID: 8231487578032277784}
   - {fileID: 1334195988183181459}
   - {fileID: 8125033831757964893}
+  - {fileID: 3598880286053572666}
   m_Father: {fileID: 6082223914250305193}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -12733,8 +12735,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3598880286053572666}
+  m_Children: []
   m_Father: {fileID: 81057425618513609}
   m_LocalEulerAnglesHint: {x: 2.652, y: -184.801, z: 28.849}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -12881,16 +12882,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8340900085505376308}
-  m_LocalRotation: {x: 0.24975601, y: 0.96712655, z: -0.011960909, w: -0.046316076}
-  m_LocalPosition: {x: 0, y: 0, z: 23.288893}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8125033831757964893}
+  m_Father: {fileID: 81057425618513609}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -242.58972, y: 123.43683}
+  m_AnchoredPosition: {x: -1609, y: -131}
   m_SizeDelta: {x: 463.0488, y: 76.7735}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1943270346261856799

@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 public class playerController : MonoBehaviour, IDamage, IPhysics
 {
     [SerializeField] CharacterController controller;
-    public gameManager gameManager;
 
     //Players stats
     [Header("-----Player Stats-----")]
@@ -46,7 +45,6 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [Range(1, 20)][SerializeField] int playerThrowForce;
     [Range(1, 20)][SerializeField] int throwLift;
     [SerializeField] Transform throwPos;
-    private float lastThrown;
 
     //Time Slow
     [Header("-----Chronokinesis-----")]
@@ -70,7 +68,6 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] private GameObject lowHealthWarnBG;
     [SerializeField] private TextMeshProUGUI ammoCurText;
     [SerializeField] private TextMeshProUGUI ammoMaxText;
-    //[SerializeField] public GameObject playerGrenadeBar;
 
     [Header("-----SFX-----")]
     [SerializeField] AudioSource audioSource;
@@ -172,7 +169,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //Keeps Stamina Bar updated
         gameManager.instance.updateStamBar(Stamina / maxStamina);
         gameManager.instance.updateChronoBar(time / maxTime);
-        
+        gameManager.instance.updateGrenadeBar(throwRate / maxThrowRate);
     }
 
     //Move Ability:  Currently allows player to move!  Wheee!
@@ -238,6 +235,56 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move((playerVelocity + pushBack) * Time.deltaTime);
     }
+
+    //Sprint Ability:  Increases run speed by 5 for 4 seconds
+    //Future: Powerups to increase maxStamina for increased sprinting
+    //void sprint()
+    //{
+    //    float moveMagnitude = move.magnitude;
+    //    if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed && moveMagnitude >=0.1)
+    //    {
+
+    //        //Increase player run speed by 5
+    //        playerSpeed = originalPlayerSpeed + 5;
+    //        Stamina -= 1.0f * Time.deltaTime;
+
+    //        if (playerSpeed == 9 && !audioSource.isPlaying && moveMagnitude >= 0.4f)
+    //        {
+    //            audioSource.PlayOneShot(playerRunsGrass);
+    //        }
+    //        {
+    //            if (Stamina <= 0.0)
+    //            {
+    //                canSprint = false;
+    //                if (!isTimeSlowed) //test
+    //                    playerSpeed = originalPlayerSpeed;
+    //            }
+    //        }
+    //    }
+
+    //    //Stamina Recover Ability:  Recovers stamina by 0.75(current regenStamina)
+    //    //Future: Powerups to speed up regenStamina
+    //    //Note: drainStamina set to 4.0 to allow sprinting sooner than possible maxStamina
+    //    else
+    //    {
+    //        if (Stamina >= 4.0)
+    //        {
+    //            canSprint = true;
+
+    //            if (!isTimeSlowed) // test
+    //            playerSpeed = originalPlayerSpeed;
+
+    //        }
+    //        Stamina += regenStamina * Time.deltaTime;
+    //        //Clamp prevents stamina going negative or over the max
+
+    //        Stamina = Mathf.Clamp(Stamina, 0, _maxStamina);
+    //        playerSpeed = originalPlayerSpeed;
+    //    }
+
+    //}
+
+
    
     void sprint()
     {
@@ -285,6 +332,92 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     }
 
 
+    //Shoot Ability:  Currently instant projectile speed
+    //IEnumerator shoot()
+    //{
+
+    //    if (isShooting || gunList.Count == 0 || gameManager.instance.isPaused)
+    //        yield break;
+
+    //    if (gunList[selectedGun].ammoCur > 0)
+    //    {
+    //        isShooting = true;
+    //        gunList[selectedGun].ammoCur--;
+
+    //        // Update HUD Ammo 
+    //        ammoCurText.text = gunList[selectedGun].ammoCur.ToString();
+    //    }
+    //    else
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.R))
+    //        {
+    //            // Get the gunName as listed in gunStats
+    //            string gunType = gunList[selectedGun].gunName;
+
+    //            if (gunList[selectedGun].reloadAmount - gunList[selectedGun].ammoCur > 0)
+    //            {
+    //                // Calculate how much ammo can be reloaded
+    //                int ammoToReload = Mathf.Min(gunList[selectedGun].reloadAmount - gunList[selectedGun].ammoCur, ammoInventory[gunType]);
+
+    //                // Deduct the reloaded ammo from the player's inventory
+    //                ammoInventory[gunType] -= ammoToReload;
+
+    //                // Update the current ammo count
+    //                gunList[selectedGun].ammoCur += ammoToReload;
+
+    //                // Update HUD ammo after Reloading
+    //                ammoUpdate();
+    //            }
+    //        }
+
+    //        isShooting = false;
+    //        yield break;
+    //    }
+
+    //    // Talk to gunStats to grab the current gun's Recoil
+    //    float recoilAmount = gunList[selectedGun].recoilAmount;
+
+    //    // Save the original gunModel rotation (to recoil back to)
+    //    Quaternion originalRotation = gunModel.transform.localRotation;
+
+    //    // Play the shoot sound
+    //    audioSource.PlayOneShot(shotSound);
+
+    //    // Cast a ray and check for hits
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
+    //    {
+    //        IDamage damageable = hit.collider.GetComponent<IDamage>();
+    //        if (damageable != null && hit.transform != transform)
+    //        {
+    //            Instantiate(gunList[selectedGun].hitEffect, hit.point, gunList[selectedGun].hitEffect.transform.rotation);
+    //            damageable.takeDamage(shootDamage);
+    //        }
+    //    }
+
+    //    Vector3 recoilForce = new Vector3(-recoilAmount, 0f, 0f);
+    //    gunModel.transform.localEulerAngles += recoilForce;
+
+    //    // Smoothly return the gunModel to its original rotation
+    //    float elapsedTime = 0f;
+    //    // returnDuration time can be adjusted for smoothness
+    //    float returnDuration = 0.09f;
+    //    while (elapsedTime < returnDuration)
+    //    {
+    //        gunModel.transform.localRotation = Quaternion.Lerp(gunModel.transform.localRotation, originalRotation, elapsedTime / returnDuration);
+    //        elapsedTime += Time.deltaTime;
+    //        yield return null;
+    //    }
+
+    //    // gunModel rotation gets back to the original position
+    //    gunModel.transform.localRotation = originalRotation;
+
+    //    yield return new WaitForSeconds(gunList[selectedGun].shootRate);
+
+    //    isShooting = false;
+
+    //}
+
     //Throw Grenade: will throw a grenade based on the throwforce and lift provided. 
     //Is infinite but only 1 grenade per second can be thrown
     IEnumerator throwGrenade()
@@ -297,48 +430,24 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //throws grenade
         thrownGrenadeRb.AddForce((throwPos.transform.forward * playerThrowForce * 20) + (transform.up * throwLift), ForceMode.Impulse);
-        grenadeCooldown();
+
         //wait for throwrate, then flip bool back
         yield return new WaitForSeconds(throwRate);
         
         grenadeCD = true;
-        lastThrown = Time.time;
-        
         //isShooting = true;
 
     }
 
-    public void grenadeCooldown()
-    {
-        StartCoroutine(grenadeCountdown(maxThrowRate));
-    }
+    //public void grenadeCooldown()
+    //{
+    //    grenadeCD = true;
 
-    private IEnumerator grenadeCountdown(float cooldownTime)
-    {
-        float remainingTime = cooldownTime;
 
-        while (remainingTime >= 0)
-        {
-            remainingTime -= Time.deltaTime;
-            // start the timer
-            if (Mathf.Floor(remainingTime) != Mathf.Floor(remainingTime - Time.deltaTime))
-            {
-                
-                gameManager.instance.updateGrenadeCDText(Mathf.Floor(remainingTime).ToString());
-            }
-
-            
-
-            yield return null;
-        }
-
-        // Reset the fill amount when the cooldown is complete
-        gameManager.instance.updateGrenadeCDText("F");
-        grenadeCD = true;
-    }
+    //}
 
     //Time Slow: slows the world but not the player
-    void chronokinesis()
+ void chronokinesis()
     {
 
 
@@ -492,9 +601,56 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     public void updatePlayerUI()
     {
         gameManager.instance.updateHpBar((float)HP / _maxHP);
+
     }
 
-   
+    //Updates Stats on Player from Gun
+    //public void gunPickup(gunStats gun)
+    //{
+    //    gunList.Add(gun);
+
+    //    shootDamage = gun.shootDamage;
+    //    shootDistance = gun.shootDist;
+    //    shootRate = gun.shootRate;
+    //    shotSound = gun.shotSound;
+
+    //    //gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
+    //   // gunModel.GetComponent<Renderer>().sharedMaterial = gun.model.GetComponent<Renderer>().sharedMaterial;
+    //    gunList[selectedGun].gunMuzzle = gunMuzzle;
+
+    //    selectedGun = gunList.Count - 1;
+    //}
+
+    ////Selecting Gun Method
+    //void selectGun()
+    //{
+    //    if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
+    //    {
+    //        selectedGun++;
+    //        changeGun();
+    //        ammoUpdate();
+    //    }
+
+    //    else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+    //    {
+    //        selectedGun--;
+    //        changeGun();
+    //        ammoUpdate();
+    //    }
+    //}
+
+    //Change gun
+    //void changeGun()
+    //{
+    //    shotSound = gunList[selectedGun].shotSound;
+    //    shootDamage = gunList[selectedGun].shootDamage;
+    //    shootDistance = gunList[selectedGun].shootDist;
+    //    shootRate = gunList[selectedGun].shootRate;
+
+    //    //gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
+    //   // gunModel.GetComponent<Renderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<Renderer>().sharedMaterial;
+    //    ammoUpdate();
+    //}
 
     //method made for delaying damage for physics
     public void delayDamage(int damage, float seconds)
@@ -510,19 +666,19 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     }
 
     //Ammo Collection for weapons
-    //public void AddAmmo(AmmoType ammoType, int amount)
-    //{
-    //    string ammoTypeName = ammoType.ToString();
+    public void AddAmmo(AmmoType ammoType, int amount)
+    {
+        string ammoTypeName = ammoType.ToString();
 
-    //    if (ammoInventory.ContainsKey(ammoTypeName))
-    //    {
-    //        ammoInventory[ammoTypeName] += amount;
-    //    }
-    //    else
-    //    {
-    //        ammoInventory[ammoTypeName] = amount;
-    //    }
-    //}
+        if (ammoInventory.ContainsKey(ammoTypeName))
+        {
+            ammoInventory[ammoTypeName] += amount;
+        }
+        else
+        {
+            ammoInventory[ammoTypeName] = amount;
+        }
+    }
     //Small convenience to update ammo to HUD
     public void ammoUpdate()
     {
