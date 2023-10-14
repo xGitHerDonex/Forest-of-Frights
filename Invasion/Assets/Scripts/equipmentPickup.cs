@@ -60,7 +60,7 @@ public class equipmentPickup : MonoBehaviour
         }
     }
 
-    public void pickupEquipment()
+    public void pickupEquipment() 
     {
         switch (equipmentType)
         {
@@ -142,6 +142,7 @@ public class equipmentPickup : MonoBehaviour
 
                 {
                     antiGravStoneUI.SetActive(true);
+                    player.physics(Vector3.up);
                     break;
 
                 }
@@ -164,6 +165,7 @@ public class equipmentPickup : MonoBehaviour
             case EquipmentItem.ChronoGreaves:
                 {
                     chronoGreavesUI.SetActive(true);
+                    player.IncreasePlayerSpeed();
                     break;
                 }
 

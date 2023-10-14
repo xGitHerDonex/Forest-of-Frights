@@ -738,4 +738,18 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //{
     //    playerSpee
     //}
+
+    public void ApplyMeleeDamage(int Damage )
+    {
+        HP -= Damage;
+    }
+
+    public void IncreasePlayerSpeed()
+    {
+       playerController pc =  gameManager.instance.player.GetComponent<playerController>();
+        pc.playerSpeed = pc.playerSpeed + 10;
+        pc = null;
+        Destroy( pc );
+        
+    }
 }
