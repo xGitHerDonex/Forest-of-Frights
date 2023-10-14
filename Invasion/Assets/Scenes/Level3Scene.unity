@@ -5477,6 +5477,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1178728346996210111, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2172427234249336836, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2580079933166528048, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
       propertyPath: demonLord
       value: 
@@ -5488,6 +5496,26 @@ PrefabInstance:
     - target: {fileID: 3397902663380245158, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
       propertyPath: m_Name
       value: LevelPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397902663380245158, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3891152035910131679, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4230265177150057407, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4690842411337790470, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 346
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924076346332349529, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6975444216886233070, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5542,7 +5570,9 @@ PrefabInstance:
       value: -273.93823
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 451449974512410939, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
+    - {fileID: 1920333851413503328, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
