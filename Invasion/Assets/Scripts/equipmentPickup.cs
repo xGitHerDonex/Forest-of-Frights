@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class equipmentPickup : MonoBehaviour
@@ -142,7 +143,8 @@ public class equipmentPickup : MonoBehaviour
 
                 {
                     antiGravStoneUI.SetActive(true);
-                    player.physics(Vector3.up);
+                    
+                    
                     break;
 
                 }
@@ -165,7 +167,11 @@ public class equipmentPickup : MonoBehaviour
             case EquipmentItem.ChronoGreaves:
                 {
                     chronoGreavesUI.SetActive(true);
-                    player.IncreasePlayerSpeed();
+
+                    if (chronoGreavesUI.activeSelf == true)
+                    {
+                        player.IncreasePlayerSpeed();
+                    }
                     break;
                 }
 
