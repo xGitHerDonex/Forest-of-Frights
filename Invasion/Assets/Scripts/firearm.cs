@@ -30,8 +30,8 @@ public class firearm : MonoBehaviour
     public GameObject hitEffect;
     [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject weaponHolder;
-    [SerializeField] public TextMeshProUGUI ammoCurText;
-    [SerializeField] public TextMeshProUGUI ammoMaxText;
+    [SerializeField] public Text ammoCurText;
+    [SerializeField] public Text ammoMaxText;
 
     [SerializeField] weaponSwap _weaponSwap;
 

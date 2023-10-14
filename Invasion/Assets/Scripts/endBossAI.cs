@@ -705,7 +705,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
             }
 
-        playAttackSound();
+        
      
         yield return new WaitForSeconds(meleeDelay);
         isAttacking = false;
@@ -733,7 +733,9 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         isAttacking = true;
         yield return new WaitForSeconds(shootDelay);
         isAttacking = false;
+
         Instantiate(bullet, shootPos.position, transform.rotation);
+        playAttackSound();
 
     }
 

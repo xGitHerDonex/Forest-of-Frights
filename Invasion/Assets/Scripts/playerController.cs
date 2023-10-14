@@ -143,8 +143,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         // Time slow
         chronokinesis();
 
-        //Use Selected Gun
-        //selectGun();
+
+        //Keeps Stamina Bar updated
+        gameManager.instance.updateStamBar(Stamina / maxStamina);
+        gameManager.instance.updateChronoBar(time / maxTime);
+        gameManager.instance.updateGrenadeBar(throwRate / maxThrowRate);
 
         //Low Health Warning
         lowHealthWarning();
