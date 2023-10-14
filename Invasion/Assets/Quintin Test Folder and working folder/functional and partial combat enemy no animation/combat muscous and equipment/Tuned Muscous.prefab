@@ -73,8 +73,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5277916927173925128}
-  - component: {fileID: 2661336722216647293}
-  - component: {fileID: 4433682087692740031}
   m_Layer: 0
   m_Name: Muscomorph_Tail_8
   m_TagString: Untagged
@@ -97,52 +95,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8309504750125954473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2661336722216647293
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 913318349558185194}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.125
-  m_Height: 0.125
-  m_Direction: 2
-  m_Center: {x: -0.37, y: -0.25, z: 0}
---- !u!136 &4433682087692740031
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 913318349558185194}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.125
-  m_Height: 0.125
-  m_Direction: 2
-  m_Center: {x: -0.37, y: -0.25, z: 0}
 --- !u!1 &942864341323652396
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +844,37 @@ Transform:
   - {fileID: 1326133508078785516}
   m_Father: {fileID: 5551781025330867754}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4246028796674689824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1489927819938922126}
+  m_Layer: 0
+  m_Name: headPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1489927819938922126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4246028796674689824}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.99997103, z: -0, w: -0.00761417}
+  m_LocalPosition: {x: -0.007, y: 0.617, z: 0.424}
+  m_LocalScale: {x: 0.9999999, y: 1, z: 0.9999999}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5041258182030931579}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4799388204222384264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,7 +1096,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2634426502142287967}
   - component: {fileID: 4853124194980825087}
-  - component: {fileID: 5915797331624276560}
   m_Layer: 0
   m_Name: SK_MuscomorphTail
   m_TagString: Untagged
@@ -1197,29 +1179,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.06457117, y: -0.47538197, z: 0.00000017881393}
     m_Extent: {x: 0.62781596, y: 0.6650512, z: 0.11968022}
   m_DirtyAABB: 0
---- !u!136 &5915797331624276560
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5653507408045999326}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.11
-  m_Height: 0.69
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5662933902063091647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,8 +2056,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5041258182030931579}
   - component: {fileID: 9136311199718026893}
-  - component: {fileID: 3797521813177972475}
   - component: {fileID: 2752212056319326661}
+  - component: {fileID: 3797521813177972475}
   - component: {fileID: 2585370830409506171}
   - component: {fileID: 3403661694220850100}
   m_Layer: 7
@@ -2129,6 +2088,7 @@ Transform:
   - {fileID: 4317719230564945910}
   - {fileID: 8745771264754369023}
   - {fileID: 5479301543483285391}
+  - {fileID: 1489927819938922126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180.873, z: 0}
 --- !u!114 &9136311199718026893
@@ -2145,15 +2105,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 2287538273054911919}
   shootPos: {fileID: 4251964525271386381}
-  headPos: {fileID: 3172272233930398995}
-  hitBox: {fileID: 3403661694220850100}
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  headPos: {fileID: 1489927819938922126}
+  hitBox: {fileID: 2752212056319326661}
+  waypoints: []
   hp: 5
   targetFaceSpeed: 3
   viewAngle: 360
-  roamDistance: 31
+  roamDistance: 50
   roamPauseTime: 1
   animeSpeedChange: 5
   bullet: {fileID: 4635538419760109935, guid: 04648627c9a99c04ba8df41de474da10, type: 3}
@@ -2163,27 +2121,6 @@ MonoBehaviour:
   attackSound: {fileID: 0}
   deathSound: {fileID: 8300000, guid: 7df0364dd13da374c8d957aaa1013f9f, type: 3}
   stopMovingTime: 0.75
---- !u!95 &3797521813177972475
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8388604507495137935}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 85f1ce7badb613040b0c9e4a88522f7c, type: 3}
-  m_Controller: {fileID: 9100000, guid: e0fe3ffbc90c3c242a8117ad4c924eba, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!136 &2752212056319326661
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2207,6 +2144,27 @@ CapsuleCollider:
   m_Height: 1.5620042
   m_Direction: 1
   m_Center: {x: 0, y: 0.75, z: -0.20119601}
+--- !u!95 &3797521813177972475
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8388604507495137935}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 85f1ce7badb613040b0c9e4a88522f7c, type: 3}
+  m_Controller: {fileID: 9100000, guid: e0fe3ffbc90c3c242a8117ad4c924eba, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!195 &2585370830409506171
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2216,7 +2174,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8388604507495137935}
   m_Enabled: 1
   m_AgentTypeID: 1479372276
-  m_Radius: 3
+  m_Radius: 1.04
   m_Speed: 6
   m_Acceleration: 7
   avoidancePriority: 50
@@ -2225,7 +2183,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 4
+  m_Height: 1.96
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -2248,8 +2206,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 40
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 2
+  m_Center: {x: -0.12, y: 0.65, z: 0}
 --- !u!1 &8439107435038480341
 GameObject:
   m_ObjectHideFlags: 0
