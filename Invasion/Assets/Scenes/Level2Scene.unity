@@ -16751,6 +16751,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 393568009681118338, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 393568009681118338, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 839605716103851090, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 839605716103851090, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 1167626509339090603, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: throwRate
       value: 5
@@ -16807,6 +16823,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3007997565425338650, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3026497911479946384, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -16835,12 +16855,36 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4252785301796056029, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 4252785301796056029, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 4904081637720529637, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589669205537132237, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 5589669205537132237, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 6761779283537249388, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 6937821870228290612, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147101735352789288, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7590227657355935379, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
@@ -16887,6 +16931,10 @@ PrefabInstance:
       propertyPath: m_FillClockwise
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8102546959524412394, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8435680789291769014, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: controlsMenuActive
@@ -16895,8 +16943,13 @@ PrefabInstance:
       propertyPath: near clip plane
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8991096266005041034, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7147101735352789288, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4facc38a3c7ea3948a23890d2e66cb65, type: 3}
