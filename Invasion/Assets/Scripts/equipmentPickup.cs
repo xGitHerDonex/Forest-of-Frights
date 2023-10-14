@@ -77,11 +77,22 @@ public class equipmentPickup : MonoBehaviour
             case EquipmentItem.CrimsonStone: 
 
                 {
-                    player.ApplyPermanentStatBoost(10);
+                    player.ApplyPermanentHPBoost(50);
                     crimsonStoneUI.SetActive(true);
                     break;
                 }
 
+
+            case EquipmentItem.ChronoGreaves:
+                {
+                    chronoGreavesUI.SetActive(true);
+
+                    if (chronoGreavesUI.activeSelf == true)
+                    {
+                        player.IncreasePlayerSpeed();
+                    }
+                    break;
+                }
 
             case EquipmentItem.TemporalRelic:
 
@@ -164,16 +175,7 @@ public class equipmentPickup : MonoBehaviour
                 }
 
 
-            case EquipmentItem.ChronoGreaves:
-                {
-                    chronoGreavesUI.SetActive(true);
 
-                    if (chronoGreavesUI.activeSelf == true)
-                    {
-                        player.IncreasePlayerSpeed();
-                    }
-                    break;
-                }
 
 
             case EquipmentItem.PowerInfusor:
