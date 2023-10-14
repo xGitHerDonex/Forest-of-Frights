@@ -36,6 +36,7 @@ public class buttonFunctions : MonoBehaviour
     public void resume()
     {
         gameManager.instance.unPause();
+   
     }
 
     
@@ -80,9 +81,20 @@ public class buttonFunctions : MonoBehaviour
 
     }
 
-    ////Runs startGame in Game manager  [[Temporarily disabled for Prototype 2]]
-    //public void begin()
-    //{
-    //    gameManager.instance.beginGame();
-    //}
+    public void controlsMenuActive()
+    {
+
+            gameManager.instance.setControlsMenuActive();
+
+
+    }
+    public void controlsMenuDisabled()
+    {
+
+        gameManager.instance.setControlsMenuActive(false);
+
+
+    }
+
 }
+

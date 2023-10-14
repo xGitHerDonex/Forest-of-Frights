@@ -40,9 +40,10 @@ public class gameManager : MonoBehaviour
 
     [Header("-----Menus-----")]
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
-    [SerializeField] GameObject pauseMenu;         // Pause Menu
+    public GameObject pauseMenu;         // Pause Menu
     [SerializeField] GameObject winMenu;           // Win Menu
     [SerializeField] GameObject loseMenu;          // Lose Menu
+    [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject inventoryMenu;    // Inventory Menu
     [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
    
@@ -78,7 +79,7 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
-
+        isPaused = false;
     
        
     }
@@ -112,6 +113,7 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined; //confine cursor
         isPaused = !isPaused; // flip pool for isPaused
         reticle.SetActive(false);
+        
 
     }
 
@@ -122,7 +124,7 @@ public class gameManager : MonoBehaviour
         Cursor.visible = false; // hide cursor
         Cursor.lockState = CursorLockMode.Locked; //lock cursor
         isPaused = !isPaused; // flip isPaused bool
-        currentMenu.SetActive(isPaused); // set Pause Menu as current window;
+        currentMenu.SetActive(false); // set Pause Menu as current window;
         currentMenu = null;  // remove window
         reticle.SetActive(true); // Adds reticle back on screen
 
@@ -202,6 +204,21 @@ public class gameManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         checkPointMenu.SetActive(false);
     }
+
+    public void setControlsMenuActive(bool active = true)
+    {
+        if (active)
+        {
+            controlsMenu.SetActive(true);
+        }
+
+        else
+        {
+            controlsMenu.SetActive(false);
+        }
+
+    }
+
 
 }
 
