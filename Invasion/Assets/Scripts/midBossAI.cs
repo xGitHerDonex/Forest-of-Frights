@@ -438,6 +438,7 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         else if (combo == 4)
             anime.SetTrigger("Melee4");
 
+        playAttackSound();
 
     yield return new WaitForSeconds(meleeDelay);
         isAttacking = false;
