@@ -88,6 +88,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     int selectedGun;
     public bool hasEnergeticRing = false;
     public bool hasSynthesizer = false;
+    public bool grenadeCD = true;
 
     //Player Buff Checks
     [SerializeField] float regenStaminaBuffAmount;
@@ -150,13 +151,14 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 70, Color.green);
 
         //Throw grenade - works similar to shoot    
-        if (Input.GetButtonDown("throw") && !isShooting && !gameManager.instance.isPaused)
+        if (Input.GetButtonDown("throw") && !isShooting && grenadeCD && !gameManager.instance.isPaused)
         {
             // Check if the "Shoot" button is also pressed, and if so, do not throw the grenade
             if (!Input.GetButton("Shoot"))
             {
                 // Start the throwGrenade coroutine
                 StartCoroutine(throwGrenade());
+                grenadeCD = false;
             }
         }
 
@@ -426,6 +428,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //wait for throwrate, then flip bool back
         yield return new WaitForSeconds(throwRate);
+        grenadeCD = true;
         //isShooting = true;
 
     }

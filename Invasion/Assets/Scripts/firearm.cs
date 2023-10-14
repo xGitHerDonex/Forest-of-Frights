@@ -17,6 +17,7 @@ public class firearm : MonoBehaviour
     public float reloadTime = 1f;
     public float specialReload = 1f;
     private bool isReloading = false;
+    private bool manualReload = false;
     
 
     public Camera shootCam;
@@ -61,9 +62,10 @@ public class firearm : MonoBehaviour
         if (isReloading)
             return;
 
-        if (currentAmmo <= 0)
+        if (currentAmmo <= 0 || manualReload)
         {
             StartCoroutine(Reload());
+            manualReload = false;
             return;
         }
 
@@ -77,6 +79,11 @@ public class firearm : MonoBehaviour
         {
             nextShot = Time.time + 1f / specialRate;
             Special();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            manualReload = true;
         }
     }
     public void Shoot()
