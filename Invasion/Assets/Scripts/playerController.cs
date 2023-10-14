@@ -33,16 +33,9 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     //Player basic shooting
     [Header("-----Gun Stats------")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>();
-    //[SerializeField] GameObject gunModel;
     [SerializeField] Transform gunMuzzle;
-    //[SerializeField] float shootRate;
-    //[SerializeField] int shootDamage;
     [SerializeField] int shootDistance;
     [SerializeField] AudioClip shotSound;
-
-    // Railgun Unique
-    //[SerializeField] GameObject Railgun;
-    //[SerializeField] GameObject Railbeam;
 
     //Grenades
     [Header("-----Grenade Stats------")]
@@ -132,11 +125,6 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         //Sets player speed
         originalPlayerSpeed = playerSpeed;
        
-
-        // Creates the total ammo capacity for weapons
-        //ammoInventory["Pistol Ammo"] = 100;
-        //ammoInventory["Railgun Ammo"] = 30;
-
         //Create Ground Waypoint Matrix
         waypoints = GameObject.FindGameObjectsWithTag("GNDWP");
 
@@ -158,12 +146,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
         //Low Health Warning
         lowHealthWarning();
-      
 
-        //Call to shoot
-        //Expanded on this line to prevent the player from shooting during the pause menu (see gameManager bool)
-        //if (!gameManager.instance.isPaused && gunList.Count > 0 && Input.GetButton("Shoot") && !isShooting)
-        //    StartCoroutine(shoot());
+        //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 70, Color.green);
 
         //Throw grenade - works similar to shoot    
         if (Input.GetButtonDown("throw") && !isShooting && !gameManager.instance.isPaused)
@@ -293,52 +277,51 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     //}
 
+
+   
     void sprint()
     {
         float moveMagnitude = move.magnitude;
-        if (hasEnergeticRing ==true)
+
+        float deltaSprint = sprintCost * Time.deltaTime;
+
+        if (hasEnergeticRing)
         {
             sprintCost = 0.5f;
         }
         else
             sprintCost = 1.0f;
 
-        if (Input.GetButton("Sprint") && canSprint && !isTimeSlowed && moveMagnitude >= 0.1)
+
+        if (!gameManager.instance.isPaused && !isTimeSlowed && Input.GetButton("Sprint") && Stamina >= deltaSprint && canSprint)
         {
-            // Check if there's enough stamina to sprint
-            if (Stamina >= (sprintCost * Time.deltaTime))
-            {
-                // Increase player run speed by 5
-                playerSpeed = originalPlayerSpeed + 5;
-                playerSpeed = originalPlayerSpeed + addSprintMod;
-                Stamina -= sprintCost * Time.deltaTime;
-            }
-            else
-            {
-                canSprint = false;
-                playerSpeed = originalPlayerSpeed;
-            }
+               playerSpeed = originalPlayerSpeed + addSprintMod;
+                Stamina -= deltaSprint;
         }
+
+
         else
         {
             if (Stamina < maxStamina)
             {
-                float regenAmount = regenStamina * Time.deltaTime;
-                Stamina = Mathf.Clamp(Stamina + regenAmount, 0, maxStamina);
+                Stamina += regenStamina * Time.deltaTime;
             }
+      
+           playerSpeed = originalPlayerSpeed;
 
-            if (Stamina >= 4.0f)
-            {
-                canSprint = true;
-
-                if (!isTimeSlowed)
-                    playerSpeed = originalPlayerSpeed;
-            }
-            else
-            {
-                playerSpeed = originalPlayerSpeed;
-            }
         }
+
+        if (Stamina <= deltaSprint)
+        {
+            StartCoroutine(outOfBreath());
+        }
+    }
+
+    IEnumerator outOfBreath()
+    {
+        canSprint = false;
+        yield return new WaitForSeconds(2);
+        canSprint = true;
     }
 
 
@@ -464,11 +447,11 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             ////time = time - Time.deltaTime; 
             #endregion
 
-            if(Time.timeScale == 1)
-            {
+            //if(Time.timeScale == 1)
+            //{
                 TimeSlowed();
 
-            }
+            //}
 
 
         }
@@ -485,22 +468,23 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     {
         isTimeSlowed = false;
         Time.timeScale = 1f;
-        playerSpeed = originalPlayerSpeed;
+        //playerSpeed = originalPlayerSpeed;
 
 
         if (time <= maxTime && !isTimeSlowed)
         {
-            //time += regenTime * Time.deltaTime;
-            time += regenTime * (this.fixedDeltaTime * Time.timeScale);
+            time += regenTime * Time.deltaTime;
 
         }
     }
 
     private void TimeSlowed()
     {
+        isTimeSlowed = true;
         Time.timeScale = .5f;
         Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
-        playerSpeed = originalPlayerSpeed * Time.fixedDeltaTime * .5f;
+        playerSpeed = originalPlayerSpeed;
+        time = time - (Time.deltaTime/2);
     }
 
     //
