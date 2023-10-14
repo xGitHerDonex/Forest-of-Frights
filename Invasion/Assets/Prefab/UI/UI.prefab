@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 5898426241997095914}
   - component: {fileID: 7426191172695694065}
   m_Layer: 0
-  m_Name: NInfPH
+  m_Name: Frag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3762,7 +3762,7 @@ GameObject:
   - component: {fileID: 5029948485987963590}
   - component: {fileID: 4365788971325270392}
   m_Layer: 0
-  m_Name: Nano Infusor
+  m_Name: Frag Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3992,7 +3992,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3474873393846320938
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4008,19 +4008,19 @@ RectTransform:
   - {fileID: 9103546496070462955}
   - {fileID: 2554820567967895580}
   - {fileID: 5962890665968128415}
-  - {fileID: 8155130446293146165}
   - {fileID: 6689768420059416908}
+  - {fileID: 8627566754332777732}
+  - {fileID: 5421322602563677065}
+  - {fileID: 6415608050695226960}
+  - {fileID: 9084709509843018217}
+  - {fileID: 8155130446293146165}
   - {fileID: 7314910807011583535}
   - {fileID: 6660875091884252917}
   - {fileID: 7396158709973719857}
   - {fileID: 4356204254294116990}
-  - {fileID: 6415608050695226960}
   - {fileID: 1571990134735954539}
-  - {fileID: 8627566754332777732}
-  - {fileID: 9084709509843018217}
   - {fileID: 8825720422764230997}
   - {fileID: 7435857607384626009}
-  - {fileID: 5421322602563677065}
   - {fileID: 5650016685030068590}
   - {fileID: 7487374626757792983}
   - {fileID: 2020906882395066777}
@@ -5616,7 +5616,7 @@ GameObject:
   - component: {fileID: 1980900835903881116}
   - component: {fileID: 1073359922278342242}
   m_Layer: 0
-  m_Name: Anti-Grav Stone TT
+  m_Name: Chronokinesis TT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5669,7 +5669,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: -1 Gravity Effect
+  m_text: Chronokinesis.  Ability to slow down time
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6319,7 +6319,7 @@ GameObject:
   - component: {fileID: 8972377889857174485}
   - component: {fileID: 6930724476769980553}
   m_Layer: 0
-  m_Name: Anti-Grav Stone
+  m_Name: Chronokinesis Img
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6676,7 +6676,7 @@ GameObject:
   - component: {fileID: 3591952509552511440}
   - component: {fileID: 2413283210753099940}
   m_Layer: 0
-  m_Name: AStonePH
+  m_Name: Chronokinesis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11774,7 +11774,7 @@ GameObject:
   - component: {fileID: 4147092155777402699}
   - component: {fileID: 331321000257454267}
   m_Layer: 0
-  m_Name: Nano Infusor TT
+  m_Name: Frag Grenade TT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11797,7 +11797,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 123.00004, y: -246.60007}
-  m_SizeDelta: {x: 400, y: 50}
+  m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4147092155777402699
 CanvasRenderer:
@@ -11827,7 +11827,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: +1 Health Regen
+  m_text: Frag Grenade.  Lethal when thrown
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
