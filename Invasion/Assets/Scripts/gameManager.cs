@@ -25,7 +25,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] Image playerStamBar;
     //[SerializeField] Image playerRightStamBar;
     [SerializeField] Image playerChronoBar;
-    [SerializeField] Image playerGrenadeBar;
+    [SerializeField] TextMeshProUGUI grenadeCDText;
 
 
     [SerializeField] GameObject reticle;
@@ -52,8 +52,8 @@ public class gameManager : MonoBehaviour
     public bool isPaused;
 
     [Header("-----SFX-----")]
-    [SerializeField] AudioSource natureSoundSource;
-    [SerializeField] AudioClip natureSounds;
+    //[SerializeField] AudioSource natureSoundSource;
+    //[SerializeField] AudioClip natureSounds;
 
     [Header("----Accessible Values-----")]
     [Range(1, 5)] public int explosionDamage;
@@ -69,13 +69,13 @@ public class gameManager : MonoBehaviour
 
         player.transform.position = playerSpawnPos.transform.position;
         //Adds some ambience
-        if (natureSoundSource != null && natureSounds != null)
-        {
-            natureSoundSource.clip = natureSounds;
-            natureSoundSource.loop = true;
-            natureSoundSource.Play();
-        }
-
+        //if (natureSoundSource != null && natureSounds != null)
+        //{
+        //    natureSoundSource.clip = natureSounds;
+        //    natureSoundSource.loop = true;
+        //    natureSoundSource.Play();
+        //}
+        playerScript.gameManager = this;
     }
 
     private void Start()
@@ -171,9 +171,19 @@ public class gameManager : MonoBehaviour
 
     }
 
-    public void updateGrenadeBar(float amount)
+    public void updateGrenadeCDText(string text)
     {
-        playerGrenadeBar.fillAmount = amount;
+        // if its F, it should show green to signal the player
+        if (text == "F")
+        {
+            
+            grenadeCDText.text = "<color=green>" + text + "</color>";
+        }
+        else
+        {
+            // if its counting down, it should show the default orange
+            grenadeCDText.text = text;
+        }
     }
 
     //Flash the screen when player gets damaged
