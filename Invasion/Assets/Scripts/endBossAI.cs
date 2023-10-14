@@ -704,7 +704,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                     break;
 
             }
-   
+
+        playAttackSound();
      
         yield return new WaitForSeconds(meleeDelay);
         isAttacking = false;
