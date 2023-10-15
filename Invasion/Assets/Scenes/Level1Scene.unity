@@ -2941,6 +2941,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9134113252509487093, guid: 5a5320fbbc44a0841920a9ad73847758, type: 3}
+      propertyPath: m_Radius
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24550,14 +24554,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tuned Muscous (27)
       objectReference: {fileID: 0}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 671519135}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 1266388151}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24620,66 +24616,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tuned Muscous (23)
       objectReference: {fileID: 0}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: roamDistance
-      value: 69
-      objectReference: {fileID: 0}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: roamPauseTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 1832217784}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 1137365947}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[2]
-      value: 
-      objectReference: {fileID: 1759773094}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[3]
-      value: 
-      objectReference: {fileID: 1513096230}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[4]
-      value: 
-      objectReference: {fileID: 23455363}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[5]
-      value: 
-      objectReference: {fileID: 387420762}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[6]
-      value: 
-      objectReference: {fileID: 237475887}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[7]
-      value: 
-      objectReference: {fileID: 363447544}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[8]
-      value: 
-      objectReference: {fileID: 414304940}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[9]
-      value: 
-      objectReference: {fileID: 1954392722}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[10]
-      value: 
-      objectReference: {fileID: 2081219384}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[11]
-      value: 
-      objectReference: {fileID: 366151891}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -28527,6 +28463,10 @@ PrefabInstance:
     - target: {fileID: 4844162970028595330, guid: b96c2420e41b2e242a41f9144c672e74, type: 3}
       propertyPath: m_Acceleration
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844162970028595330, guid: b96c2420e41b2e242a41f9144c672e74, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -35179,66 +35119,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tuned Muscous (59)
       objectReference: {fileID: 0}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: roamDistance
-      value: 69
-      objectReference: {fileID: 0}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: roamPauseTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 1832217784}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 1137365947}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[2]
-      value: 
-      objectReference: {fileID: 1759773094}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[3]
-      value: 
-      objectReference: {fileID: 1513096230}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[4]
-      value: 
-      objectReference: {fileID: 23455363}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[5]
-      value: 
-      objectReference: {fileID: 387420762}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[6]
-      value: 
-      objectReference: {fileID: 237475887}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[7]
-      value: 
-      objectReference: {fileID: 363447544}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[8]
-      value: 
-      objectReference: {fileID: 414304940}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[9]
-      value: 
-      objectReference: {fileID: 1954392722}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[10]
-      value: 
-      objectReference: {fileID: 2081219384}
-    - target: {fileID: 9136311199718026893, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
-      propertyPath: waypoints.Array.data[11]
-      value: 
-      objectReference: {fileID: 366151891}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -46331,6 +46211,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2030784710}
     m_Modifications:
+    - target: {fileID: 2585370830409506171, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5041258182030931579, guid: 2b7691bb4ee9635478ce2ca1c355513b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 462.50003
