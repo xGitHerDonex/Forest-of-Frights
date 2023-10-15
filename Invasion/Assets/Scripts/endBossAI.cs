@@ -814,7 +814,8 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     //Used for when player dies - resets boss and destorys relevant objects
     public void resetFight()
     {
-        transform.position = startingPos;
+        agent.SetDestination(startingPos);
+
         GameObject[] bossSpawns = GameObject.FindGameObjectsWithTag("artho");
         GameObject[] healthOrbs = GameObject.FindGameObjectsWithTag("healthOrb");
 
