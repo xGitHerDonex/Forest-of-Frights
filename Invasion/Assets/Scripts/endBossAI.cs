@@ -815,7 +815,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     public void resetFight()
     {
         GameObject[] bossSpawns = GameObject.FindGameObjectsWithTag("artho");
-        GameObject[] healthOrbs = GameObject.FindGameObjectsWithTag("healthOrbs");
+        GameObject[] healthOrbs = GameObject.FindGameObjectsWithTag("healthOrb");
 
         foreach (GameObject enemy in bossSpawns)
         {
@@ -838,6 +838,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            hitBox.enabled = true;
 
         }
     }

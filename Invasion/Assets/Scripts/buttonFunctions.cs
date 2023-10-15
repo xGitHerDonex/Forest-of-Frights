@@ -70,7 +70,10 @@ public class buttonFunctions : MonoBehaviour
 
         }
 
-        respawnPlayer();
+        else
+        {
+            respawnPlayer();
+        }
 
 
 
