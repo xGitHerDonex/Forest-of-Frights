@@ -4693,7 +4693,7 @@ PrefabInstance:
     - target: {fileID: 5723125313800939450, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 6312046575337969148, guid: c57d25f09f6f23e40bd17c3b3b097888, type: 3}
+      objectReference: {fileID: 6312046575337969148, guid: 26b4edf488043cc48abb31c91f4f09cc, type: 3}
     - target: {fileID: 5723125313800939450, guid: 389aa060e7ba7304485e23cd9f6c10ab, type: 3}
       propertyPath: spawnRate
       value: 1
@@ -8915,6 +8915,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demon Lord
       objectReference: {fileID: 0}
+    - target: {fileID: 884292984102214125, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576755904453881166, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: airTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4825752165692352313, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 177.1
@@ -8953,6 +8961,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825752165692352313, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5210883362826208591, guid: f75d06a52ccb8374bb74f82eac95e86d, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
