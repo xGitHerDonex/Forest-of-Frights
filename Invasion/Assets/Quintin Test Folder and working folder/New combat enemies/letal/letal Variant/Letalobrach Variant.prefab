@@ -385,6 +385,8 @@ MonoBehaviour:
   headPos: {fileID: 2334285695117143708}
   hitBox: {fileID: 1237293416327186468}
   healthOrb: {fileID: 2309197827884873162, guid: f5641ff499fd83c4792bc3142c2b65b6, type: 3}
+  doorTrigger: {fileID: 0}
+  doorTrigger2: {fileID: 0}
   waypoints: []
   hp: 71
   targetFaceSpeed: 3
@@ -393,8 +395,8 @@ MonoBehaviour:
   roamPauseTime: 3
   animeSpeedChange: 1
   bullet: {fileID: 4635538419760109935, guid: fa4f4ebee593b254aa0217924451d556, type: 3}
-  shootAngle: 45
-  shootRate: 1
+  shootAngle: 90
+  shootRate: 0.8
   audioSource: {fileID: -4345596070647429949}
   walkSound: {fileID: 8300000, guid: e6015690bab79a347997c4d0517f5b9d, type: 3}
   attackSound: {fileID: 0}
@@ -433,7 +435,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -902729914
   m_Radius: 4
-  m_Speed: 1
+  m_Speed: 25
   m_Acceleration: 2
   avoidancePriority: 50
   m_AngularSpeed: 30

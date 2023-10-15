@@ -386,9 +386,10 @@ MonoBehaviour:
   hitBox: {fileID: 1237293416327186468}
   healthOrb: {fileID: 2309197827884873162, guid: f5641ff499fd83c4792bc3142c2b65b6, type: 3}
   doorTrigger: {fileID: 0}
+  doorTrigger2: {fileID: 0}
   waypoints: []
   hp: 55
-  targetFaceSpeed: 2
+  targetFaceSpeed: 4
   viewAngle: 360
   roamDistance: 75
   roamPauseTime: 0
@@ -575,7 +576,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -902729914
   m_Radius: 4
-  m_Speed: 18
+  m_Speed: 25
   m_Acceleration: 4
   avoidancePriority: 50
   m_AngularSpeed: 65
