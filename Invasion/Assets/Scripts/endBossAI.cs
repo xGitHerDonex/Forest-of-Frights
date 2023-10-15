@@ -127,7 +127,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     float distToPlayer;
     float angleToPlayer;
     bool isDead;
-    bool isPlayerInRange;
+    bool playerInRange;
     playerController playerScript;
     float stoppingDistOriginal;
     Vector3 pushBack;
@@ -178,7 +178,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     // Update is called once per frame
     void Update()
     {
-        if (!isDead && finalCheckpointActivated)
+        if (!isDead && finalCheckpointActivated && playerInRange)
         {
 
             //Check HP levels
@@ -823,5 +823,27 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         hurtBaddies(explosionDamage);
     }
 
+    public void resetFight()
+    {
+        GameObject[] bossSpawns = GameObject.FindGameObjectsWithTag("artho");
+
+        foreach (GameObject enemy in bossSpawns)
+        {
+            Destroy(enemy);
+        }
+        hp = maxHp;
+        transform.position = startingPos;
+
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+
+        }
+    }
 
 }

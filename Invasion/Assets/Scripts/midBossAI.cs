@@ -514,5 +514,13 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
         }
     }
 
+    public void resetFight()
+    {
+        hp = maxHp;
+        transform.position = startingPos;
+        playerInRange = false;
+    }
+
+
     
 }

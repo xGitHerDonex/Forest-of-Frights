@@ -32,7 +32,9 @@ public class gameManager : MonoBehaviour
 
 
     [Header("-----Game Goal-----")]
-    [SerializeField] GameObject demonLord;
+    [SerializeField] GameObject demonLordGameObject;
+    public endBossAI demonLord;
+    public midBossAI goro;
     public bool midBoss;
     public bool endBoss;
     public checkPoint midBossCP;
@@ -47,7 +49,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject inventoryMenu;    // Inventory Menu
     [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
-   
+
 
     public bool isPaused;
 
@@ -90,8 +92,8 @@ public class gameManager : MonoBehaviour
     private void Start()
     {
         isPaused = false;
-    
-       
+
+
     }
 
     void Update()
@@ -123,7 +125,7 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined; //confine cursor
         isPaused = !isPaused; // flip pool for isPaused
         reticle.SetActive(false);
-        
+
 
     }
 
@@ -161,7 +163,7 @@ public class gameManager : MonoBehaviour
     //When called updates the fill level of the Hp Bar
     public void updateHpBar(float amount)
     {
-       playerHpBar.fillAmount = amount;
+        playerHpBar.fillAmount = amount;
 
     }
 
@@ -219,7 +221,7 @@ public class gameManager : MonoBehaviour
     public void activateBoss()
     {
         midBoss = true;
-        demonLord.SetActive(true);
+        demonLordGameObject.SetActive(true);
     }
 
 
@@ -243,6 +245,17 @@ public class gameManager : MonoBehaviour
         }
 
     }
+
+    public void restartMidBoss()
+    {
+        goro.resetFight();
+    }
+
+    public void restartEndBoss()
+    {
+        demonLord.resetFight();
+    }
+
 
 
 }
