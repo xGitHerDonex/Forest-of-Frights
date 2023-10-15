@@ -1,8 +1,3 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using System.Threading;
 using UnityEngine;
 
 public class explosion : MonoBehaviour
@@ -18,20 +13,20 @@ public class explosion : MonoBehaviour
 
     }
     //Lecture Code 9-8-23 if Iphysics is attached to the other collider then multiply the explosion amount to the transm=form normalized between 0-1
-   void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
 
         ProcessDamage(other);
 
     }
 
- public void BombsAway()
-        {
-            Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
-            Destroy(gameObject, destroyTime);
-        }
+    public void BombsAway()
+    {
+        Instantiate(explosionEffect, transform.position, explosionEffect.transform.rotation);
+        Destroy(gameObject, destroyTime);
+    }
 
-    public void ProcessDamage(Collider other )
+    public void ProcessDamage(Collider other)
     {
         if (other.isTrigger)
             return;
