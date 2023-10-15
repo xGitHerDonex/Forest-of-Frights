@@ -1038,9 +1038,11 @@ MonoBehaviour:
   playerStam: {fileID: 8295725633111721808}
   playerStamBar: {fileID: 9177057736801863376}
   playerChronoBar: {fileID: 307254033199917483}
-  playerGrenadeBar: {fileID: 0}
+  grenadeCDText: {fileID: 0}
   reticle: {fileID: 5287922795987789643}
+  demonLordGameObject: {fileID: 0}
   demonLord: {fileID: 0}
+  goro: {fileID: 0}
   midBoss: 0
   endBoss: 0
   midBossCP: {fileID: 0}
@@ -2330,12 +2332,12 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7481356020700348831}
+  - {fileID: 9130752318606679622}
   - {fileID: 2960829008965377708}
   - {fileID: 1775127794165172359}
   - {fileID: 7023755002842426838}
-  - {fileID: 9130752318606679622}
   - {fileID: 5116345729770088769}
-  - {fileID: 7481356020700348831}
   - {fileID: 1081485143231099698}
   - {fileID: 3474873393846320938}
   - {fileID: 8715327453817300871}
@@ -3993,7 +3995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3474873393846320938
 RectTransform:
   m_ObjectHideFlags: 0

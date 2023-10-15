@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class mainMenu : MonoBehaviour
 {
     [SerializeField] GameObject controlsPanel;
+    [SerializeField] GameObject creditsPanel;
 
     public void OnPlayButton()
     {
@@ -29,4 +30,13 @@ public class mainMenu : MonoBehaviour
         controlsPanel.SetActive(false);  
     }
 
+    public void showCredits()
+    {
+        creditsPanel.SetActive(true);
+    }
+
+    public void closeCredits()
+    {
+        creditsPanel.SetActive(false);
+    }
 }

@@ -55,22 +55,21 @@ public class buttonFunctions : MonoBehaviour
         //if mid boss is dead
         if (gameManager.instance.midBoss)
         {
- 
-            SceneManager.LoadScene(5);
+
+            gameManager.instance.restartEndBoss();
       
                   
         }
 
         else if (midBossCP.isTriggered) 
-        {
-            SceneManager.LoadScene(4);
+        {         
+            gameManager.instance.restartMidBoss();
+
+     
         }
 
+        respawnPlayer();
 
-        else
-        {
-            respawnPlayer();
-        }
 
     }
 
