@@ -280,7 +280,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     {
         isShooting = true;
         playAttackSound();      
-        if(agent.remainingDistance > 7 && playerInRange)
+        if(agent.remainingDistance >= stoppingDistOriginal && playerInRange)
         {
             //SphereCollider temp = new SphereCollider();
             //temp.radius = 5f;
@@ -294,19 +294,19 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         Instantiate(bullet, shootPos.position, transform.rotation);
         isShooting = false;
         }
-         else if(agent.remainingDistance < 7 && playerInRange)
-        {
-            anime.SetBool("isMelee", true);
-            anime.SetBool("isRanged", false);
-            anime.SetBool("isLanding", true);
+        // else if(agent.remainingDistance < 7 && playerInRange)
+        //{
+        //    anime.SetBool("isMelee", true);
+        //    anime.SetBool("isRanged", false);
+        //    anime.SetBool("isLanding", true);
 
-            anime.SetTrigger("Shoot");
-            //Used to add delay to the shoot to match the animation
-            //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
-            yield return new WaitForSeconds(shootRate);
-            Instantiate(bullet, shootPos.position, transform.rotation);
-            isShooting = false;
-        }
+        //    anime.SetTrigger("Shoot");
+        //    //Used to add delay to the shoot to match the animation
+        //    //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
+        //    yield return new WaitForSeconds(shootRate);
+        //    Instantiate(bullet, shootPos.position, transform.rotation);
+        //    isShooting = false;
+        //}
   
     }
 
