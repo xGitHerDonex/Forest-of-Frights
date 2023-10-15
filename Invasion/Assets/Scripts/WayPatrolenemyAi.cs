@@ -21,6 +21,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Collider hitBox;
     [SerializeField] GameObject healthOrb;
     [SerializeField] public doorOpenTrigger doorTrigger;
+    [SerializeField] public doorOpenTrigger doorTrigger2;
     //public spawner whereISpawned;
 
     [Tooltip("waypoints must be set")]
@@ -248,6 +249,11 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             {
                 doorTrigger.isSwitchActivated = true;
                 doorTrigger.ActivateSwitch();
+            }
+            if (doorTrigger2 != null)
+            {
+                doorTrigger2.isSwitchActivated = true;
+                doorTrigger2.ActivateSwitch();
             }
 
             // Turn out the lights! (When the enemy dies)
