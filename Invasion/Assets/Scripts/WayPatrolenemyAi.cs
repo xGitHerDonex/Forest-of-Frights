@@ -20,6 +20,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     protected Animator anime;
     [SerializeField] Collider hitBox;
     [SerializeField] GameObject healthOrb;
+    [SerializeField] public doorOpenTrigger doorTrigger;
     //public spawner whereISpawned;
 
     [Tooltip("waypoints must be set")]
@@ -237,11 +238,16 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
             // Random chance to drop a health orb
             float randomChance = Random.Range(0f, 100f);
-            if (randomChance >= 20f && randomChance <= 100f)
+            if (randomChance >= 0f && randomChance <= 13f)
             {
                 Instantiate(healthOrb, transform.position + (Vector3.up * 1) + (Vector3.left * 2), transform.rotation);
             }
 
+            if (doorTrigger != null)
+            {
+                doorTrigger.isSwitchActivated = true;
+                doorTrigger.ActivateSwitch();
+            }
 
             // Turn out the lights! (When the enemy dies)
             Light enemyLight = GetComponent<Light>();
