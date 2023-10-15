@@ -61,6 +61,15 @@ public class gameManager : MonoBehaviour
     //Initializes before Application Runs
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         instance = this; // set the the instance to this
         player = GameObject.FindGameObjectWithTag("Player"); // set player to player with tag "player"
         playerScript = player.GetComponent<playerController>(); // set player controller to the player controller of player
