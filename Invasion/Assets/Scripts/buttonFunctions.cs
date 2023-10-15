@@ -57,18 +57,21 @@ public class buttonFunctions : MonoBehaviour
         {
 
             gameManager.instance.restartEndBoss();
-      
-                  
+            respawnPlayer();
+
+
         }
 
         else if (midBossCP.isTriggered) 
         {         
             gameManager.instance.restartMidBoss();
+            respawnPlayer();
 
-     
+
         }
 
         respawnPlayer();
+
 
 
     }

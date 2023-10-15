@@ -392,14 +392,13 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
                  * face the target and prepare to shoot if the angle is within parameter and the enemy is not already shooting
                  * if these are true then start to shoot
                  */
-                if (agent.remainingDistance >= agent.stoppingDistance)
+
+                faceTarget();
+
+                if (agent.remainingDistance <= agent.stoppingDistance && !isShooting && angleToPlayer <= shootAngle)
                 {                    
-                    faceTarget();
-                    
-                    if (!isShooting && angleToPlayer <= shootAngle)
-                    {
-                        StartCoroutine(shoot());
-                    }
+
+                      StartCoroutine(shoot());                    
                 }
                 return true;
             }
