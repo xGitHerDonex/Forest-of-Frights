@@ -424,17 +424,19 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         float distToTarget = Vector3.Distance(rb.position, target.transform.position);
 
-        float switchViewTarget = groundingHeight + switchFacing;
+        //float switchViewTarget = groundingHeight + switchFacing;
 
-        if (flyToGround && distToTarget >= switchViewTarget)
-        {
-            faceTarget(target);
-        }
+        //if (flyToGround && distToTarget >= switchViewTarget)
+        //{
+        //    faceTarget(target);
+
+        //}
         
-        else if (flyToGround && distToTarget <= switchViewTarget )
-        {
-            facePlayer();
-        }
+        //else if (flyToGround && distToTarget <= switchViewTarget )
+        //{
+        //    faceTarget(target);
+     
+        //}
     
         Vector3 position;
 
@@ -472,6 +474,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                 isFlying = false;
                 reachedTarget = true;
                 isLanding = true;
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, waypoint.transform.rotation, 90f);
                 StartCoroutine(land());
 
 
@@ -551,13 +554,15 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
             if (!isGrounded && !isFlying)
             {
-                facePlayer();
+                this.
                 flightSpeed = origFlightSpeed;                            
                 rb.velocity = new Vector3(0, landingSpeed, 0);
                 rb.useGravity = true;
                 setFlightAnimation();
 
+             
                 yield return new WaitForSeconds(landingDelay);
+
                 isLanding = false;
                 anime.SetTrigger("equip");
                 agent.enabled = true;              
