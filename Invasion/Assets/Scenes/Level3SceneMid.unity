@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: bffa6027645060d42835832a415a00c5, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 795f229c4be459e449b524721c63c7a2, type: 2}
 --- !u!1001 &79817114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -848,7 +848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &357080426
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -943,10 +943,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 332004023617824042, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_Speed
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 236.56
@@ -988,44 +984,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: hp
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: maxHp
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: checkpoint
       value: 
       objectReference: {fileID: 1867628430}
-    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: deathSound
-      value: 
-      objectReference: {fileID: 8300000, guid: d8ecd0bc6fffb2c4db2636409cc4d1ba, type: 3}
-    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: attackSound
-      value: 
-      objectReference: {fileID: 8300000, guid: ff3ab857626708d4f90aee30b5755c26, type: 3}
-    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 942764255}
     - target: {fileID: 7918646389003623894, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: m_Name
       value: Gorosaurus
       objectReference: {fileID: 0}
-    - target: {fileID: 7918646389003623894, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7918646389003623894, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 942764255}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
 --- !u!1001 &427070134
 PrefabInstance:
@@ -2604,107 +2573,6 @@ Transform:
   - {fileID: 100734193}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
---- !u!1 &942764248 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7918646389003623894, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
-  m_PrefabInstance: {fileID: 360377809}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &942764255
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942764248}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1001 &986713182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3714,7 +3582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9141661729236417519, guid: e52973b0ed8095f4fa45c0b395c99893, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5543,15 +5411,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8594839297254001763, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 230.68
+      value: -282.5
       objectReference: {fileID: 0}
     - target: {fileID: 8594839297254001763, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.37
+      value: -13.22
       objectReference: {fileID: 0}
     - target: {fileID: 8594839297254001763, guid: 21682ce7732e8b9489642a85ec74d8e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -263.17
+      value: -733.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

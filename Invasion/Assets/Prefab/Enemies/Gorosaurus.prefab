@@ -1574,6 +1574,7 @@ GameObject:
   - component: {fileID: 1596141818590855422}
   - component: {fileID: 2638309090893716847}
   - component: {fileID: 7599512346608029463}
+  - component: {fileID: 833728138732330540}
   m_Layer: 7
   m_Name: Gorosaurus
   m_TagString: Untagged
@@ -1630,7 +1631,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 22
+  m_Speed: 25
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1707,8 +1708,8 @@ MonoBehaviour:
   checkpoint: {fileID: 0}
   targetFaceSpeed: 5
   runningDistance: 11
-  hp: 800
-  maxHp: 800
+  hp: 400
+  maxHp: 400
   animeSpeedChange: 10
   enemyRunSpeed: 35
   leftMeleeCollider: {fileID: 8062806175532408263}
@@ -1724,14 +1725,110 @@ MonoBehaviour:
   shootAngle: 10
   shootRate: 1
   shootDelay: 0.35
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 833728138732330540}
   walkSound: {fileID: 0}
-  attackSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: ff3ab857626708d4f90aee30b5755c26, type: 3}
+  deathSound: {fileID: 8300000, guid: d8ecd0bc6fffb2c4db2636409cc4d1ba, type: 3}
   healthOrb: {fileID: 2309197827884873162, guid: f5641ff499fd83c4792bc3142c2b65b6, type: 3}
   orb1: 0
   orb2: 0
   orb3: 0
+--- !u!82 &833728138732330540
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7918646389003623894}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8032524666230114982
 GameObject:
   m_ObjectHideFlags: 0
