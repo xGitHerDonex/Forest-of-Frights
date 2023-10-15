@@ -27437,6 +27437,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 324623734734365061}
     m_Modifications:
+    - target: {fileID: 543392938498117031, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4406098225257270888, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
       propertyPath: m_Name
       value: UI
@@ -27529,6 +27533,55 @@ PrefabInstance:
 --- !u!224 &1304740963 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6493654570813498596, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+  m_PrefabInstance: {fileID: 1304740962}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1304740964 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4290583638548584502, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+  m_PrefabInstance: {fileID: 1304740962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1304740965 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4607014560683968057, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+  m_PrefabInstance: {fileID: 1304740962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1304740966 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9185727853195595338, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+  m_PrefabInstance: {fileID: 1304740962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cfb0d3731956d6459ab68047b8f465b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1304740967 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7168615381763039836, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+  m_PrefabInstance: {fileID: 1304740962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1304740968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1736134280964673576, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
   m_PrefabInstance: {fileID: 1304740962}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1305707786 stripped
@@ -56564,8 +56617,8 @@ MonoBehaviour:
   hitEffect: {fileID: 5168290068380350925, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
   audioSource: {fileID: 7303108228411551491}
   weaponHolder: {fileID: 7677128262803397430}
-  ammoCurText: {fileID: 0}
-  ammoMaxText: {fileID: 0}
+  ammoCurText: {fileID: 1304740965}
+  ammoMaxText: {fileID: 1304740964}
   _weaponSwap: {fileID: 8925904426530831240}
   animator: {fileID: 9214862274642415474}
 --- !u!199 &2457587445230833906
@@ -56673,8 +56726,8 @@ MonoBehaviour:
   hitEffect: {fileID: 5168290068380350925, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
   audioSource: {fileID: 7303108228411551491}
   weaponHolder: {fileID: 7677128262803397430}
-  ammoCurText: {fileID: 0}
-  ammoMaxText: {fileID: 0}
+  ammoCurText: {fileID: 1304740965}
+  ammoMaxText: {fileID: 1304740964}
   _weaponSwap: {fileID: 8925904426530831240}
   animator: {fileID: 9214862274642415474}
 --- !u!4 &2606810839652866654
@@ -57126,7 +57179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 6227333649828515786}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 1304740966}
   HP: 200
   _maxHP: 200
   maxHPBuff: 0
@@ -57163,8 +57216,8 @@ MonoBehaviour:
   waypointDist: 0
   closestWaypointDist: 0
   closestWaypoint: {fileID: 0}
-  lowHPWarnText: {fileID: 0}
-  lowHealthWarnBG: {fileID: 0}
+  lowHPWarnText: {fileID: 1304740967}
+  lowHealthWarnBG: {fileID: 1304740968}
   audioSource: {fileID: 1793253779140185276}
   playerInjured: {fileID: 8300000, guid: 4c5ffcdd319042140a80e6bd311e2ece, type: 3}
   playerWalksGrass: {fileID: 8300000, guid: 18e761ff5ef14fd4588d9283fcc9b829, type: 3}
@@ -63027,8 +63080,8 @@ MonoBehaviour:
   hitEffect: {fileID: 5168290068380350925, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
   audioSource: {fileID: 0}
   weaponHolder: {fileID: 0}
-  ammoCurText: {fileID: 0}
-  ammoMaxText: {fileID: 0}
+  ammoCurText: {fileID: 1304740965}
+  ammoMaxText: {fileID: 1304740964}
   _weaponSwap: {fileID: 8925904426530831240}
   animator: {fileID: 5036734065892864491}
 --- !u!4 &6290483238329307843
@@ -64178,8 +64231,8 @@ MonoBehaviour:
   hitEffect: {fileID: 5168290068380350925, guid: d1b90bdc418f3b34ab37bd5550ae10bb, type: 3}
   audioSource: {fileID: 7303108228411551491}
   weaponHolder: {fileID: 7677128262803397430}
-  ammoCurText: {fileID: 0}
-  ammoMaxText: {fileID: 0}
+  ammoCurText: {fileID: 1304740965}
+  ammoMaxText: {fileID: 1304740964}
   _weaponSwap: {fileID: 8925904426530831240}
   animator: {fileID: 9214862274642415474}
 --- !u!1 &8779241066145847747

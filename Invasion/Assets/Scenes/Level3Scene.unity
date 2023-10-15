@@ -17090,6 +17090,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+--- !u!114 &6205717664457366311 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9185727853195595338, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+  m_PrefabInstance: {fileID: 6205717664457366310}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cfb0d3731956d6459ab68047b8f465b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &6266129456241164375
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -27002,7 +27013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 621709086435475795}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 6205717664457366311}
   HP: 200
   _maxHP: 200
   maxHPBuff: 0
