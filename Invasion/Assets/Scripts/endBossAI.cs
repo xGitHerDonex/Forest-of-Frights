@@ -814,6 +814,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     //Used for when player dies - resets boss and destorys relevant objects
     public void resetFight()
     {
+        transform.position = startingPos;
         GameObject[] bossSpawns = GameObject.FindGameObjectsWithTag("artho");
         GameObject[] healthOrbs = GameObject.FindGameObjectsWithTag("healthOrb");
 
@@ -828,9 +829,10 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         }
 
         hp = maxHp;
-        transform.position = startingPos;
+        playerInRange = false;
 
-        
+
+
     }
 
     private void OnTriggerEnter(Collider other)
