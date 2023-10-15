@@ -516,6 +516,13 @@ public class midBossAI : MonoBehaviour, IDamage, IPhysics
 
     public void resetFight()
     {
+        GameObject[] healthOrbs = GameObject.FindGameObjectsWithTag("healthOrbs");
+
+        foreach (GameObject healthOrb in healthOrbs)
+        {
+            Destroy(healthOrb);
+        }
+
         hp = maxHp;
         transform.position = startingPos;
         playerInRange = false;

@@ -157,6 +157,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         //Get's Player Script so we can check the closest waypoint
 
+        startingPos = transform.position;
         playerScript = gameManager.instance.player.GetComponent<playerController>();
         origFlightSpeed = flightSpeed;
         stoppingDistOriginal = agent.stoppingDistance;
@@ -424,19 +425,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         float distToTarget = Vector3.Distance(rb.position, target.transform.position);
 
-        //float switchViewTarget = groundingHeight + switchFacing;
-
-        //if (flyToGround && distToTarget >= switchViewTarget)
-        //{
-        //    faceTarget(target);
-
-        //}
-        
-        //else if (flyToGround && distToTarget <= switchViewTarget )
-        //{
-        //    faceTarget(target);
-     
-        //}
     
         Vector3 position;
 
@@ -823,14 +811,22 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         hurtBaddies(explosionDamage);
     }
 
+    //Used for when player dies - resets boss and destorys relevant objects
     public void resetFight()
     {
         GameObject[] bossSpawns = GameObject.FindGameObjectsWithTag("artho");
+        GameObject[] healthOrbs = GameObject.FindGameObjectsWithTag("healthOrbs");
 
         foreach (GameObject enemy in bossSpawns)
         {
             Destroy(enemy);
         }
+
+        foreach (GameObject healthOrb in healthOrbs)
+        {
+            Destroy(healthOrb);
+        }
+
         hp = maxHp;
         transform.position = startingPos;
 
