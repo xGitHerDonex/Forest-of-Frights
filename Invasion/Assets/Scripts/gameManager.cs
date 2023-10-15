@@ -146,18 +146,18 @@ public class gameManager : MonoBehaviour
     public IEnumerator youWin()
     {
         currentMenu = winMenu;
-        currentMenu.SetActive(isPaused);
+        currentMenu.SetActive(true);
         yield return new WaitForSeconds(5f);
         pause();
 
-        currentMenu.SetActive(isPaused);
+        currentMenu.SetActive(true);
     }
     //Pulls up the Lose Table after the player dies.
     public void youLose()
     {
         pause();
         currentMenu = loseMenu;
-        currentMenu.SetActive(isPaused);
+        currentMenu.SetActive(true);
     }
 
     //When called updates the fill level of the Hp Bar

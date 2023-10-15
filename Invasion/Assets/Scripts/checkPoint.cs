@@ -28,7 +28,8 @@ public class checkPoint : MonoBehaviour
 
             else if (isMidBossCheckpoint)
             {
-                barrierWall.SetActive(true);
+                if (barrierWall != null)
+                    barrierWall.SetActive(true);
 
 
             }

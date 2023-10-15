@@ -20,7 +20,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float maxStamina;
     [SerializeField] float regenStamina;
     [SerializeField] float playerSpeed;
-    [SerializeField] float playerSpeedBuff = 20f;
+    //[SerializeField] float playerSpeedBuff = 20f;
     [Range(0, 7)][SerializeField] float jumpHeight;
     float sprintCost;
 
