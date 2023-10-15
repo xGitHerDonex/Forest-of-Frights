@@ -19,6 +19,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Transform headPos;
     protected Animator anime;
     [SerializeField] Collider hitBox;
+    [SerializeField] GameObject healthOrb;
     //public spawner whereISpawned;
 
     [Tooltip("waypoints must be set")]
@@ -60,7 +61,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     [Range(0, 10)][SerializeField] float shootRate;
 
     [Header("SFX")]
-    private AudioSource audioSource;
+    [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip attackSound;
     [SerializeField] AudioClip deathSound;
@@ -233,7 +234,14 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             playDeathSound();
             anime.SetBool("isDead", true);
             hitboxOff();
-           
+
+            // Random chance to drop a health orb
+            float randomChance = Random.Range(0f, 100f);
+            if (randomChance >= 20f && randomChance <= 100f)
+            {
+                Instantiate(healthOrb, transform.position + (Vector3.up * 1) + (Vector3.left * 2), transform.rotation);
+            }
+
 
             // Turn out the lights! (When the enemy dies)
             Light enemyLight = GetComponent<Light>();
