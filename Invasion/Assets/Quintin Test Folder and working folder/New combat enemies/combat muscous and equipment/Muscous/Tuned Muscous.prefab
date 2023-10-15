@@ -2076,7 +2076,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8388604507495137935}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99997103, z: -0, w: -0.00761417}
+  m_LocalRotation: {x: 0, y: 0.99997103, z: -0, w: -0.0076181483}
   m_LocalPosition: {x: 462.50003, y: -4.2870026, z: 840.50006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2111,7 +2111,7 @@ MonoBehaviour:
   hp: 5
   targetFaceSpeed: 3
   viewAngle: 360
-  roamDistance: 50
+  roamDistance: 69
   roamPauseTime: 1
   animeSpeedChange: 5
   bullet: {fileID: 4635538419760109935, guid: 04648627c9a99c04ba8df41de474da10, type: 3}
@@ -2174,14 +2174,14 @@ NavMeshAgent:
   m_GameObject: {fileID: 8388604507495137935}
   m_Enabled: 1
   m_AgentTypeID: 1479372276
-  m_Radius: 3
+  m_Radius: 1
   m_Speed: 8
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 160
   m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2.25
   m_BaseOffset: 0
