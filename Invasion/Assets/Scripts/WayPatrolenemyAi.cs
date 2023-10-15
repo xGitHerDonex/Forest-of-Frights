@@ -346,8 +346,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     /// <summary>
     /// method made for triggering explosion damage through iPhysics
     /// </summary>
-    /// <param name="explosionDamage"></param>
-    /// <param name="seconds"></param>
+    // <param name="explosionDamage"></param>
+    // <param name="seconds"></param>
     /// <returns></returns>
     private IEnumerator delayedDamage( int explosionDamage, float seconds )
     {
