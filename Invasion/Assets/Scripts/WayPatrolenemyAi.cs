@@ -121,7 +121,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             //variable for custimization by Lerping it over time prevents choppy transitions
             float agentVel = agent.velocity.normalized.magnitude;
 
-            anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.deltaTime * animeSpeedChange));
+            anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.fixedDeltaTime * animeSpeedChange));
 
             //if the player is in range but cant be "seen" the enemy is allowed to roam
             //also if the player is not in range at all the enemy is allowed to roam
@@ -220,11 +220,12 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     {
         hp -= amount;
         
-        StartCoroutine(stopMoving());
 
 
         if (hp <= 0)
-        {
+        {        
+            StartCoroutine(stopMoving());
+
             hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
             if (agent.baseOffset != 0)
             {
@@ -307,21 +308,20 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(shootRate);
         Instantiate(bullet, shootPos.position, transform.rotation);
         isShooting = false;
-        }
-        // else if(agent.remainingDistance < 7 && playerInRange)
-        //{
-        //    anime.SetBool("isMelee", true);
-        //    anime.SetBool("isRanged", false);
-        //    anime.SetBool("isLanding", true);
+        } else if (agent.remainingDistance < stoppingDistOriginal && playerInRange)
+        {
+            anime.SetBool("isMelee", !true);
+            anime.SetBool("isRanged", !false);
+            anime.SetBool("isLanding", true);
 
-        //    anime.SetTrigger("Shoot");
-        //    //Used to add delay to the shoot to match the animation
-        //    //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
-        //    yield return new WaitForSeconds(shootRate);
-        //    Instantiate(bullet, shootPos.position, transform.rotation);
-        //    isShooting = false;
-        //}
-  
+            anime.SetTrigger("Shoot");
+            //Used to add delay to the shoot to match the animation
+            //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
+            yield return new WaitForSeconds(shootRate);
+            Instantiate(bullet, shootPos.position, transform.rotation);
+            isShooting = false;
+        }
+
     }
 
     //IEnumerator shootDelayed()
