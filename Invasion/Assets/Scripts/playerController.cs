@@ -14,7 +14,8 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float HP;
     //[SerializeField] float maxHP;
     [SerializeField] float _maxHP; // = 200f;
-    [SerializeField] float maxHPBuff; //=0f;
+    [SerializeField] float maxHPBuff;
+    [SerializeField] float maxSTABuff;
     [SerializeField] float Stamina;
     [SerializeField] float maxStamina;
     [SerializeField] float regenStamina;
@@ -79,7 +80,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     //Bools and others for functions
     public bool isShooting = false;
-    public AmmoType ammoType;
+    //public AmmoType ammoType;
     private bool groundedPlayer;
     private bool canSprint = true;
     private bool isTakingDamage = false;
@@ -98,14 +99,14 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     private float fixedDeltaTime;
 
 
-    public enum AmmoType
-    {
-        PistolAmmo,
-        PulsarAmmo,
-        ShotgunAmmo,
-        RailgunAmmo,
-        RBFGAmmo
-    }
+    //public enum AmmoType
+    //{
+    //    PistolAmmo,
+    //    PulsarAmmo,
+    //    ShotgunAmmo,
+    //    RailgunAmmo,
+    //    RBFGAmmo
+    //}
 
     // Ammo Management
     public Dictionary<string, int> ammoInventory = new Dictionary<string, int>();
@@ -399,7 +400,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     }
 
-    //Heal Ability:  Currently through the pause menu, until medkits are implemented
+    //Health Increase via Crimson Stone Equipment
     public void giveHP(int amount)
     {
         if (HP < MaxHP)
@@ -409,6 +410,37 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         }
 
     }
+
+    // Temporary health buff via Health Up Orb pickup
+    public void givemaxHPBuff(float duration, float maxHPBuff)
+    {
+        _maxHP += maxHPBuff;
+        StartCoroutine(destroyHPBuff(duration, maxHPBuff));
+    }
+
+    // Destroy's temporary health up buff
+    IEnumerator destroyHPBuff(float duration, float maxHPBuff)
+    {
+        yield return new WaitForSeconds(duration);
+
+        _maxHP -= maxHPBuff;
+    }
+
+    public void givemaxSTABuff(float duration, float maxSTABuff)
+    {
+        maxStamina += maxSTABuff;
+        StartCoroutine(destroySTABuff(duration, maxSTABuff));
+    }
+
+    IEnumerator destroySTABuff(float duration, float maxSTABuff)
+    {
+        yield return new WaitForSeconds(duration);
+        maxStamina -= maxSTABuff;
+        maxStamina = 3f;
+        Stamina = maxStamina;
+    }
+
+
 
     //Damageable Ability:  Currently allows player takes damage
     public void hurtBaddies(int amount)
@@ -505,19 +537,19 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
     }
 
     //Ammo Collection for weapons
-    public void AddAmmo(AmmoType ammoType, int amount)
-    {
-        string ammoTypeName = ammoType.ToString();
+    //public void AddAmmo(AmmoType ammoType, int amount)
+    //{
+    //    string ammoTypeName = ammoType.ToString();
 
-        if (ammoInventory.ContainsKey(ammoTypeName))
-        {
-            ammoInventory[ammoTypeName] += amount;
-        }
-        else
-        {
-            ammoInventory[ammoTypeName] = amount;
-        }
-    }
+    //    if (ammoInventory.ContainsKey(ammoTypeName))
+    //    {
+    //        ammoInventory[ammoTypeName] += amount;
+    //    }
+    //    else
+    //    {
+    //        ammoInventory[ammoTypeName] = amount;
+    //    }
+    //}
 
     //public method that will return the ground waypoint closest to the player
     public GameObject getClosestGroundWaypoint()
@@ -558,23 +590,20 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             _maxHP = Mathf.Max(value, 0f);
         }
     }
-    //public float MaxStamina
-    //{
-    //    get
-    //    {
-    //        // Calculate maxHP including any buffs
-    //        return maxStamina + maxStaminaBuff;
-    //    }
-    //    set
-    //    {
-    //        // Ensure maxHP is never negative
-    //        maxStamina = Mathf.Max(0f, value);
-    //    }
-    //}
-    /// <summary>
-    /// Equipment Buff Section (WIP)
-    /// </summary>
-    // <param name="hpBoost"></param>
+    public float MaxStamina
+    {
+        get
+        {
+            // Calculate maxSTA including any buffs
+            return maxStamina + maxSTABuff;
+        }
+        set
+        {
+            // Ensure maxSTA is never negative
+            maxStamina = Mathf.Max(0f, value);
+        }
+    }
+
     public void ApplyPermanentHPBoost(float hpBoost)
     {
         _maxHP += hpBoost;
