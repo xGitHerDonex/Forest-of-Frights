@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3524028776393812240}
   - component: {fileID: 5449048267499554653}
   m_Layer: 8
-  m_Name: letal prefab
+  m_Name: letal Variant Attack prefab 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,9 +51,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3524028776393812240}
-  damage: 4
-  speed: 20
-  destroyTime: 4
+  damage: 10
+  speed: 25
+  destroyTime: 2.5
 --- !u!114 &-864417641232556038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   explosionAmount: 15
   explosionEffect: {fileID: 100006, guid: 5c4816ab27403454dab71a44408dff24, type: 3}
   explosionDamage: 0
-  destroyTime: 2.5
+  destroyTime: 1
 --- !u!33 &6140715677174310904
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -77,7 +77,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4635538419760109935}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &164147425155102111
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -210,7 +210,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 1.25
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -220,7 +220,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.3571434
+        value: 0.20820236
         inSlope: -1.0908935
         outSlope: -1.0908935
         tangentMode: 0
@@ -228,8 +228,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.6165797
       - serializedVersion: 3
-        time: 0.217846
-        value: 0.2423194
+        time: 0.23647699
+        value: 0.05387336
         inSlope: 0.26534978
         outSlope: 0.26534978
         tangentMode: 0
@@ -237,8 +237,8 @@ TrailRenderer:
         inWeight: 1
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.3683995
-        value: 0.14004603
+        time: 0.36553085
+        value: 0.1795663
         inSlope: -0.8250818
         outSlope: -0.8250818
         tangentMode: 0
@@ -246,8 +246,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.8034574
       - serializedVersion: 3
-        time: 0.6074158
-        value: 0.058573604
+        time: 0.5973755
+        value: 0.09809387
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -255,8 +255,8 @@ TrailRenderer:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.68558246
-        value: 0
+        time: 0.7314454
+        value: 0.14286447
         inSlope: -1.6174535
         outSlope: -1.6174535
         tangentMode: 0
@@ -268,8 +268,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9069376, g: 0.9716981, b: 0.35292807, a: 0.654902}
-      key1: {r: 0.69181085, g: 0.9433962, b: 0.22694907, a: 0.7921569}
+      key0: {r: 0.879014, g: 0.9245283, b: 0.501513, a: 0.32941177}
+      key1: {r: 0.9716981, g: 0.6715638, b: 0.16042183, a: 0.49803922}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -284,8 +284,8 @@ TrailRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
-      atime1: 65535
+      atime0: 3470
+      atime1: 57632
       atime2: 0
       atime3: 0
       atime4: 0

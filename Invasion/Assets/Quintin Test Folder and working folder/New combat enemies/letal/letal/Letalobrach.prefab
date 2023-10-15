@@ -384,18 +384,18 @@ MonoBehaviour:
   headPos: {fileID: 2334285695117143708}
   hitBox: {fileID: 1237293416327186468}
   waypoints: []
-  hp: 35
+  hp: 55
   targetFaceSpeed: 2
   viewAngle: 360
-  roamDistance: 50
+  roamDistance: 75
   roamPauseTime: 0
-  animeSpeedChange: 0.5
-  bullet: {fileID: 4635538419760109935, guid: 04648627c9a99c04ba8df41de474da10, type: 3}
+  animeSpeedChange: 1
+  bullet: {fileID: 4635538419760109935, guid: 67c254f1b6b279444a36d4e81214cece, type: 3}
   shootAngle: 45
   shootRate: 1
-  walkSound: {fileID: 0}
+  walkSound: {fileID: 8300000, guid: e6015690bab79a347997c4d0517f5b9d, type: 3}
   attackSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: a9af668abdf6ad24aba89c1e11467876, type: 3}
   stopMovingTime: 0
 --- !u!136 &1237293416327186468
 CapsuleCollider:
@@ -429,17 +429,17 @@ NavMeshAgent:
   m_GameObject: {fileID: 1640687235208197725}
   m_Enabled: 1
   m_AgentTypeID: -1923039037
-  m_Radius: 5.5
+  m_Radius: 7
   m_Speed: 1
-  m_Acceleration: 1
+  m_Acceleration: 2
   avoidancePriority: 50
   m_AngularSpeed: 30
-  m_StoppingDistance: 6
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 5.5
-  m_BaseOffset: 0
+  m_BaseOffset: 0.54
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &738249865775300252

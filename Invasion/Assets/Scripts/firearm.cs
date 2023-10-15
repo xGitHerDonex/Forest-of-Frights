@@ -91,7 +91,11 @@ public class firearm : MonoBehaviour
 
         if (!gameManager.instance.isPaused)
         {
+            if (muzzleFlash != null)
+            {
             muzzleFlash.Play();
+
+            }
             audioSource.PlayOneShot(shotSound);
             currentAmmo--;
             antiGrenade = true;

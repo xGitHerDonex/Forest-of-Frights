@@ -263,9 +263,11 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     /// <returns></returns>
     IEnumerator flashDamage()
     {
+        Material temp = model.material;
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = Color.white;
+        //model.material.color = Color.white;
+        model.material.color = temp.color;
     }
 
     /// <summary>
@@ -503,13 +505,13 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     }
 
     //void Melee(){}
-    public void Fly( float wait )
+    public void Fly( float wait = .25f)
     {
 
-        float flightHeight = 3;
+        float flightHeight = 1.5f;
         for (float i = agent.baseOffset; i < flightHeight;)
         {
-            agent.baseOffset += (0.5f * Time.fixedDeltaTime);
+            agent.baseOffset += (0.1f * Time.fixedDeltaTime);
             i = agent.baseOffset;
             StartCoroutine(Wait(wait));
             continue;
@@ -522,7 +524,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(waitTime);
     }
     
-   public void Land( float wait )
+   public void Land( float wait = .25f )
     {
 
         float landHeight = 0;
