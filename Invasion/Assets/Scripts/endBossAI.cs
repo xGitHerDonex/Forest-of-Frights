@@ -181,7 +181,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
     {
         if (!isDead && finalCheckpointActivated && playerInRange)
         {
-
+            //agent.enabled = false;
             //Check HP levels
             float hpRatio = (hp / maxHp);
 
@@ -231,7 +231,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                 Stage1();
             }
 
-            else if (hpRatio < 0.7f  && !isSummoning)
+            else if (hpRatio < 0.8f  && !isSummoning)
             {
 
                 if (timeToLand && isFlying && summonCompleted && !isGrounded)
@@ -283,7 +283,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
 
                 //If player within stopping distance, face target and attack if not already attacking
-                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance + 5 && distToPlayer > meleeRange)
+                if (!isAttacking && !isShooting && hit.collider.CompareTag("Player") && distToPlayer <= agent.stoppingDistance + 5 && distToPlayer >= meleeRange)
                 {
  
                     agent.ResetPath();
@@ -453,7 +453,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
             setFlightAnimation();
             isGrounded = false;
             isFlying = true;
-            agent.enabled = false;
+
 
             distToWaypoint = Vector3.Distance(rb.position, waypoint.transform.position);
 
@@ -499,6 +499,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
             setFlightAnimation();
             createRb();
+            hitBox.enabled = false;
 
             isFlying = true;
             timeToLand = false;
@@ -542,7 +543,6 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
 
             if (!isGrounded && !isFlying)
             {
-                this.
                 flightSpeed = origFlightSpeed;                            
                 rb.velocity = new Vector3(0, landingSpeed, 0);
                 rb.useGravity = true;
@@ -558,6 +558,7 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                 reachedTarget = false;
                 Destroy(rb);
                 isRbDestroyed = true;
+                hitBox.enabled = true;
 
 
 
@@ -828,6 +829,14 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
         {
             Destroy(healthOrb);
         }
+
+        summon1 = false;
+        summon2 = false;
+        summon3 = false;
+
+        orb1 = false;
+        orb2 = false;
+        orb3 = false;
 
         hp = maxHp;
         playerInRange = false;

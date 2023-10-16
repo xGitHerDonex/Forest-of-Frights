@@ -48,7 +48,7 @@ public class buttonFunctions : MonoBehaviour
 
     }
 
-    public void respawnPlayerScene3()
+    public void respawn()
     {
         checkPoint midBossCP = gameManager.instance.midBossCP;
 
@@ -57,25 +57,16 @@ public class buttonFunctions : MonoBehaviour
         {
 
             gameManager.instance.restartEndBoss();
-            respawnPlayer();
-
-
+  
         }
 
-        else if (midBossCP.isTriggered) 
+        else if (midBossCP != null && midBossCP.isTriggered) 
         {         
             gameManager.instance.restartMidBoss();
-            respawnPlayer();
-
 
         }
 
-        else
-        {
-            respawnPlayer();
-        }
-
-
+        respawnPlayer();
 
     }
 

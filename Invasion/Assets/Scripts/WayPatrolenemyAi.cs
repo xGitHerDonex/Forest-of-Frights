@@ -406,6 +406,9 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
                       StartCoroutine(shoot());                    
                 }
+
+
+
                 return true;
             }
         }
