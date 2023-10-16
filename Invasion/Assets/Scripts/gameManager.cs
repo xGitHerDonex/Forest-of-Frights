@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -79,14 +80,10 @@ public class gameManager : MonoBehaviour
 
 
         player.transform.position = playerSpawnPos.transform.position;
-        //Adds some ambience
-        //if (natureSoundSource != null && natureSounds != null)
-        //{
-        //    natureSoundSource.clip = natureSounds;
-        //    natureSoundSource.loop = true;
-        //    natureSoundSource.Play();
-        //}
 
+
+      
+                
     }
 
     private void Start()
@@ -105,12 +102,12 @@ public class gameManager : MonoBehaviour
             currentMenu.SetActive(isPaused); // show menu
         }
 
-        if (Input.GetButtonDown("Inventory") && currentMenu == null) //if tab button is hit, and currentMenu is null
-        {
-            pause(); //Pause the game
-            currentMenu = inventoryMenu; // set current menu to pause menu
-            currentMenu.SetActive(isPaused); // show menu
-        }
+        //if (Input.GetButtonDown("Inventory") && currentMenu == null) //if tab button is hit, and currentMenu is null
+        //{
+        //    pause(); //Pause the game
+        //    currentMenu = inventoryMenu; // set current menu to pause menu
+        //    currentMenu.SetActive(isPaused); // show menu
+        //}
 
 
     }

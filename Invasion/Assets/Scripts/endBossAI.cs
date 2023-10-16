@@ -310,7 +310,9 @@ public class endBossAI : MonoBehaviour, IDamage, IPhysics
                 else if (!isAttacking)
                 {
                     facePlayer();
-                    agent.SetDestination(gameManager.instance.player.transform.position);
+
+                    if (agent.enabled)
+                        agent.SetDestination(gameManager.instance.player.transform.position);
                 }
             }
 
