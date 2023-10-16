@@ -20,6 +20,9 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     protected Animator anime;
     [SerializeField] Collider hitBox;
     [SerializeField] GameObject healthOrb;
+    [SerializeField] GameObject crimsonStone;
+    [SerializeField] GameObject chronoGreaves;
+    [SerializeField] GameObject reflexGauntlet;
     [SerializeField] public doorOpenTrigger doorTrigger;
     [SerializeField] public doorOpenTrigger doorTrigger2;
     //public spawner whereISpawned;
