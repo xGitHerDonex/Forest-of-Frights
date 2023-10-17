@@ -342,6 +342,11 @@ MonoBehaviour:
   headPos: {fileID: 7716419018027483914}
   hitBox: {fileID: 2934562479123292413}
   healthOrb: {fileID: 2309197827884873162, guid: f5641ff499fd83c4792bc3142c2b65b6, type: 3}
+  crimsonStone: {fileID: 0}
+  chronoGreaves: {fileID: 0}
+  reflexGauntlet: {fileID: 0}
+  doorTrigger: {fileID: 0}
+  doorTrigger2: {fileID: 0}
   waypoints: []
   hp: 30
   targetFaceSpeed: 3
@@ -442,7 +447,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 17
+  m_Radius: 35
   m_Center: {x: -0.12, y: 0.65, z: 0}
 --- !u!82 &-9008716287679996995
 AudioSource:

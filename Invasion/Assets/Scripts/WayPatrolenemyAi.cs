@@ -74,6 +74,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     Vector3 pushBack;
     Vector3 playerDirection;
     Vector3 startingPos;
+    float distToStart;
     float stoppingDistOriginal;
     float angleToPlayer;
     float speedOrig;
@@ -127,14 +128,27 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
             anime.SetFloat("Speed", Mathf.Lerp(anime.GetFloat("Speed"), agentVel, Time.fixedDeltaTime * animeSpeedChange));
 
+            //Gets distance to startingPOs
+            distToStart = Vector3.Distance(transform.position, startingPos);
+
             //if the player is in range but cant be "seen" the enemy is allowed to roam
             //also if the player is not in range at all the enemy is allowed to roam
             if (playerInRange && !canSeePlayer())
             {
-                StartCoroutine(roam());
-            } else if (!playerInRange)
+                if (distToStart >= 35)
+                    agent.SetDestination(startingPos);
+
+                else
+                    StartCoroutine(roam());
+            } 
+            
+            else if (!playerInRange && !canSeePlayer())
             {
-                StartCoroutine(roam());
+                if(distToStart >= 35)
+                    agent.SetDestination(startingPos);
+
+                else
+                    StartCoroutine(roam());
             }
         }
     }
