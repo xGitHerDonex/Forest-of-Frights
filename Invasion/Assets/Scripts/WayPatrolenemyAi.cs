@@ -34,6 +34,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
     [Tooltip("Enemy health value between 1 and 100.")]
     [Range(0, 100)][SerializeField] int hp;
+    int maxHP;
+
 
     [Tooltip("Turning speed 1-10.")]
     [Range(1, 10)][SerializeField] int targetFaceSpeed;
@@ -83,6 +85,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     bool destinationPicked;
     private int m_PathIndex;
     public float stopMovingTime;
+
+    Color originalColor;
     #endregion
 
 
@@ -91,15 +95,18 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         agent = GetComponent<NavMeshAgent>();
         anime = GetComponent<Animator>();
         gameObject.AddComponent<AudioSource>();
-       // audioSource = GetComponent<AudioSource>();
+        startingPos = transform.position;
+        // audioSource = GetComponent<AudioSource>();
     }
 
 
 
     void Start()
     {
+        maxHP = hp;
         speedOrig = agent.speed; // gives the agent speed to the float original speed for later on.
-        startingPos = transform.position;
+        originalColor = model.material.color;
+        
         stoppingDistOriginal = agent.stoppingDistance;
         audioSource = GetComponent<AudioSource>();
 
@@ -120,6 +127,16 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
      */
     protected virtual void Update()
     {
+        if (gameManager.instance.playerScript.HP <= 0)
+        {
+            transform.position = startingPos;
+            hp = maxHP;
+            playerInRange = false;
+
+            model.material.color = originalColor;
+
+        }
+
         if (agent.isActiveAndEnabled)
         {
             //allows the enemy to ease into the transition animation with a tuneable
@@ -135,33 +152,20 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             //also if the player is not in range at all the enemy is allowed to roam
             if (playerInRange && !canSeePlayer())
             {
-                if (distToStart >= 15)
-                {
-                    agent.speed = 40;
-                    agent.SetDestination(startingPos);
-                }
-                else
-                {
-                    agent.speed = speedOrig;
+
                     StartCoroutine(roam()) ;
                 }
 
 
-            }
+            
             else if (!playerInRange)
             {
-                if (distToStart >= 15)
-                {
-                    agent.speed = 40;
-                    agent.SetDestination(startingPos);
-                }
-                else
-                {
-                    agent.speed = speedOrig;
+
+  
                     StartCoroutine(roam());
                 }
 
-            }
+            
         }
     }
 
@@ -314,6 +318,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     IEnumerator flashDamage()
     {
         Material temp = model.material;
+
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         //model.material.color = Color.white;

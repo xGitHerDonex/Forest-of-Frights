@@ -11,7 +11,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
     //Players stats
     [Header("-----Player Stats-----")]
-    [SerializeField] float HP;
+    public float HP;
     //[SerializeField] float maxHP;
     [SerializeField] float _maxHP; // = 200f;
     [SerializeField] float maxHPBuff;
