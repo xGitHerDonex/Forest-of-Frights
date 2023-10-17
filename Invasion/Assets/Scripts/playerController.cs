@@ -253,7 +253,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
             sprintCost = 1.0f;
 
 
-        if (!gameManager.instance.isPaused && !isTimeSlowed && Input.GetButton("Sprint") && Stamina >= deltaSprint && canSprint)
+        if (!gameManager.instance.isPaused && !isTimeSlowed && Input.GetButton("Sprint") && Stamina >= deltaSprint && canSprint && moveMagnitude>0.2)
         {
             playerSpeed = originalPlayerSpeed + addSprintMod;
             Stamina -= deltaSprint;
@@ -320,12 +320,14 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
         while (remainingTime >= 0)
         {
             remainingTime -= Time.deltaTime;
+            string formattedTime = remainingTime.ToString("F1");
             // start the timer
-            if (Mathf.Floor(remainingTime) != Mathf.Floor(remainingTime - Time.deltaTime))
-            {
+            gameManager.instance.updateGrenadeCDText(formattedTime);
+            //if (Mathf.Floor(remainingTime) != Mathf.Floor(remainingTime - Time.deltaTime))
+            //{
 
-                gameManager.instance.updateGrenadeCDText(Mathf.Floor(remainingTime).ToString());
-            }
+            //    gameManager.instance.updateGrenadeCDText(Mathf.Floor(remainingTime).ToString());
+            //}
             yield return null;
         }
         // Reset the fill amount when the cooldown is complete

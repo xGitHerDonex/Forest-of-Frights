@@ -93,7 +93,7 @@ public class firearm : MonoBehaviour
         {
             if (muzzleFlash != null)
             {
-            muzzleFlash.Play();
+                muzzleFlash.Play();
 
             }
             audioSource.PlayOneShot(shotSound);
@@ -131,7 +131,12 @@ public class firearm : MonoBehaviour
 
     public void Special()
     {
-        muzzleFlash.Play();
+
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.Play();
+
+        }
         audioSource.PlayOneShot(shotSound);
         currentAmmo--;
         antiGrenade = true;
@@ -168,6 +173,10 @@ public class firearm : MonoBehaviour
 
     IEnumerator Reload()
     {
+        if (currentAmmo == maxAmmo)
+        {
+            yield break;
+        }
         isReloading = true;
         animator.SetBool("Reloading", true);
         ammoCurText.text = "Reload";
