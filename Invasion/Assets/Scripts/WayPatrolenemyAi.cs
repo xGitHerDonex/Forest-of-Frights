@@ -135,24 +135,36 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             //also if the player is not in range at all the enemy is allowed to roam
             if (playerInRange && !canSeePlayer())
             {
-                if (distToStart >= 35)
+                if (distToStart >= 15)
+                {
+                    agent.speed = 40;
                     agent.SetDestination(startingPos);
-
+                }
                 else
-                    StartCoroutine(roam());
-            } 
-            
-            else if (!playerInRange && !canSeePlayer())
+                {
+                    agent.speed = speedOrig;
+                    StartCoroutine(roam()) ;
+                }
+
+
+            }
+            else if (!playerInRange)
             {
-                if(distToStart >= 35)
+                if (distToStart >= 15)
+                {
+                    agent.speed = 40;
                     agent.SetDestination(startingPos);
-
+                }
                 else
+                {
+                    agent.speed = speedOrig;
                     StartCoroutine(roam());
+                }
+
             }
         }
     }
-   
+
 
     #region Movement
     /// <summary>
@@ -237,20 +249,20 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     public void hurtBaddies( int amount )
     {
         hp -= amount;
-        
+
 
 
         if (hp <= 0)
-        {        
+        {
             StartCoroutine(stopMoving());
 
             hitBox.enabled = false; // turns off the hitbox so player isnt collided with the dead body
             if (agent.baseOffset != 0)
             {
                 agent.baseOffset = 0;
-            } 
+            }
             StopAllCoroutines();
-            agent.enabled = false;           
+            agent.enabled = false;
             playDeathSound();
             anime.SetBool("isDead", true);
             hitboxOff();
@@ -287,7 +299,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             anime.SetTrigger("Damage");
             StartCoroutine(flashDamage());
             agent.SetDestination(gameManager.instance.player.transform.position);
-            
+
         }
 
 
@@ -317,7 +329,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     IEnumerator shoot()
     {
         isShooting = true;
-        playAttackSound();      
+        playAttackSound();
         if(agent.remainingDistance >= stoppingDistOriginal && playerInRange)
         {
             //SphereCollider temp = new SphereCollider();
@@ -419,9 +431,9 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
                 faceTarget();
 
                 if (agent.remainingDistance <= agent.stoppingDistance && !isShooting && angleToPlayer <= shootAngle)
-                {                    
+                {
 
-                      StartCoroutine(shoot());                    
+                      StartCoroutine(shoot());
                 }
 
 
@@ -459,7 +471,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             anime.SetBool("isCaught", playerInRange);
                 //wrap for flight
             anime.SetBool("isLanding",!playerInRange);
-            
+
         }
     }
 
@@ -475,7 +487,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             anime.SetBool("isCaught", playerInRange);
                 //wrap for flight
             anime.SetBool("isLanding",!playerInRange);
-           
+
         }
     }
 
@@ -562,7 +574,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         //wait "waitTime"
         yield return new WaitForSeconds(waitTime);
     }
-    
+
    public void Land( float wait = .25f )
     {
 
@@ -570,14 +582,14 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         for (float i = agent.baseOffset; i > landHeight;)
         {
 
-        
+
             //StartCoroutine(Wait(wait));
-            ////add 0.5f to current height every loop 
+            ////add 0.5f to current height every loop
             //agent.baseOffset -= 0.5f;
             //StopCoroutine(Wait(wait));
             agent.baseOffset -= (0.5f * Time.deltaTime);
             i = agent.baseOffset;
-            
+
             continue;
         }
 
