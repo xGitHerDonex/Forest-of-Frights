@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5449048267499554653}
   m_Layer: 8
   m_Name: Muscous Bullet Prefab
-  m_TagString: Untagged
+  m_TagString: enemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +53,7 @@ MonoBehaviour:
   rb: {fileID: 3524028776393812240}
   damage: 15
   speed: 40
-  destroyTime: 4
+  destroyTime: 1
 --- !u!114 &-864417641232556038
 MonoBehaviour:
   m_ObjectHideFlags: 0

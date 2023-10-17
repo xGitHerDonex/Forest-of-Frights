@@ -125,19 +125,32 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
      *  set destination otherwise returns false and no new path is calculated
      *
      */
+
+    IEnumerator reset()
+    {
+        transform.position = startingPos;
+        hp = maxHP;
+        playerInRange = false;
+        model.material.color = originalColor;
+
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("enemyBullet");
+
+        yield return new WaitForSeconds(1);
+
+        foreach (GameObject bullet in bullets)
+        {
+            Destroy(bullet);
+        }
+    }
     protected virtual void Update()
     {
         if (gameManager.instance.playerScript.HP <= 0)
         {
-            transform.position = startingPos;
-            hp = maxHP;
-            playerInRange = false;
-
-            model.material.color = originalColor;
+            StartCoroutine(reset());
 
         }
 
-        if (agent.isActiveAndEnabled)
+        else if (agent.isActiveAndEnabled)
         {
             //allows the enemy to ease into the transition animation with a tuneable
             //variable for custimization by Lerping it over time prevents choppy transitions
@@ -152,18 +165,15 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             //also if the player is not in range at all the enemy is allowed to roam
             if (playerInRange && !canSeePlayer())
             {
-
                     StartCoroutine(roam()) ;
-                }
+            }
 
 
             
             else if (!playerInRange)
             {
-
-  
                     StartCoroutine(roam());
-                }
+            }
 
             
         }
@@ -192,7 +202,9 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
                     //agent.stoppingDistance = 0;
                     yield return new WaitForSeconds(roamPauseTime);
                     agent.SetDestination(waypoints[m_PathIndex].position);
-                } else
+                } 
+                
+                else
                 {
 
                     Vector3 randomPos = Random.insideUnitSphere * roamDistance;
@@ -437,8 +449,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
                 if (agent.remainingDistance <= agent.stoppingDistance && !isShooting && angleToPlayer <= shootAngle)
                 {
-
-                      StartCoroutine(shoot());
+                    if ( gameManager.instance.playerScript.HP >= 0)
+                        StartCoroutine(shoot());
                 }
 
 
