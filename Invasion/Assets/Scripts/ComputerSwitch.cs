@@ -8,6 +8,7 @@ public class ComputerSwitch : MonoBehaviour
     public TextMeshProUGUI activateMessage;
     public Material greenMaterial;
     public GameObject door;
+    public GameObject popupAlert;
     public GameObject monitor;
     public AudioClip activateSound;
 
@@ -34,6 +35,7 @@ public class ComputerSwitch : MonoBehaviour
                 {
                     monitorRender.material = greenMaterial;
                     Destroy(door);
+                    Destroy(popupAlert);
                     isSwitchActivated = true;
                     activateMessage.gameObject.SetActive(false);
                     audioSource.PlayOneShot(activateSound);
