@@ -10,6 +10,7 @@ public class weaponSwap : MonoBehaviour
     void Start()
     {
         SelectWeapon();
+        
     }
 
     void Update()
@@ -34,21 +35,13 @@ public class weaponSwap : MonoBehaviour
                     selectedWeapon--;
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            for (int i = 0; i < transform.childCount; i++)
             {
-                selectedWeapon = 0;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2)
-            {
-                selectedWeapon = 1;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3)
-            {
-                selectedWeapon = 2;
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4) && transform.childCount >= 4)
-            {
-                selectedWeapon = 3;
+                if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+                {
+                    selectedWeapon = i;
+                    break;
+                }
             }
         }
 
@@ -57,40 +50,58 @@ public class weaponSwap : MonoBehaviour
             SelectWeapon();
         }
     }
+    //if (Input.GetKeyDown(KeyCode.Alpha1))
+    //{
+    //    selectedWeapon = 0;
+    //}
+    //if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2)
+    //{
+    //    selectedWeapon = 1;
+    //}
+    //if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3)
+    //{
+    //    selectedWeapon = 2;
+    //}
+    //if (Input.GetKeyDown(KeyCode.Alpha4) && transform.childCount >= 4)
+    //{
+    //    selectedWeapon = 3;
+    //}
+    //    if (previousSelectedWeapon != selectedWeapon)
+    //    {
+    //     SelectWeapon();
+    //    }
+    //}
 
     void SelectWeapon()
     {
-        int i = 0;
-        foreach (Transform weapon in transform)
+        for (int i = 0; i < transform.childCount; i++)
         {
+            Transform weapon = transform.GetChild(i);
+            weapon.gameObject.SetActive(i == selectedWeapon);
+
             if (i == selectedWeapon)
             {
-                weapon.gameObject.SetActive(true);
-
                 firearm currentWeapon = weapon.GetComponent<firearm>();
                 if (currentWeapon != null)
                 {
-
                     if (currentWeapon.currentAmmo > 0)
                     {
-                        currentWeapon.UpdateAmmoUI();
+                        if (currentWeapon.ammoCurText != null)
+                        {
+                            currentWeapon.ammoCurText.text = currentWeapon.currentAmmo.ToString();
+                            currentWeapon.ammoMaxText.text = currentWeapon.maxAmmo.ToString();
+                        }
                     }
                     else
                     {
                         if (currentWeapon.ammoCurText != null)
                         {
                             currentWeapon.ammoCurText.text = "0";
+                            currentWeapon.ammoMaxText.text = "0";
                         }
                     }
                 }
             }
-            else
-            {
-                weapon.gameObject.SetActive(false);
-            }
-            i++;
         }
     }
-
-
 }
