@@ -2099,7 +2099,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 332004023617824042, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: m_Speed
-      value: 25
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5784420588845750088, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2165,6 +2165,14 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 942764255}
+    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: enemyRunSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599512346608029463, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
+      propertyPath: targetFaceSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7918646389003623894, guid: 9a1c4ebc196e91c4bbeac365e8fab0ce, type: 3}
       propertyPath: m_Name
       value: Gorosaurus
@@ -10513,10 +10521,13 @@ MonoBehaviour:
   force: 0
   firerate: 0
   specialRate: 0
+  recoilAmount: 1
   maxAmmo: 1
   currentAmmo: 1
   reloadTime: 0
   specialReload: 0
+  inBurstMode: 0
+  burstCooldown: 5
   shootCam: {fileID: 477784471535707412}
   muzzleFlash: {fileID: 0}
   shotSound: {fileID: 0}
@@ -10526,6 +10537,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 0}
   ammoCurText: {fileID: 3575385321686977847}
   ammoMaxText: {fileID: 6597175318220584252}
+  firearmType: 0
   _weaponSwap: {fileID: 2671761733054887185}
   animator: {fileID: 1958288591983755122}
 --- !u!23 &696601311980724421
@@ -11184,10 +11196,13 @@ MonoBehaviour:
   force: 30
   firerate: 0.6
   specialRate: 25
+  recoilAmount: 1
   maxAmmo: 2
   currentAmmo: 0
   reloadTime: 2
   specialReload: 3.8
+  inBurstMode: 0
+  burstCooldown: 5
   shootCam: {fileID: 477784471535707412}
   muzzleFlash: {fileID: 5780475873352822970}
   shotSound: {fileID: 8300000, guid: 9db176e1ad4d89647a0bbcbd8b28693b, type: 3}
@@ -11197,6 +11212,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 3765445322063549871}
   ammoCurText: {fileID: 3575385321686977847}
   ammoMaxText: {fileID: 6597175318220584252}
+  firearmType: 0
   _weaponSwap: {fileID: 2671761733054887185}
   animator: {fileID: 2389981494701883883}
 --- !u!1 &2904696856966547263 stripped
@@ -27490,10 +27506,13 @@ MonoBehaviour:
   force: 10
   firerate: 2.4
   specialRate: 3
+  recoilAmount: 1
   maxAmmo: 15
   currentAmmo: 0
   reloadTime: 1.2
   specialReload: 1.9
+  inBurstMode: 0
+  burstCooldown: 5
   shootCam: {fileID: 477784471535707412}
   muzzleFlash: {fileID: 7262665108527920096}
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
@@ -27503,6 +27522,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 3765445322063549871}
   ammoCurText: {fileID: 3575385321686977847}
   ammoMaxText: {fileID: 6597175318220584252}
+  firearmType: 0
   _weaponSwap: {fileID: 2671761733054887185}
   animator: {fileID: 2389981494701883883}
 --- !u!1 &9103828444586558314
@@ -27556,10 +27576,13 @@ MonoBehaviour:
   force: 10
   firerate: 12
   specialRate: 12
+  recoilAmount: 1
   maxAmmo: 30
   currentAmmo: 0
   reloadTime: 3
   specialReload: 3
+  inBurstMode: 0
+  burstCooldown: 5
   shootCam: {fileID: 477784471535707412}
   muzzleFlash: {fileID: 6506201920949677677}
   shotSound: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
@@ -27569,6 +27592,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 3765445322063549871}
   ammoCurText: {fileID: 3575385321686977847}
   ammoMaxText: {fileID: 6597175318220584252}
+  firearmType: 0
   _weaponSwap: {fileID: 2671761733054887185}
   animator: {fileID: 2389981494701883883}
 --- !u!1660057539 &9223372036854775807
