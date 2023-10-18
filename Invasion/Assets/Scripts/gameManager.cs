@@ -75,8 +75,7 @@ public class gameManager : MonoBehaviour
         player.transform.position = playerSpawnPos.transform.position;
 
 
-      
-                
+                  
     }
 
     private void Start()
