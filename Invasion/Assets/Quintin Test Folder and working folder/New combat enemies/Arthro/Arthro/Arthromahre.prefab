@@ -1815,19 +1815,7 @@ MonoBehaviour:
   reflexGauntlet: {fileID: 0}
   doorTrigger: {fileID: 0}
   doorTrigger2: {fileID: 0}
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  waypoints: []
   hp: 35
   targetFaceSpeed: 3
   viewAngle: 360
@@ -1900,7 +1888,7 @@ NavMeshAgent:
   m_Acceleration: 2
   avoidancePriority: 50
   m_AngularSpeed: 25
-  m_StoppingDistance: 12
+  m_StoppingDistance: 20
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
