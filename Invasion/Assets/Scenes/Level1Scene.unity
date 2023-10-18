@@ -24947,6 +24947,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6269635625250689571, guid: 1b890216c6645c648bfde4c7ba8f0b08, type: 3}
   m_PrefabInstance: {fileID: 225634820}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1131813033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8986483307788811354, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+  m_PrefabInstance: {fileID: 1304740962}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1131958403 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5725000371507048362, guid: b2452a5c2cd649a4db9eebcd16f7b155, type: 3}
@@ -28928,21 +28933,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 324623734734365061}
     m_Modifications:
-    - target: {fileID: 2520137060091280499, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 180
-      objectReference: {fileID: 0}
     - target: {fileID: 4406098225257270888, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 4406098225257270888, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4609731256055771614, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 5155879695160831469, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: controlsMenuActive
       objectReference: {fileID: 0}
     - target: {fileID: 6493654570813498596, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
       propertyPath: m_Pivot.x
@@ -29024,6 +29021,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8244918291997629479, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185727853195595338, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: isPaused
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185727853195595338, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: beginMenu
+      value: 
+      objectReference: {fileID: 1131813033}
+    - target: {fileID: 9185727853195595338, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: currentMenu
+      value: 
+      objectReference: {fileID: 1131813033}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
