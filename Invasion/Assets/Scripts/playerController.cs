@@ -221,7 +221,7 @@ public class playerController : MonoBehaviour, IDamage, IPhysics
 
 
         //Jump Ability:  Currently allows player to jump
-        if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax)
+        if (Input.GetButtonDown("Jump") && jumpedTimes < jumpsMax && Stamina>=1.3)
         {
             jumpedTimes++;
             playerVelocity.y += jumpHeight;
