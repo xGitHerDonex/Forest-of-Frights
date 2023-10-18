@@ -19,21 +19,29 @@ public class bullet : MonoBehaviour
        
 
     }
+    
 
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.isTrigger)
-            return;
-
-
-        IDamage damageable = other.GetComponent<IDamage>();
-
-        if (damageable != null)
+        if (other.CompareTag("walls"))
         {
-            damageable.hurtBaddies(damage);
+            Destroy(gameObject);
+        } else
+        {
+
+            if (other.isTrigger)
+                return;
+
+
+            IDamage damageable = other.GetComponent<IDamage>();
+
+            if (damageable != null)
+            {
+                damageable.hurtBaddies(damage);
+            }
+            Destruction();
         }
-        Destruction();
     }
 
     void Destruction()
