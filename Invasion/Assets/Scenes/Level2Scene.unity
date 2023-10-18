@@ -11188,6 +11188,91 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3452931867044665262, guid: 32467b8dc355cd04da356b17dbac4f29, type: 3}
   m_PrefabInstance: {fileID: 449488667}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &450321739
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1119341997312212281, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: hp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1119341997312212281, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: shootRate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1119341997312212281, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: targetFaceSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1556228876638063551, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_Radius
+      value: 70.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257292715300304477, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_Speed
+      value: 15.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257292715300304477, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_Acceleration
+      value: 10.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 3257292715300304477, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 10.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846975686360225306, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 256.84244
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846975686360225306, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.788752
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846975686360225306, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 398.5044
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846975686360225306, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846975686360225306, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846975686360225306, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846975686360225306, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846975686360225306, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846975686360225306, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846975686360225306, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8010112081440449478, guid: cc7576db0224790499242817341b03e1, type: 3}
+      propertyPath: m_Name
+      value: Arthromahre Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc7576db0224790499242817341b03e1, type: 3}
 --- !u!1001 &450366260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20647,7 +20732,7 @@ MonoBehaviour:
   m_TileSize: 256
   m_OverrideVoxelSize: 1
   m_VoxelSize: 1.18
-  m_MinRegionArea: 0.25
+  m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 15975fe499c3bd64a94c5b10024edc7f, type: 2}
   m_BuildHeightMesh: 1
 --- !u!4 &793482937
@@ -33814,7 +33899,7 @@ MonoBehaviour:
   m_TileSize: 256
   m_OverrideVoxelSize: 1
   m_VoxelSize: 1.04
-  m_MinRegionArea: 2
+  m_MinRegionArea: 5
   m_NavMeshData: {fileID: 23800000, guid: 838d38172cf7a144392b42cbb3140e4a, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1332553250
@@ -73928,10 +74013,13 @@ MonoBehaviour:
   force: 10
   firerate: 2.4
   specialRate: 3
+  recoilAmount: 1
   maxAmmo: 15
   currentAmmo: 0
   reloadTime: 1.2
   specialReload: 1.9
+  inBurstMode: 0
+  burstCooldown: 5
   shootCam: {fileID: 8814927828285917604}
   muzzleFlash: {fileID: 1747307826114158416}
   shotSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
@@ -73941,6 +74029,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 5238821938643892511}
   ammoCurText: {fileID: 182525994}
   ammoMaxText: {fileID: 182525993}
+  firearmType: 0
   _weaponSwap: {fileID: 6476604497959492001}
   animator: {fileID: 6764248154806414683}
 --- !u!4 &160276897185714677
@@ -73994,10 +74083,13 @@ MonoBehaviour:
   force: 10
   firerate: 12
   specialRate: 12
+  recoilAmount: 1
   maxAmmo: 30
   currentAmmo: 0
   reloadTime: 3
   specialReload: 3
+  inBurstMode: 0
+  burstCooldown: 5
   shootCam: {fileID: 8814927828285917604}
   muzzleFlash: {fileID: 2791994785350419165}
   shotSound: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
@@ -74007,6 +74099,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 5238821938643892511}
   ammoCurText: {fileID: 182525994}
   ammoMaxText: {fileID: 182525993}
+  firearmType: 0
   _weaponSwap: {fileID: 6476604497959492001}
   animator: {fileID: 6764248154806414683}
 --- !u!65 &296892074167428576
@@ -91142,10 +91235,13 @@ MonoBehaviour:
   force: 30
   firerate: 0.6
   specialRate: 25
+  recoilAmount: 1
   maxAmmo: 2
   currentAmmo: 0
   reloadTime: 2
   specialReload: 3.8
+  inBurstMode: 0
+  burstCooldown: 5
   shootCam: {fileID: 8814927828285917604}
   muzzleFlash: {fileID: 3228487695756712970}
   shotSound: {fileID: 8300000, guid: 9db176e1ad4d89647a0bbcbd8b28693b, type: 3}
@@ -91155,6 +91251,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 5238821938643892511}
   ammoCurText: {fileID: 182525994}
   ammoMaxText: {fileID: 182525993}
+  firearmType: 0
   _weaponSwap: {fileID: 6476604497959492001}
   animator: {fileID: 6764248154806414683}
 --- !u!1 &6622695590658800618
@@ -95539,10 +95636,13 @@ MonoBehaviour:
   force: 0
   firerate: 0
   specialRate: 0
+  recoilAmount: 1
   maxAmmo: 1
   currentAmmo: 1
   reloadTime: 0
   specialReload: 0
+  inBurstMode: 0
+  burstCooldown: 5
   shootCam: {fileID: 8814927828285917604}
   muzzleFlash: {fileID: 0}
   shotSound: {fileID: 0}
@@ -95552,6 +95652,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 0}
   ammoCurText: {fileID: 182525994}
   ammoMaxText: {fileID: 182525993}
+  firearmType: 0
   _weaponSwap: {fileID: 6476604497959492001}
   animator: {fileID: 7482934479770702786}
 --- !u!1 &8486178408593211617
@@ -97020,3 +97121,4 @@ SceneRoots:
   - {fileID: 1637334287}
   - {fileID: 1679706795}
   - {fileID: 2560797693596626110}
+  - {fileID: 450321739}
