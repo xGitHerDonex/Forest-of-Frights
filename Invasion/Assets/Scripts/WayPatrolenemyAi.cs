@@ -39,7 +39,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
     [Tooltip("Turning speed 1-10.")]
     [Range(1, 10)][SerializeField] int targetFaceSpeed;
-
+    [Range(1, 30)][SerializeField] int runSpeed;
+    [SerializeField] bool isLetal;
 
 
     [Tooltip("Enemy viewing angle, (-)360-360.")]
@@ -77,6 +78,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     Vector3 playerDirection;
     Vector3 startingPos;
     float distToStart;
+    float distToPlayer;
     float stoppingDistOriginal;
     float angleToPlayer;
     float speedOrig;
@@ -144,6 +146,9 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     }
     protected virtual void Update()
     {
+
+        distToPlayer = Vector3.Distance(transform.position, gameManager.instance.playerScript.transform.position);
+
         if (gameManager.instance.playerScript.HP <= 0)
         {
             StartCoroutine(reset());
@@ -165,14 +170,16 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             //also if the player is not in range at all the enemy is allowed to roam
             if (playerInRange && !canSeePlayer())
             {
-                    StartCoroutine(roam()) ;
+                agent.speed = speedOrig;
+                StartCoroutine(roam()) ;
             }
 
 
             
             else if (!playerInRange)
             {
-                    StartCoroutine(roam());
+                agent.speed = speedOrig;
+                StartCoroutine(roam());
             }
 
             
@@ -192,6 +199,9 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         //will allow the enemy to consulte with the nav mesh to pick a random destination that is walkable
         //that is within the roaming distance set that destinatino and walk to it
         {
+
+           
+
             if (agent.remainingDistance <= agent.stoppingDistance && !destinationPicked)
             {
                 if (waypoints.Length > 0)
@@ -214,6 +224,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
                     if (NavMesh.SamplePosition(randomPos, out destination, roamDistance, 1))
                     {
+              
                         agent.SetDestination(destination.position);
                     }
 
@@ -347,7 +358,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     {
         isShooting = true;
         playAttackSound();
-        if(agent.remainingDistance >= stoppingDistOriginal && playerInRange)
+        if(!isLetal && agent.remainingDistance >= stoppingDistOriginal && playerInRange)
         {
             //SphereCollider temp = new SphereCollider();
             //temp.radius = 5f;
@@ -360,7 +371,24 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(shootRate);
         Instantiate(bullet, shootPos.position, transform.rotation);
         isShooting = false;
-        } else if (agent.remainingDistance < stoppingDistOriginal && playerInRange)
+        }
+
+        else if (isLetal && distToPlayer >= agent.stoppingDistance)
+        {
+            //SphereCollider temp = new SphereCollider();
+            //temp.radius = 5f;
+            //temp.enabled = true;
+            anime.SetBool("isMelee", false);
+            anime.SetBool("isRanged", true);
+            anime.SetTrigger("Shoot");
+            //Used to add delay to the shoot to match the animation
+            //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
+            yield return new WaitForSeconds(shootRate);
+            Instantiate(bullet, shootPos.position, transform.rotation);
+            isShooting = false;
+        }
+
+        else if (agent.remainingDistance < stoppingDistOriginal && playerInRange)
         {
             anime.SetBool("isMelee", !true);
             anime.SetBool("isRanged", !false);
@@ -434,11 +462,17 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
              * if the ray cast hits an object and its the player and the angle to the player is less than
              * or equal to the preset viewing angle then tell the enemy to set the target destination to the player
              */
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle)
+            if (hit.collider.CompareTag("Player"))// && angleToPlayer <= viewAngle)
             {
+               
                 agent.stoppingDistance = stoppingDistOriginal;
-
                 agent.SetDestination(gameManager.instance.player.transform.position);
+
+                if (isLetal && playerInRange && distToPlayer >= stoppingDistOriginal)
+                {
+                    agent.speed = runSpeed;
+                }
+
                 /*
                  * if the remaining distance is less than or equal to the stopping  distance of the enemy
                  * face the target and prepare to shoot if the angle is within parameter and the enemy is not already shooting
@@ -447,7 +481,15 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
                 faceTarget();
 
-                if (agent.remainingDistance <= agent.stoppingDistance && !isShooting && angleToPlayer <= shootAngle)
+
+                if (isLetal && distToPlayer >= agent.stoppingDistance && distToPlayer <= agent.stoppingDistance + 20 && !isShooting && angleToPlayer <= shootAngle)
+                {
+
+                    if (gameManager.instance.playerScript.HP >= 0)
+                        StartCoroutine(shoot());
+                }
+
+                else if (!isLetal && agent.remainingDistance <= agent.stoppingDistance && !isShooting && angleToPlayer <= shootAngle)
                 {
                     if ( gameManager.instance.playerScript.HP >= 0)
                         StartCoroutine(shoot());
@@ -460,6 +502,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         }
         //otherwise set the stopping distance to zero and return false
         agent.stoppingDistance = 0;
+        
         return false;
     }
 

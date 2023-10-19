@@ -1818,17 +1818,19 @@ MonoBehaviour:
   waypoints: []
   hp: 35
   targetFaceSpeed: 3
+  runSpeed: 0
+  isLetal: 0
   viewAngle: 360
   roamDistance: 5
   roamPauseTime: 2
   animeSpeedChange: 2
   bullet: {fileID: 4635538419760109935, guid: 8244d40c271e1c2498a72a05630e3733, type: 3}
   shootAngle: 45
-  shootRate: 1.49
+  shootRate: 0.75
   audioSource: {fileID: 821739805263676626}
   walkSound: {fileID: 8300000, guid: 912acfbfb0389384ab7986b0ccec124f, type: 3}
   attackSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 704f717f85aa4334ea4ef35c2e2d0254, type: 3}
   stopMovingTime: 0
 --- !u!95 &1044419115854282431
 Animator:
@@ -1893,7 +1895,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 3.88
-  m_BaseOffset: -0.02
+  m_BaseOffset: -0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &2817483584997220364

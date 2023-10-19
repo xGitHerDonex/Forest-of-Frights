@@ -329,7 +329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &290050810049184387
 Transform:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 29.85, y: 0, z: 44.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7340383893807332027}
@@ -391,8 +391,10 @@ MonoBehaviour:
   doorTrigger: {fileID: 0}
   doorTrigger2: {fileID: 0}
   waypoints: []
-  hp: 55
+  hp: 100
   targetFaceSpeed: 4
+  runSpeed: 10
+  isLetal: 1
   viewAngle: 360
   roamDistance: 5
   roamPauseTime: 0
@@ -534,7 +536,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -902729914
   m_Radius: 4
-  m_Speed: 4
+  m_Speed: 10
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 65
@@ -543,7 +545,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 5.5
-  m_BaseOffset: 0
+  m_BaseOffset: -0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &738249865775300252
