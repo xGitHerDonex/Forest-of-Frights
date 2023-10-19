@@ -391,8 +391,10 @@ MonoBehaviour:
   doorTrigger: {fileID: 0}
   doorTrigger2: {fileID: 0}
   waypoints: []
-  hp: 55
+  hp: 100
   targetFaceSpeed: 4
+  runSpeed: 10
+  isLetal: 1
   viewAngle: 360
   roamDistance: 5
   roamPauseTime: 0
@@ -534,7 +536,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -902729914
   m_Radius: 4
-  m_Speed: 4
+  m_Speed: 3
   m_Acceleration: 5
   avoidancePriority: 50
   m_AngularSpeed: 65
@@ -543,7 +545,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 5.5
-  m_BaseOffset: 0
+  m_BaseOffset: -1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!135 &738249865775300252
