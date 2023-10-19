@@ -146,6 +146,9 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     }
     protected virtual void Update()
     {
+
+        distToPlayer = Vector3.Distance(transform.position, gameManager.instance.playerScript.transform.position);
+
         if (gameManager.instance.playerScript.HP <= 0)
         {
             StartCoroutine(reset());
@@ -355,7 +358,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     {
         isShooting = true;
         playAttackSound();
-        if(agent.remainingDistance >= stoppingDistOriginal && playerInRange)
+        if(!isLetal && agent.remainingDistance >= stoppingDistOriginal && playerInRange)
         {
             //SphereCollider temp = new SphereCollider();
             //temp.radius = 5f;
@@ -368,7 +371,24 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(shootRate);
         Instantiate(bullet, shootPos.position, transform.rotation);
         isShooting = false;
-        } else if (agent.remainingDistance < stoppingDistOriginal && playerInRange)
+        }
+
+        else if (isLetal && distToPlayer >= agent.stoppingDistance)
+        {
+            //SphereCollider temp = new SphereCollider();
+            //temp.radius = 5f;
+            //temp.enabled = true;
+            anime.SetBool("isMelee", false);
+            anime.SetBool("isRanged", true);
+            anime.SetTrigger("Shoot");
+            //Used to add delay to the shoot to match the animation
+            //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
+            yield return new WaitForSeconds(shootRate);
+            Instantiate(bullet, shootPos.position, transform.rotation);
+            isShooting = false;
+        }
+
+        else if (agent.remainingDistance < stoppingDistOriginal && playerInRange)
         {
             anime.SetBool("isMelee", !true);
             anime.SetBool("isRanged", !false);
@@ -444,7 +464,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
              */
             if (hit.collider.CompareTag("Player"))// && angleToPlayer <= viewAngle)
             {
-                distToPlayer = Vector3.Distance(transform.position, gameManager.instance.playerScript.transform.position);
+               
                 agent.stoppingDistance = stoppingDistOriginal;
                 agent.SetDestination(gameManager.instance.player.transform.position);
 
@@ -461,7 +481,15 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
                 faceTarget();
 
-                if (agent.remainingDistance <= agent.stoppingDistance && !isShooting && angleToPlayer <= shootAngle)
+
+                if (isLetal && distToPlayer >= agent.stoppingDistance && distToPlayer <= agent.stoppingDistance + 20 && !isShooting && angleToPlayer <= shootAngle)
+                {
+
+                    if (gameManager.instance.playerScript.HP >= 0)
+                        StartCoroutine(shoot());
+                }
+
+                else if (!isLetal && agent.remainingDistance <= agent.stoppingDistance && !isShooting && angleToPlayer <= shootAngle)
                 {
                     if ( gameManager.instance.playerScript.HP >= 0)
                         StartCoroutine(shoot());

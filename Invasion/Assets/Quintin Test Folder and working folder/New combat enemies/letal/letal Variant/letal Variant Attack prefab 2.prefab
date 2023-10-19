@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3524028776393812240}
   - component: {fileID: 5449048267499554653}
   m_Layer: 8
-  m_Name: letal Variant Attack prefab 1
+  m_Name: letal Variant Attack prefab 2
   m_TagString: enemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.417, z: 0.47}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3524028776393812240}
   damage: 35
-  speed: 50
+  speed: 60
   destroyTime: 3
 --- !u!114 &-864417641232556038
 MonoBehaviour:
