@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionAmount: 25
   explosionEffect: {fileID: 4408539241108053208, guid: 4ef85365838d557499de6b10af6b31a4, type: 3}
-  explosionDamage: 5
-  destroyTime: 0
+  explosionDamage: 8
+  destroyTime: 0.5
 --- !u!33 &5884274645516863061
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -68,7 +68,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9013456325837797778}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -119,11 +119,11 @@ SphereCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5
-  m_Center: {x: 0, y: -0.05630766, z: 0}
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &2303574703383286148
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -169,12 +169,12 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 99
   DopplerLevel: 1
-  MinDistance: 5
+  MinDistance: 1
   MaxDistance: 80
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

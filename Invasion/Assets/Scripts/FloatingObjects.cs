@@ -9,6 +9,7 @@ public class FloatingObjects : MonoBehaviour
     public bool floatEnabled = false;
     public bool horizontalFloatEnabled = false;
     public bool spinEnabled = false;
+    public bool verticalSpin = false;
     public float floatSpeed = 1.0f;
     public float floatDistance = 0.5f;
     public float spinSpeed = 30.0f;
@@ -46,6 +47,11 @@ public class FloatingObjects : MonoBehaviour
         {
             //if you turn on spin, the object will spin in around in a 360
             transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime);
+        }
+
+        if (verticalSpin)
+        {
+            transform.Rotate(Vector3.forward, spinSpeed * Time.deltaTime);
         }
     }
 }
