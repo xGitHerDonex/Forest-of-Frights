@@ -7,6 +7,8 @@ public class mainMenu : MonoBehaviour
 {
     [SerializeField] GameObject controlsPanel;
     [SerializeField] GameObject creditsPanel;
+    [SerializeField] GameObject audioPanel;
+
 
     public void OnPlayButton()
     {
@@ -20,23 +22,67 @@ public class mainMenu : MonoBehaviour
     }
 
 
-    public void showControls()
+    public void ControlOpenClose()
     {
-        controlsPanel.SetActive(true);
+        if (audioPanel.activeSelf || creditsPanel.activeSelf)
+        {
+            return;
+        } else
+        {        
+            controlsPanel.SetActive(!controlsPanel.activeSelf);
+
+        }
     }
 
-    public void closeControls()
+   
+
+    public void CreditsOpenAndClose()
     {
-        controlsPanel.SetActive(false);  
+        if (audioPanel.activeSelf || controlsPanel.activeSelf)
+        {
+            return;
+        } else
+        {
+            creditsPanel.SetActive(!creditsPanel.activeSelf);
+
+        }
     }
 
-    public void showCredits()
+
+    public void AudioDisplayAndClose()
     {
-        creditsPanel.SetActive(true);
+        if (creditsPanel.activeSelf || controlsPanel.activeSelf)
+        {
+            return;
+        } else
+        {
+        audioPanel.SetActive(!audioPanel.activeSelf);
+        }
     }
 
-    public void closeCredits()
-    {
-        creditsPanel.SetActive(false);
-    }
+
+    #region oldCode
+    //public void closeCredits()
+    //{
+    //    if (audioPanel.activeSelf || controlsPanel.activeSelf)
+    //    {
+    //        return;
+    //    } else
+    //    {
+    //        creditsPanel.SetActive(false);
+
+    //    }
+    //} 
+    //public void closeControls()
+    //{
+    //    if (audioPanel.activeSelf || creditsPanel.activeSelf)
+    //    {
+    //        return;
+    //    } else
+    //    {
+    //        controlsPanel.SetActive(false);
+
+    //    }
+    //} 
+    #endregion
 }
