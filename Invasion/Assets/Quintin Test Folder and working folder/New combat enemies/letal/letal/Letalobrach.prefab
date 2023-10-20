@@ -405,7 +405,7 @@ MonoBehaviour:
   audioSource: {fileID: -4627468961055096311}
   walkSound: {fileID: 8300000, guid: e6015690bab79a347997c4d0517f5b9d, type: 3}
   attackSound: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: a9af668abdf6ad24aba89c1e11467876, type: 3}
+  deathSound: {fileID: 8300000, guid: 4be1df018e0df574ca575bee6f1a9b78, type: 3}
   stopMovingTime: 0
 --- !u!82 &-4627468961055096311
 AudioSource:
@@ -419,7 +419,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -430,7 +430,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 80
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

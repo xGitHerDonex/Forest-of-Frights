@@ -350,6 +350,8 @@ MonoBehaviour:
   waypoints: []
   hp: 30
   targetFaceSpeed: 3
+  runSpeed: 0
+  isLetal: 0
   viewAngle: 360
   roamDistance: 60
   roamPauseTime: 0
@@ -360,7 +362,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   walkSound: {fileID: 8300000, guid: 736ee352acbeb2946bf337216c6bd995, type: 3}
   attackSound: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: 7df0364dd13da374c8d957aaa1013f9f, type: 3}
+  deathSound: {fileID: 8300000, guid: 7bc806ae34ca75246938726710e44e59, type: 3}
   stopMovingTime: 0.15
 --- !u!136 &2934562479123292413
 CapsuleCollider:
@@ -472,7 +474,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 55
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

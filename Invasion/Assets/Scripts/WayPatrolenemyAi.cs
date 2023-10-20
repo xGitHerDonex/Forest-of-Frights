@@ -296,7 +296,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
             // Random chance to drop a health orb
             float randomChance = Random.Range(0f, 100f);
-            if (randomChance >= 0f && randomChance <= 13f)
+            if (randomChance >= 0f && randomChance <= 15f)
             {
                 Instantiate(healthOrb, transform.position + (Vector3.up * 1) + (Vector3.left * 2), transform.rotation);
             }

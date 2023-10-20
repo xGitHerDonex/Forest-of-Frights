@@ -120,8 +120,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.27056146, g: 1, b: 0, a: 1}
-  m_Intensity: 2
-  m_Range: 5
+  m_Intensity: 3
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -185,6 +185,7 @@ MonoBehaviour:
   floatEnabled: 0
   horizontalFloatEnabled: 0
   spinEnabled: 1
+  verticalSpin: 0
   floatSpeed: 1
   floatDistance: 0.5
   spinSpeed: 40
@@ -201,4 +202,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSTABuff: 5
-  buffDuration: 15
+  buffDuration: 17
