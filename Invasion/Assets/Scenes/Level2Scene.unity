@@ -3547,6 +3547,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2792196723033162668}
     m_Modifications:
+    - target: {fileID: 1163358710182395514, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.4995995
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163358710182395514, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163358710182395514, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.52662677
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163358710182395514, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.4995995
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163358710182395514, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163358710182395514, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.52662677
+      objectReference: {fileID: 0}
     - target: {fileID: 4406098225257270888, guid: b61ffb69c2a7ccb4e8c454aa2e93cec2, type: 3}
       propertyPath: m_Name
       value: UI
@@ -4019,6 +4043,7 @@ MonoBehaviour:
   floatEnabled: 1
   horizontalFloatEnabled: 0
   spinEnabled: 1
+  verticalSpin: 0
   floatSpeed: 1
   floatDistance: 0.5
   spinSpeed: 5
@@ -6261,6 +6286,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuffAlerts: {fileID: 995762583}
+  ShootAlert: {fileID: 0}
+  GrenadeAlert: {fileID: 0}
 --- !u!65 &270308110
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27154,7 +27181,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -30088,6 +30115,7 @@ MonoBehaviour:
   floatEnabled: 1
   horizontalFloatEnabled: 0
   spinEnabled: 1
+  verticalSpin: 0
   floatSpeed: 1
   floatDistance: 0.5
   spinSpeed: 5
@@ -37924,6 +37952,7 @@ MonoBehaviour:
   floatEnabled: 1
   horizontalFloatEnabled: 0
   spinEnabled: 1
+  verticalSpin: 0
   floatSpeed: 1
   floatDistance: 0.2
   spinSpeed: 30
@@ -45887,6 +45916,7 @@ MonoBehaviour:
   floatEnabled: 1
   horizontalFloatEnabled: 0
   spinEnabled: 1
+  verticalSpin: 0
   floatSpeed: 1
   floatDistance: 0.5
   spinSpeed: 5
@@ -70222,6 +70252,7 @@ MonoBehaviour:
   floatEnabled: 1
   horizontalFloatEnabled: 0
   spinEnabled: 1
+  verticalSpin: 0
   floatSpeed: 0.75
   floatDistance: 0.5
   spinSpeed: 5
