@@ -9,6 +9,7 @@ public class weaponSwap : MonoBehaviour
 
     void Start()
     {
+        //selectedWeapon = PlayerPrefs.GetInt("SelectedWeapon", 0);
         SelectWeapon();
         
     }

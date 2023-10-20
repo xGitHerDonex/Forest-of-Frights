@@ -76,9 +76,10 @@ public class firearm : MonoBehaviour
     }
     void Update()
     {
+       // UpdateAmmoUI();
         if (isReloading)
             return;
-
+        UpdateAmmoUI();
         if (currentAmmo <= 0 || manualReload)
         {
             StartCoroutine(Reload());
@@ -106,8 +107,6 @@ public class firearm : MonoBehaviour
             nextShot = Time.time + 1f / specialRate;
             Special();
         }
-
-
 
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -160,48 +159,51 @@ public class firearm : MonoBehaviour
 
     public void Special()
     {
-        if (firearmType == FirearmType.Pistol && currentAmmo >=3)
+        if (!gameManager.instance.isPaused)
         {
-            StartCoroutine(PistolBurst());
-        }
-        else
-        {
-            if (muzzleFlash != null)
+            if (firearmType == FirearmType.Pistol && currentAmmo >= 3)
             {
-                muzzleFlash.Play();
-
+                StartCoroutine(PistolBurst());
             }
-            audioSource.PlayOneShot(shotSound);
-            currentAmmo--;
-            antiGrenade = true;
-
-            RaycastHit hit;
-            if (Physics.Raycast(shootCam.transform.position, shootCam.transform.forward, out hit, range))
+            else
             {
-
-                IDamage damageable = hit.collider.GetComponent<IDamage>();
-
-                if (damageable != player && damageable != null && hit.transform != transform && damageable != player)
+                if (muzzleFlash != null)
                 {
-                    damageable.hurtBaddies(damage);
-                    GameObject hitEffectGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-                    Destroy(hitEffectGO, 1f);
+                    muzzleFlash.Play();
+
+                }
+                audioSource.PlayOneShot(shotSound);
+                currentAmmo--;
+                antiGrenade = true;
+
+                RaycastHit hit;
+                if (Physics.Raycast(shootCam.transform.position, shootCam.transform.forward, out hit, range))
+                {
+
+                    IDamage damageable = hit.collider.GetComponent<IDamage>();
+
+                    if (damageable != player && damageable != null && hit.transform != transform && damageable != player)
+                    {
+                        damageable.hurtBaddies(damage);
+                        GameObject hitEffectGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                        Destroy(hitEffectGO, 1f);
+                    }
+
+                }
+                animator.SetBool("isShooting", true);
+                if (hit.rigidbody != null)
+                {
+                    hit.rigidbody.AddForce(-hit.normal * force);
                 }
 
-            }
-            animator.SetBool("isShooting", true);
-            if (hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(-hit.normal * force);
-            }
+                //GameObject hitEffectGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
+                //Destroy(hitEffectGO, 1f);
+                specialUsed = true;
 
-            //GameObject hitEffectGO = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            //Destroy(hitEffectGO, 1f);
-            specialUsed = true;
-
-            if (ammoCurText != null)
-            {
-                ammoCurText.text = currentAmmo.ToString();
+                if (ammoCurText != null)
+                {
+                    ammoCurText.text = currentAmmo.ToString();
+                }
             }
         }
     }
@@ -256,6 +258,7 @@ public class firearm : MonoBehaviour
         {
             ammoCurText.text = currentAmmo.ToString();
         }
+        
         isReloading = false;
         specialUsed = false;
     }
@@ -263,19 +266,19 @@ public class firearm : MonoBehaviour
 
     public void UpdateAmmoUI()
     {
-
-        if (ammoCurText != null && _weaponSwap.selectedWeapon != 0)
+        if (ammoCurText != null)
         {
-            ammoCurText.text = currentAmmo.ToString();
-            ammoMaxText.text = maxAmmo.ToString();
+            if (currentAmmo > 0)
+            {
+                ammoCurText.text = currentAmmo.ToString();
+                ammoMaxText.text = maxAmmo.ToString();
+            }
+            else
+            {
+                //ammoCurText.text = "";
+                ammoMaxText.text = maxAmmo.ToString(); 
+            }
         }
-
-        else if (_weaponSwap.selectedWeapon <= 0)
-        {
-            ammoCurText.text = "";
-            ammoMaxText.text = "";
-        }
-
 
     }
 

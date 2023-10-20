@@ -44,12 +44,12 @@ public class gameManager : MonoBehaviour
 
     [Header("-----Menus-----")]
     [SerializeField] GameObject currentMenu;       // Selected Menu - will store the current menu that needs to be controlled
-    public GameObject pauseMenu;         // Pause Menu
+    public GameObject pauseMenu;                   // Pause Menu
     [SerializeField] GameObject winMenu;           // Win Menu
     [SerializeField] GameObject loseMenu;          // Lose Menu
     [SerializeField] GameObject controlsMenu;
-    [SerializeField] GameObject inventoryMenu;
-    [SerializeField] GameObject beginMenu;    // Inventory Menu
+    [SerializeField] GameObject inventoryMenu;     // Inventory Menu
+    [SerializeField] GameObject beginMenu;         // Intro message
     [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
 
 

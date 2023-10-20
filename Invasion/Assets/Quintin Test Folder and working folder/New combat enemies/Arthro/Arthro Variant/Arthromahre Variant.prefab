@@ -2012,8 +2012,10 @@ MonoBehaviour:
   doorTrigger: {fileID: 0}
   doorTrigger2: {fileID: 0}
   waypoints: []
-  hp: 25
+  hp: 48
   targetFaceSpeed: 5
+  runSpeed: 0
+  isLetal: 0
   viewAngle: 360
   roamDistance: 30
   roamPauseTime: 3
@@ -2024,7 +2026,7 @@ MonoBehaviour:
   audioSource: {fileID: 5862919928193599647}
   walkSound: {fileID: 8300000, guid: 912acfbfb0389384ab7986b0ccec124f, type: 3}
   attackSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: ca58c9525e5f3cd428e91665f310ce23, type: 3}
   stopMovingTime: 0
 --- !u!95 &2240422596516258181
 Animator:
@@ -2136,7 +2138,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 55
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

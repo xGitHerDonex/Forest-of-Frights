@@ -11,11 +11,23 @@ public class SceneTransition : MonoBehaviour
     }
 
     public NextScene nextScene;
+    public weaponSwap weaponSwapScript;
 
+    private void SaveWeaponState()
+    {
+        if (weaponSwapScript != null)
+        {
+            PlayerPrefs.SetInt("SelectedWeapon", weaponSwapScript.selectedWeapon);
+            PlayerPrefs.Save();
+        }
+        
+    }
+    
     private void OnTriggerEnter(Collider transit)
     {
         if (transit.CompareTag("Player"))
         {
+            SaveWeaponState();
             LoadNextScene();
         }
     }
