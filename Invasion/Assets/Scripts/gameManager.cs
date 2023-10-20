@@ -49,6 +49,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject loseMenu;          // Lose Menu
     [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject inventoryMenu;     // Inventory Menu
+    [SerializeField] GameObject audioMenu;         //i think we know what this is :)
     [SerializeField] GameObject beginMenu;         // Intro message
     [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
 
@@ -251,7 +252,10 @@ public class gameManager : MonoBehaviour
         demonLord.resetFight();
     }
 
-
+    public void ToggleAudio()
+    {
+        audioMenu.SetActive(!audioMenu.activeSelf);
+    }
 
 }
 

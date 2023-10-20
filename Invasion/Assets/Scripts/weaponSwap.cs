@@ -105,4 +105,12 @@ public class weaponSwap : MonoBehaviour
             }
         }
     }
+    public int GiveMeTheWeaponYouAreUsing()
+    {
+        return selectedWeapon;
+    }
+    public void SetMyWeapon(int weaponslot )
+    {
+        selectedWeapon = weaponslot;
+    }
 }

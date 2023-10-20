@@ -91,6 +91,9 @@ public class buttonFunctions : MonoBehaviour
 
 
     }
-
+    public void AudioMenuOpenClose()
+    {
+        gameManager.instance.ToggleAudio();
+    }
 }
 
