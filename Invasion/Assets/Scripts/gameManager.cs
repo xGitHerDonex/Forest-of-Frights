@@ -142,10 +142,9 @@ public class gameManager : MonoBehaviour
     public IEnumerator youWin()
     {
         currentMenu = winMenu;
-        currentMenu.SetActive(true);
+       
         yield return new WaitForSeconds(5f);
         pause();
-
         currentMenu.SetActive(true);
     }
     //Pulls up the Lose Table after the player dies.
