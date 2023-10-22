@@ -52,7 +52,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject inventoryMenu;     // Inventory Menu
     public  GameObject audioMenu;         //i think we know what this is :)
-    [SerializeField] GameObject beginMenu;         // Intro message
+    public GameObject beginMenu;         // Intro message
     [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
 
 
@@ -229,23 +229,23 @@ public class gameManager : MonoBehaviour
         checkPointMenu.SetActive(false);
     }
 
-    public void setControlsMenuActive(bool active = true)
-    {
-        EventSystem eventsystem = pauseMenu.GetComponent<EventSystem>();
+    //public void setControlsMenuActive(bool active = true)
+    //{
+    //    EventSystem eventsystem = pauseMenu.GetComponent<EventSystem>();
 
-        if (active)
-        {
-            controlsMenu.SetActive(true);
-            eventsystem.enabled = false;
-        }
+    //    if (active)
+    //    {
+    //        controlsMenu.SetActive(true);
+    //        eventsystem.enabled = false;
+    //    }
 
-        else
-        {
-            controlsMenu.SetActive(false);
-            eventsystem.enabled = true;
-        }
+    //    else
+    //    {
+    //        controlsMenu.SetActive(false);
+    //        eventsystem.enabled = true;
+    //    }
 
-    }
+    //}
 
     public void restartMidBoss()
     {
@@ -260,17 +260,37 @@ public class gameManager : MonoBehaviour
     public void ToggleAudio()
     {
         audioMenu.SetActive(!audioMenu.activeSelf);
-        EventSystem eventsystem = pauseMenu.GetComponent<EventSystem>();
 
-        if (eventsystem.enabled)
-        {
-            eventsystem.enabled = false;
-        }
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+        //EventSystem eventsystem = pauseMenu.GetComponent<EventSystem>();
 
-        else
-        {
-            eventsystem.enabled = true;
-        }
+        //if (eventsystem.enabled)
+        //{
+        //    eventsystem.enabled = false;
+        //}
+
+        //else
+        //{
+        //    eventsystem.enabled = true;
+        //}
+    }
+
+    public void toggleControlMenu()
+    {
+        controlsMenu.SetActive(!controlsMenu.activeSelf);
+
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+        //EventSystem eventsystem = pauseMenu.GetComponent<EventSystem>();
+
+        //if (eventsystem.enabled)
+        //{
+        //    eventsystem.enabled = false;
+        //}
+
+        //else
+        //{
+        //    eventsystem.enabled = true;
+        //}
     }
 
 }

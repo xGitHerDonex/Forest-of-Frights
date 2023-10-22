@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.SceneManagement;
 
@@ -37,6 +38,14 @@ public class buttonFunctions : MonoBehaviour
     {
         gameManager.instance.unPause();
    
+    }
+
+    public void resumeBeginMenu()
+    {
+       EventSystem eventSystem =  gameManager.instance.beginMenu.GetComponent<EventSystem>();
+       eventSystem.enabled = false;
+       resume();
+
     }
 
     
@@ -77,23 +86,29 @@ public class buttonFunctions : MonoBehaviour
 
     }
 
-    public void controlsMenuActive()
-    {
+    //public void controlsMenuActive()
+    //{
 
-            gameManager.instance.setControlsMenuActive();
-
-
-    }
-    public void controlsMenuDisabled()
-    {
-
-        gameManager.instance.setControlsMenuActive(false);
+    //        gameManager.instance.setControlsMenuActive();
 
 
-    }
+    //}
+    //public void controlsMenuDisabled()
+    //{
+
+    //    gameManager.instance.setControlsMenuActive(false);
+
+
+    //}
     public void AudioMenuOpenClose()
     {
         gameManager.instance.ToggleAudio();
     }
+
+    public void controlMenuOpenClose()
+    {
+        gameManager.instance.toggleControlMenu();
+    }
+
 }
 
