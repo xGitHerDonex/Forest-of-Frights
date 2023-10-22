@@ -76,7 +76,7 @@ MonoBehaviour:
   grenade: {fileID: 8825613890474161169, guid: 802e9ea262efceb48ba432d2a5f9eedc, type: 3}
   throwRate: 5
   maxThrowRate: 5
-  playerThrowForce: 2
+  playerThrowForce: 3
   throwLift: 17
   throwPos: {fileID: 3064095616643548764}
   isTimeSlowed: 0
@@ -195,7 +195,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.88455683
   m_Height: 2.0171962
