@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using JetBrains.Annotations;
+using UnityEngine.EventSystems;
 
 public class gameManager : MonoBehaviour
 {
@@ -49,7 +51,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject loseMenu;          // Lose Menu
     [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject inventoryMenu;     // Inventory Menu
-    [SerializeField] GameObject audioMenu;         //i think we know what this is :)
+    public  GameObject audioMenu;         //i think we know what this is :)
     [SerializeField] GameObject beginMenu;         // Intro message
     [SerializeField] GameObject playerDamageFlash; // Flash Screen when player gets injured
 
@@ -229,14 +231,18 @@ public class gameManager : MonoBehaviour
 
     public void setControlsMenuActive(bool active = true)
     {
+        EventSystem eventsystem = pauseMenu.GetComponent<EventSystem>();
+
         if (active)
         {
             controlsMenu.SetActive(true);
+            eventsystem.enabled = false;
         }
 
         else
         {
             controlsMenu.SetActive(false);
+            eventsystem.enabled = true;
         }
 
     }
@@ -254,6 +260,17 @@ public class gameManager : MonoBehaviour
     public void ToggleAudio()
     {
         audioMenu.SetActive(!audioMenu.activeSelf);
+        EventSystem eventsystem = pauseMenu.GetComponent<EventSystem>();
+
+        if (eventsystem.enabled)
+        {
+            eventsystem.enabled = false;
+        }
+
+        else
+        {
+            eventsystem.enabled = true;
+        }
     }
 
 }

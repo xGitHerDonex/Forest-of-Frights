@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class mainMenu : MonoBehaviour
 {
     [SerializeField] GameObject controlsPanel;
     [SerializeField] GameObject creditsPanel;
     [SerializeField] GameObject audioPanel;
+    //[SerializeField] GameObject self;
 
 
     public void OnPlayButton()
@@ -31,6 +33,18 @@ public class mainMenu : MonoBehaviour
         {        
             controlsPanel.SetActive(!controlsPanel.activeSelf);
 
+            EventSystem eventsystem = this.GetComponent<EventSystem>();
+
+            if (eventsystem.enabled)
+            {
+                eventsystem.enabled = false;
+            }
+
+            else
+            {
+                eventsystem.enabled = true;
+            }
+
         }
     }
 
@@ -41,9 +55,24 @@ public class mainMenu : MonoBehaviour
         if (audioPanel.activeSelf || controlsPanel.activeSelf)
         {
             return;
-        } else
+        } 
+        
+        
+        else
         {
             creditsPanel.SetActive(!creditsPanel.activeSelf);
+
+            EventSystem eventsystem = this.GetComponent<EventSystem>();
+
+            if (eventsystem.enabled)
+            {
+                eventsystem.enabled = false;
+            }
+
+            else
+            {
+                eventsystem.enabled = true;
+            }
 
         }
     }
@@ -57,6 +86,18 @@ public class mainMenu : MonoBehaviour
         } else
         {
         audioPanel.SetActive(!audioPanel.activeSelf);
+
+            EventSystem eventsystem = this.GetComponent<EventSystem>();
+
+            if (eventsystem.enabled)
+            {
+                eventsystem.enabled = false;
+            }
+
+            else
+            {
+                eventsystem.enabled = true;
+            }
         }
     }
 
