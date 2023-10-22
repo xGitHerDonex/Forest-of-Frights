@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class ComputerSwitch : MonoBehaviour
 {
-    public TextMeshProUGUI activateMessage;
+    public Text activateMessage;
     public Material greenMaterial;
     public GameObject door;
     public GameObject popupAlert;
