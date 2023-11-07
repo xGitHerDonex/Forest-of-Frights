@@ -89,6 +89,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     public float stopMovingTime;
 
     Color originalColor;
+    [SerializeField] float speed, levitationSpeed;
     #endregion
 
 
@@ -108,7 +109,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         maxHP = hp;
         speedOrig = agent.speed; // gives the agent speed to the float original speed for later on.
         originalColor = model.material.color;
-        
+
         stoppingDistOriginal = agent.stoppingDistance;
         audioSource = GetComponent<AudioSource>();
 
@@ -144,6 +145,10 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             Destroy(bullet);
         }
     }
+    void FixedUpdate()
+    {
+        
+    }
     protected virtual void Update()
     {
 
@@ -153,9 +158,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         {
             StartCoroutine(reset());
 
-        }
-
-        else if (agent.isActiveAndEnabled)
+        } else if (agent.isActiveAndEnabled)
         {
             //allows the enemy to ease into the transition animation with a tuneable
             //variable for custimization by Lerping it over time prevents choppy transitions
@@ -171,18 +174,14 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             if (playerInRange && !canSeePlayer())
             {
                 agent.speed = speedOrig;
-                StartCoroutine(roam()) ;
-            }
-
-
-            
-            else if (!playerInRange)
+                StartCoroutine(roam());
+            } else if (!playerInRange)
             {
                 agent.speed = speedOrig;
                 StartCoroutine(roam());
             }
 
-            
+
         }
     }
 
@@ -200,7 +199,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         //that is within the roaming distance set that destinatino and walk to it
         {
 
-           
+
 
             if (agent.remainingDistance <= agent.stoppingDistance && !destinationPicked)
             {
@@ -212,9 +211,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
                     //agent.stoppingDistance = 0;
                     yield return new WaitForSeconds(roamPauseTime);
                     agent.SetDestination(waypoints[m_PathIndex].position);
-                } 
-                
-                else
+                } else
                 {
 
                     Vector3 randomPos = Random.insideUnitSphere * roamDistance;
@@ -224,7 +221,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
                     if (NavMesh.SamplePosition(randomPos, out destination, roamDistance, 1))
                     {
-              
+
                         agent.SetDestination(destination.position);
                     }
 
@@ -247,13 +244,13 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         agent.speed = speedOrig;
     }
 
-   /// <summary>
-   /// turns and faces target with a lerp
-   /// </summary>
+    /// <summary>
+    /// turns and faces target with a lerp
+    /// </summary>
     void faceTarget()
     {
         //sets the rotation of the enemy to face the player based on the player _direction to the enemy
-    //and it lerps the rotation over time so it is smooth and not choppy
+        //and it lerps the rotation over time so it is smooth and not choppy
         Quaternion rotation = Quaternion.LookRotation(playerDirection);
         //lerp over time rotation
         anime.SetBool("isTurning", true);
@@ -358,22 +355,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     {
         isShooting = true;
         playAttackSound();
-        if(!isLetal && agent.remainingDistance >= stoppingDistOriginal && playerInRange)
-        {
-            //SphereCollider temp = new SphereCollider();
-            //temp.radius = 5f;
-            //temp.enabled = true;
-            anime.SetBool("isMelee",false);
-            anime.SetBool("isRanged", true);
-             anime.SetTrigger("Shoot");
-        //Used to add delay to the shoot to match the animation
-        //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
-        yield return new WaitForSeconds(shootRate);
-        Instantiate(bullet, shootPos.position, transform.rotation);
-        isShooting = false;
-        }
-
-        else if (isLetal && distToPlayer >= agent.stoppingDistance)
+        if (!isLetal && agent.remainingDistance >= stoppingDistOriginal && playerInRange)
         {
             //SphereCollider temp = new SphereCollider();
             //temp.radius = 5f;
@@ -386,9 +368,20 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             yield return new WaitForSeconds(shootRate);
             Instantiate(bullet, shootPos.position, transform.rotation);
             isShooting = false;
-        }
-
-        else if (agent.remainingDistance < stoppingDistOriginal && playerInRange)
+        } else if (isLetal && distToPlayer >= agent.stoppingDistance)
+        {
+            //SphereCollider temp = new SphereCollider();
+            //temp.radius = 5f;
+            //temp.enabled = true;
+            anime.SetBool("isMelee", false);
+            anime.SetBool("isRanged", true);
+            anime.SetTrigger("Shoot");
+            //Used to add delay to the shoot to match the animation
+            //StartCoroutine(shootDelayed()); // DO NOT REMOVE - if you do not require a delay simply use 0 in the shootDelay variable
+            yield return new WaitForSeconds(shootRate);
+            Instantiate(bullet, shootPos.position, transform.rotation);
+            isShooting = false;
+        } else if (agent.remainingDistance < stoppingDistOriginal && playerInRange)
         {
             anime.SetBool("isMelee", !true);
             anime.SetBool("isRanged", !false);
@@ -440,12 +433,12 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     ///
     public bool canSeePlayer()
     {
-//tests to see if the player is within range of the enemy and if the player is within range calculate
-    /* the angle of the player to the enemy
-     * there is a debug to show the angle and the player position to the enemy position in the scene screen.
-     * sends out a ray cast from the head of the enemy to the player to figure out the _direction and if there is
-     * any obstacles in the way
-     */
+        //tests to see if the player is within range of the enemy and if the player is within range calculate
+        /* the angle of the player to the enemy
+         * there is a debug to show the angle and the player position to the enemy position in the scene screen.
+         * sends out a ray cast from the head of the enemy to the player to figure out the _direction and if there is
+         * any obstacles in the way
+         */
         playerDirection = gameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDirection.x, 0, playerDirection.z), transform.forward);
 
@@ -464,7 +457,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
              */
             if (hit.collider.CompareTag("Player"))// && angleToPlayer <= viewAngle)
             {
-               
+
                 agent.stoppingDistance = stoppingDistOriginal;
                 agent.SetDestination(gameManager.instance.player.transform.position);
 
@@ -487,11 +480,9 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
 
                     if (gameManager.instance.playerScript.HP >= 0)
                         StartCoroutine(shoot());
-                }
-
-                else if (!isLetal && agent.remainingDistance <= agent.stoppingDistance && !isShooting && angleToPlayer <= shootAngle)
+                } else if (!isLetal && agent.remainingDistance <= agent.stoppingDistance && !isShooting && angleToPlayer <= shootAngle)
                 {
-                    if ( gameManager.instance.playerScript.HP >= 0)
+                    if (gameManager.instance.playerScript.HP >= 0)
                         StartCoroutine(shoot());
                 }
 
@@ -502,7 +493,7 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         }
         //otherwise set the stopping distance to zero and return false
         agent.stoppingDistance = 0;
-        
+
         return false;
     }
 
@@ -529,8 +520,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
         {
             playerInRange = true;
             anime.SetBool("isCaught", playerInRange);
-                //wrap for flight
-            anime.SetBool("isLanding",!playerInRange);
+            //wrap for flight
+            anime.SetBool("isLanding", !playerInRange);
 
         }
     }
@@ -545,8 +536,8 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
             playerInRange = false;
 
             anime.SetBool("isCaught", playerInRange);
-                //wrap for flight
-            anime.SetBool("isLanding",!playerInRange);
+            //wrap for flight
+            anime.SetBool("isLanding", !playerInRange);
 
         }
     }
@@ -616,26 +607,31 @@ public class WayPatrolenemyAi : MonoBehaviour, IDamage, IPhysics
     }
 
     //void Melee(){}
-    public void Fly( float wait = .25f)
+    public void Fly( float wait = .25f )
     {
-
-        float flightHeight = 1.5f;
-        for (float i = agent.baseOffset; i < flightHeight;)
-        {
-            agent.baseOffset += (0.1f * Time.fixedDeltaTime);
-            i = agent.baseOffset;
-            StartCoroutine(Wait(wait));
-            continue;
-        }
+        float up = 1.0f;
+        Vector3 flightHeight =  new Vector3(gameObject.transform.position.x, up + gameObject.transform.position.y, gameObject.transform.position.z);
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, flightHeight, Time.deltaTime);
+        NavMeshAgent navMeshAgent = gameObject.GetComponent<NavMeshAgent>() ;       
+        navMeshAgent.baseOffset = up;
+        
+        //float offset = gameObject.transform.position.y;
+        //for (float i = agent.baseOffset; i <= offset;)
+        //{
+        //    agent.baseOffset += (0.01f * Time.deltaTime);
+        //    i = agent.baseOffset;
+        //    //StartCoroutine(Wait(wait));
+        //    continue;
+        //}
 
     }
-    IEnumerator Wait(float waitTime )
+    IEnumerator Wait( float waitTime )
     {
         //wait "waitTime"
         yield return new WaitForSeconds(waitTime);
     }
 
-   public void Land( float wait = .25f )
+    public void Land( float wait = .25f )
     {
 
         float landHeight = 0;
